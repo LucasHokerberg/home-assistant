@@ -1,0 +1,5 @@
+platform: integration
+source: sensor.kitchen_dishwasher_watts
+name: kitchen_dishwasher_kwh
+unit_prefix: k
+round: 2

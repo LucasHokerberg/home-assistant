@@ -1,0 +1,54 @@
+homeassistant:
+  customize: !include_dir_named include/customizations/
+
+frontend:
+
+cloud:
+
+config:
+
+http: !include include/http.yaml
+
+updater:
+
+discovery:
+  ignore:
+    - igd
+
+history:
+
+logbook:
+
+system_health:
+
+sun:
+
+mobile_app:
+
+automation: !include_dir_merge_list include/automations/
+
+device_tracker: !include_dir_list include/device_trackers/
+
+group: !include_dir_named include/groups/
+
+media_player: !include_dir_list include/media_players/
+
+remote: !include_dir_list include/remotes/
+
+script: !include_dir_named include/scripts/
+
+sensor: !include_dir_list include/sensors/
+
+utility_meter: !include_dir_named include/utility_meters/
+
+notify: !include include/notify.yaml
+
+tellduslive: !include include/tellduslive.yaml
+
+zone: !include_dir_list include/zones/
+
+spotify: !include include/spotify.yaml
+
+tibber: !include include/tibber.yaml
+
+plex_webhooks: !include include/plex_webhooks.yaml

@@ -1,0 +1,118 @@
+# Start Spotify and play a default playlist when Living Room Harmony Hub starts Spotify
+- alias: "Media - Living Room Harmony Spotify"
+  trigger:
+    platform: state
+    entity_id: remote.living_room_harmony_hub
+  condition:
+    condition: template
+    value_template: '{{ trigger.to_state.attributes.current_activity == "Spotify" }}'
+  action:
+    - delay:
+        seconds: 12
+    - service: androidtv.adb_command
+      data:
+        entity_id: media_player.living_room_shield
+        command: 'am start -a android.intent.action.VIEW -d -n com.spotify.tv.android/.SpotifyTVActivity'
+    - delay:
+        seconds: 10
+    - service: media_player.select_source
+      entity_id: media_player.spotify_lucas_hokerberg
+      data:
+        source: 'Living Room Shield'
+    - service: media_player.play_media
+      entity_id: media_player.spotify_lucas_hokerberg
+      data:
+        media_content_id: 'spotify:user:spotify:playlist:37i9dQZEVXcH5UOFYpBVWG'
+        media_content_type: playlist
+
+# Turn off lights and start Plex when Living Room Harmony Hub starts Movie Mode
+- alias: "Media - Living Room Harmony Movie Mode"
+  trigger:
+    platform: state
+    entity_id: remote.living_room_harmony_hub
+  condition:
+    condition: template
+    value_template: '{{ trigger.to_state.attributes.current_activity == "Movie Mode" }}'
+  action:
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.indoor_comfort_lights
+        - light.living_room_desk_light
+    - service: scene.turn_on
+      entity_id:
+        - scene.living_room_tradfri_remote_plex_pause
+        - scene.living_room_desk_light_plex_pause
+    - delay:
+        seconds: 12
+    - service: androidtv.adb_command
+      data:
+        entity_id: media_player.living_room_shield
+        command: 'am start -a android.intent.action.MAIN -c android.intent.category.LEANBACK_LAUNCHER -n com.plexapp.android/com.plexapp.plex.activities.SplashActivity'
+
+# Turn on lights when Plex is pausing or stoping and Movie Mode is active
+- alias: Media - Turn on lights when Plex stops
+  initial_state: 'on'
+  trigger:
+    - platform: event
+      event_type: PLEX_EVENT
+      event_data:
+        event: media.pause
+        playerUuid: !secret plex_uuid_living_room_shield # To find out UUID, uncomment the notify section below and trigger this automation
+    - platform: event
+      event_type: PLEX_EVENT
+      event_data:
+        event: media.stop
+        playerUuid: !secret plex_uuid_living_room_shield
+  condition:
+    - condition: template
+      value_template: '{{ states.remote.living_room_harmony_hub.attributes.current_activity == "Movie Mode" }}'
+  action:
+    - service: scene.turn_on
+      entity_id:
+        - scene.living_room_tradfri_remote_plex_pause
+        - scene.living_room_desk_light_plex_pause
+#    - service: notify.mobile_app_lucas_hokerberg
+#      data_template:
+#        message: 'Title: {{ trigger.event.data.Player.title }} - UUID: {{ trigger.event.data.Player.uuid }}'
+
+# Turn off lights when Plex is resuming or playing and Movie Mode is active
+- alias: Media - Turn off lights when Plex plays
+  initial_state: 'on'
+  trigger:
+    - platform: event
+      event_type: PLEX_EVENT
+      event_data:
+        event: media.resume
+        playerUuid: !secret plex_uuid_living_room_shield
+    - platform: event
+      event_type: PLEX_EVENT
+      event_data:
+        event: media.play
+        playerUuid: !secret plex_uuid_living_room_shield
+  condition:
+    - condition: template
+      value_template: '{{ states.remote.living_room_harmony_hub.attributes.current_activity == "Movie Mode" }}'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.living_room_table_light
+          - light.living_room_desk_light
+        transition: 2
+
+# Turn on lights when Living Room Harmony Hub stops Movie Mode
+- alias: Media - Turn on lights when Living Room Harmony exit Movie Mode
+  trigger:
+    platform: state
+    entity_id: remote.living_room_harmony_hub
+  condition:
+    - condition: template
+      value_template: '{{ trigger.from_state.attributes.current_activity == "Movie Mode" }}'
+  action:
+    - service: scene.turn_on
+      entity_id: scene.living_room_tradfri_remote_normal
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.indoor_comfort_lights
+    - service: light.turn_off
+      entity_id: light.living_room_desk_light

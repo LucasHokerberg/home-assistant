@@ -1,0 +1,105 @@
+# Send a notification when someone is coming home
+- alias: Presence - Notify when someone comes home
+  trigger:
+    platform: zone
+    entity_id: person.lucas_hokerberg,person.victoria_johansson
+    zone: zone.home
+    event: enter
+  action:
+    - service: notify.home_mobile_apps
+      data_template:
+        title: 'HalloNET Home'
+        message: '{{ trigger.to_state.attributes.friendly_name }} just came home.'
+
+# Send a nofitication when someone is leaving home
+- alias: Presence - Notify when someone leaves home
+  trigger:
+    platform: zone
+    entity_id: person.lucas_hokerberg,person.victoria_johansson
+    zone: zone.home
+    event: leave
+  action:
+    - service: notify.home_mobile_apps
+      data_template:
+        title: 'HalloNET Home'
+        message: '{{ trigger.to_state.attributes.friendly_name }} just left the home.'
+
+# Send a notification when Lucas is arriving at work
+- alias: Presence - Notify when Lucas arrives at work
+  trigger:
+    platform: zone
+    entity_id: person.lucas_hokerberg
+    zone: zone.lucas_hokerberg_work
+    event: enter
+  action:
+    - service: notify.home_mobile_apps
+      data_template:
+        title: 'HalloNET Home'
+        message: 'Lucas Hökerberg just arrived at work.'
+
+# Send a notification when Victoria is arriving at work
+- alias: Presence - Notify when Victoria arrives at work
+  trigger:
+    platform: zone
+    entity_id: person.victoria_johansson
+    zone: zone.victoria_johansson_work
+    event: enter
+  action:
+    - service: notify.home_mobile_apps
+      data_template:
+        title: 'HalloNET Home'
+        message: 'Victoria Johansson just arrived at work.'
+
+# Send a notification when Lucas is leaving work
+- alias: Presence - Notify when Lucas leaves work
+  trigger:
+    platform: zone
+    entity_id: person.lucas_hokerberg
+    zone: zone.lucas_hokerberg_work
+    event: leave
+  action:
+    - service: notify.home_mobile_apps
+      data_template:
+        title: 'HalloNET Home'
+        message: 'Lucas Hökerberg just left work.'
+
+# Send a notification when Victoria is leaving work
+- alias: Presence - Notify when Victoria leaves work
+  trigger:
+    platform: zone
+    entity_id: person.victoria_johansson
+    zone: zone.victoria_johansson_work
+    event: leave
+  action:
+    - service: notify.home_mobile_apps
+      data_template:
+        title: 'HalloNET Home'
+        message: 'Victoria Johansson just left work.'
+
+# Turn on lights when it's dark and lonley and someone comes home
+- alias: Presence - Turn on lights when someone comes home
+  trigger:
+    platform: state
+    entity_id: group.home_members
+    to: 'home'
+  condition:
+    condition: numeric_state
+    entity_id: sensor.living_room_light_level
+    below: 10
+  action:
+    - service: scene.turn_on
+      entity_id: scene.living_room_tradfri_remote_normal
+    - service: homeassistant.turn_on
+      entity_id: group.indoor_comfort_lights
+
+# Turn off lights and TV when everyone leaves home
+- alias: Presence - Turn off lights and TV when everyone leaves home
+  trigger:
+    platform: state
+    entity_id: group.home_members
+    from: 'home'
+  action:
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.indoor_comfort_lights
+        - remote.living_room_harmony_hub

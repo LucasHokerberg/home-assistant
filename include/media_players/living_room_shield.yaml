@@ -1,0 +1,14 @@
+platform: androidtv
+name: living_room_shield
+host: 192.168.12.50
+adb_server_ip: 127.0.0.1
+apps:
+  com.hbo_android_tv: 'HBO'
+  se.svt.android.svtplay: 'SVT Play'
+  se.tv4.tv4playtab: 'TV4 Play'
+  se.viafree.android: 'Viafree'
+  se.kanal5play: 'Dplay'
+  tunein.player: 'TuneIn Radio'
+  com.android.vending: 'Google Play Store'
+  com.google.android.play.games: 'Google Play Games'
+  com.google.android.apps.mediashell: 'Chromecast'

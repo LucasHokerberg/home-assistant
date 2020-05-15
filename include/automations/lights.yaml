@@ -1,0 +1,49 @@
+# Turn on lights when it becomes dark and someone is home
+- alias: Lights - Turn on lights when dark and someone is home
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_light_level
+    below: 10
+    for:
+      seconds: 5
+  condition:
+    condition: state
+    entity_id: group.home_members
+    state: 'home'
+  action:
+    - service: scene.turn_on
+      entity_id: scene.living_room_tradfri_remote_normal
+    - service: homeassistant.turn_on
+      entity_id: group.indoor_comfort_lights
+
+# Turn off lights when living room is bright
+- alias: Lights - Turn off lights when bright
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_light_level
+    above: 25
+    for:
+      seconds: 5
+  action:
+    - service: homeassistant.turn_off
+      entity_id: group.indoor_comfort_lights
+
+# Turn on lights when the computer is turning on
+- alias: Lights - Turn on lights when computer start
+  trigger:
+    platform: state
+    entity_id: device_tracker.lucas_pc_hallonet_local
+    to: 'home'
+  action:
+    - service: scene.turn_on
+      entity_id: scene.living_room_desk_light_computer_on
+
+# Turn off lights when the computer is turning off
+- alias: Lights - Turn off lights when computer stop
+  trigger:
+    platform: state
+    entity_id: device_tracker.lucas_pc_hallonet_local
+    to: 'not_home'
+  action:
+    - service: light.turn_off
+      entity_id: light.living_room_desk_light

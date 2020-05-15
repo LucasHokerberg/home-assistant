@@ -1,0 +1,5 @@
+- name: home_mobile_apps
+  platform: group
+  services:
+    - service: mobile_app_lucas_hokerberg
+    - service: mobile_app_victoria_johansson

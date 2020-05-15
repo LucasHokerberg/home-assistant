@@ -1,0 +1,13 @@
+# Send a notification when the dishwasher is done
+- alias: Appliance - Notify when dishwasher is done
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.kitchen_dishwasher_watts
+    below: 10
+    for:
+      minutes: 15
+  action:
+    - service: notify.home_mobile_apps
+      data_template:
+        title: 'HalloNET Home'
+        message: 'The dishwasher is done.'
