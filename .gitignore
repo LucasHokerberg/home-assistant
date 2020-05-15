@@ -1,8 +1,8 @@
-.cloud
-.storage
-custom_components
-deps
-tts
+.cloud/
+.storage/
+custom_components/
+deps/
+tts/
 .HA_VERSION
 .uuid
 harmony*.conf
