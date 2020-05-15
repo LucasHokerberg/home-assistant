@@ -1,0 +1,12 @@
+.cloud
+.storage
+custom_components
+deps
+tts
+.HA_VERSION
+.uuid
+harmony*.conf
+*.log
+*.db
+known_devices.yaml
+secrets.yaml
