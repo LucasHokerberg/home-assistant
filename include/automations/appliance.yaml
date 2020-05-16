@@ -1,11 +1,9 @@
 # Send a notification when the dishwasher is done
 - alias: Appliance - Notify when dishwasher is done
   trigger:
-    platform: numeric_state
-    entity_id: sensor.kitchen_dishwasher_watts
-    below: 5
-    for:
-      minutes: 15
+    platform: state
+    entity_id: binary_sensor.kitchen_dishwasher_state
+    to: off
   action:
     - service: notify.home_mobile_apps
       data_template:

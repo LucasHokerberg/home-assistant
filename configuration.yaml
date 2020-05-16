@@ -33,6 +33,8 @@ influxdb: !include include/influxdb.yaml
 
 automation: !include_dir_merge_list include/automations/
 
+binary_sensor: !include_dir_list include/binary_sensors/
+
 device_tracker: !include_dir_list include/device_trackers/
 
 group: !include_dir_named include/groups/

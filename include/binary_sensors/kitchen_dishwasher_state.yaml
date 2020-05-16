@@ -1,0 +1,8 @@
+platform: template
+sensors:
+  kitchen_dishwasher_state:
+    device_class: power
+    value_template: >-
+      {{ states('sensor.kitchen_dishwasher_watts')|float > 10 }}
+    delay_on: 2
+    delay_off: 15
