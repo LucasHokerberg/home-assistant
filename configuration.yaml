@@ -25,9 +25,6 @@ sun:
 
 mobile_app:
 
-recorder:
-  db_url: !secret mariadb_url
-
 automation: !include_dir_merge_list include/automations/
 
 device_tracker: !include_dir_list include/device_trackers/
