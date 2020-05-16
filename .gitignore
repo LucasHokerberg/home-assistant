@@ -6,7 +6,7 @@ tts/
 .HA_VERSION
 .uuid
 harmony*.conf
-*.log
-*.db
+home-assistant.log
+home-assistant_v2.db
 known_devices.yaml
 secrets.yaml
