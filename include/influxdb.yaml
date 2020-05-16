@@ -1,4 +1,4 @@
-host: localhost
+host: a0d7b954-influxdb
 port: 8086
 database: !secret influxdb_database
 username: !secret influxdb_username
