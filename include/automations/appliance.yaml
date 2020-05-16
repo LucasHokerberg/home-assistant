@@ -3,7 +3,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.kitchen_dishwasher_watts
-    below: 10
+    below: 5
     for:
       minutes: 15
   action:
