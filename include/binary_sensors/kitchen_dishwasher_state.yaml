@@ -2,7 +2,9 @@ platform: template
 sensors:
   kitchen_dishwasher_state:
     device_class: power
+    friendly_name: Dishwasher
     value_template: >-
-      {{ states('sensor.kitchen_dishwasher_watts')|float > 10 }}
+      {{ states('sensor.kitchen_dishwasher_watts')|float > 5 }}
     delay_on: 2
     delay_off: 15
+    icon_template: mdi:dishwasher
