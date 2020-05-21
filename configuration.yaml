@@ -12,8 +12,6 @@ http: !include include/http.yaml
 updater:
 
 discovery:
-  ignore:
-    - igd
 
 history:
 
