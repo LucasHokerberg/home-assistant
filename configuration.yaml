@@ -55,6 +55,4 @@ zone: !include_dir_list include/zones/
 
 spotify: !include include/spotify.yaml
 
-tibber: !include include/tibber.yaml
-
 plex_webhooks: !include include/plex_webhooks.yaml
