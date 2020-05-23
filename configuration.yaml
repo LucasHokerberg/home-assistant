@@ -2,6 +2,7 @@ homeassistant:
   customize: !include_dir_named include/customizations/
 
 frontend:
+  themes: !include_dir_list include/themes/
 
 cloud:
 
