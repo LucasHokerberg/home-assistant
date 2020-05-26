@@ -5,6 +5,8 @@ sensors:
     friendly_name: Dishwasher
     value_template: >-
       {{ states('sensor.kitchen_dishwasher_watts')|float > 5 }}
-    delay_on: 2
-    delay_off: 15
+    delay_on:
+      minutes: 2
+    delay_off:
+      minutes: 15
     icon_template: mdi:dishwasher
