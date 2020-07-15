@@ -53,16 +53,19 @@
 - alias: Media - Turn on lights when Plex stops
   initial_state: 'on'
   trigger:
-    - platform: event
-      event_type: PLEX_EVENT
-      event_data:
-        event: media.pause
-        playerUuid: !secret plex_uuid_living_room_shield # To find out UUID, uncomment the notify section below and trigger this automation
-    - platform: event
-      event_type: PLEX_EVENT
-      event_data:
-        event: media.stop
-        playerUuid: !secret plex_uuid_living_room_shield
+    #- platform: event
+    #  event_type: PLEX_EVENT
+    #  event_data:
+    #    event: media.pause
+    #    playerUuid: !secret plex_uuid_living_room_shield # To find out UUID, uncomment the notify section below and trigger this automation
+    #- platform: event
+    #  event_type: PLEX_EVENT
+    #  event_data:
+    #    event: media.stop
+    #    playerUuid: !secret plex_uuid_living_room_shield
+    platform: state
+    entity_id: media_player.living_room_shield
+    to: 'idle'
   condition:
     - condition: template
       value_template: '{{ states.remote.living_room_harmony_hub.attributes.current_activity == "Movie Mode" }}'
@@ -79,16 +82,19 @@
 - alias: Media - Turn off lights when Plex plays
   initial_state: 'on'
   trigger:
-    - platform: event
-      event_type: PLEX_EVENT
-      event_data:
-        event: media.resume
-        playerUuid: !secret plex_uuid_living_room_shield
-    - platform: event
-      event_type: PLEX_EVENT
-      event_data:
-        event: media.play
-        playerUuid: !secret plex_uuid_living_room_shield
+    #- platform: event
+    #  event_type: PLEX_EVENT
+    #  event_data:
+    #    event: media.resume
+    #    playerUuid: !secret plex_uuid_living_room_shield
+    #- platform: event
+    #  event_type: PLEX_EVENT
+    #  event_data:
+    #    event: media.play
+    #    playerUuid: !secret plex_uuid_living_room_shield
+    platform: state
+    entity_id: media_player.living_room_shield
+    to: 'playing'
   condition:
     - condition: template
       value_template: '{{ states.remote.living_room_harmony_hub.attributes.current_activity == "Movie Mode" }}'
