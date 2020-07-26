@@ -40,7 +40,7 @@
         - light.living_room_desk_light
     - service: scene.turn_on
       entity_id:
-        - scene.living_room_tradfri_remote_plex_pause
+        - scene.living_room_table_light_plex_pause
         - scene.living_room_desk_light_plex_pause
     - delay:
         seconds: 12
@@ -72,7 +72,7 @@
   action:
     - service: scene.turn_on
       entity_id:
-        - scene.living_room_tradfri_remote_plex_pause
+        - scene.living_room_table_light_plex_pause
         - scene.living_room_desk_light_plex_pause
 #    - service: notify.mobile_app_lucas_hokerberg
 #      data_template:
@@ -116,7 +116,7 @@
       value_template: '{{ trigger.from_state.attributes.current_activity == "Movie Mode" }}'
   action:
     - service: scene.turn_on
-      entity_id: scene.living_room_tradfri_remote_normal
+      entity_id: scene.living_room_table_light_normal
     - service: homeassistant.turn_on
       data:
         entity_id: group.indoor_comfort_lights
