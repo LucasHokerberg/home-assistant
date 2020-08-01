@@ -1,7 +1,6 @@
 - platform: template
   switches:
     guest_mode:
-      friendly_name: Guest Mode
       turn_on:
         - service: automation.turn_off
           data:
@@ -16,4 +15,3 @@
               - automation.motion_turn_on_lights_on_living_room_motion
               - automation.presence_turn_off_lights_and_tv_when_everyone_leaves_home
               - automation.presence_turn_on_lights_when_someone_comes_home
-      icon_template: mdi:briefcase-account
