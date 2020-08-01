@@ -1,0 +1,5 @@
+- platform: template
+  switches:
+    home_precense:
+      turn_on:
+      turn_off:

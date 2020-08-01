@@ -40,20 +40,22 @@ group: !include_dir_named include/groups/
 
 media_player: !include_dir_list include/media_players/
 
+notify: !include include/notify.yaml
+
+plex_webhooks: !include include/plex_webhooks.yaml
+
 remote: !include_dir_list include/remotes/
 
 script: !include_dir_named include/scripts/
 
 sensor: !include_dir_list include/sensors/
 
-utility_meter: !include_dir_named include/utility_meters/
+spotify: !include include/spotify.yaml
 
-notify: !include include/notify.yaml
+switch: !include include/switches.yaml
 
 tellduslive: !include include/tellduslive.yaml
 
+utility_meter: !include_dir_named include/utility_meters/
+
 zone: !include_dir_list include/zones/
-
-spotify: !include include/spotify.yaml
-
-plex_webhooks: !include include/plex_webhooks.yaml
