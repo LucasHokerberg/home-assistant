@@ -3,7 +3,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
-    below: 10
+    below: 15
     for:
       seconds: 5
   condition:
