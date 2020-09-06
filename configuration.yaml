@@ -42,8 +42,6 @@ media_player: !include_dir_list include/media_players/
 
 notify: !include include/notify.yaml
 
-plex_webhooks: !include include/plex_webhooks.yaml
-
 remote: !include_dir_list include/remotes/
 
 script: !include_dir_named include/scripts/
