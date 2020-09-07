@@ -1,4 +1,3 @@
 entities:
   - group.living_room_comfort_lights
-  - switch.hallway_floor_light
   - switch.kitchen_window_light
