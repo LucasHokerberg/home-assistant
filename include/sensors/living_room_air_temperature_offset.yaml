@@ -1,6 +1,6 @@
 platform: template
 sensors:
-  living_room_room_temperature_offset:
+  living_room_air_temperature_offset:
     value_template: '{{ states.sensor.living_room_air_temperature.state | float + 2 }}'
     unit_of_measurement: °C
     icon_template: mdi:thermometer
