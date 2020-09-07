@@ -1,83 +1,34 @@
-# Turn on lights when motion in hallway is detected
-- alias: Motion - Turn on lights on hallway motion
+# Turn on lights when motion upstairs is detected and it's dark
+- alias: Motion - Turn on lights on upstairs motion
   trigger:
     platform: state
-    entity_id: binary_sensor.hallway_motion
-    to: 'on'
-  action:
-    - service: switch.turn_on
-      entity_id: switch.hallway_floor_light
-
-# Turn off lights when no motion is detected in the hallway and kitchen window light is off
-- alias: Motion - Turn off lights on no hallway motion
-  trigger:
-    platform: state
-    entity_id: binary_sensor.hallway_motion
-    to: 'off'
-    for:
-      minutes: 2
-  condition:
-    condition: state
-    entity_id: switch.kitchen_window_light
-    state: 'off'
-  action:
-    - service: switch.turn_off
-      entity_id: switch.hallway_floor_light
-
-# Turn on lights when motion in living room is detected and it's dark and quiet
-- alias: Motion - Turn on lights on living room motion
-  trigger:
-    platform: state
-    entity_id: binary_sensor.living_room_motion
+    entity_id: binary_sensor.upstairs_motion
     to: 'on'
   condition:
     - condition: state
-      entity_id: group.living_room_comfort_lights
-      state: 'off'
-    - condition: state
-      entity_id: light.living_room_desk_light
-      state: 'off'
-    - condition: state
-      entity_id: remote.living_room_harmony_hub
+      entity_id: light.upstairs_desk_light
       state: 'off'
     - condition: numeric_state
-      entity_id: sensor.living_room_light_level
+      entity_id: sensor.upstairs_light_level
       below: 10
   action:
     - service: scene.turn_on
-      entity_id: scene.living_room_desk_light_night
+      entity_id: scene.upstairs_desk_light_night
 
-# Turn off lights when no living room motion is detected, the computer is turned off and movie mode is not active
-- alias: Motion - Turn off lights on no living room motion
+# Turn off lights when no upstairs motion is detected and the computer is off
+- alias: Motion - Turn off lights on no upstairs motion
   trigger:
     platform: state
-    entity_id: binary_sensor.living_room_motion
+    entity_id: binary_sensor.upstairs_motion
     to: 'off'
     for:
-      minutes: 2
+      minutes: 1
   condition:
     - condition: state
       entity_id: device_tracker.lucas_pc_hallonet_local
       state: 'not_home'
-    - condition: template
-      value_template: '{{ states.remote.living_room_harmony_hub.attributes.current_activity != "Movie Mode" }}'
   action:
     - service: light.turn_off
       data:
-        entity_id: light.living_room_desk_light
+        entity_id: light.upstairs_desk_light
         transition: 2
-
-# Force location update from home mmobile apps when motion is detected in the hallway and nobody is home
-- alias: Motion - Force mobile location update
-  trigger:
-    platform: state
-    entity_id: binary_sensor.hallway_motion
-    to: 'on'
-  condition:
-    - condition: state
-      entity_id: group.home_members
-      state: 'not_home'
-  action:
-    - service: notify.home_mobile_apps
-      data:
-        message: 'request_location_update'
