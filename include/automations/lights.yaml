@@ -36,7 +36,7 @@
     to: 'home'
   action:
     - service: scene.turn_on
-      entity_id: scene.living_room_desk_light_computer_on
+      entity_id: scene.upstairs_desk_light_computer_on
 
 # Turn off lights when the computer is turning off
 - alias: Lights - Turn off lights when computer stop
@@ -46,4 +46,4 @@
     to: 'not_home'
   action:
     - service: light.turn_off
-      entity_id: light.living_room_desk_light
+      entity_id: light.upstairs_desk_light

@@ -37,11 +37,10 @@
     - service: homeassistant.turn_off
       entity_id:
         - group.indoor_comfort_lights
-        - light.living_room_desk_light
+        - light.upstairs_desk_light
     - service: scene.turn_on
       entity_id:
         - scene.living_room_tradfri_remote_plex_pause
-        - scene.living_room_desk_light_plex_pause
     - delay:
         seconds: 12
     - service: androidtv.adb_command
@@ -53,16 +52,6 @@
 - alias: Media - Turn on lights when Plex stops
   initial_state: 'on'
   trigger:
-    #- platform: event
-    #  event_type: PLEX_EVENT
-    #  event_data:
-    #    event: media.pause
-    #    playerUuid: !secret plex_uuid_living_room_shield # To find out UUID, uncomment the notify section below and trigger this automation
-    #- platform: event
-    #  event_type: PLEX_EVENT
-    #  event_data:
-    #    event: media.stop
-    #    playerUuid: !secret plex_uuid_living_room_shield
     platform: state
     entity_id: media_player.living_room_shield
     to: 'idle'
@@ -73,25 +62,11 @@
     - service: scene.turn_on
       entity_id:
         - scene.living_room_tradfri_remote_plex_pause
-        - scene.living_room_desk_light_plex_pause
-#    - service: notify.mobile_app_lucas_hokerberg
-#      data_template:
-#        message: 'Title: {{ trigger.event.data.Player.title }} - UUID: {{ trigger.event.data.Player.uuid }}'
 
 # Turn off lights when Plex is resuming or playing and Movie Mode is active
 - alias: Media - Turn off lights when Plex plays
   initial_state: 'on'
   trigger:
-    #- platform: event
-    #  event_type: PLEX_EVENT
-    #  event_data:
-    #    event: media.resume
-    #    playerUuid: !secret plex_uuid_living_room_shield
-    #- platform: event
-    #  event_type: PLEX_EVENT
-    #  event_data:
-    #    event: media.play
-    #    playerUuid: !secret plex_uuid_living_room_shield
     platform: state
     entity_id: media_player.living_room_shield
     to: 'playing'
@@ -103,7 +78,6 @@
       data:
         entity_id:
           - light.living_room_table_light
-          - light.living_room_desk_light
         transition: 2
 
 # Turn on lights when Living Room Harmony Hub stops Movie Mode
@@ -120,5 +94,3 @@
     - service: homeassistant.turn_on
       data:
         entity_id: group.indoor_comfort_lights
-    - service: light.turn_off
-      entity_id: light.living_room_desk_light
