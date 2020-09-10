@@ -10,7 +10,7 @@
       state: 'off'
     - condition: numeric_state
       entity_id: sensor.upstairs_light_level
-      below: 10
+      below: 5
   action:
     - service: scene.turn_on
       entity_id: scene.upstairs_desk_light_night
