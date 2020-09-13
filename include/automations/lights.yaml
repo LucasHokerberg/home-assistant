@@ -32,7 +32,7 @@
 - alias: Lights - Turn on lights when computer start
   trigger:
     platform: state
-    entity_id: device_tracker.lucas_pc_hallonet_local,device_tracker.54_27_1e_32_41_4d
+    entity_id: group.lucas_pc
     to: 'home'
   action:
     - service: scene.turn_on
@@ -42,7 +42,7 @@
 - alias: Lights - Turn off lights when computer stop
   trigger:
     platform: state
-    entity_id: device_tracker.lucas_pc_hallonet_local,device_tracker.54_27_1e_32_41_4d
+    entity_id: group.lucas_pc
     to: 'not_home'
   action:
     - service: light.turn_off
