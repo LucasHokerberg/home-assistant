@@ -1,5 +1,5 @@
 name: beda_2
-frequency: 'even-n-weeks'
+frequency: 'every-n-weeks'
 collection_days:
 - wed
 period: 2
