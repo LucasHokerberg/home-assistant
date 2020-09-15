@@ -1,0 +1,19 @@
+- name: beda_1
+  frequency: 'even-n-weeks'
+  collection_days:
+  - wed
+  period: 4
+  first_week: 3
+  expire_after: '12:00'
+
+- name: beda_2
+  frequency: 'even-n-weeks'
+  collection_days:
+  - wed
+  period: 2
+  first_week: 1
+  expire_after: '12:00'
+  exclude_dates:
+  - '2020-12-23'
+  include_dates:
+  - '2019-12-22'

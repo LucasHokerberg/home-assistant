@@ -1,7 +1,0 @@
-name: beda_1
-frequency: 'even-n-weeks'
-collection_days:
-- wed
-period: 4
-first_week: 3
-expire_after: '12:00'
