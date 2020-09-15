@@ -3,7 +3,6 @@ frequency: 'every-n-weeks'
 collection_days:
 - wed
 period: 2
-first_week: 1
 expire_after: '12:00'
 exclude_dates:
 - '2020-12-23'
