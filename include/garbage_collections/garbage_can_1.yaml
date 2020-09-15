@@ -4,6 +4,7 @@ collection_days:
 - wed
 period: 4
 first_week: 2
-expire_after: '12:00'
+expire_after: '06:00'
+hidden: true
 verbose_state: true
 verbose_format: 'In {days} days'

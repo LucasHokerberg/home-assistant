@@ -4,6 +4,7 @@ collection_days:
 - thu
 first_month: 'mar'
 last_month: 'nov'
-expire_after: '12:00'
+expire_after: '06:00'
+hidden: true
 verbose_state: true
 verbose_format: 'In {days} days'
