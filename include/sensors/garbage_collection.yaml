@@ -1,0 +1,13 @@
+platform: template
+sensors:
+  garbage_collection:
+    entity_id: sensor.date
+    friendly_name: 'Garbage Collection'
+    value_template: >-
+      {% set week = now().isocalendar()[1] %}
+      {% set week = week + 1 if now().isoweekday() > 3 else week %}
+      {{ 'Recycling Only' if week % 2 == 0 else 'General Waste and Recycling' }}
+    icon_template: >-
+      {% set week = now().isocalendar()[1] %}
+      {% set week = week + 1 if now().isoweekday() > 3 else week %}
+      {{ 'mdi:recycle' if week % 2 == 0 else 'mdi:delete' }}
