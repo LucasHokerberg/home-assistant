@@ -38,7 +38,6 @@ device_tracker: !include_dir_list include/device_trackers/
 
 # Is configured using UI
 garbage_collection:
-  sensors:
 
 group: !include_dir_named include/groups/
 
