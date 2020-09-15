@@ -1,9 +1,9 @@
-name: 'Trädgård'
-frequency: 'odd-weeks'
+name: 'Garbage Can 1'
+frequency: 'every-n-weeks'
 collection_days:
-- thu
-first_month: 'mar'
-last_month: 'nov'
+- wed
+period: 4
+first_week: 2
 expire_after: '12:00'
 verbose_state: true
 verbose_format: 'In {days} days'

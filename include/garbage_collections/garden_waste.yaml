@@ -1,9 +1,9 @@
-name: 'Beda 1'
-frequency: 'every-n-weeks'
+name: 'Garden Waste'
+frequency: 'odd-weeks'
 collection_days:
-- wed
-period: 4
-first_week: 2
+- thu
+first_month: 'mar'
+last_month: 'nov'
 expire_after: '12:00'
 verbose_state: true
 verbose_format: 'In {days} days'
