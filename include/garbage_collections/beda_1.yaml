@@ -5,3 +5,5 @@ collection_days:
 period: 4
 first_week: 2
 expire_after: '12:00'
+verbose_state: true
+verbose_format: "In {days} days"

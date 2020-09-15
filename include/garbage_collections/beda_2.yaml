@@ -7,3 +7,5 @@ exclude_dates:
 - '2020-12-23'
 include_dates:
 - '2019-12-22'
+verbose_state: true
+verbose_format: "In {days} days"
