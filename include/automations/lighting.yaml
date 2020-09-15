@@ -1,5 +1,5 @@
 # Turn on lights when it becomes dark and someone is home
-- alias: Lights - Turn on lights when dark and someone is home
+- alias: Lighting - Turn on lights when dark and someone is home
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
@@ -17,7 +17,7 @@
       entity_id: group.indoor_comfort_lights
 
 # Turn off lights when living room is bright
-- alias: Lights - Turn off lights when bright
+- alias: Lighting - Turn off lights when bright
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
@@ -29,7 +29,7 @@
       entity_id: group.indoor_comfort_lights
 
 # Turn on lights when the computer is turning on
-- alias: Lights - Turn on lights when computer start
+- alias: Lighting - Turn on lights when computer start
   trigger:
     platform: state
     entity_id: group.lucas_pc
@@ -39,7 +39,7 @@
       entity_id: scene.upstairs_desk_light_computer_on
 
 # Turn off lights when the computer is turning off
-- alias: Lights - Turn off lights when computer stop
+- alias: Lighting - Turn off lights when computer stop
   trigger:
     platform: state
     entity_id: group.lucas_pc
