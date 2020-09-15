@@ -1,8 +1,7 @@
 name: beda_2
-frequency: 'every-n-weeks'
+frequency: 'even-weeks'
 collection_days:
 - wed
-period: 2
 expire_after: '12:00'
 exclude_dates:
 - '2020-12-23'
