@@ -1,5 +1,5 @@
 alias: 'Normal light color'
-icon: mdi:lightbulb-on
+icon: mdi:brightness-6
 sequence:
   - service: scene.turn_on
     entity_id:
