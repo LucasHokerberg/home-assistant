@@ -8,5 +8,8 @@ exclude_dates:
 include_dates:
 - '2019-12-22'
 hidden: true
+icon_normal: mdi:delete-empty
+icon_today: mdi:delete
+icon_tomorrow: mdi:delete
 verbose_state: true
 verbose_format: 'In {days} days'

@@ -6,5 +6,8 @@ period: 4
 first_week: 2
 expire_after: '06:00'
 hidden: true
+icon_normal: mdi:delete-empty
+icon_today: mdi:delete
+icon_tomorrow: mdi:delete
 verbose_state: true
 verbose_format: 'In {days} days'
