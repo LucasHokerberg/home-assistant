@@ -1,7 +1,7 @@
 sequence:
   - service: remote.send_command
-    data:
+    data_template:
       entity_id: remote.living_room_harmony_hub
+      device: 'Babysitter'
       command:
         - PowerOff
-      device: 'Babysitter'
