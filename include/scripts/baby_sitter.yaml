@@ -3,5 +3,7 @@ sequence:
     data:
       entity_id: remote.living_room_harmony_hub
       command:
-        - PowerOff
+        - PowerOn
+        - Auto
       device: Babysitter
+      delay_secs: 1
