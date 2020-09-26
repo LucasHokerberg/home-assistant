@@ -1,0 +1,6 @@
+sequence:
+  - service: remote.send_command
+    entity_id: remote.living_room_harmony_hub
+    command:
+      - PowerOff
+    device: Babysitter
