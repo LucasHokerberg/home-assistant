@@ -1,9 +1,8 @@
 sequence:
   - service: remote.send_command
-    data_template:
+    data:
       entity_id: remote.living_room_harmony_hub
-      device: 'Babysitter'
       command:
-        - PowerOn
+        - PowerToggle
         - Auto
-      delay_secs: 1
+      device: Babysitter
