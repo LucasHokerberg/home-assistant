@@ -4,4 +4,4 @@ sequence:
     data:
       command:
         - PowerOff
-      device: Babysitter
+      device: 'Babysitter'
