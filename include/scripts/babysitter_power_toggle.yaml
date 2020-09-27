@@ -4,4 +4,7 @@ sequence:
       entity_id: remote.living_room_harmony_hub
       command:
         - PowerToggle
+        - 3
+        - Auto
       device: Babysitter
+      delay_secs: 0.5 
