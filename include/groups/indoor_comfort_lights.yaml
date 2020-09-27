@@ -1,3 +1,4 @@
 entities:
-  - group.living_room_comfort_lights
-  - group.dining_room_comfort_lights
+  - light.living_room_table_light
+  - switch.living_room_floor_light
+  - light.dining_room_cabinet_light
