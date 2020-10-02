@@ -1,5 +1,0 @@
-sequence:
-  - service: remote.turn_on
-    entity_id: remote.living_room_harmony_hub
-    data:
-      activity: 'PlayStation'

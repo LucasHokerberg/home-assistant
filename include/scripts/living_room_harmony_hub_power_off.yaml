@@ -1,3 +1,0 @@
-sequence:
-  - service: remote.turn_off
-    entity_id: remote.living_room_harmony_hub
