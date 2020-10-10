@@ -2,7 +2,7 @@
 - alias: Presence - Notify when someone comes home
   trigger:
     platform: zone
-    entity_id: person.lucas_hokerberg,person.victoria_johansson
+    entity_id: person.lucas_hokerberg,person.victoria_hjerter
     zone: zone.home
     event: enter
   action:
@@ -15,7 +15,7 @@
 - alias: Presence - Notify when someone leaves home
   trigger:
     platform: zone
-    entity_id: person.lucas_hokerberg,person.victoria_johansson
+    entity_id: person.lucas_hokerberg,person.victoria_hjerter
     zone: zone.home
     event: leave
   action:
@@ -41,14 +41,14 @@
 - alias: Presence - Notify when Victoria arrives at work
   trigger:
     platform: zone
-    entity_id: person.victoria_johansson
-    zone: zone.victoria_johansson_work
+    entity_id: person.victoria_hjerter
+    zone: zone.victoria_hjerter_work
     event: enter
   action:
     - service: notify.home_mobile_apps
       data_template:
         title: 'HalloNET Home'
-        message: 'Victoria Johansson just arrived at work.'
+        message: 'Victoria Hjerter just arrived at work.'
 
 # Send a notification when Lucas is leaving work
 - alias: Presence - Notify when Lucas leaves work
@@ -67,14 +67,14 @@
 - alias: Presence - Notify when Victoria leaves work
   trigger:
     platform: zone
-    entity_id: person.victoria_johansson
-    zone: zone.victoria_johansson_work
+    entity_id: person.victoria_hjerter
+    zone: zone.victoria_hjerter_work
     event: leave
   action:
     - service: notify.home_mobile_apps
       data_template:
         title: 'HalloNET Home'
-        message: 'Victoria Johansson just left work.'
+        message: 'Victoria Hjerter just left work.'
 
 # Turn on lights when it's dark and lonley and someone comes home
 - alias: Presence - Turn on lights when someone comes home

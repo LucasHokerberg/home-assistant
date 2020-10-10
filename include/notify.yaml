@@ -2,4 +2,4 @@
   platform: group
   services:
     - service: mobile_app_lucas_hokerberg
-    - service: mobile_app_victoria_johansson
+    - service: mobile_app_victoria_hjerter
