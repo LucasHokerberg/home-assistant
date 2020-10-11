@@ -93,7 +93,7 @@
         - group.indoor_window_lights
 
 # Turn off lights and TV when everyone leaves home
-- alias: Presence - Turn off indoor lights and TV when everyone leaves
+- alias: Presence - Turn off lights and TV when everyone leaves home
   trigger:
     platform: state
     entity_id: group.home_members
