@@ -1,4 +1,3 @@
 entities:
-  - light.living_room_table_light
   - switch.living_room_floor_light
   - light.dining_room_cabinet_light

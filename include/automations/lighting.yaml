@@ -1,4 +1,4 @@
-# Turn on outdoor comfort lights at sunset
+# Turn on outdoor lights at sunset
 - alias: Lighting - Turn on outdoor lights at sunset
   trigger:
     platform: sun
@@ -7,8 +7,8 @@
     - service: homeassistant.turn_on
       entity_id: group.outdoor_comfort_lights
 
-# Turn on indoor comfort lights when it becomes dark and someone is home
-- alias: Lighting - Turn on indoor lights when dark and someone is home
+# Turn on lights when living room becomes dark and someone is home
+- alias: Lighting - Turn on indoor lights when dark and somone is home
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
@@ -20,12 +20,10 @@
     entity_id: group.home_members
     state: 'home'
   action:
-    - service: scene.turn_on
-      entity_id: scene.living_room_tradfri_remote_normal
     - service: homeassistant.turn_on
       entity_id: group.indoor_comfort_lights
 
-# Turn on some of the indoor lights when it becomes dark
+# Turn on indoor lights when living room becomes dark
 - alias: Lighting - Turn on indoor lights when dark
   trigger:
     platform: numeric_state
@@ -34,11 +32,11 @@
     for:
       seconds: 5
   action:
-    - service: scene.turn_on
-      entity_id: scene.living_room_tradfri_remote_normal
+    - service: homeassistant.turn_on
+      entity_id: group.indoor_window_lights
 
-# Turn off outdoor comfort lights at sunrise
-- alias: Lighting - Turn off outdoor lights at sunset
+# Turn off outdoor lights at sunrise
+- alias: Lighting - Turn off outdoor lights at sunrise
   trigger:
     platform: sun
     event: sunrise
@@ -46,7 +44,7 @@
     - service: homeassistant.turn_off
       entity_id: group.outdoor_comfort_lights
 
-# Turn off lights when living room is bright
+# Turn off indoor lights when living room is bright
 - alias: Lighting - Turn off indoor lights when bright
   trigger:
     platform: numeric_state
@@ -56,7 +54,9 @@
       seconds: 5
   action:
     - service: homeassistant.turn_off
-      entity_id: group.indoor_comfort_lights
+      entity_id:
+        - group.indoor_comfort_lights
+        - group.indoor_window_lights
 
 # Turn on lights when the computer is turning on
 - alias: Lighting - Turn on lights when computer start

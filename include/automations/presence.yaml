@@ -76,8 +76,8 @@
         title: 'HalloNET Home'
         message: 'Victoria Hjerter just left work.'
 
-# Turn on lights when it's dark and lonley and someone comes home
-- alias: Presence - Turn on lights when someone comes home
+# Turn on lights when living room is dark and someone comes home
+- alias: Presence - Turn on indoor lights when someone comes home
   trigger:
     platform: state
     entity_id: group.home_members
@@ -87,13 +87,13 @@
     entity_id: sensor.living_room_light_level
     below: 10
   action:
-    - service: scene.turn_on
-      entity_id: scene.living_room_tradfri_remote_normal
     - service: homeassistant.turn_on
-      entity_id: group.indoor_comfort_lights
+      entity_id:
+        - group.indoor_comfort_lights
+        - group.indoor_window_lights
 
 # Turn off lights and TV when everyone leaves home
-- alias: Presence - Turn off lights and TV when everyone leaves home
+- alias: Presence - Turn off indoor lights and TV when everyone leaves
   trigger:
     platform: state
     entity_id: group.home_members
