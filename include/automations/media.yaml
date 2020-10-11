@@ -77,7 +77,7 @@
     - service: light.turn_off
       data:
         entity_id:
-          - light.living_room_table_light
+          - light.living_room_window_light
         transition: 2
 
 # Turn on lights when Living Room Harmony Hub stops Movie Mode
