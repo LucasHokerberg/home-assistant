@@ -59,6 +59,4 @@ tellduslive: !include include/tellduslive.yaml
 
 utility_meter: !include_dir_named include/utility_meters/
 
-verisure: !include include/verisure.yaml
-
 zone: !include_dir_list include/zones/
