@@ -1,0 +1,3 @@
+username: !secret verisure_username.yaml
+password: !secret verisure_password.yaml
+code_digits: 6
