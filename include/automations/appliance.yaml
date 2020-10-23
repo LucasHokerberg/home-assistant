@@ -5,7 +5,7 @@
     entity_id: binary_sensor.kitchen_dishwasher_state
     to: 'off'
   action:
-    - service: notify.home_mobile_apps
-      data_template:
-        title: 'HalloNET Home'
-        message: 'The dishwasher is done.'
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: 'The dishwasher is done.'

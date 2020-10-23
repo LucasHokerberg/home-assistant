@@ -7,7 +7,7 @@
     for:
       hours: 8
   action:
-    - service: notify.home_mobile_apps
-      data_template:
-        title: 'HalloNET Home'
-        message: 'Reminder for {{ trigger.to_state.attributes.friendly_name }}.'
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: 'Reminder for {{ trigger.to_state.attributes.friendly_name }}.'

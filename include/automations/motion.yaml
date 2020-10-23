@@ -12,8 +12,8 @@
       entity_id: sensor.upstairs_light_level
       below: 5
   action:
-    - service: scene.turn_on
-      entity_id: scene.upstairs_desk_light_night
+    service: scene.turn_on
+    entity_id: scene.upstairs_desk_light_night
 
 # Turn off lights when no upstairs motion is detected and the computer is off
 - alias: Motion - Turn off lights on no upstairs motion
@@ -24,11 +24,11 @@
     for:
       minutes: 1
   condition:
-    - condition: state
-      entity_id: group.lucas_pc
-      state: 'not_home'
+    condition: state
+    entity_id: lock.front_door
+    state: 'unlocked'
   action:
-    - service: light.turn_off
-      data:
-        entity_id: light.upstairs_desk_light
-        transition: 2
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: 'Everyone left the home, but the door is unlocked!'
