@@ -1,4 +1,4 @@
 username: !secret verisure_username
 password: !secret verisure_password
-alarm: disable
+alarm: false
 code_digits: 6
