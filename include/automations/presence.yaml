@@ -6,10 +6,10 @@
     zone: zone.home
     event: enter
   action:
-    - service: notify.home_mobile_apps
-      data_template:
-        title: 'HalloNET Home'
-        message: '{{ trigger.to_state.attributes.friendly_name }} just came home.'
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: '{{ trigger.to_state.attributes.friendly_name }} just came home.'
 
 # Send a nofitication when someone is leaving home
 - alias: Presence - Notify when someone leaves home
@@ -19,10 +19,10 @@
     zone: zone.home
     event: leave
   action:
-    - service: notify.home_mobile_apps
-      data_template:
-        title: 'HalloNET Home'
-        message: '{{ trigger.to_state.attributes.friendly_name }} just left the home.'
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: '{{ trigger.to_state.attributes.friendly_name }} just left the home.'
 
 # Send a notification when Lucas is arriving at work
 - alias: Presence - Notify when Lucas arrives at work
@@ -32,10 +32,10 @@
     zone: zone.lucas_hokerberg_work
     event: enter
   action:
-    - service: notify.home_mobile_apps
-      data_template:
-        title: 'HalloNET Home'
-        message: 'Lucas Hökerberg just arrived at work.'
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: 'Lucas Hökerberg just arrived at work.'
 
 # Send a notification when Victoria is arriving at work
 - alias: Presence - Notify when Victoria arrives at work
@@ -45,10 +45,10 @@
     zone: zone.victoria_hjerter_work
     event: enter
   action:
-    - service: notify.home_mobile_apps
-      data_template:
-        title: 'HalloNET Home'
-        message: 'Victoria Hjerter just arrived at work.'
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: 'Victoria Hjerter just arrived at work.'
 
 # Send a notification when Lucas is leaving work
 - alias: Presence - Notify when Lucas leaves work
@@ -58,10 +58,10 @@
     zone: zone.lucas_hokerberg_work
     event: leave
   action:
-    - service: notify.home_mobile_apps
-      data_template:
-        title: 'HalloNET Home'
-        message: 'Lucas Hökerberg just left work.'
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: 'Lucas Hökerberg just left work.'
 
 # Send a notification when Victoria is leaving work
 - alias: Presence - Notify when Victoria leaves work
@@ -71,10 +71,10 @@
     zone: zone.victoria_hjerter_work
     event: leave
   action:
-    - service: notify.home_mobile_apps
-      data_template:
-        title: 'HalloNET Home'
-        message: 'Victoria Hjerter just left work.'
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: 'Victoria Hjerter just left work.'
 
 # Turn on lights when living room is dark and someone comes home
 - alias: Presence - Turn on indoor lights when someone comes home
@@ -87,10 +87,10 @@
     entity_id: sensor.living_room_light_level
     below: 10
   action:
-    - service: homeassistant.turn_on
-      entity_id:
-        - group.indoor_comfort_lights
-        - group.indoor_window_lights
+    service: homeassistant.turn_on
+    entity_id:
+      - group.indoor_comfort_lights
+      - group.indoor_window_lights
 
 # Turn off lights and TV when everyone leaves home
 - alias: Presence - Turn off lights and TV when everyone leaves home
@@ -99,7 +99,19 @@
     entity_id: group.home_members
     from: 'home'
   action:
-    - service: homeassistant.turn_off
-      entity_id:
-        - group.indoor_comfort_lights
-        - remote.living_room_harmony_hub
+    service: homeassistant.turn_off
+    entity_id:
+      - group.indoor_comfort_lights
+      - remote.living_room_harmony_hub
+
+# Notify when everyone leaves the home and the front door is unlocked
+- alias: Presence - Notify when door is unlocked
+  trigger:
+    platform: state
+    entity_id: group.home_members
+    from: 'home'
+  action:
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: 'EVeryone left home, but the front door is unlocked!'
