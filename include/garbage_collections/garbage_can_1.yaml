@@ -1,7 +1,6 @@
 name: 'Garbage Can 1'
 frequency: 'every-n-weeks'
-collection_days:
-- wed
+collection_days: wed
 period: 4
 first_week: 2
 expire_after: '06:00'
