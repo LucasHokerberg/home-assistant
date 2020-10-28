@@ -115,7 +115,4 @@
     entity_id: lock.front_door
     state: 'unlocked'
   action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: 'Everyone left home, but the door is unlocked!'
+    service: script.check_front_door
