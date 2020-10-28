@@ -24,11 +24,11 @@
     for:
       minutes: 1
   condition:
-    condition: state
-    entity_id: lock.front_door
-    state: 'unlocked'
+    - condition: state
+      entity_id: group.lucas_pc
+      state: 'not_home'
   action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: 'Everyone left the home, but the door is unlocked!'
+    - service: light.turn_off
+      data:
+        entity_id: light.upstairs_desk_light
+        transition: 2

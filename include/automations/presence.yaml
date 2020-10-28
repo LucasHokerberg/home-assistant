@@ -110,8 +110,12 @@
     platform: state
     entity_id: group.home_members
     from: 'home'
+  condition:
+    condition: state
+    entity_id: lock.front_door
+    state: 'unlocked'
   action:
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Everyone left home, but the front door is unlocked!'
+      message: 'Everyone left home, but the door is unlocked!'
