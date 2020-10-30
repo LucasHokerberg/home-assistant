@@ -36,11 +36,8 @@
   action:
     - service: homeassistant.turn_off
       entity_id:
+        - group.indoor_window_lights
         - group.indoor_comfort_lights
-        - light.upstairs_desk_light
-    - service: scene.turn_on
-      entity_id:
-        - scene.living_room_tradfri_switch_plex_pause
     - delay:
         seconds: 12
     - service: androidtv.adb_command
@@ -49,34 +46,34 @@
         command: 'am start -a android.intent.action.MAIN -c android.intent.category.LEANBACK_LAUNCHER -n com.plexapp.android/com.plexapp.plex.activities.SplashActivity'
 
 # Turn on lights when Plex is pausing or stoping and Movie Mode is active
-- alias: Media - Turn on lights when Plex stops
-  initial_state: 'on'
-  trigger:
-    platform: state
-    entity_id: media_player.living_room_shield
-    to: 'idle'
-  condition:
-    condition: template
-    value_template: '{{ states.remote.living_room_harmony_hub.attributes.current_activity == "Movie Mode" }}'
-  action:
-    service: scene.turn_on
-    entity_id: scene.living_room_tradfri_switch_plex_pause
+#- alias: Media - Turn on lights when Plex stops
+#  initial_state: 'on'
+#  trigger:
+#    platform: state
+#    entity_id: media_player.living_room_shield
+#    to: 'idle'
+#  condition:
+#    condition: template
+#    value_template: '{{ states.remote.living_room_harmony_hub.attributes.current_activity == "Movie Mode" }}'
+#  action:
+#    service: scene.turn_on
+#    entity_id: scene.living_room_tradfri_switch_plex_pause
 
 # Turn off lights when Plex is resuming or playing and Movie Mode is active
-- alias: Media - Turn off lights when Plex plays
-  initial_state: 'on'
-  trigger:
-    platform: state
-    entity_id: media_player.living_room_shield
-    to: 'playing'
-  condition:
-    condition: template
-    value_template: '{{ states.remote.living_room_harmony_hub.attributes.current_activity == "Movie Mode" }}'
-  action:
-    service: light.turn_off
-    data:
-      entity_id: light.living_room_window_light
-      transition: 2
+#- alias: Media - Turn off lights when Plex plays
+#  initial_state: 'on'
+#  trigger:
+#    platform: state
+#    entity_id: media_player.living_room_shield
+#    to: 'playing'
+#  condition:
+#    condition: template
+#    value_template: '{{ states.remote.living_room_harmony_hub.attributes.current_activity == "Movie Mode" }}'
+#  action:
+#    service: light.turn_off
+#    data:
+#      entity_id: light.living_room_window_light
+#      transition: 2
 
 # Turn on lights when Living Room Harmony Hub stops Movie Mode
 - alias: Media - Turn on lights when Living Room Harmony exit Movie Mode
@@ -87,8 +84,8 @@
     condition: template
     value_template: '{{ trigger.from_state.attributes.current_activity == "Movie Mode" }}'
   action:
-    - service: scene.turn_on
-      entity_id: scene.living_room_tradfri_switch_normal
-    - service: homeassistant.turn_on
-      data:
-        entity_id: group.indoor_comfort_lights
+    service: homeassistant.turn_on
+    data:
+      entity_id:
+        - group.indoor_window_lights
+        - group.indoor_comfort_lights
