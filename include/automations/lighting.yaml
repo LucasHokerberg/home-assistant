@@ -7,7 +7,7 @@
     service: homeassistant.turn_on
     entity_id: group.outdoor_comfort_lights
 
-# Turn on lights when living room becomes dark and someone is home
+# Turn on indoor lights when living room becomes dark and someone is home
 - alias: Lighting - Turn on indoor lights when dark and somone is home
   trigger:
     platform: numeric_state
