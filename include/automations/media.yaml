@@ -36,6 +36,8 @@
   action:
     - service: homeassistant.turn_off
       entity_id:
+        - automation.lighting_turn_on_indoor_lights_when_dark_and_somone_is_home
+        - automation.lighting_turn_on_indoor_lights_when_dark
         - group.indoor_window_lights
         - group.indoor_comfort_lights
     - delay:
@@ -89,3 +91,5 @@
       entity_id:
         - group.indoor_window_lights
         - group.indoor_comfort_lights
+        - automation.lighting_turn_on_indoor_lights_when_dark_and_somone_is_home
+        - automation.lighting_turn_on_indoor_lights_when_dark
