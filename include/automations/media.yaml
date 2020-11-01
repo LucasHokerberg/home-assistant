@@ -2,10 +2,8 @@
 - alias: "Media - Living Room Harmony Spotify"
   trigger:
     platform: state
-    entity_id: remote.living_room_harmony_hub
-  condition:
-    condition: template
-    value_template: '{{ trigger.to_state.attributes.current_activity == "Spotify" }}'
+    entity_id: sensor.living_room_harmony_hub
+    to: 'Spotify'
   action:
     - delay:
         seconds: 12
@@ -29,10 +27,8 @@
 - alias: "Media - Living Room Harmony Movie Mode"
   trigger:
     platform: state
-    entity_id: remote.living_room_harmony_hub
-  condition:
-    condition: template
-    value_template: '{{ trigger.to_state.attributes.current_activity == "Movie Mode" }}'
+    entity_id: sensor.living_room_harmony_hub
+    to: 'Movie Mode'
   action:
     - service: homeassistant.turn_off
       entity_id:
@@ -55,8 +51,9 @@
 #    entity_id: media_player.living_room_shield
 #    to: 'idle'
 #  condition:
-#    condition: template
-#    value_template: '{{ states.remote.living_room_harmony_hub.attributes.current_activity == "Movie Mode" }}'
+#    condition: state
+#    entity_id: sensor.living_room_harmony_hub
+#    state: 'Movie Mode'
 #  action:
 #    service: scene.turn_on
 #    entity_id: scene.living_room_tradfri_switch_plex_pause
@@ -69,8 +66,9 @@
 #    entity_id: media_player.living_room_shield
 #    to: 'playing'
 #  condition:
-#    condition: template
-#    value_template: '{{ states.remote.living_room_harmony_hub.attributes.current_activity == "Movie Mode" }}'
+#    condition: state
+#    entity_id: sensor.living_room_harmony_hub
+#    state: 'Movie Mode'
 #  action:
 #    service: light.turn_off
 #    data:
@@ -81,10 +79,8 @@
 - alias: Media - Turn on lights when Living Room Harmony exit Movie Mode
   trigger:
     platform: state
-    entity_id: remote.living_room_harmony_hub
-  condition:
-    condition: template
-    value_template: '{{ trigger.from_state.attributes.current_activity == "Movie Mode" }}'
+    entity_id: sensor.living_room_harmony_hub
+    from: 'Movie Mode'
   action:
     service: homeassistant.turn_on
     data:
