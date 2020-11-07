@@ -1,3 +1,4 @@
 entities:
   - switch.living_room_floor_light
   - light.dining_room_cabinet_light
+  - group.lovelias_room_balloon_lights
