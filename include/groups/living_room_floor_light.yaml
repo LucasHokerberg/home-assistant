@@ -1,0 +1,6 @@
+name: Floor Light
+icon: mdi:floor-lamp
+entities:
+  - light.living_room_floor_light_1
+  - light.living_room_floor_light_2
+  - light.living_room_floor_light_3
