@@ -1,2 +1,3 @@
 entities:
-  - light.living_room_window_light
+  - switch.living_room_window_light
+  - switch.dining_room_window_light
