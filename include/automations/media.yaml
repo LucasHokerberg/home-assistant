@@ -38,10 +38,32 @@
         - group.indoor_comfort_lights
     - delay:
         seconds: 12
-    - service: androidtv.adb_command
+    - service: scene.turn_on
+      data:
+        entity_id: scene.living_room_hue_switch_plex
+        transition: 2
       data:
         entity_id: media_player.living_room_shield
         command: 'am start -a android.intent.action.MAIN -c android.intent.category.LEANBACK_LAUNCHER -n com.plexapp.android/com.plexapp.plex.activities.SplashActivity'
+
+# Turn off lights when Plex is resuming or playing and Movie Mode is active
+- alias: Media - Turn off lights when Plex plays
+  initial_state: 'on'
+  trigger:
+    platform: state
+    entity_id: media_player.living_room_shield
+    to: 'playing'
+  condition:
+    condition: state
+    entity_id: sensor.living_room_harmony_hub
+    state: 'Movie Mode'
+  action:
+    service: light.turn_off
+    data:
+      entity_id:
+        - light.living_room_sideboard_light
+        - group.living_room_floor_light
+      transition: 2
 
 # Turn on lights when Plex is pausing or stoping and Movie Mode is active
 - alias: Media - Turn on lights when Plex stops
@@ -58,23 +80,6 @@
     service: scene.turn_on
     data:
       entity_id: scene.living_room_hue_switch_plex
-      transition: 2
-
-# Turn off lights when Plex is resuming or playing and Movie Mode is active
-- alias: Media - Turn off lights when Plex plays
-  initial_state: 'on'
-  trigger:
-    platform: state
-    entity_id: media_player.living_room_shield
-    to: 'playing'
-  condition:
-    condition: state
-    entity_id: sensor.living_room_harmony_hub
-    state: 'Movie Mode'
-  action:
-    service: light.turn_off
-    data:
-      entity_id: light.living_room_window_light
       transition: 2
 
 # Turn on lights when Living Room Harmony Hub stops Movie Mode
