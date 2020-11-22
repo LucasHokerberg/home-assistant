@@ -42,6 +42,7 @@
       data:
         entity_id: scene.living_room_hue_switch_plex
         transition: 2
+    - service: androidtv.adb_command
       data:
         entity_id: media_player.living_room_shield
         command: 'am start -a android.intent.action.MAIN -c android.intent.category.LEANBACK_LAUNCHER -n com.plexapp.android/com.plexapp.plex.activities.SplashActivity'
