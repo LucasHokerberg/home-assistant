@@ -59,7 +59,7 @@
     entity_id: scene.living_room_hue_switch_plex
     transition: 2
 
- Turn off lights when Plex is resuming or playing and Movie Mode is active
+# Turn off lights when Plex is resuming or playing and Movie Mode is active
 - alias: Media - Turn off lights when Plex plays
   initial_state: 'on'
   trigger:
