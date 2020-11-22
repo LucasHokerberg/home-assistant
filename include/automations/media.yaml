@@ -98,3 +98,23 @@
         - group.indoor_comfort_lights
         - automation.lighting_turn_on_indoor_lights_when_dark_and_somone_is_home
         - automation.lighting_turn_on_indoor_lights_when_dark
+
+# Turn on lights when the computer is turning on
+- alias: Media - Turn on lights when computer start
+  trigger:
+    platform: state
+    entity_id: group.lucas_pc
+    to: 'home'
+  action:
+    service: scene.turn_on
+    entity_id: scene.upstairs_desk_light_computer
+
+# Turn off lights when the computer is turning off
+- alias: Media - Turn off lights when computer stop
+  trigger:
+    platform: state
+    entity_id: group.lucas_pc
+    to: 'not_home'
+  action:
+    service: light.turn_off
+    entity_id: light.upstairs_desk_light
