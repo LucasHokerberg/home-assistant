@@ -56,8 +56,9 @@
     state: 'Movie Mode'
   action:
     service: scene.turn_on
-    entity_id: scene.living_room_hue_switch_plex
-    transition: 2
+    data:
+      entity_id: scene.living_room_hue_switch_plex
+      transition: 2
 
 # Turn off lights when Plex is resuming or playing and Movie Mode is active
 - alias: Media - Turn off lights when Plex plays
@@ -72,8 +73,9 @@
     state: 'Movie Mode'
   action:
     service: light.turn_off
-    entity_id: light.living_room_window_light
-    transition: 2
+    data:
+      entity_id: light.living_room_window_light
+      transition: 2
 
 # Turn on lights when Living Room Harmony Hub stops Movie Mode
 - alias: Media - Turn on lights when Living Room Harmony exit Movie Mode
