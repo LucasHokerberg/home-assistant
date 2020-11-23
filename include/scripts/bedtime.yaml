@@ -4,4 +4,6 @@ sequence:
       - group.indoor_comfort_lights
       - group.indoor_window_lights
       - remote.living_room_harmony_hub
-  - service: script.check_front_door
+  - service: lock.lock
+    entity_id:
+      - lock.front_door
