@@ -1,5 +1,5 @@
-# Send a reminder when a garbage cans is due tomorrow
-- alias: Reminder - Garbage Cans
+# Send a reminder when a garbage cans is emptied tomorrow
+- alias: Reminder - Garbage Cans 1
   trigger:
     platform: state
     entity_id: sensor.garbage_can_1,sensor.garbage_can_2,sensor.garden_waste
@@ -10,4 +10,18 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Reminder for {{ trigger.to_state.attributes.friendly_name }}.'
+      message: '{{ trigger.to_state.attributes.friendly_name }} is emptied tomorrow.'
+
+# Send a reminder when a garbage cans is emptied tomorrow
+- alias: Reminder - Garbage Cans 2
+  trigger:
+    platform: state
+    entity_id: sensor.garbage_can_1,sensor.garbage_can_2,sensor.garden_waste
+    to: 'tomorrow'
+    for:
+      hours: 20
+  action:
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: '{{ trigger.to_state.attributes.friendly_name }} is emptied tomorrow.'
