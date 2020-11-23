@@ -124,7 +124,7 @@
           - action: lock_front_door
             title: 'Lock Front Door'
 
-- alias: Precense - Notify when door is unlocked ACTION
+- alias: Precense - Notify when door is unlocked - Action
   trigger:
     platform: event
     event_type: mobile_app_notification_action
