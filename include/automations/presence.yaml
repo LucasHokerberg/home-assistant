@@ -115,4 +115,21 @@
     entity_id: lock.front_door
     state: 'unlocked'
   action:
-    service: script.check_front_door
+    service: notify.home_mobile_apps
+    data:
+      title: 'HalloNET Home'
+      message: 'Everyone left home, but the front door is unlocked!'
+      data:
+        actions:
+          - action: lock_front_door
+            title: 'Lock Front Door'
+
+- alias: Precense - Notify when door is unlocked ACTION
+  trigger:
+    platform: event
+    event_type: mobile_app_notification_action
+    data_event:
+      action: lock_front_door
+  action:
+    service: lock.lock
+    entity_id: lock.front_door
