@@ -121,8 +121,8 @@
       message: 'Everyone left home, but the front door is unlocked!'
       data:
         actions:
-          - action: lock_front_door
-            title: 'Lock Front Door'
+          action: lock_front_door
+          title: 'Lock Front Door'
 
 - alias: Precense - Notify when door is unlocked ACTION
   trigger:
