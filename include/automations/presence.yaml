@@ -128,7 +128,7 @@
   trigger:
     platform: event
     event_type: mobile_app_notification_action
-    data_event:
+    event_data:
       action: lock_front_door
   action:
     service: lock.lock
