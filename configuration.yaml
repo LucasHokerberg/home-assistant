@@ -51,8 +51,6 @@ script: !include_dir_named include/scripts/
 
 sensor: !include_dir_list include/sensors/
 
-spotify: !include include/spotify.yaml
-
 switch: !include include/switches.yaml
 
 tellduslive: !include include/tellduslive.yaml
