@@ -2,3 +2,4 @@ entities:
   #- light.living_room_window_light
   - switch.living_room_window_light_2
   - light.dining_room_window_light
+  - switch.kitchen_window_light_2
