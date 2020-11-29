@@ -1,7 +1,0 @@
-sequence:
-  service: script.turn_on
-  data_template:
-    entity_id: >
-      {% if is_state('lock.front_door', 'unlocked') %}
-        script.notify_front_door
-      {% endif %}
