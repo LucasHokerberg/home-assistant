@@ -15,7 +15,7 @@
 # Notify when the freezer temperature is too high
 - alias: Security - Notify on high freezer temperature
   trigger:
-    platform: state
+    platform: numeric_state
     entity_id: sensor.kitchen_freezer_temperature
     above: -10
     for:
@@ -31,7 +31,7 @@
 # Notify when the fridge temperature is too high
 - alias: Security - Notify on high fridge temperature
   trigger:
-    platform: state
+    platform: numeric_state
     entity_id: sensor.kitchen_fridge_temperature
     above: 15
     for:
