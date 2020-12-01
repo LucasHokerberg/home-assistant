@@ -9,3 +9,5 @@
     data_template:
       title: 'HalloNET Home'
       message: 'The dishwasher is done.'
+      data:
+        channel: Appliance
