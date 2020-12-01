@@ -132,6 +132,7 @@
       title: 'HalloNET Home'
       message: 'Everyone left home, but the front door is unlocked!'
       data:
+        channel: Presence
         actions:
           - action: lock_front_door
             title: 'Lock Front Door'
