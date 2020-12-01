@@ -11,6 +11,8 @@
     data_template:
       title: 'HalloNET Home'
       message: '{{ trigger.to_state.attributes.friendly_name }} is emptied tomorrow.'
+      data:
+        channel: Reminder
 
 # Send a reminder when a garbage cans is emptied tomorrow
 - alias: Reminder - Garbage Cans 2
@@ -25,3 +27,5 @@
     data_template:
       title: 'HalloNET Home'
       message: '{{ trigger.to_state.attributes.friendly_name }} is emptied tomorrow.'
+      data:
+        channel: Reminder
