@@ -43,3 +43,34 @@
       message: 'Fridge temperature is too high!'
       data:
         channel: Security
+
+# Notify when everyone leaves the home and the front door is unlocked
+- alias: Security - Notify when door is unlocked
+  trigger:
+    platform: state
+    entity_id: group.home_members
+    from: 'home'
+  condition:
+    condition: state
+    entity_id: lock.front_door
+    state: 'unlocked'
+  action:
+    service: notify.home_mobile_apps
+    data:
+      title: 'HalloNET Home'
+      message: 'Everyone left home, but the front door is unlocked!'
+      data:
+        channel: Security
+        actions:
+          - action: lock_front_door
+            title: 'Lock Front Door'
+
+- alias: Precense - Notify when door is unlocked - Action
+  trigger:
+    platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: lock_front_door
+  action:
+    service: lock.lock
+    entity_id: lock.front_door
