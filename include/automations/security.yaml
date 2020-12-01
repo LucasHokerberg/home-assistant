@@ -10,5 +10,4 @@
       title: 'HalloNET Home'
       message: 'Leakage detected in the basement!'
       data:
-        ttl: 0
-        priority: high
+        channel: Security
