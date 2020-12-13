@@ -1,4 +1,5 @@
 sequence:
+  alias: Babysitter
   service: remote.send_command
   data:
     entity_id: remote.living_room_harmony_hub
