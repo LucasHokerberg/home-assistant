@@ -1,6 +1,14 @@
 platform: template
 sensors:
   hallway_front_door_door_sensor:
+    value_template: >-
+      {% if states.binary_sensor.hallway_front_door_door_sensor.state == 'off' %}
+        Closed
+      {% elif states.binary_sensor.hallway_front_door_door_sensor.state == 'on' %}
+        Open
+      {% else %}
+        Unknown
+      {% endif %}
     icon_template: >
       {% if states.binary_sensor.hallway_front_door_door_sensor.state == 'off' %}
         mdi:door-closed
