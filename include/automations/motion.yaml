@@ -24,11 +24,11 @@
     for:
       minutes: 1
   condition:
-    - condition: state
-      entity_id: group.lucas_pc
-      state: 'not_home'
+    condition: state
+    entity_id: group.lucas_pc
+    state: 'not_home'
   action:
-    - service: light.turn_off
-      data:
-        entity_id: light.upstairs_desk_light
-        transition: 2
+    service: light.turn_off
+    data:
+      entity_id: light.upstairs_desk_light
+      transition: 2
