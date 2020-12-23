@@ -91,13 +91,21 @@
 # Turn on lights when living room is dark and someone comes home
 - alias: Presence - Turn on indoor lights when someone comes home
   trigger:
-    platform: state
-    entity_id: group.home_members
-    to: 'home'
+    - platform: state
+      entity_id: group.home_members
+      to: 'home'
+    - platform: state
+      entity_id: binary_sensor.hallway_front_door_door_sensor
+      to: 'on'
   condition:
-    condition: numeric_state
-    entity_id: sensor.living_room_light_level
-    below: 10
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.home_members
+        state: 'not_home'
+      - condition: numeric_state
+        entity_id: sensor.living_room_light_level
+        below: 10
   action:
     service: homeassistant.turn_on
     entity_id:
