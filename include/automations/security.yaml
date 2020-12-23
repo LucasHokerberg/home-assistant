@@ -52,7 +52,7 @@
     from: 'home'
   condition:
     condition: state
-    entity_id: lock.front_door
+    entity_id: lock.hallway_front_door
     state: 'unlocked'
   action:
     service: notify.home_mobile_apps
@@ -62,7 +62,7 @@
       data:
         channel: Security
         actions:
-          - action: lock_front_door
+          - action: lock_hallway_front_door
             title: 'Lock Front Door'
 
 - alias: Security - Notify when door is unlocked - Action
@@ -70,7 +70,7 @@
     platform: event
     event_type: mobile_app_notification_action
     event_data:
-      action: lock_front_door
+      action: lock_hallway_front_door
   action:
     service: lock.lock
-    entity_id: lock.front_door
+    entity_id: lock.hallway_front_door
