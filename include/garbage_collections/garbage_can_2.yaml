@@ -2,8 +2,14 @@ name: 'Garbage Can 2'
 frequency: 'odd-weeks'
 collection_days: wed
 expire_after: '06:00'
-exclude_dates: '2020-12-23'
-include_dates: '2019-12-22'
+exclude_dates:
+- '2021-03-31'
+- '2021-06-23'
+- '2021-12-22'
+include_dates:
+- '2021-03-30'
+- '2021-06-22'
+- '2021-12-21'
 hidden: true
 icon_normal: mdi:delete-empty
 icon_today: mdi:delete
