@@ -4,6 +4,12 @@ collection_days: wed
 period: 4
 first_week: 1
 expire_after: '06:00'
+exclude_dates:
+- '2021-03-31'
+- '2021-06-23'
+include_dates:
+- '2021-03-30'
+- '2021-06-22'
 hidden: true
 icon_normal: mdi:delete-empty
 icon_today: mdi:delete
