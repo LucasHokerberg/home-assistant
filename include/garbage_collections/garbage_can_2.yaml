@@ -1,5 +1,5 @@
 name: 'Garbage Can 2'
-frequency: 'even-weeks'
+frequency: 'odd-weeks'
 collection_days: wed
 expire_after: '06:00'
 exclude_dates: '2020-12-23'
