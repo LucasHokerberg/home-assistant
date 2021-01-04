@@ -107,7 +107,7 @@
 - alias: Presence - Turn on indoor lights when someone comes home 2
   trigger:
     platform: state
-    entity_id: binary_sensor.hallway_front_door_door_sensor
+    entity_id: binary_sensor.hallway_front_door_sensor
     to: 'on'
   condition:
     condition: and

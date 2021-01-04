@@ -1,7 +1,7 @@
 platform: template
 sensors:
-  upstairs_air_temperature_offset:
-    value_template: '{{ states.sensor.upstairs_air_temperature.state | float + 2 }}'
+  upstairs_temperature_offset:
+    value_template: '{{ states.sensor.upstairs_temperature.state | float + 2 }}'
     unit_of_measurement: °C
     icon_template: mdi:thermometer
     device_class: temperature
