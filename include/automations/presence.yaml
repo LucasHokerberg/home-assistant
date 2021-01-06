@@ -144,8 +144,9 @@
     to: 'on'
   action:
     service: scene.turn_on
-    entity_id: scene.bedroom_wardrobe_light_normal
-    transition: 2
+    data:
+      entity_id: scene.bedroom_wardrobe_light_normal
+      transition: 2
 
 # Turn off bedroom wardrobe light when door is closed for one minutes
 - alias: Presence - Turn off bedroom wardrobe light
