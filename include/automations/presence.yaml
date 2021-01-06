@@ -143,11 +143,9 @@
     entity_id: binary_sensor.bedroom_wardrobe_door_sensor
     to: 'on'
   action:
-    service: light.turn_on
+    service: scene.turn_on
     data:
-      entity_id: light.bedroom_wardrobe_light
-      brightness_pct: 40
-      transition: 2
+      entity_id: scene.bedroom_wardrobe_light_normal
 
 # Turn off bedroom wardrobe light when door is closed for one minutes
 - alias: Presence - Turn off bedroom wardrobe light
