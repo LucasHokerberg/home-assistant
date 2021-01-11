@@ -7,4 +7,4 @@ sensors:
     delay_on:
       minutes: 2
     delay_off:
-      minutes: 15
+      minutes: 25
