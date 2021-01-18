@@ -1,2 +1,2 @@
-source: sensor.kitchen_dishwasher_total_power
+source: sensor.kitchen_dishwasher_kwh
 cycle: monthly
