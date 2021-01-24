@@ -42,7 +42,7 @@
   action:
     service: light.turn_on
     data:
-      entity_id: scene.bedroom_wardrobe_light
+      entity_id: light.bedroom_wardrobe_light
       brightness: 104
       transition: 3
 
