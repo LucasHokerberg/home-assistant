@@ -43,7 +43,7 @@
     - service: light.turn_on
       data:
         entity_id: light.bedroom_wardrobe_light
-        brightness_pct: 10
+        brightness_pct: 15
     - service: light.turn_on
       data:
         entity_id: light.bedroom_wardrobe_light
