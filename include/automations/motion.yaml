@@ -34,7 +34,7 @@
       transition: 2
 
 # Turn on bedroom wardrobe light when door is opened
-- alias: Presence - Turn on bedroom wardrobe light
+- alias: Motion - Turn on bedroom wardrobe light
   trigger:
     platform: state
     entity_id: binary_sensor.bedroom_wardrobe_door_sensor
@@ -51,7 +51,7 @@
         transition: 3
 
 # Turn off bedroom wardrobe light when door is closed
-- alias: Presence - Turn off bedroom wardrobe light
+- alias: Motion - Turn off bedroom wardrobe light
   trigger:
     platform: state
     entity_id: binary_sensor.bedroom_wardrobe_door_sensor
