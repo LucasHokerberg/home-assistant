@@ -2,6 +2,7 @@ platform: wundergroundpws
 api_key: !secret wunderground_api
 pws_id: !secret wunderground_id
 monitored_conditions:
+  - obsTimeLocal
   - winddir
   - humidity
   - dewpt
