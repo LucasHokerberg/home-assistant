@@ -1,0 +1,21 @@
+platform: wundergroundpws
+api_key: 46c3412743f4472683412743f4172617
+pws_id: IKLIPP12
+monitored_conditions:
+  - winddir
+  - humidity
+  - dewpt
+  - precipTotal
+  - precipRate
+  - pressure
+  - temp
+  - windGust
+  - windSpeed
+  - weather_1d
+  - weather_1n
+  - weather_2d
+  - weather_2n
+  - weather_3d
+  - weather_3n
+  - weather_4d
+  - weather_4n
