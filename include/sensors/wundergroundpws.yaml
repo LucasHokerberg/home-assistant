@@ -1,6 +1,6 @@
 platform: wundergroundpws
-api_key: 46c3412743f4472683412743f4172617
-pws_id: IKLIPP12
+api_key: !secret wunderground_api
+pws_id: !secret wunderground_id
 monitored_conditions:
   - winddir
   - humidity
