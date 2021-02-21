@@ -1,0 +1,9 @@
+platform: template
+sensors:
+  bedroom_tv:
+    value_template: >-
+      {% if state("media_player.bedroom_tv") == "on" %}
+        on
+      {% else %}
+        off
+      {% endif %}
