@@ -2,4 +2,5 @@ sequence:
   - service: homeassistant.turn_off
     entity_id:
       - light.bedroom_table_light
+      - media_player.bedroom_chromecast
       - media_player.bedroom_tv
