@@ -42,7 +42,7 @@
       seconds: 5
   condition:
     condition: time
-      after: "12:00:00"
+    after: "12:00:00"
   action:
     service: homeassistant.turn_on
     entity_id: group.indoor_window_lights
