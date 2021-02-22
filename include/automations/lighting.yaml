@@ -16,14 +16,17 @@
     for:
       seconds: 5
   condition:
-    condition: or
+    condition: and
     conditions:
-      - condition: state
-        entity_id: group.home_members
-        state: 'home'
-      - condition: state
-        entity_id: switch.guest_mode
-        state: 'on'
+      - condition: time
+        after: "12:00:00"
+      - condition: or
+        - condition: state
+          entity_id: group.home_members
+          state: 'home'
+        - condition: state
+          entity_id: switch.guest_mode
+          state: 'on'
   action:
     service: homeassistant.turn_on
     entity_id: group.indoor_comfort_lights
@@ -36,6 +39,9 @@
     below: 10
     for:
       seconds: 5
+  condition:
+    condition: time
+      after: "12:00:00"
   action:
     service: homeassistant.turn_on
     entity_id: group.indoor_window_lights
