@@ -11,3 +11,4 @@ apps:
   com.android.vending: 'Google Play Store'
   com.google.android.play.games: 'Google Play Games'
   com.google.android.apps.mediashell: 'Chromecast'
+  com.android.tv.settings: 'Settings'
