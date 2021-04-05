@@ -1,6 +1,6 @@
 platform: androidtv
 name: living_room_shield
-host: !secret androidtv_living_room_shield_ip
+host: 192.168.12.50
 apps:
   com.hbo_android_tv: 'HBO'
   se.svt.android.svtplay: 'SVT Play'
