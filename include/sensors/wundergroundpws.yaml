@@ -1,6 +1,7 @@
 platform: wundergroundpws
 api_key: !secret wunderground_api
 pws_id: !secret wunderground_id
+numeric_precision: decimal
 monitored_conditions:
   - obsTimeLocal
   - winddir
