@@ -26,38 +26,6 @@
       data:
         channel: Security
 
-# Notify when the freezer temperature is too high
-- alias: Security - Notify on high freezer temperature
-  trigger:
-    platform: numeric_state
-    entity_id: sensor.kitchen_freezer_temperature
-    above: -10
-    for:
-      minutes: 20
-  action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: 'Freezer temperature is too high!'
-      data:
-        channel: Security
-
-# Notify when the fridge temperature is too high
-- alias: Security - Notify on high fridge temperature
-  trigger:
-    platform: numeric_state
-    entity_id: sensor.kitchen_fridge_temperature
-    above: 15
-    for:
-      minutes: 10
-  action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: 'Fridge temperature is too high!'
-      data:
-        channel: Security
-
 # Notify when everyone leaves the home and the front door is unlocked
 - alias: Security - Notify when door is unlocked
   trigger:
