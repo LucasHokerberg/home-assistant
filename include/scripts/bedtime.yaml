@@ -1,7 +1,7 @@
 sequence:
   - service: homeassistant.turn_off
     entity_id:
-      - group.indoor_comfort_lights
+      - group.downstairs_comfort_lights
       - group.indoor_window_lights
       - remote.living_room_harmony_hub
   - service: lock.lock
