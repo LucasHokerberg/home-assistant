@@ -1,6 +1,3 @@
 entities:
-  - group.living_room_floor_light
-  - light.living_room_sideboard_light
-  - light.dining_room_cabinet_light
-  - group.lovelias_room_balloon_lights
-  - light.bedroom_table_light
+  - group.downstairs_comfort_lights
+  - group.upstairs_comfort_lights
