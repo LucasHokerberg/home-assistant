@@ -20,7 +20,6 @@
 
 # Turn off lights when no living room motion is detected
 - alias: Motion - Turn off lights on no living room motion
-  initial_state: 'off'
   trigger:
     platform: state
     entity_id: binary_sensor.living_room_motion
