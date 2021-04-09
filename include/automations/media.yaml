@@ -34,8 +34,8 @@
       entity_id:
         - automation.lighting_turn_on_indoor_lights_when_dark_and_somone_is_home
         - automation.lighting_turn_on_indoor_lights_when_dark
-        - group.indoor_window_lights
-        - group.indoor_comfort_lights
+        - group.downstairs_window_lights
+        - group.downstairs_comfort_lights
     - delay:
         seconds: 12
     - service: scene.turn_on
@@ -94,8 +94,8 @@
     data:
       entity_id:
         - scene.living_room_hue_switch_normal
-        - group.indoor_window_lights
-        - group.indoor_comfort_lights
+        - group.downstairs_window_lights
+        - group.downstairs_comfort_lights
         - automation.lighting_turn_on_indoor_lights_when_dark_and_somone_is_home
         - automation.lighting_turn_on_indoor_lights_when_dark
 
