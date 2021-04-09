@@ -10,7 +10,7 @@
       state: 'off'
     - condition: numeric_state
       entity_id: sensor.living_room_light_level
-      below: 10
+      below: 5
     - condition: state
       entity_id: remote.living_room_harmony_hub
       state: 'off'
