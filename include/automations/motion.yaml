@@ -16,7 +16,9 @@
       state: 'off'
   action:
     service: light.turn_on
-    entity_id: light.living_room_floor_light_1
+    data:
+      entity_id: light.living_room_floor_light_1
+      transition: 2
 
 # Turn off lights when no living room motion is detected
 - alias: Motion - Turn off lights on no living room motion
@@ -32,7 +34,9 @@
     state: 'off'
   action:
     service: light.turn_off
-    entity_id: light.living_room_floor_light_1
+    data:
+      entity_id: light.living_room_floor_light_1
+      transition: 2
 
 # Turn on lights when motion upstairs is detected and it's dark
 - alias: Motion - Turn on lights on upstairs motion
