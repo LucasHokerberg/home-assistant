@@ -1,5 +1,0 @@
-username: !secret verisure_username
-password: !secret verisure_password
-default_lock_code: !secret verisure_lockcode
-alarm: true
-code_digits: 6
