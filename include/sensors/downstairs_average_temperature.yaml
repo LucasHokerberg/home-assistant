@@ -1,5 +1,7 @@
 platform: template 
 sensors:
   downstairs_average_temperature:
+    unit_of_measurement: '°C'
+    friendly_name: Downstairs (average)
     value_template: >-
       {{ ((float(states.sensor.hallway_temperature.state) + float(states.sensor.living_room_temperature.state)) / 2) | round(1) }}
