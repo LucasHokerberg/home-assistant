@@ -1,5 +1,5 @@
 platform: template 
 sensors:
-  upstairs_avarge_temperature:
+  upstairs_average_temperature:
     value_template: >-
       {{ ((float(states.sensor.upstairs_temperature.state) + float(states.sensor.bedroom_temperature.state)) / 2) | round(1) }}
