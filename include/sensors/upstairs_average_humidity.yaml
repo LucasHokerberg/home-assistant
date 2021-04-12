@@ -1,0 +1,7 @@
+platform: template 
+sensors:
+  upstairs_average_humidity:
+    unit_of_measurement: '%'
+    friendly_name: Upstairs (average)
+    value_template: >-
+      {{ ((float(states.sensor.upstairs_humidity.state) + float(states.sensor.bedroom_humidity.state)) / 2) | round(1) }}
