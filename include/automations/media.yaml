@@ -103,7 +103,7 @@
 - alias: Media - Turn on lights when computer start
   trigger:
     platform: state
-    entity_id: group.lucas_pc
+    entity_id: device_tracker.lucas_pc
     to: 'home'
   action:
     service: scene.turn_on
@@ -113,7 +113,7 @@
 - alias: Media - Turn off lights when computer stop
   trigger:
     platform: state
-    entity_id: group.lucas_pc
+    entity_id: device_tracker.lucas_pc
     to: 'not_home'
   action:
     service: light.turn_off

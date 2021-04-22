@@ -65,7 +65,7 @@
       seconds: 30
   condition:
     condition: state
-    entity_id: group.lucas_pc
+    entity_id: device_tracker.lucas_pc
     state: 'not_home'
   action:
     service: light.turn_off
