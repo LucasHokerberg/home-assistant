@@ -45,7 +45,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Everyone left home but the front door is {{ states('lock.hallway_front_door_lock') }} and the alarm is {{ states('alarm_control_panel.snyggatorpsvagen_alarm') }}!'
+      message: 'Everyone left home but the front door is {{ states(lock.hallway_front_door_lock) }} and the alarm is {{ states(alarm_control_panel.snyggatorpsvagen_alarm) }}!'
       data:
         channel: Security
         actions:
