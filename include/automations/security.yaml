@@ -26,28 +26,33 @@
       data:
         channel: Security
 
-# Notify when everyone leaves the home and the front door is unlocked
-- alias: Security - Notify when door is unlocked
+# Notify when everyone leaves the home and the front door is unlocked or alarm disarmed
+- alias: Security - Notify when home is unsecured
   trigger:
     platform: state
     entity_id: group.home_members
     from: 'home'
   condition:
-    condition: state
-    entity_id: lock.hallway_front_door_lock
-    state: 'unlocked'
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: lock.hallway_front_door_lock
+        state: 'unlocked'
+      - condition: state
+        entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+        state: 'Disarmed'
   action:
     service: notify.home_mobile_apps
-    data:
+    data_template:
       title: 'HalloNET Home'
-      message: 'Everyone left home, but the front door is unlocked!'
+      message: 'Everyone left home but the front door is {{ states('lock.hallway_front_door_lock') }} and the alarm is {{ states('alarm_control_panel.snyggatorpsvagen_alarm') }}!'
       data:
         channel: Security
         actions:
           - action: lock_hallway_front_door_lock
             title: 'Lock Front Door'
 
-- alias: Security - Notify when door is unlocked - Action
+- alias: Security - Notify when home is unsecured - Action
   trigger:
     platform: event
     event_type: mobile_app_notification_action

@@ -5,7 +5,7 @@ turn_on:
       - automation.presence_turn_off_lights_and_tv_when_everyone_leaves_home
       - automation.presence_turn_on_indoor_lights_when_someone_comes_home_1
       - automation.presence_turn_on_indoor_lights_when_someone_comes_home_2
-      - automation.security_notify_when_door_is_unlocked
+      - automation.security_notify_when_home_is_unsecured
       - automation.motion_turn_on_lights_on_living_room_motion
 turn_off:
   service: automation.turn_on
@@ -14,5 +14,5 @@ turn_off:
       - automation.presence_turn_off_lights_and_tv_when_everyone_leaves_home
       - automation.presence_turn_on_indoor_lights_when_someone_comes_home_1
       - automation.presence_turn_on_indoor_lights_when_someone_comes_home_2
-      - automation.security_notify_when_door_is_unlocked
+      - automation.security_notify_when_home_is_unsecured
       - automation.motion_turn_on_lights_on_living_room_motion
