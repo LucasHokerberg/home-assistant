@@ -57,12 +57,12 @@
     service: lock.lock
     entity_id: lock.hallway_front_door_lock
 
-# Notify when front doorbell is ringed
-- alias: Security - Notify on front doorbell
+# Notify when entrance doorbell is ringed
+- alias: Security - Notify on entrance doorbell
   trigger:
     platform: state
     entity_id: binary_sensor.outdoor_entrance_doorbell
-    from: 'on'
+    to: 'Siren active'
   action:
     service: notify.home_mobile_apps
     data:
@@ -74,7 +74,7 @@
           - action: unlock_hallway_front_door_lock
             title: 'Unlock Front Door'
 
-- alias: Security - Notify on front doorbell - Action
+- alias: Security - Notify on entrance doorbell - Action
   trigger:
     platform: event
     event_type: mobile_app_notification_action
