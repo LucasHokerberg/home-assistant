@@ -6,7 +6,7 @@
     to: 'on'
   action:
     service: notify.home_mobile_apps
-    data_template:
+    data:
       title: 'HalloNET Home'
       message: 'Leakage detected in the basement!'
       data:
@@ -20,7 +20,7 @@
     to: 'on'
   action:
     service: notify.home_mobile_apps
-    data_template:
+    data:
       title: 'HalloNET Home'
       message: 'Leakage detected in the kitchen!'
       data:
