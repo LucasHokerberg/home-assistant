@@ -97,9 +97,12 @@
 # Turn off lights and TV when everyone leaves home
 - alias: Presence - Turn off lights and TV when everyone leaves home
   trigger:
-    platform: state
-    entity_id: group.home_members
-    from: 'home'
+    - platform: state
+      entity_id: group.home_members
+      from: 'home'
+    - platform: state
+      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+      to: armed_away
   action:
     service: homeassistant.turn_off
     entity_id:
