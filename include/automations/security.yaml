@@ -26,7 +26,7 @@
       data:
         channel: Security
 
-# Notify when everyone leaves the home and the front door is unlocked or alarm disarmed
+# Notify when everyone leaves the home and the front door is unlocked or the alarm is disarmed
 - alias: Security - Notify when home is unsecured
   trigger:
     platform: state
@@ -87,4 +87,17 @@
       action: unlock_hallway_front_door_lock
   action:
     service: lock.unlock
+    entity_id: lock.hallway_front_door_lock
+
+# Lock the front door when the TV is off, it's evening and, all downstairs lights are turned off
+- alias: Security - Lock front door when going to sleep
+  trigger:
+    platform: state
+    entity_id: group.indoor_lights
+    to: 'off'
+  condition:
+    condition: time
+    after: '21:30'
+  action:
+    service: lock.lock
     entity_id: lock.hallway_front_door_lock
