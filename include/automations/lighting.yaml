@@ -67,5 +67,4 @@
   action:
     service: homeassistant.turn_off
     entity_id:
-      - group.indoor_comfort_lights
-      - group.indoor_window_lights
+      - group.indoor_lights

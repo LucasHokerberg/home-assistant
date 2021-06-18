@@ -71,8 +71,7 @@
   action:
     service: homeassistant.turn_on
     entity_id:
-      - group.indoor_comfort_lights
-      - group.indoor_window_lights
+      - group.indoor_lights
 
 - alias: Presence - Turn on indoor lights when someone comes home 2
   trigger:
@@ -91,8 +90,7 @@
   action:
     service: homeassistant.turn_on
     entity_id:
-      - group.indoor_comfort_lights
-      - group.indoor_window_lights
+      - group.indoor_lights
 
 # Turn off lights and TV when everyone leaves home
 - alias: Presence - Turn off lights and TV when everyone leaves home
