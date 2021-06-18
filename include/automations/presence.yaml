@@ -1,33 +1,3 @@
-# Send a notification when someone is coming home
-- alias: Presence - Notify when someone comes home
-  trigger:
-    platform: zone
-    entity_id: person.lucas_hokerberg,person.victoria_hjerter
-    zone: zone.home
-    event: enter
-  action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: '{{ trigger.to_state.attributes.friendly_name }} just came home.'
-      data:
-        channel: Presence
-
-# Send a nofitication when someone is leaving home
-- alias: Presence - Notify when someone leaves home
-  trigger:
-    platform: zone
-    entity_id: person.lucas_hokerberg,person.victoria_hjerter
-    zone: zone.home
-    event: leave
-  action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: '{{ trigger.to_state.attributes.friendly_name }} just left the home.'
-      data:
-        channel: Presence
-
 # Send a notification when Lucas is arriving at work
 - alias: Presence - Notify when Lucas arrives at work
   trigger:
@@ -39,7 +9,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Lucas Hökerberg just arrived at work.'
+      message: 'Lucas Hökerberg arrived at work.'
       data:
         channel: Presence
 
@@ -54,7 +24,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Victoria Hjerter just arrived at work.'
+      message: 'Victoria Hjerter arrived at work.'
       data:
         channel: Presence
 
@@ -69,7 +39,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Lucas Hökerberg just left work.'
+      message: 'Lucas Hökerberg left work.'
       data:
         channel: Presence
 
@@ -84,7 +54,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Victoria Hjerter just left work.'
+      message: 'Victoria Hjerter left work.'
       data:
         channel: Presence
 
