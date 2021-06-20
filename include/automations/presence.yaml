@@ -93,14 +93,23 @@
       - group.indoor_lights
 
 # Turn off lights and TV when everyone leaves home
-- alias: Presence - Turn off lights and TV when everyone leaves home
+- alias: Presence - Turn off lights and TV when everyone leaves home 1
   trigger:
-    - platform: state
-      entity_id: group.home_members
-      from: 'home'
-    - platform: state
-      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-      to: armed_away
+    platform: state
+    entity_id: group.home_members
+    from: 'home'
+  action:
+    service: homeassistant.turn_off
+    entity_id:
+      - group.indoor_comfort_lights
+      - remote.living_room_harmony_hub
+
+# Turn off lights and TV when the alarm is armed away
+- alias: Presence - Turn off lights and TV when everyone leaves home 2
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    to: armed_away
   action:
     service: homeassistant.turn_off
     entity_id:
