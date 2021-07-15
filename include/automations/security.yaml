@@ -40,7 +40,7 @@
         state: 'unlocked'
       - condition: state
         entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-        state: 'Disarmed'
+        state: 'disarmed'
   action:
     service: notify.home_mobile_apps
     data_template:
@@ -62,12 +62,34 @@
     service: lock.lock
     entity_id: lock.hallway_front_door_lock
 
-# Notify when entrance doorbell is ringed
-- alias: Security - Notify on entrance doorbell
+# Notify when entrance doorbell is ringed, and no one is home
+- alias: Security - Notify on entrance doorbell 1
   trigger:
     platform: state
     entity_id: sensor.outdoor_entrance_doorbell
     to: 'Siren active'
+  condition:
+    condition: state
+    entity_id: group.home_members
+    state: 'not_home'
+  action:
+    service: notify.home_mobile_apps
+    data:
+      title: 'HalloNET Home'
+      message: 'Someone is at the front door!'
+      data:
+        channel: Security
+
+# Notify when entrance doorbell is ringed, and someone is home
+- alias: Security - Notify on entrance doorbell 2
+  trigger:
+    platform: state
+    entity_id: sensor.outdoor_entrance_doorbell
+    to: 'Siren active'
+  condition:
+    condition: state
+    entity_id: group.home_members
+    state: 'home'
   action:
     service: notify.home_mobile_apps
     data:
@@ -79,7 +101,7 @@
           - action: unlock_hallway_front_door_lock
             title: 'Unlock Front Door'
 
-- alias: Security - Notify on entrance doorbell - Action
+- alias: Security - Notify on entrance doorbell 2 - Action
   trigger:
     platform: event
     event_type: mobile_app_notification_action
@@ -89,7 +111,7 @@
     service: lock.unlock
     entity_id: lock.hallway_front_door_lock
 
-# Lock the front door when the TV is off, it's evening and, all downstairs lights are turned off
+# Lock the front door when the TV is off, it's evening, and all downstairs lights are turned off
 - alias: Security - Lock front door when going to sleep
   trigger:
     platform: state
