@@ -1,5 +1,0 @@
-platform: template
-sensors:
-  bedroom_tv:
-    value_template: >-
-      {{ is_state('media_player.bedroom_tv', 'on') }}
