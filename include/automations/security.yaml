@@ -66,12 +66,12 @@
 - alias: Security - Notify on entrance doorbell 1
   trigger:
     platform: state
-    entity_id: sensor.outdoor_entrance_doorbell
-    to: 'Siren active'
+    entity_id: binary_sensor.outdoor_entrance_doorbell
+    to: 'on'
   condition:
     condition: state
-    entity_id: group.home_members
-    state: 'not_home'
+    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    state: 'armed_away'
   action:
     service: notify.home_mobile_apps
     data:
@@ -84,7 +84,7 @@
 - alias: Security - Notify on entrance doorbell 2
   trigger:
     platform: state
-    entity_id: sensor.outdoor_entrance_doorbell
+    entity_id: binary_sensor.outdoor_entrance_doorbell
     to: 'Siren active'
   condition:
     condition: state
