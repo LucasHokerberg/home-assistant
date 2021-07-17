@@ -10,8 +10,8 @@ basement_water_leakage:
   data:
     channel: Security
     actions:
-      action: acknowledge_basement_water_leakage
-      title: 'Acknowledge'
+      - action: acknowledge_basement_water_leakage
+        title: 'Acknowledge'
 
 # Notify when kitchen water sensor is wet
 kitchen_water_leakage:
@@ -25,5 +25,5 @@ kitchen_water_leakage:
   data:
     channel: Security
     actions:
-      action: acknowledge_kitchen_water_leakage
-      title: 'Acknowledge'
+      - action: acknowledge_kitchen_water_leakage
+        title: 'Acknowledge'

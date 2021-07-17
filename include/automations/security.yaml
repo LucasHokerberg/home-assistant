@@ -21,8 +21,8 @@
       data:
         channel: Security
         actions:
-          action: lock_hallway_front_door_lock
-          title: 'Lock Front Door'
+          - action: lock_hallway_front_door_lock
+            title: 'Lock Front Door'
 
 # Notify when entrance doorbell is ringed
 - alias: Security - Notify on entrance doorbell
@@ -38,8 +38,8 @@
       data:
         channel: Security
         actions:
-          action: unlock_hallway_front_door_lock
-          title: 'Unlock Front Door'
+          - action: unlock_hallway_front_door_lock
+            title: 'Unlock Front Door'
 
 # Lock the front door when the TV is off, it's evening, and all downstairs lights are turned off
 - alias: Security - Lock front door when going to sleep
