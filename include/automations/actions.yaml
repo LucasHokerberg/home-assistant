@@ -25,7 +25,7 @@
     entity_id: lock.hallway_front_door_lock
 
 # Acknowledge basement water leakge alert
-- Alias: Action - Acknowledge basement water leakage
+- alias: Action - Acknowledge basement water leakage
   trigger:
     platform: event
     event_type: mobile_app_notification_action
@@ -37,7 +37,7 @@
       entity_id: alert.basement_water_leakage
 
 # Acknowledge kitchen water leakge alert
-- Alias: Action - Acknowledge kitchen water leakage
+- alias: Action - Acknowledge kitchen water leakage
   trigger:
     platform: event
     event_type: mobile_app_notification_action
