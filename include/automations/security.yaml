@@ -1,16 +1,16 @@
 # Notify when basement water sensor is wet
-- alias: Security - Notify on basement leakage
-  trigger:
-    platform: state
-    entity_id: binary_sensor.basement_water_sensor
-    to: 'on'
-  action:
-    service: notify.home_mobile_apps
-    data:
-      title: 'HalloNET Home'
-      message: 'Leakage detected in the basement!'
-      data:
-        channel: Security
+#- alias: Security - Notify on basement leakage
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.basement_water_sensor
+#    to: 'on'
+#  action:
+#    service: notify.home_mobile_apps
+#    data:
+#      title: 'HalloNET Home'
+#      message: 'Leakage detected in the basement!'
+#      data:
+#        channel: Security
 
 # Notify when kitchen water sensor is wet
 - alias: Security - Notify on kitchen leakage
