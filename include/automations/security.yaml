@@ -21,47 +21,15 @@
       data:
         channel: Security
         actions:
-          - action: lock_hallway_front_door_lock
-            title: 'Lock Front Door'
+          action: lock_hallway_front_door_lock
+          title: 'Lock Front Door'
 
-- alias: Security - Notify when home is unsecured - Action
-  trigger:
-    platform: event
-    event_type: mobile_app_notification_action
-    event_data:
-      action: lock_hallway_front_door_lock
-  action:
-    service: lock.lock
-    entity_id: lock.hallway_front_door_lock
-
-# Notify when entrance doorbell is ringed, and no one is home
-- alias: Security - Notify on entrance doorbell 1
+# Notify when entrance doorbell is ringed
+- alias: Security - Notify on entrance doorbell
   trigger:
     platform: state
     entity_id: binary_sensor.outdoor_entrance_doorbell
     to: 'on'
-  condition:
-    condition: state
-    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-    state: 'armed_away'
-  action:
-    service: notify.home_mobile_apps
-    data:
-      title: 'HalloNET Home'
-      message: 'Someone is at the front door!'
-      data:
-        channel: Security
-
-# Notify when entrance doorbell is ringed, and someone is home
-- alias: Security - Notify on entrance doorbell 2
-  trigger:
-    platform: state
-    entity_id: binary_sensor.outdoor_entrance_doorbell
-    to: 'Siren active'
-  condition:
-    condition: state
-    entity_id: group.home_members
-    state: 'home'
   action:
     service: notify.home_mobile_apps
     data:
@@ -70,18 +38,8 @@
       data:
         channel: Security
         actions:
-          - action: unlock_hallway_front_door_lock
-            title: 'Unlock Front Door'
-
-- alias: Security - Notify on entrance doorbell 2 - Action
-  trigger:
-    platform: event
-    event_type: mobile_app_notification_action
-    event_data:
-      action: unlock_hallway_front_door_lock
-  action:
-    service: lock.unlock
-    entity_id: lock.hallway_front_door_lock
+          action: unlock_hallway_front_door_lock
+          title: 'Unlock Front Door'
 
 # Lock the front door when the TV is off, it's evening, and all downstairs lights are turned off
 - alias: Security - Lock front door when going to sleep

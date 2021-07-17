@@ -1,0 +1,49 @@
+# Lock hallway front door
+- alias: Action - Lock hallway front door
+  trigger:
+    platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: lock_hallway_front_door_lock
+  action:
+    service: lock.lock
+    entity_id: lock.hallway_front_door_lock
+
+# Unlock hallway front door only when someone is home
+- alias: Action - Unlock hallway front door
+  trigger:
+    platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: unlock_hallway_front_door_lock
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    state: 'disarmed'
+  action:
+    service: lock.unlock
+    entity_id: lock.hallway_front_door_lock
+
+# Acknowledge basement water leakge alert
+- Alias: Action - Acknowledge basement water leakage
+  trigger:
+    platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: acknowledge_basement_water_leakage
+  action:
+    service: alert.turn_off
+    target:
+      entity_id: alert.basement_water_leakage
+
+# Acknowledge kitchen water leakge alert
+- Alias: Action - Acknowledge kitchen water leakage
+  trigger:
+    platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: acknowledge_kitchen_water_leakage
+  action:
+    service: alert.turn_off
+    target:
+      entity_id: alert.kitchen_water_leakage
