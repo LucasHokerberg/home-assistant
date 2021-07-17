@@ -1,0 +1,23 @@
+# Notify when basement water sensor is wet
+basement_water_leakage:
+  name: Basement water leakage
+  title: 'HalloNET Home'
+  message: 'Water leakage detected in the basement!'
+  done_message: 'Basement water leakage cleared.'
+  entity_id: binary_sensor.basement_water_sensor
+  repeat: 5
+  notifiers: home_mobile_apps
+  data:
+    channel: Security
+
+# Notify when kitchen water sensor is wet
+kitchen_water_leakage:
+  name: Kitchen water leakage
+  title: 'HalloNET Home'
+  message: 'Water leakage detected in the kitchen!'
+  done_message: 'Kitchen water leakage cleared.'
+  entity_id: binary_sensor.kitchen_water_sensor
+  repeat: 5
+  notifiers: home_mobile_apps
+  data:
+    channel: Security
