@@ -56,7 +56,6 @@
     service: homeassistant.turn_off
     entity_id:
       - group.outdoor_comfort_lights
-      - light.bedroom_night_light
 
 # Turn off indoor lights when living room is bright
 - alias: Lighting - Turn off indoor lights when bright
@@ -70,3 +69,4 @@
     service: homeassistant.turn_off
     entity_id:
       - group.indoor_lights
+      - light.bedroom_night_light
