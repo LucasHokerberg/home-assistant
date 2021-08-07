@@ -24,6 +24,8 @@ sun:
 
 mobile_app:
 
+energy:
+
 # Replace built-in SQLite database with mariadb
 recorder: !include include/recorder.yaml
 
