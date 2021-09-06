@@ -103,6 +103,7 @@
     entity_id:
       - group.indoor_comfort_lights
       - remote.living_room_harmony_hub
+      - group.bedroom_bedside_lights
 
 # Turn off lights and TV when the alarm is armed away
 - alias: Presence - Turn off lights and TV when everyone leaves home 2
