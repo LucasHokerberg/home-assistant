@@ -2,7 +2,7 @@ turn_on:
   service: automation.turn_off
   data:
     entity_id:
-      - automation.presence_turn_off_lights_and_tv_when_everyone_leaves_home_1
+      - automation.presence_turn_off_lights_and_tv_when_alarm_is_armed_away
       - automation.presence_turn_on_indoor_lights_when_someone_comes_home_1
       - automation.presence_turn_on_indoor_lights_when_someone_comes_home_2
       - automation.security_notify_when_home_is_unsecured
@@ -11,7 +11,7 @@ turn_off:
   service: automation.turn_on
   data:
     entity_id:
-      - automation.presence_turn_off_lights_and_tv_when_everyone_leaves_home_1
+      - automation.presence_turn_off_lights_and_tv_when_alarm_is_armed_away
       - automation.presence_turn_on_indoor_lights_when_someone_comes_home_1
       - automation.presence_turn_on_indoor_lights_when_someone_comes_home_2
       - automation.security_notify_when_home_is_unsecured
