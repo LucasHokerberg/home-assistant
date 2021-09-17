@@ -7,7 +7,7 @@
     for:
       minutes: 5
   condition:
-    platform: numeric_state
+    condition: numeric_state
     entity_id: sensor.outdoor_temperature
     below: 17
   action:
@@ -27,7 +27,7 @@
     for:
       minutes: 5
   condition:
-    platform: numeric_state
+    condition: numeric_state
     entity_id: sensor.outdoor_temperature
     above: 17
   action:
@@ -47,7 +47,7 @@
     for:
       minutes: 5
   condition:
-    platform: numeric_state
+    condition: numeric_state
     entity_id: sensor.outdoor_temperature
     below: 17
   action:
@@ -64,7 +64,7 @@
     for:
       minutes: 5
   condition:
-    platform: numeric_state
+    condition: numeric_state
     entity_id: sensor.outdoor_temperature
     above: 17
   action:
