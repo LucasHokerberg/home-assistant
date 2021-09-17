@@ -1,0 +1,50 @@
+# Start HVAC on heat when cold inside and outside
+- alias: Climate - Start HVAC heat
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_temperature
+    below: 21
+  condition:
+    platform: numeric_state
+    entity_id: sensor.outdoor_temperature
+    below: 17
+  action:
+    service: climate.set_temperature
+    target:
+      entity_id: climate.living_room_hvac
+    data:
+      temperature: 23
+      hvac_mode: heat
+
+# Start HVAC on cool when warm inside and outside
+- alias: Climate - Start HVAC cool
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_temperature
+    above: 23
+  condition:
+    platform: numeric_state
+    entity_id: sensor.outdoor_temperature
+    above: 17
+  action:
+    service: climate.set_temperature
+    target:
+      entity_id: climate.living_room_hvac
+    data:
+      temperature: 23
+      hvac_mode: cool
+
+# Stop HVAC when cold inside and warm outside, or wamr inside and cold outside
+- alias: Climate - Stop HVAC
+  trigger:
+    - platform: template
+        value_template: '{{ states('sensor.living_room_temperature') | float < 21 and states('sensor.outdoor_temperature') | float > 17 }}'
+    - platform: template
+        value_template: '{{ states('sensor.living_room_temperature') | float > 23 and states('sensor.outdoor_temperature') | float < 17 }}'
+  action:
+    service: climate.set_temperature
+    target:
+      entity_id: climate.living_room_hvac
+    data:
+      temperature: 23
+      hvac_mode: heat
