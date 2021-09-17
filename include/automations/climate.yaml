@@ -68,6 +68,6 @@
     entity_id: sensor.outdoor_temperature
     above: 17
   action:
-    service: climaate.turn_off
+    service: climate.turn_off
     target:
       entity_id: climate.living_room_hvac
