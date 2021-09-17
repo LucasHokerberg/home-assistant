@@ -3,7 +3,7 @@ sensors:
   kitchen_dishwasher_state:
     device_class: power
     value_template: >-
-      {{ states('sensor.kitchen_dishwasher_power')|float > 1 }}
+      {{ states('sensor.kitchen_dishwasher_power') | float > 1 }}
     delay_on:
       minutes: 1
     delay_off:
