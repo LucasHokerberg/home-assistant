@@ -15,7 +15,7 @@
     target:
       entity_id: climate.living_room_hvac
     data:
-      temperature: 22
+      temperature: 21
       hvac_mode: heat
 
 # Start the AC when warm inside and outside
@@ -38,35 +38,45 @@
       temperature: 23
       hvac_mode: cool
 
-# Turn off the heat when warm inside and cold outside
+# Turn off the heat when warm inside or outside, and the heat is on
 - alias: Climate - Stop heating when warm
   trigger:
-    platform: numeric_state
-    entity_id: sensor.downstairs_average_temperature
-    above: 23
-    for:
-      minutes: 5
+    - platform: numeric_state
+      entity_id: sensor.downstairs_average_temperature
+      above: 23
+      for:
+        minutes: 5
+    - platform: numeric_state
+      entity_id: sensor.outdoor_temperature
+      above: 17
+      for:
+        minutes: 5
   condition:
-    condition: numeric_state
-    entity_id: sensor.outdoor_temperature
-    below: 17
+    condition: state
+    entity_id: climate.living_room_hvac
+    state: heat
   action:
     service: climate.turn_off
     target:
       entity_id: climate.living_room_hvac
 
-# Turn off the AC when cold inside and warm outside
+# Turn off the AC when cold inside or outside, and the AC is on
 - alias: Climate - Stop cooling when cold
   trigger:
-    platform: numeric_state
-    entity_id: sensor.downstairs_average_temperature
-    below: 21
-    for:
-      minutes: 5
+    - platform: numeric_state
+      entity_id: sensor.downstairs_average_temperature
+      below: 21
+      for:
+        minutes: 5
+    - platform: numeric_state
+      entity_id: sensor.outdoor_temperature
+      below: 17
+      for:
+        minutes: 5
   condition:
-    condition: numeric_state
-    entity_id: sensor.outdoor_temperature
-    above: 17
+    condition: state
+    entity_id: climate.living_room_hvac
+    state: cool
   action:
     service: climate.turn_off
     target:
