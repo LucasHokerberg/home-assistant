@@ -1,0 +1,7 @@
+platform: template 
+sensors:
+  kitchen_dishwasher_cost:
+    unit_of_measurement: 'kr'
+    friendly_name: Dishwasher
+    value_template: >-
+      {{ (float(states.sensor.kitchen_dishwasher_meter.state) * float(states.sensor.electricity_price.state)) | round(1) }}
