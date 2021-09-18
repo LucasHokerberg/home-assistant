@@ -2,7 +2,7 @@
 - alias: Climate - Start heating when cold
   trigger:
     platform: numeric_state
-    entity_id: sensor.living_room_temperature
+    entity_id: sensor.downstairs_average_temperature
     below: 21
     for:
       minutes: 5
@@ -22,7 +22,7 @@
 - alias: Climate - Start cooling when warm
   trigger:
     platform: numeric_state
-    entity_id: sensor.living_room_temperature
+    entity_id: sensor.downstairs_average_temperature
     above: 23
     for:
       minutes: 5
@@ -42,7 +42,7 @@
 - alias: Climate - Stop heating when warm
   trigger:
     platform: numeric_state
-    entity_id: sensor.living_room_temperature
+    entity_id: sensor.downstairs_average_temperature
     above: 23
     for:
       minutes: 5
@@ -59,7 +59,7 @@
 - alias: Climate - Stop cooling when cold
   trigger:
     platform: numeric_state
-    entity_id: sensor.living_room_temperature
+    entity_id: sensor.downstairs_average_temperature
     below: 21
     for:
       minutes: 5
