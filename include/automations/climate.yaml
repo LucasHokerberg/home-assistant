@@ -3,7 +3,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.downstairs_average_temperature
-    below: 21
+    below: 21.5
     for:
       minutes: 5
   condition:
@@ -23,7 +23,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.downstairs_average_temperature
-    above: 23
+    above: 22.5
     for:
       minutes: 5
   condition:
@@ -43,14 +43,14 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.downstairs_average_temperature
-      above: 23
+      above: 22.5
       for:
-        minutes: 5
+        minutes: 30
     - platform: numeric_state
       entity_id: sensor.outdoor_temperature
       above: 17
       for:
-        minutes: 5
+        minutes: 30
   condition:
     condition: state
     entity_id: climate.living_room_hvac
@@ -65,14 +65,14 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.downstairs_average_temperature
-      below: 21
+      below: 21.5
       for:
-        minutes: 5
+        minutes: 30
     - platform: numeric_state
       entity_id: sensor.outdoor_temperature
       below: 17
       for:
-        minutes: 5
+        minutes: 30
   condition:
     condition: state
     entity_id: climate.living_room_hvac
