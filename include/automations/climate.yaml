@@ -15,8 +15,9 @@
     target:
       entity_id: climate.living_room_hvac
     data:
-      temperature: 20
+      temperature: 21
       hvac_mode: heat
+      fan_mode: low
 
 # Start the AC when warm inside and outside
 - alias: Climate - Start cooling when warm
@@ -37,6 +38,7 @@
     data:
       temperature: 23
       hvac_mode: cool
+      fan_mode: low
 
 # Turn off the heat when warm inside or outside, and the heat is on
 - alias: Climate - Stop heating when warm
