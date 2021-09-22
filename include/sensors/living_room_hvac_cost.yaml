@@ -1,7 +1,0 @@
-platform: template 
-sensors:
-  living_room_hvac_cost:
-    unit_of_measurement: 'kr'
-    friendly_name: Living Room HVAC
-    value_template: >-
-      {{ (float(states.sensor.living_room_hvac_meter_meter.state) * float(states.sensor.electricity_price.state)) | round(2) }}
