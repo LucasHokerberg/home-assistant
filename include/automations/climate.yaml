@@ -91,17 +91,3 @@
     service: climate.turn_off
     target:
       entity_id: climate.living_room_hvac
-
-# Turn off the HVAC when the TV is off, it's evening, and all downstairs lights are turned off
-- alias: Climate - Turn off HVAC when going to sleep
-  trigger:
-    platform: state
-    entity_id: group.indoor_lights
-    to: 'off'
-  condition:
-    condition: time
-    after: '21:30'
-  action:
-    service: climate.turn_off
-    target:
-      entity_id: climate.living_room_hvac

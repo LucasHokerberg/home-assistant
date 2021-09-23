@@ -1,0 +1,17 @@
+# Call bedtime script when the TV is off, it's evening, and all downstairs lights are turned off
+- alias: Routine - Bedtime
+  trigger:
+    platform: state
+    entity_id: group.indoor_lights
+    to: 'off'
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        after: '21:00'
+        before: '03:00'
+      - condition: state
+        entity_id: remote.living_room_harmony_hub
+        state: 'off'
+  action:
+    service: script.bedtime
