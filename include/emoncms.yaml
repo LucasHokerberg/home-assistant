@@ -1,0 +1,7 @@
+api_key: !secret emoncms_api
+url: https://emoncms.org
+inputnode: 7
+whitelist:
+  - sensor.kitchen_dishwasher_power
+  - sensor.living_room_hvac_meter_power
+  - sensor.electricity_price
