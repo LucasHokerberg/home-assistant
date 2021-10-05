@@ -1,1 +1,3 @@
-entities: light.outdoor_entrance_light
+entities:
+  - light.outdoor_entrance_light
+  - switch.outdoor_facade_lights
