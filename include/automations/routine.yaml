@@ -2,7 +2,7 @@
 - alias: Routine - Bedtime
   trigger:
     platform: state
-    entity_id: group.indoor_lights
+    entity_id: group.downstairs_lights
     to: 'off'
   condition:
     condition: and
