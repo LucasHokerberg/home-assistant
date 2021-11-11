@@ -46,6 +46,8 @@ notify: !include include/notify.yaml
 
 remote: !include_dir_list include/remotes/
 
+scene: !include scenes.yaml
+
 script: !include_dir_named include/scripts/
 
 sensor: !include_dir_list include/sensors/
