@@ -39,8 +39,8 @@
         seconds: 12
     - service: scene.turn_on
       data:
-        entity_id: scene.living_room_hue_switch_plex
-        transition: 2
+        entity_id: scene.living_room_lights_plex
+        transition: 3
     - service: androidtv.adb_command
       data:
         entity_id: media_player.living_room_shield
@@ -63,7 +63,7 @@
       entity_id:
         - light.living_room_sideboard_light
         - group.living_room_floor_light
-      transition: 2
+      transition: 3
 
 # Turn on lights when Plex is pausing or stoping and Movie Mode is active
 - alias: Media - Turn on lights when Plex stops
@@ -79,8 +79,8 @@
   action:
     service: scene.turn_on
     data:
-      entity_id: scene.living_room_hue_switch_plex
-      transition: 2
+      entity_id: scene.living_room_lights_plex
+      transition: 3
 
 # Turn on lights when Living Room Harmony Hub stops Movie Mode
 - alias: Media - Turn on lights when Living Room Harmony exit Movie Mode
@@ -92,7 +92,7 @@
     service: homeassistant.turn_on
     data:
       entity_id:
-        - scene.living_room_hue_switch_normal
+        - scene.living_room_lights_normal
         - group.downstairs_lights
         - automation.lighting_turn_on_indoor_lights_when_dark_and_somone_is_home
         - automation.lighting_turn_on_indoor_lights_when_dark
