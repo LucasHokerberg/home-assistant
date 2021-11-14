@@ -62,8 +62,8 @@
 - alias: Presence - Turn on indoor lights when someone comes home 1
   trigger:
     platform: state
-    entity_id: group.home_members
-    to: 'home'
+    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    to: disarmed
   condition:
     condition: numeric_state
     entity_id: sensor.living_room_light_level
@@ -79,14 +79,12 @@
     entity_id: binary_sensor.hallway_front_door_sensor
     to: 'on'
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: group.home_members
-        state: 'not_home'
-      - condition: numeric_state
-        entity_id: sensor.living_room_light_level
-        below: 10
+    - condition: state
+      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+      state: armed_away
+    - condition: numeric_state
+      entity_id: sensor.living_room_light_level
+      below: 10
   action:
     service: homeassistant.turn_on
     entity_id:
