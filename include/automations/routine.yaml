@@ -71,7 +71,7 @@
     service: homeassistant.turn_on
     entity_id:
       - light.upstairs_window_light
-      - group.downstairs_comfort_lights
+      - group.downstairs_lights
 
 # Run bedtime routine when the TV is off, it's evening, and all downstairs lights are turned off
 - alias: Routine - Bedtime
