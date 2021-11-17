@@ -1,21 +1,15 @@
 # Start the heat when cold inside and outside
 - alias: Climate - Start heating when cold
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.downstairs_average_temperature
-      below: 21.5
-      for:
-        minutes: 5
-    - platform: state
-      entity_id: switch.night_mode
-      to: 'off'
+    platform: numeric_state
+    entity_id: sensor.downstairs_average_temperature
+    below: 21.5
+    for:
+      minutes: 5
   condition:
-    - condition: numeric_state
-      entity_id: sensor.outdoor_temperature
-      below: 17
-    - condition: numeric_state
-      entity_id: sensor.downstairs_average_temperature
-      below: 21.5
+    condition: numeric_state
+    entity_id: sensor.outdoor_temperature
+    below: 17
   action:
     - service: climate.turn_on
       target:
@@ -45,21 +39,15 @@
 # Start the AC when warm inside and outside
 - alias: Climate - Start cooling when warm
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.downstairs_average_temperature
-      above: 22.5
-      for:
-        minutes: 5
-    - platform: state
-      entity_id: switch.night_mode
-      to: 'off'
+    platform: numeric_state
+    entity_id: sensor.downstairs_average_temperature
+    above: 22.5
+    for:
+      minutes: 5
   condition:
-    - condition: numeric_state
-      entity_id: sensor.outdoor_temperature
-      above: 17
-    - condition: numeric_state
-      entity_id: sensor.downstairs_average_temperature
-      above: 22.5
+    condition: numeric_state
+    entity_id: sensor.outdoor_temperature
+    above: 17
   action:
     - service: climate.turn_on
       target:

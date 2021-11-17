@@ -16,13 +16,68 @@
   action:
     service: script.bedtime
 
-# Turn off night mode in the morning or 1 hour prior to an alarm
-- alias: Routine - Turn off night mode
+# Turn off night mode one hour before an alarm is set, or in the morning
+- alias: Routine - Wake up
   trigger:
     - platform: time
-      at: '08:00:00'
+      at: '07:00:00'
     - platform: template
       value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
+    - platform: template
+      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
   action:
     service: switch.turn_off
     entity_id: switch.night_mode
+
+# Things to do when night mode switch is turned off ...
+# ... and it's cold inside and outside
+- alias: Routine - Wake up - Cold
+  trigger:
+    platform: state
+    entity_id: switch.night_mode
+    to: 'off'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      below: 17
+    - condition: numeric_state
+      entity_id: sensor.downstairs_average_temperature
+      below: 21.5
+  action:
+    service: automation.trigger
+    entity_id: automation.climate_start_heating_when_cold
+
+# ... and it's warm inside and outside
+- alias: Routine - Wake up - Warm
+  trigger:
+    platform: state
+    entity_id: switch.night_mode
+    to: 'off'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      above: 17
+    - condition: numeric_state
+      entity_id: sensor.downstairs_average_temperature
+      above: 22.5
+  action:
+    service: automation.trigger
+    entity_id: automation.climate_start_cooling_when_warm
+
+# ... for one hour and living room is dark
+- alias: Routine - Wake up - Dark
+  trigger:
+    platform: state
+    entity_id: switch.night_mode
+    to: 'off'
+    for:
+      minutes: 60
+  condition:
+    platform: numeric_state
+    entity_id: sensor.living_room_light_level
+    below: 10
+  action:
+    service: homeassistant.turn_on
+    entity_id:
+      - light.upstairs_window_light
+      - group.downstairs_comfort_lights
