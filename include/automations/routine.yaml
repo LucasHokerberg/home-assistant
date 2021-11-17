@@ -1,4 +1,79 @@
-# Call bedtime script when the TV is off, it's evening, and all downstairs lights are turned off
+# Run wake up routine when an alarm is set, or in the morning
+- alias: Routine - Wake up
+  trigger:
+    - platform: template
+      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) == as_timestamp(states("sensor.date_time").replace(",","")) }}'
+    - platform: template
+      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) == as_timestamp(states("sensor.date_time").replace(",","")) }}'
+    - platform: time
+      at: '08:00:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.night_mode
+
+# Start the heat when cold inside and outside when night mode is turned off, or one hour before an alarm is set, or in the morning
+- alias: Routine - Start heating when cold morning
+  trigger:
+    - platform: state
+      entity_id: switch.night_mode
+      to: 'off'
+    - platform: template
+      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
+    - platform: template
+      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
+    - platform: time
+      at: '07:00:00'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      below: 17
+    - condition: numeric_state
+      entity_id: sensor.downstairs_average_temperature
+      below: 21.5
+  action:
+    service: automation.trigger
+    entity_id: automation.climate_start_heating_when_cold
+
+# Start the AC when warm inside and outside when night mode is turned off, or one hour before an alarm is set, or in the morning
+- alias: Routine - Start cooling when warm morning
+  trigger:
+    - platform: state
+      entity_id: switch.night_mode
+      to: 'off'
+    - platform: template
+      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
+    - platform: template
+      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
+    - platform: time
+      at: '07:00:00'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      above: 17
+    - condition: numeric_state
+      entity_id: sensor.downstairs_average_temperature
+      above: 22.5
+  action:
+    service: automation.trigger
+    entity_id: automation.climate_start_cooling_when_warm
+    
+# Wake up routine when living room is dark
+- alias: Routine - Wake up and dark
+  trigger:
+    - platform: state
+      entity_id: switch.night_mode
+      to: 'off'
+  condition:
+    condition: numeric_state
+    entity_id: sensor.living_room_light_level
+    below: 10
+  action:
+    service: homeassistant.turn_on
+    entity_id:
+      - light.upstairs_window_light
+      - group.downstairs_comfort_lights
+
+# Run bedtime routine when the TV is off, it's evening, and all downstairs lights are turned off
 - alias: Routine - Bedtime
   trigger:
     platform: state
@@ -14,70 +89,12 @@
         entity_id: remote.living_room_harmony_hub
         state: 'off'
   action:
-    service: script.bedtime
-
-# Turn off night mode one hour before an alarm is set, or in the morning
-- alias: Routine - Wake up
-  trigger:
-    - platform: time
-      at: '07:00:00'
-    - platform: template
-      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
-    - platform: template
-      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
-  action:
-    service: switch.turn_off
-    entity_id: switch.night_mode
-
-# Things to do when night mode switch is turned off ...
-# ... and it's cold inside and outside
-- alias: Routine - Wake up - Cold
-  trigger:
-    platform: state
-    entity_id: switch.night_mode
-    to: 'off'
-  condition:
-    - condition: numeric_state
-      entity_id: sensor.outdoor_temperature
-      below: 17
-    - condition: numeric_state
-      entity_id: sensor.downstairs_average_temperature
-      below: 21.5
-  action:
-    service: automation.trigger
-    entity_id: automation.climate_start_heating_when_cold
-
-# ... and it's warm inside and outside
-- alias: Routine - Wake up - Warm
-  trigger:
-    platform: state
-    entity_id: switch.night_mode
-    to: 'off'
-  condition:
-    - condition: numeric_state
-      entity_id: sensor.outdoor_temperature
-      above: 17
-    - condition: numeric_state
-      entity_id: sensor.downstairs_average_temperature
-      above: 22.5
-  action:
-    service: automation.trigger
-    entity_id: automation.climate_start_cooling_when_warm
-
-# ... for one hour and living room is dark
-- alias: Routine - Wake up - Dark
-  trigger:
-    platform: state
-    entity_id: switch.night_mode
-    to: 'off'
-    for:
-      minutes: 60
-  condition:
-    condition: numeric_state
-    entity_id: sensor.living_room_light_level
-    below: 10
-  action:
-    service: homeassistant.turn_on
-    entity_id:
-      - light.upstairs_window_light
-      - group.downstairs_comfort_lights
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.downstairs_lights
+        - remote.living_room_harmony_hub
+        - climate.living_room_hvac
+    - service: lock.lock
+      entity_id: lock.hallway_front_door_lock
+    - service: switch.turn_on
+      entity_id: switch.night_mode
