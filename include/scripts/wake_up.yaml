@@ -1,0 +1,3 @@
+sequence:
+  - service: automation_trigger
+    entity_id: automation.routine_wake_up
