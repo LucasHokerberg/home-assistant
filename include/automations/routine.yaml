@@ -16,11 +16,13 @@
   action:
     service: script.bedtime
 
-# Turn off night mode in the morning
+# Turn off night mode in the morning or 1 hour prior to an alarm
 - alias: Routine - Turn off night mode
   trigger:
-    platform: time
-    at: '04:00:00'
+    - platform: time
+      at: '08:00:00'
+    - platform: template
+      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
   action:
     service: switch.turn_off
     entity_id: switch.night_mode
