@@ -73,7 +73,7 @@
     for:
       minutes: 60
   condition:
-    platform: numeric_state
+    condition: numeric_state
     entity_id: sensor.living_room_light_level
     below: 10
   action:
