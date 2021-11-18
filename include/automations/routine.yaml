@@ -8,15 +8,14 @@
     - platform: time
       at: '08:00:00'
   action:
-    service: switch.turn_off
-    entity_id: switch.night_mode
+    service: script.wake_up
 
-# Start the heat when cold inside and outside when night mode is turned off, or one hour before an alarm is set, or in the morning
+# Start the heat when cold inside and outside when wake up is called, or one hour before an alarm is set, or in the morning
 - alias: Routine - Start heating when cold morning
   trigger:
     - platform: state
-      entity_id: switch.night_mode
-      to: 'off'
+      entity_id: script.wake_up
+      to: 'on'
     - platform: template
       value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
     - platform: template
@@ -34,12 +33,12 @@
     service: automation.trigger
     entity_id: automation.climate_start_heating_when_cold
 
-# Start the AC when warm inside and outside when night mode is turned off, or one hour before an alarm is set, or in the morning
+# Start the AC when warm inside and outside when wake up is called, or one hour before an alarm is set, or in the morning
 - alias: Routine - Start cooling when warm morning
   trigger:
     - platform: state
-      entity_id: switch.night_mode
-      to: 'off'
+      entity_id: script.wake_up
+      to: 'on'
     - platform: template
       value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
     - platform: template
@@ -61,8 +60,8 @@
 - alias: Routine - Wake up and dark
   trigger:
     - platform: state
-      entity_id: switch.night_mode
-      to: 'off'
+      entity_id: script.wake_up
+      to: 'on'
   condition:
     condition: numeric_state
     entity_id: sensor.living_room_light_level
@@ -89,12 +88,4 @@
         entity_id: remote.living_room_harmony_hub
         state: 'off'
   action:
-    - service: homeassistant.turn_off
-      entity_id:
-        - group.downstairs_lights
-        - remote.living_room_harmony_hub
-        - climate.living_room_hvac
-    - service: lock.lock
-      entity_id: lock.hallway_front_door_lock
-    - service: switch.turn_on
-      entity_id: switch.night_mode
+    service: script.bedtime

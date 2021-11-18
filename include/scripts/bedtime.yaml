@@ -1,3 +1,10 @@
 sequence:
-  - service: automation.trigger
-    entity_id: automation.routine_bedtime
+  - service: homeassistant.turn_off
+      entity_id:
+        - group.downstairs_lights
+        - remote.living_room_harmony_hub
+        - climate.living_room_hvac
+    - service: lock.lock
+      entity_id: lock.hallway_front_door_lock
+    - service: switch.turn_on
+      entity_id: switch.night_mode
