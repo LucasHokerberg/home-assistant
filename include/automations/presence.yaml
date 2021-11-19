@@ -9,7 +9,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Lucas Hökerberg arrived at work.'
+      message: 'Lucas arrived at work.'
       data:
         channel: Presence
 
@@ -24,7 +24,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Victoria Hjerter arrived at work.'
+      message: 'Victoria arrived at work.'
       data:
         channel: Presence
 
@@ -39,7 +39,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Lucas Hökerberg left work.'
+      message: 'Lucas left work.'
       data:
         channel: Presence
 
@@ -54,7 +54,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Victoria Hjerter left work.'
+      message: 'Victoria left work.'
       data:
         channel: Presence
 
