@@ -4,9 +4,11 @@ turn_on:
     entity_id:
       - automation.climate_start_heating_when_cold
       - automation.climate_start_cooling_when_warm
+      - automation.routine_bedtime
 turn_off:
   - service: automation.turn_on
     data:
       entity_id:
         - automation.climate_start_heating_when_cold
         - automation.climate_start_cooling_when_warm
+        - automation.routine_bedtime

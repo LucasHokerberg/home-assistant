@@ -87,8 +87,5 @@
       - condition: state
         entity_id: remote.living_room_harmony_hub
         state: 'off'
-      - condition: state
-        entity_id: switch.night_mode
-        state: 'off'
   action:
     service: script.bedtime
