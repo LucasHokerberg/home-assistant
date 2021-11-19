@@ -63,6 +63,7 @@
   trigger:
     platform: state
     entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    from: armed_away
     to: disarmed
   condition:
     condition: numeric_state
