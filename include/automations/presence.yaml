@@ -67,7 +67,7 @@
   condition:
     condition: numeric_state
     entity_id: sensor.living_room_light_level
-    below: 10
+    below: 7
   action:
     service: homeassistant.turn_on
     entity_id:
@@ -84,7 +84,7 @@
       state: armed_away
     - condition: numeric_state
       entity_id: sensor.living_room_light_level
-      below: 10
+      below: 7
   action:
     service: homeassistant.turn_on
     entity_id:
