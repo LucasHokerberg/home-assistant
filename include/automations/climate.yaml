@@ -3,7 +3,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.downstairs_average_temperature
-    below: '{{ float(states.input_number.living_room_hvac_target.state) - 0.5 }}'
+    below: '{{ states("input_number.living_room_hvac_target") - 0.5 | float }}'
     for:
       minutes: 5
   condition:
@@ -27,7 +27,7 @@
       target:
         entity_id: climate.living_room_hvac
       data:
-        temperature: '{{ float(states.input_number.living_room_hvac_target.state) - 1 }}'
+        temperature: '{{ states("input_number.living_room_hvac_target") - 1 | float }}'
     - delay:
         seconds: 5
     - service: climate.set_fan_mode
@@ -41,7 +41,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.downstairs_average_temperature
-    above: '{{ float(states.input_number.living_room_hvac_target.state) + 0.5 }}'
+    above: '{{ states("input_number.living_room_hvac_target") + 0.5 | float }}'
     for:
       minutes: 5
   condition:
@@ -65,7 +65,7 @@
       target:
         entity_id: climate.living_room_hvac
       data:
-        temperature: '{{ float(states.input_number.living_room_hvac_target.state) + 1 }}'
+        temperature: '{{ states("input_number.living_room_hvac_target") + 1 | float }}'
     - delay:
         seconds: 5
     - service: climate.set_fan_mode
@@ -79,7 +79,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.downstairs_average_temperature
-      above: '{{ float(states.input_number.living_room_hvac_target.state) + 0.5 }}'
+      above: '{{ states("input_number.living_room_hvac_target") + 0.5 | float }}'
       for:
         minutes: 30
     - platform: numeric_state
@@ -101,7 +101,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.downstairs_average_temperature
-      below: '{{ float(states.input_number.living_room_hvac_target.state) - 0.5 }}'
+      below: '{{ states("input_number.living_room_hvac_target") - 0.5 | float }}'
       for:
         minutes: 30
     - platform: numeric_state

@@ -28,7 +28,7 @@
       below: 17
     - condition: numeric_state
       entity_id: sensor.downstairs_average_temperature
-      below: '{{ float(states.input_number.living_room_hvac_target.state) - 0.5 }}'
+      below: '{{ states("input_number.living_room_hvac_target") - 0.5 | float }}'
   action:
     service: automation.trigger
     entity_id: automation.climate_start_heating_when_cold
@@ -51,7 +51,7 @@
       above: 17
     - condition: numeric_state
       entity_id: sensor.downstairs_average_temperature
-      above: '{{ float(states.input_number.living_room_hvac_target.state) + 0.5 }}'
+      above: '{{ states("input_number.living_room_hvac_target") + 0.5 | float }}'
   action:
     service: automation.trigger
     entity_id: automation.climate_start_cooling_when_warm
