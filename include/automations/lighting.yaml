@@ -12,24 +12,19 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
-    below: 10
+    below: 7
     for:
       seconds: 5
   condition:
     condition: and
     conditions:
-      - condition: time
-        after: "12:00:00"
+      - condition: sun
+        after: sunrise
       - condition: sun
         before: sunset
-      - condition: or
-        conditions:
-          - condition: state
-            entity_id: group.home_members
-            state: 'home'
-          - condition: state
-            entity_id: switch.guest_mode
-            state: 'on'
+      - condition: state
+        entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+        state: disarmed
   action:
     service: homeassistant.turn_on
     entity_id: group.indoor_comfort_lights
@@ -39,12 +34,12 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
-    below: 10
+    below: 7
     for:
       seconds: 5
   condition:
-    - condition: time
-      after: "12:00:00"
+    - condition: sun
+      after: sunrise
     - condition: sun
       before: sunset
   action:
@@ -58,22 +53,21 @@
     event: sunrise
   action:
     service: homeassistant.turn_off
-    entity_id:
-      - group.outdoor_comfort_lights
+    entity_id: group.outdoor_comfort_lights
 
 # Turn off indoor lights when living room is bright
 - alias: Lighting - Turn off indoor lights when bright
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
-    above: 25
+    above: 9
     for:
       seconds: 5
   condition:
     - condition: sun
       after: sunrise
-    - condition: time
-      before: "12:00:00"
+    - condition: sun
+      before: sunset
   action:
     service: homeassistant.turn_off
     entity_id:

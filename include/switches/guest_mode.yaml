@@ -4,9 +4,11 @@ turn_on:
     entity_id:
       - automation.security_notify_when_home_is_unsecured
       - automation.motion_turn_on_lights_on_living_room_motion
+      - automation.routine_bedtime
 turn_off:
   service: automation.turn_on
   data:
     entity_id:
       - automation.security_notify_when_home_is_unsecured
       - automation.motion_turn_on_lights_on_living_room_motion
+      - automation.routine_bedtime

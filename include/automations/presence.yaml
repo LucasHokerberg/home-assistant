@@ -9,7 +9,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Lucas Hökerberg arrived at work.'
+      message: 'Lucas arrived at work.'
       data:
         channel: Presence
 
@@ -24,7 +24,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Victoria Hjerter arrived at work.'
+      message: 'Victoria arrived at work.'
       data:
         channel: Presence
 
@@ -39,7 +39,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Lucas Hökerberg left work.'
+      message: 'Lucas left work.'
       data:
         channel: Presence
 
@@ -54,7 +54,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Victoria Hjerter left work.'
+      message: 'Victoria left work.'
       data:
         channel: Presence
 
@@ -63,11 +63,12 @@
   trigger:
     platform: state
     entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    from: armed_away
     to: disarmed
   condition:
     condition: numeric_state
     entity_id: sensor.living_room_light_level
-    below: 10
+    below: 7
   action:
     service: homeassistant.turn_on
     entity_id:
@@ -84,7 +85,7 @@
       state: armed_away
     - condition: numeric_state
       entity_id: sensor.living_room_light_level
-      below: 10
+      below: 7
   action:
     service: homeassistant.turn_on
     entity_id:
