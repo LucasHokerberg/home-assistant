@@ -39,7 +39,7 @@
       data:
         fan_mode: low
 
-# Start the AC when warm inside and outside, and only someone is home
+# Start the AC when warm inside and outside, and only if someone is home
 - alias: Climate - Start cooling when warm
   trigger:
     platform: numeric_state
