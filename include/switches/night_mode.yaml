@@ -1,12 +1,15 @@
 turn_on:
-  service: automation.turn_off
-  data:
-    entity_id:
-      - automation.climate_start_heating_when_cold
-      - automation.climate_start_cooling_when_warm
-      - automation.routine_bedtime
-      - automation.routine_start_heating_when_cold_morning
-      - automation.routine_start_cooling_when_warm_morning
+  - service: automation.turn_off
+    data:
+      entity_id:
+        - automation.climate_start_heating_when_cold
+        - automation.climate_start_cooling_when_warm
+        - automation.routine_bedtime
+  - service: automation.turn_on
+    data:
+      entity_id:
+        - automation.routine_start_heating_when_cold_morning
+        - automation.routine_start_cooling_when_warm_morning
 turn_off:
   - service: automation.turn_on
     data:
@@ -14,3 +17,8 @@ turn_off:
         - automation.climate_start_heating_when_cold
         - automation.climate_start_cooling_when_warm
         - automation.routine_bedtime
+  - service: automation.turn_off
+    data:
+      entity_id:
+        - automation.routine_start_heating_when_cold_morning
+        - automation.routine_start_cooling_when_warm_morning

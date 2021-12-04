@@ -36,6 +36,12 @@
       entity_id:
         - automation.routine_start_heating_when_cold_morning
         - automation.routine_start_cooling_when_warm_morning
+    - service: automation.turn_on
+      entity_id:
+        - automation.routine_start_heating_when_cold_morning
+        - automation.routine_start_cooling_when_warm_morning
+        - automation.climate_start_heating_when_cold
+        - automation.climate_start_cooling_when_warm
 
 # Start the AC when warm inside and outside when wake up is called, or two hour before an alarm is set, or in the morning
 - alias: Routine - Start cooling when warm morning
@@ -63,6 +69,12 @@
       entity_id:
         - automation.routine_start_heating_when_cold_morning
         - automation.routine_start_cooling_when_warm_morning
+    - service: automation.turn_on
+      entity_id:
+        - automation.routine_start_heating_when_cold_morning
+        - automation.routine_start_cooling_when_warm_morning
+        - automation.climate_start_heating_when_cold
+        - automation.climate_start_cooling_when_warm
     
 # Wake up routine when living room is dark
 - alias: Routine - Wake up and dark
