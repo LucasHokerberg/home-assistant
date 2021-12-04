@@ -16,15 +16,13 @@
     for:
       seconds: 5
   condition:
-    condition: and
-    conditions:
-      - condition: sun
-        after: sunrise
-      - condition: sun
-        before: sunset
-      - condition: state
-        entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-        state: disarmed
+    - condition: sun
+      after: sunrise
+    - condition: sun
+      before: sunset
+    - condition: state
+      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+      state: disarmed
   action:
     service: homeassistant.turn_on
     entity_id: group.indoor_comfort_lights
