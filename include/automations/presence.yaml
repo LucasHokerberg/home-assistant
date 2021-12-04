@@ -89,6 +89,48 @@
     service: homeassistant.turn_on
     entity_id: group.indoor_lights
 
+# Turn on the heat if cold inside and outside, and someone comes home
+- alias: Presence - Turn on heat when cold and someone comes home
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    from: armed_away
+    to: disarmed
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      below: 17
+    - condition: numeric_state
+      entity_id: sensor.downstairs_average_temperature
+      below: 21.5
+    - condition: state
+      entity_id: climate.living_room_hvac
+      state: 'off'
+  action:
+    service: automation.trigger
+    entity_id: automation.climate_start_cooling_when_warm
+
+# Turn on the AC if warm inside and outside, and someone comes home
+- alias: Presence - Turn on AC when warm and someone comes home
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    from: armed_away
+    to: disarmed
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      above: 17
+    - condition: numeric_state
+      entity_id: sensor.downstairs_average_temperature
+      above: 22.5
+    - condition: state
+      entity_id: climate.living_room_hvac
+      state: 'off'
+  action:
+    service: automation.trigger
+    entity_id: automation.climate_start_cooling_when_warm
+
 # Turn off lights and TV when the alarm is armed away
 - alias: Presence - Turn off lights and TV when alarm is armed away
   trigger:
