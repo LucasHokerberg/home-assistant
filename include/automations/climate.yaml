@@ -39,7 +39,7 @@
       data:
         fan_mode: low
 
-# Start the AC when warm inside and outside
+# Start the AC when warm inside and outside, and only someone is home
 - alias: Climate - Start cooling when warm
   trigger:
     platform: numeric_state
@@ -48,6 +48,9 @@
     for:
       minutes: 5
   condition:
+    - condition: state
+      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+      state: disarmed
     - condition: numeric_state
       entity_id: sensor.outdoor_temperature
       above: 17
