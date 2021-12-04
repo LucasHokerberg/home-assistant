@@ -33,17 +33,14 @@
     - condition: numeric_state
       entity_id: sensor.downstairs_average_temperature
       below: 21.5
+    - condition: state
+      entity_id: climate.living_room_hvac
+      state: 'off'
   action:
     - service: automation.trigger
       entity_id: automation.climate_start_heating_when_cold
-    - service: automation.turn_off
-      entity_id:
-        - automation.routine_start_heating_when_cold_morning
-        - automation.routine_start_cooling_when_warm_morning
     - service: automation.turn_on
       entity_id:
-        - automation.routine_start_heating_when_cold_morning
-        - automation.routine_start_cooling_when_warm_morning
         - automation.climate_start_heating_when_cold
         - automation.climate_start_cooling_when_warm
 
@@ -69,17 +66,14 @@
     - condition: numeric_state
       entity_id: sensor.downstairs_average_temperature
       above: 22.5
+    - condition: state
+      entity_id: climate.living_room_hvac
+      state: 'off'
   action:
     - service: automation.trigger
       entity_id: automation.climate_start_cooling_when_warm
-    - service: automation.turn_off
-      entity_id:
-        - automation.routine_start_heating_when_cold_morning
-        - automation.routine_start_cooling_when_warm_morning
     - service: automation.turn_on
       entity_id:
-        - automation.routine_start_heating_when_cold_morning
-        - automation.routine_start_cooling_when_warm_morning
         - automation.climate_start_heating_when_cold
         - automation.climate_start_cooling_when_warm
     
