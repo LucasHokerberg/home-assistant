@@ -71,8 +71,7 @@
     below: 8
   action:
     service: homeassistant.turn_on
-    entity_id:
-      - group.indoor_lights
+    entity_id: group.indoor_lights
 
 - alias: Presence - Turn on indoor lights when someone comes home 2
   trigger:
@@ -88,8 +87,7 @@
       below: 8
   action:
     service: homeassistant.turn_on
-    entity_id:
-      - group.indoor_lights
+    entity_id: group.indoor_lights
 
 # Turn off lights and TV when the alarm is armed away
 - alias: Presence - Turn off lights and TV when alarm is armed away
