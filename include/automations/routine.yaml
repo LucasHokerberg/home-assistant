@@ -10,18 +10,18 @@
   action:
     service: script.wake_up
 
-# Start the heat when cold inside and outside when wake up is called, or one hour before an alarm is set, or in the morning
+# Start the heat when cold inside and outside when wake up is called, or two hours before an alarm is set, or in the morning
 - alias: Routine - Start heating when cold morning
   trigger:
     - platform: state
       entity_id: script.wake_up
       to: 'on'
     - platform: template
-      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
+      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 7200 }}'
     - platform: template
-      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
+      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 7200 }}'
     - platform: time
-      at: '07:00:00'
+      at: '06:00:00'
   condition:
     - condition: numeric_state
       entity_id: sensor.outdoor_temperature
@@ -33,18 +33,18 @@
     service: automation.trigger
     entity_id: automation.climate_start_heating_when_cold
 
-# Start the AC when warm inside and outside when wake up is called, or one hour before an alarm is set, or in the morning
+# Start the AC when warm inside and outside when wake up is called, or two hour before an alarm is set, or in the morning
 - alias: Routine - Start cooling when warm morning
   trigger:
     - platform: state
       entity_id: script.wake_up
       to: 'on'
     - platform: template
-      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
+      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 7200 }}'
     - platform: template
-      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 3600 }}'
+      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 7200 }}'
     - platform: time
-      at: '07:00:00'
+      at: '06:00:00'
   condition:
     - condition: numeric_state
       entity_id: sensor.outdoor_temperature
