@@ -1,4 +1,4 @@
-# Run wake up routine when an alarm is set, or in the morning
+# Run wake up routine when an alarm is set, or in the morning, and only if someone is home
 - alias: Routine - Wake up
   trigger:
     - platform: template
@@ -7,10 +7,14 @@
       value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) == as_timestamp(states("sensor.date_time").replace(",","")) }}'
     - platform: time
       at: '08:00:00'
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    state: disarmed
   action:
     service: script.wake_up
 
-# Start the heat when cold inside and outside when wake up is called, or two hours before an alarm is set, or in the morning
+# Start the heat when cold inside and outside when wake up is called, or two hours before an alarm is set, or in the morning, and only if someone is home
 - alias: Routine - Start heating when cold morning
   trigger:
     - platform: state
@@ -23,6 +27,9 @@
     - platform: time
       at: '06:00:00'
   condition:
+    - condition: state
+      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+      state: disarmed
     - condition: numeric_state
       entity_id: sensor.outdoor_temperature
       below: 17
@@ -43,7 +50,7 @@
         - automation.climate_start_heating_when_cold
         - automation.climate_start_cooling_when_warm
 
-# Start the AC when warm inside and outside when wake up is called, or two hour before an alarm is set, or in the morning
+# Start the AC when warm inside and outside when wake up is called, or two hour before an alarm is set, or in the morning, and only if someone is home
 - alias: Routine - Start cooling when warm morning
   trigger:
     - platform: state
@@ -56,6 +63,9 @@
     - platform: time
       at: '06:00:00'
   condition:
+    - condition: state
+      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+      state: disarmed
     - condition: numeric_state
       entity_id: sensor.outdoor_temperature
       above: 17
