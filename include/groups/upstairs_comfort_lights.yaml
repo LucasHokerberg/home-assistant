@@ -1,4 +1,5 @@
 entities:
   - group.lovelias_room_balloon_lights
   - light.bedroom_table_light
-  - group.bedroom_bedside_lights
+  - light.bedroom_lucas_bedside_light
+  - light.bedroom_victorias_bedside_light
