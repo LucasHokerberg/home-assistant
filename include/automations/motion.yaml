@@ -55,7 +55,7 @@
       below: 5
   action:
     service: scene.turn_on
-    entity_id: scene.upstairs_ligts_night
+    entity_id: scene.upstairs_desk_light_night
 
 # Turn off lights when no upstairs motion is detected and the computer is off
 - alias: Motion - Turn off lights on no upstairs motion
