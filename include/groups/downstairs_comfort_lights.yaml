@@ -1,4 +1,5 @@
 entities:
-  - group.living_room_floor_light
+  #- group.living_room_floor_light
+  - group.living_christmas_tree
   - light.living_room_sideboard_light
   - light.dining_room_cabinet_light
