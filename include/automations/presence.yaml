@@ -142,4 +142,3 @@
     entity_id:
       - group.indoor_comfort_lights
       - remote.living_room_harmony_hub
-      - group.bedroom_bedside_lights
