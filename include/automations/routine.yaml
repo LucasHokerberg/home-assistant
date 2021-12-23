@@ -1,4 +1,4 @@
-# Run wake up routine when an alarm is set, or in the morning, and only if someone is home
+# Run wake up routine when an alarm is set or in the morning, when night mode is on
 - alias: Routine - Wake up
   trigger:
     - platform: template
@@ -9,73 +9,10 @@
       at: '08:00:00'
   condition:
     condition: state
-    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-    state: disarmed
+    entity_id: switch.night_mode
+    state: 'on'
   action:
     service: script.wake_up
-
-# Start the heat when cold inside and outside when wake up is called, or two hours before an alarm is set, or in the morning
-- alias: Routine - Start heating when cold morning
-  trigger:
-    - platform: state
-      entity_id: script.wake_up
-      to: 'on'
-    - platform: template
-      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 7200 }}'
-    - platform: template
-      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 7200 }}'
-    - platform: time
-      at: '06:00:00'
-  condition:
-    - condition: numeric_state
-      entity_id: sensor.outdoor_temperature
-      below: 17
-    - condition: numeric_state
-      entity_id: sensor.downstairs_average_temperature
-      below: 21.5
-    - condition: state
-      entity_id: climate.living_room_hvac
-      state: 'off'
-  action:
-    - service: automation.trigger
-      entity_id: automation.climate_start_heating_when_cold
-    - service: automation.turn_on
-      entity_id:
-        - automation.climate_start_heating_when_cold
-        - automation.climate_start_cooling_when_warm
-
-# Start the AC when warm inside and outside when wake up is called, or two hour before an alarm is set, or in the morning, and only if someone is home
-- alias: Routine - Start cooling when warm morning
-  trigger:
-    - platform: state
-      entity_id: script.wake_up
-      to: 'on'
-    - platform: template
-      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 7200 }}'
-    - platform: template
-      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - as_timestamp(states("sensor.date_time").replace(",","")) == 7200 }}'
-    - platform: time
-      at: '06:00:00'
-  condition:
-    - condition: state
-      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-      state: disarmed
-    - condition: numeric_state
-      entity_id: sensor.outdoor_temperature
-      above: 17
-    - condition: numeric_state
-      entity_id: sensor.downstairs_average_temperature
-      above: 22.5
-    - condition: state
-      entity_id: climate.living_room_hvac
-      state: 'off'
-  action:
-    - service: automation.trigger
-      entity_id: automation.climate_start_cooling_when_warm
-    - service: automation.turn_on
-      entity_id:
-        - automation.climate_start_heating_when_cold
-        - automation.climate_start_cooling_when_warm
     
 # Wake up routine when living room is dark
 - alias: Routine - Wake up and dark
@@ -92,6 +29,26 @@
     entity_id:
       - light.upstairs_window_light
       - group.downstairs_window_lights
+
+# Wake up routine when warm inside and outside
+- alias: Routine - Wake up and warm
+  trigger:
+    - platform: state
+      entity_id: script.wake_up
+      to: 'on'
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.outdoor_temperature
+        above: 17
+      - condition: numeric_state
+        entity_id: sensor.downstairs_average_temperature
+        above: 22.5
+      - condition: state
+        entity_id: climate.living_room_hvac
+        state: 'off'
+    action:
+      - service: automation.trigger
+        entity_id: automation.climate_start_cooling_when_warm
 
 # Run bedtime routine when the TV is off, it's evening, and all downstairs lights are turned off
 - alias: Routine - Bedtime
