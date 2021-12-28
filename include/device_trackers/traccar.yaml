@@ -1,0 +1,5 @@
+platform: traccar
+host: !secret traccar_host
+port: !secret traccar_port
+username: !secret traccar_username
+password: !secret traccar_password
