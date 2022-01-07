@@ -70,3 +70,5 @@ switch:
     switches: !include_dir_named include/switches/
 
 utility_meter: !include_dir_named include/utility_meters/
+
+zone: !include_dir_list include/zones/
