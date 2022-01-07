@@ -1,10 +1,9 @@
 # Send a notification when Lucas is arriving at work
 - alias: Presence - Notify when Lucas arrives at work
   trigger:
-    platform: zone
+    platform: state
     entity_id: person.lucas_hokerberg
-    zone: zone.lucas_hokerberg_work
-    event: enter
+    to: zone.lucas_hokerberg_work
   action:
     service: notify.home_mobile_apps
     data_template:
@@ -16,10 +15,11 @@
 # Send a notification when Victoria is arriving at work
 - alias: Presence - Notify when Victoria arrives at work
   trigger:
-    platform: zone
+    platform: state
     entity_id: person.victoria_hjerter
-    zone: zone.victoria_hjerter_work
-    event: enter
+    to: zone.victoria_hjerter_work
+    for:
+      minutes: 1
   action:
     service: notify.home_mobile_apps
     data_template:
@@ -31,10 +31,9 @@
 # Send a notification when Lucas is leaving work
 - alias: Presence - Notify when Lucas leaves work
   trigger:
-    platform: zone
+    platform: state
     entity_id: person.lucas_hokerberg
-    zone: zone.lucas_hokerberg_work
-    event: leave
+    from: zone.lucas_hokerberg_work
   action:
     service: notify.home_mobile_apps
     data_template:
@@ -46,10 +45,11 @@
 # Send a notification when Victoria is leaving work
 - alias: Presence - Notify when Victoria leaves work
   trigger:
-    platform: zone
+    platform: state
     entity_id: person.victoria_hjerter
-    zone: zone.victoria_hjerter_work
-    event: leave
+    from: zone.victoria_hjerter_work
+    for:
+      minutes: 1
   action:
     service: notify.home_mobile_apps
     data_template:
