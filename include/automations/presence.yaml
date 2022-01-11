@@ -1,62 +1,86 @@
-# Send a notification when Lucas is arriving at work
-- alias: Presence - Notify when Lucas arrives at work
+# Send a notification when someone enters or leaves a zone
+- alias: Presence - Notify on zone enter or leave
   trigger:
-    platform: zone
-    entity_id: person.lucas_hokerberg
-    zone: zone.lucas_hokerberg_work
-    event: enter
+    - platform: zone
+      entity_id:
+        - person.lucas_hokerberg
+        - person.victoria_hjerter
+      event: enter
+    - platform: zone
+      entity_id:
+        - person.lucas_hokerberg
+        - person.victoria_hjerter
+      event: leave
   action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: 'Lucas arrived at work.'
+    - variables:
+        event: "{{ 'left' if trigger.event == 'leave' else 'arrived at' }}"
+        person: "{{ trigger.to_state.attributes.friendly_name }}"
+        zone: "{{ trigger.zone.attributes.friendly_name }}"
+    - service: notify.home_mobile_apps
       data:
+        message: >
+          {{ person + ' ' + event ' ' + zone }}
         channel: Presence
+
+# Send a notification when Lucas is arriving at work
+#- alias: Presence - Notify when Lucas arrives at work
+#  trigger:
+#    platform: zone
+#    entity_id: person.lucas_hokerberg
+#    zone: zone.lucas_hokerberg_work
+#    event: enter
+#  action:
+#    service: notify.home_mobile_apps
+#    data_template:
+#      title: 'HalloNET Home'
+#      message: 'Lucas arrived at work.'
+#      data:
+#        channel: Presence
 
 # Send a notification when Victoria is arriving at work
-- alias: Presence - Notify when Victoria arrives at work
-  trigger:
-    platform: zone
-    entity_id: person.victoria_hjerter
-    zone: zone.victoria_hjerter_work
-    event: enter
-  action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: 'Victoria arrived at work.'
-      data:
-        channel: Presence
+#- alias: Presence - Notify when Victoria arrives at work
+#  trigger:
+#    platform: zone
+#    entity_id: person.victoria_hjerter
+#    zone: zone.victoria_hjerter_work
+#    event: enter
+#  action:
+#    service: notify.home_mobile_apps
+#    data_template:
+#      title: 'HalloNET Home'
+#      message: 'Victoria arrived at work.'
+#      data:
+#        channel: Presence
 
 # Send a notification when Lucas is leaving work
-- alias: Presence - Notify when Lucas leaves work
-  trigger:
-    platform: zone
-    entity_id: person.lucas_hokerberg
-    zone: zone.lucas_hokerberg_work
-    event: leave
-  action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: 'Lucas left work.'
-      data:
-        channel: Presence
+#- alias: Presence - Notify when Lucas leaves work
+#  trigger:
+#    platform: zone
+#    entity_id: person.lucas_hokerberg
+#    zone: zone.lucas_hokerberg_work
+#    event: leave
+#  action:
+#    service: notify.home_mobile_apps
+#    data_template:
+#      title: 'HalloNET Home'
+#      message: 'Lucas left work.'
+#      data:
+#        channel: Presence
 
 # Send a notification when Victoria is leaving work
-- alias: Presence - Notify when Victoria leaves work
-  trigger:
-    platform: zone
-    entity_id: person.victoria_hjerter
-    zone: zone.victoria_hjerter_work
-    event: leave
-  action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: 'Victoria left work.'
-      data:
-        channel: Presence
+#- alias: Presence - Notify when Victoria leaves work
+#  trigger:
+#    platform: zone
+#    entity_id: person.victoria_hjerter
+#    zone: zone.victoria_hjerter_work
+#    event: leave
+#  action:
+#    service: notify.home_mobile_apps
+#    data_template:
+#      title: 'HalloNET Home'
+#      message: 'Victoria left work.'
+#      data:
+#        channel: Presence
 
 # Turn on lights when living room is dark and someone comes home
 - alias: Presence - Turn on indoor lights when someone comes home 1
