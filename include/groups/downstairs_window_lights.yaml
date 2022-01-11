@@ -1,6 +1,6 @@
 entities:
+  #- switch.living_room_candlestick
   - light.living_room_window_light
-  - switch.living_room_candlestick
   - light.dining_room_window_light
-  - switch.kitchen_candlestick
-  - light.kitchen_star_light
+  #- switch.kitchen_candlestick
+  #- light.kitchen_star_light
