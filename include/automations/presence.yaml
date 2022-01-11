@@ -5,11 +5,23 @@
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
+      zone:
+        - zone.lucas_hokerberg_work
+        - zone.victoria_hjerter_work
+        - zone.preschool
+        - zone.hokerbergs
+        - zone.johanssons
       event: enter
     - platform: zone
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
+      zone:
+        - zone.lucas_hokerberg_work
+        - zone.victoria_hjerter_work
+        - zone.preschool
+        - zone.hokerbergs
+        - zone.johanssons
       event: leave
   action:
     service: notify.home_mobile_apps
