@@ -12,14 +12,11 @@
         - person.victoria_hjerter
       event: leave
   action:
-    - variables:
-        event: "{{ 'left' if trigger.event == 'leave' else 'arrived at' }}"
-        person: "{{ trigger.to_state.attributes.friendly_name }}"
-        zone: "{{ trigger.zone.attributes.friendly_name }}"
-    - service: notify.home_mobile_apps
+    service: notify.home_mobile_apps
+    data_template:
+      title: 'HalloNET Home'
+      message: '{{ trigger.to_state.attributes.friendly_name }} {{ "left" if trigger.event == "leave" else "arrived at" }} {{ trigger.zone.attributes.friendly_name }}.'
       data:
-        message: >
-          {{ person + ' ' + event ' ' + zone }}
         channel: Presence
 
 # Send a notification when Lucas is arriving at work
