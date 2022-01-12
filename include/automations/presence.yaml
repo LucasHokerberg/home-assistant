@@ -129,9 +129,9 @@
     from: armed_away
     to: disarmed
   condition:
-    condition: numeric_state
-    entity_id: sensor.living_room_light_level
-    below: 8
+    condition: state
+    entity_id: group.indoor_window_lights
+    state: 'on'
   action:
     service: homeassistant.turn_on
     entity_id: group.indoor_lights
@@ -145,9 +145,9 @@
     - condition: state
       entity_id: alarm_control_panel.snyggatorpsvagen_alarm
       state: armed_away
-    - condition: numeric_state
-      entity_id: sensor.living_room_light_level
-      below: 8
+    - condition: state
+      entity_id: group.indoor_window_lights
+      state: 'on'
   action:
     service: homeassistant.turn_on
     entity_id: group.indoor_lights
