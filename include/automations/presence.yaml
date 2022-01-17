@@ -13,12 +13,6 @@
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
-      zone: zone.preschool
-      event: enter
-    - platform: zone
-      entity_id:
-        - person.lucas_hokerberg
-        - person.victoria_hjerter
       zone: zone.hokerbergs
       event: enter
     - platform: zone
@@ -34,12 +28,6 @@
     - platform: zone
       entity_id: person.victoria_hjerter
       zone: zone.victoria_hjerter_work
-      event: leave
-    - platform: zone
-      entity_id:
-        - person.lucas_hokerberg
-        - person.victoria_hjerter
-      zone: zone.preschool
       event: leave
     - platform: zone
       entity_id:
