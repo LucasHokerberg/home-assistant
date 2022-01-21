@@ -67,7 +67,7 @@
 - alias: Presence - Turn on indoor lights when someone comes home 2
   trigger:
     platform: state
-    entity_id: binary_sensor.hallway_front_door_sensor
+    entity_id: binary_sensor.hallway_front_door_contact_sensor
     to: 'on'
   condition:
     - condition: state
@@ -138,18 +138,18 @@
 - alias: Presence - Turn on wardrobe light on door open
   trigger:
     platform: state
-    entity_id: binary_sensor.bedroom_wardrobe_doorsensor
+    entity_id: binary_sensor.bedroom_wardrobe_contact_sensor
     to: 'on'
   action:
     service: light.turn_on
-    entity_id: light.bedroom_wardrobe_ceilinglight
+    entity_id: light.bedroom_wardrobe_ceiling_light
 
 # Turn off bedroom wardrobe light when door is closed
 - alias: Presence - Turn off wardrobe light on door close
   trigger:
     platform: state
-    entity_id: binary_sensor.bedroom_wardrobe_doorsensor
+    entity_id: binary_sensor.bedroom_wardrobe_contact_sensor
     to: 'off'
   action:
     service: light.turn_off
-    entity_id: light.bedroom_wardrobe_ceilinglight
+    entity_id: light.bedroom_wardrobe_ceiling_light
