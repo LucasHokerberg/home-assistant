@@ -133,3 +133,23 @@
     entity_id:
       - group.indoor_comfort_lights
       - remote.living_room_harmony_hub
+
+# Turn on bedroom wardrobe light when door is open
+- alias: Presence - Turn on wardrobe light on door open
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bedroom_wardrobe_doorsensor
+    to: 'on'
+  action:
+    service: light.turn_on
+    entity_id: light.bedroom_wardrobe_ceilinglight
+
+# Turn off bedroom wardrobe light when door is closed
+- alias: Presence - Turn off wardrobe light on door close
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bedroom_wardrobe_doorsensor
+    to: 'off'
+  action:
+    service: light.turn_off
+    entity_id: light.bedroom_wardrobe_ceilinglight
