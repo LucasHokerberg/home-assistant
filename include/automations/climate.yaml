@@ -57,6 +57,9 @@
     - condition: state
       entity_id: climate.living_room_hvac
       state: 'off'
+    - condition: state
+      entity_id: input_boolean.night_mode
+      state: 'off'
   action:
     - service: climate.turn_on
       target:
