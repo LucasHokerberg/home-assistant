@@ -1,4 +1,4 @@
-# Turn on lights when motion in living room is detected, it's dark and quiet, and night mode is on
+# Turn on lights when motion in living room is detected, it's dark and quiet, night mode is on, and guest mode is off
 - alias: Motion - Turn on lights on living room motion
   mode: restart
   trigger:
@@ -16,8 +16,11 @@
       entity_id: sensor.living_room_light_level
       below: 5
     - condition: state
-      entity_id: switch.night_mode
+      entity_id: input_boolean.night_mode
       state: 'on'
+    - condition: state
+      entity_id: input_boolean.guest_mode
+      state: 'off'
   action:
     - service: light.turn_on
       entity_id: light.living_room_floor_light_1
@@ -44,7 +47,7 @@
       entity_id: sensor.upstairs_light_level
       below: 5
     - condition: state
-      entity_id: switch.night_mode
+      entity_id: input_boolean.night_mode
       state: 'on'
   action:
     - service: scene.turn_on

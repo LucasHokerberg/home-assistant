@@ -13,6 +13,9 @@
       - condition: state
         entity_id: alarm_control_panel.snyggatorpsvagen_alarm
         state: 'disarmed'
+      - condition: state
+        entity_id: input_boolean.guest_mode
+        state: 'off'
   action:
     service: notify.home_mobile_apps
     data_template:

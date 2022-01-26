@@ -1,4 +1,4 @@
-# Run wake up routine when an alarm is set or in the morning, when night mode is on
+# Run wake up routine when an alarm is set or in the morning, when night mode is on, and guest mode is off
 - alias: Routine - Wake up
   trigger:
     - platform: template
@@ -8,9 +8,12 @@
     - platform: time
       at: '08:00:00'
   condition:
-    condition: state
-    entity_id: input_boolean.night_mode
-    state: 'on'
+    - condition: state
+      entity_id: input_boolean.night_mode
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.guest_mode
+      state: 'off'
   action:
     service: script.wake_up
     
@@ -85,6 +88,9 @@
       state: 'off'
     - condition: state
       entity_id: input_boolean.night_mode
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.guest_mode
       state: 'off'
   action:
     service: script.bedtime
