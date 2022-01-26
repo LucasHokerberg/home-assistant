@@ -25,7 +25,7 @@
     - service: light.turn_on
       entity_id: light.living_room_floor_light_1
     - delay:
-      seconds: 30
+        seconds: 30
     - service: light.turn_off
       entity_id: light.living_room_floor_light_1
 
@@ -53,6 +53,6 @@
     - service: scene.turn_on
       entity_id: scene.upstairs_desk_light_night
     - delay:
-      seconds: 30
+        seconds: 30
     - service: light.turn_off
       entity_id: light.upstairs_desk_light
