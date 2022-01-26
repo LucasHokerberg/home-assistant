@@ -1,5 +1,6 @@
-# Turn on lights when motion in living room is detected and it's dark and quiet
+# Turn on lights when motion in living room is detected, it's dark and quiet, and night mode is on
 - alias: Motion - Turn on lights on living room motion
+  mode: restart
   trigger:
     platform: state
     entity_id: binary_sensor.living_room_motion
@@ -8,69 +9,47 @@
     - condition: state
       entity_id: group.downstairs_comfort_lights
       state: 'off'
+    - condition: state
+      entity_id: remote.living_room_harmony_hub
+      state: 'off'
     - condition: numeric_state
       entity_id: sensor.living_room_light_level
       below: 5
     - condition: state
-      entity_id: remote.living_room_harmony_hub
-      state: 'off'
+      entity_id: switch.night_mode
+      state: 'on'
   action:
-    service: light.turn_on
-    data:
+    - service: light.turn_on
       entity_id: light.living_room_floor_light_1
-      transition: 2
-
-# Turn off lights when no living room motion is detected
-- alias: Motion - Turn off lights on no living room motion
-  trigger:
-    platform: state
-    entity_id: binary_sensor.living_room_motion
-    to: 'off'
-    for:
+    - delay:
       seconds: 30
-  condition:
-    condition: state
-    entity_id: light.living_room_floor_light_2,light.living_room_floor_light_3
-    state: 'off'
-  action:
-    service: light.turn_off
-    data:
+    - service: light.turn_off
       entity_id: light.living_room_floor_light_1
-      transition: 2
 
-# Turn on lights when motion upstairs is detected and it's dark
+# Turn on lights when motion upstairs is detected, it's dark, and night mode is on
 - alias: Motion - Turn on lights on upstairs motion
+  mode: restart
   trigger:
     platform: state
     entity_id: binary_sensor.upstairs_motion
     to: 'on'
   condition:
     - condition: state
-      entity_id:
-        - light.upstairs_desk_light
-        - light.upstairs_window_light
+      entity_id: light.upstairs_window_light
       state: 'off'
+    - condition: state
+      entity_id: device_tracker.lucas_pc
+      state: 'not_home'
     - condition: numeric_state
       entity_id: sensor.upstairs_light_level
       below: 5
+    - condition: state
+      entity_id: switch.night_mode
+      state: 'on'
   action:
-    service: scene.turn_on
-    entity_id: scene.upstairs_desk_light_night
-
-# Turn off lights when no upstairs motion is detected and the computer is off
-- alias: Motion - Turn off lights on no upstairs motion
-  trigger:
-    platform: state
-    entity_id: binary_sensor.upstairs_motion
-    to: 'off'
-    for:
+    - service: scene.turn_on
+      entity_id: scene.upstairs_desk_light_night
+    - delay:
       seconds: 30
-  condition:
-    condition: state
-    entity_id: device_tracker.lucas_pc
-    state: 'not_home'
-  action:
-    service: light.turn_off
-    data:
+    - service: light.turn_off
       entity_id: light.upstairs_desk_light
-      transition: 2
