@@ -14,7 +14,7 @@
     entity_id: sensor.living_room_light_level
     below: 7
     for:
-      minutes: 1
+      seconds: 61
   condition:
     - condition: sun
       after: sunrise
@@ -34,7 +34,7 @@
     entity_id: sensor.living_room_light_level
     below: 7
     for:
-      minutes: 1
+      seconds: 60
   condition:
     - condition: sun
       after: sunrise
