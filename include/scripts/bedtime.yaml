@@ -5,8 +5,9 @@ sequence:
       - remote.living_room_harmony_hub
   - service: lock.lock
     entity_id: lock.hallway_front_door_lock
-  - service: switch.turn_on
-    entity_id: switch.night_mode
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.night_mode
   - condition: state
     entity_id: climate.living_room_hvac
     state: 'cool'
