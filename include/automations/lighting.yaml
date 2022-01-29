@@ -12,7 +12,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
-    below: 7
+    below: 6
     for:
       seconds: 61
   condition:
@@ -32,7 +32,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
-    below: 7
+    below: 6
     for:
       seconds: 60
   condition:
@@ -60,7 +60,7 @@
     entity_id: sensor.living_room_light_level
     above: 9
     for:
-      minutes: 1
+      minutes: 5
   condition:
     - condition: sun
       after: sunrise
