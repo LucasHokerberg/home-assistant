@@ -3,6 +3,7 @@
   trigger:
     platform: state
     entity_id: binary_sensor.kitchen_dishwasher_state
+    from: 'on'
     to: 'off'
   action:
     service: notify.home_mobile_apps

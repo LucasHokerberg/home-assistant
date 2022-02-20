@@ -1,2 +1,3 @@
 friendly_name: Dishwasher
 icon: mdi:dishwasher
+initial_state: 'off'
