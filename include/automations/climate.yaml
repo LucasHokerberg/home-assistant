@@ -147,3 +147,14 @@
     service: climate.turn_off
     target:
       entity_id: climate.living_room_hvac
+
+# Update bedroom radiator external temp
+- alias: Climate - Bedroom external temp
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.bedroom_temperature
+  action:
+    service: input_number.set_value
+    data_template:
+      entity_id: number.bedroom_radiator_external_temp
+      value: '{{ states("sensor.bedroom_temperature") }}'
