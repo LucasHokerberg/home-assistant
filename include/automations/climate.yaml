@@ -154,8 +154,7 @@
     platform: template
     value_template: '{{ states.sensor.bedroom_temperature.attributes.temperature }}'
   action:
-    service: input_number.set_value
-    target:
-      entity_id: number.bedroom_radiator_external_temp
+    service: number.set_value
     data:
+      entity_id: number.bedroom_radiator_external_temp
       value: '{{ states("sensor.bedroom_temperature") }}'
