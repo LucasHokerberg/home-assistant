@@ -151,8 +151,8 @@
 # Update bedroom radiator external temp
 - alias: Climate - Bedroom external temp
   trigger:
-    platform: numeric_state
-    entity_id: sensor.bedroom_temperature
+    platform: template
+    value_template: '{{ states.sensor.bedroom_temperature.attributes.temperature }}'
   action:
     service: input_number.set_value
     target:
