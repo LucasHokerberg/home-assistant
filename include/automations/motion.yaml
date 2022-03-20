@@ -1,6 +1,5 @@
 # Turn on lights when motion in living room is detected, it's dark and quiet, night mode is on, and guest mode is off
 - alias: Motion - Turn on lights on living room motion
-  mode: restart
   trigger:
     platform: state
     entity_id: binary_sensor.living_room_motion
@@ -24,14 +23,17 @@
   action:
     - service: light.turn_on
       entity_id: light.living_room_floor_light_1
-    - delay:
-        seconds: 30
+    - wait_for_trigger:
+      - platform: state
+        entity_id: binary_sensor.living_room_motion
+        to: 'off'
+      timeout:
+        minutes: 5
     - service: light.turn_off
       entity_id: light.living_room_floor_light_1
 
 # Turn on lights when motion upstairs is detected, it's dark, and night mode is on
 - alias: Motion - Turn on lights on upstairs motion
-  mode: restart
   trigger:
     platform: state
     entity_id: binary_sensor.upstairs_motion
@@ -52,7 +54,11 @@
   action:
     - service: scene.turn_on
       entity_id: scene.upstairs_desk_light_night
-    - delay:
-        seconds: 30
+    - wait_for_trigger:
+      - platform: state
+        entity_id: binary_sensor.upstairs_motion
+        to: 'off'
+      timeout:
+        minutes: 5
     - service: light.turn_off
       entity_id: light.upstairs_desk_light
