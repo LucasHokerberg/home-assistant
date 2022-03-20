@@ -62,3 +62,25 @@
         minutes: 5
     - service: light.turn_off
       entity_id: light.upstairs_desk_light
+
+# Turn on lights when driveway motion is detected, and outdoor comfort lights are on
+- alias: Motion - Turn on lights on driveway motion
+  trigger:
+    platform: state
+    entity_id: binary_sensor.outdoor_driveway_motion
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: group.outdoor_comfort_lights
+    state: 'on'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.outdoor_driveway_floodlight
+    - wait_for_trigger:
+      - platform: state
+        entity_id: binary_sensor.outdoor_driveway_motion
+        to: 'off'
+      timeout:
+        minutes: 5
+    - service: switch.turn_off
+      entity_id: switch.outdoor_driveway_floodlight
