@@ -23,6 +23,9 @@
     - condition: state
       entity_id: alarm_control_panel.snyggatorpsvagen_alarm
       state: disarmed
+    - condition: state
+      entity_id: input_boolean.night_mode
+      state: 'off'
   action:
     service: homeassistant.turn_on
     entity_id: group.indoor_comfort_lights
@@ -40,6 +43,9 @@
       after: sunrise
     - condition: sun
       before: sunset
+    - condition: state
+      entity_id: input_boolean.night_mode
+      state: 'off'
   action:
     service: homeassistant.turn_on
     entity_id: group.indoor_window_lights
