@@ -11,22 +11,22 @@
     - condition: state
       entity_id: input_boolean.night_mode
       state: 'on'
-    - condition: state
-      entity_id: input_boolean.guest_mode
-      state: 'off'
   action:
     service: script.wake_up
     
 # Wake up routine when living room is dark
 - alias: Routine - Wake up and dark
   trigger:
-    - platform: state
-      entity_id: script.wake_up
-      to: 'on'
+    platform: state
+    entity_id: script.wake_up
+    to: 'on'
   condition:
-    condition: numeric_state
-    entity_id: sensor.living_room_light_level
-    below: 7
+    - condition: numeric_state
+      entity_id: sensor.living_room_light_level
+      below: 6
+    - condition: state
+      entity_id: input_boolean.guest_mode
+      state: 'off'
   action:
     service: homeassistant.turn_on
     entity_id:
