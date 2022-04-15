@@ -18,7 +18,6 @@
   condition:
     - condition: sun
       after: sunrise
-    - condition: sun
       before: sunset
     - condition: state
       entity_id: alarm_control_panel.snyggatorpsvagen_alarm
@@ -38,7 +37,6 @@
   condition:
     - condition: sun
       after: sunrise
-    - condition: sun
       before: sunset
   action:
     service: homeassistant.turn_on
@@ -64,7 +62,6 @@
   condition:
     - condition: sun
       after: sunrise
-    - condition: sun
       before: sunset
   action:
     service: homeassistant.turn_off
