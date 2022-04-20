@@ -160,9 +160,9 @@
     for:
       minutes: 5
   condition:
-    - condition: sun
-      after: sunrise
-      before: sunset
+    condition: sun
+    after: sunrise
+    before: sunset
   action:
     service: homeassistant.turn_off
     entity_id:

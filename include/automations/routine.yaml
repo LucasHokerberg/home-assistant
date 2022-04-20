@@ -8,9 +8,9 @@
     - platform: time
       at: '08:00:00'
   condition:
-    - condition: state
-      entity_id: input_boolean.night_mode
-      state: 'on'
+    condition: state
+    entity_id: input_boolean.night_mode
+    state: 'on'
   action:
     service: script.wake_up
     
