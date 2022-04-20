@@ -36,7 +36,7 @@
         - automation.lighting_turn_on_window_lights_when_dark
         - automation.lighting_turn_on_lovelias_comfort_lights_when_dark
         #- automation.lighting_turn_on_lovelias_window_lights_when_dark
-        - automation.lighting_turn_on_bedroom_comfort_lights when dark
+        - automation.lighting_turn_on_bedroom_comfort_lights_when_dark
         #- automation.lighting_turn_on_bedroom_window_lights_when_dark
         - group.dining_room_comfort_lights
         - group.dining_room_window_lights
@@ -112,7 +112,7 @@
         - automation.lighting_turn_on_window_lights_when_dark
         - automation.lighting_turn_on_lovelias_comfort_lights_when_dark
         #- automation.lighting_turn_on_lovelias_window_lights_when_dark
-        - automation.lighting_turn_on_bedroom_comfort_lights when dark
+        - automation.lighting_turn_on_bedroom_comfort_lights_when_dark
         #- automation.lighting_turn_on_bedroom_window_lights_when_dark
 
 # Turn on lights when the computer is turning on
