@@ -6,14 +6,14 @@
     to: 'on'
   condition:
     - condition: state
-      entity_id: group.downstairs_comfort_lights
+      entity_id: group.living_room_comfort_lights
       state: 'off'
     - condition: state
       entity_id: remote.living_room_harmony_hub
       state: 'off'
     - condition: numeric_state
       entity_id: sensor.living_room_light_level
-      below: 5
+      below: 6
     - condition: state
       entity_id: input_boolean.night_mode
       state: 'on'
@@ -40,14 +40,14 @@
     to: 'on'
   condition:
     - condition: state
-      entity_id: light.upstairs_window_light
+      entity_id: group.upstairs_window_lights
       state: 'off'
     - condition: state
       entity_id: device_tracker.lucas_pc
       state: 'not_home'
     - condition: numeric_state
       entity_id: sensor.upstairs_light_level
-      below: 5
+      below: 6
     - condition: state
       entity_id: input_boolean.night_mode
       state: 'on'
