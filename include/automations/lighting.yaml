@@ -28,9 +28,7 @@
   action:
     service: homeassistant.turn_on
     entity_id:
-      - group.living_room_comfort_lights
-      - group.dining_room_comfort_lights
-      #- group.kitchen_comfort_lights
+      - group.downstairs_comfort_lights
       #- group.upstairs_comfort_lights
 
 # Turn on Lovelia's comfort lights when living room becomes dark, someone is home, and Lovelia is not sleeping
@@ -97,9 +95,7 @@
   action:
     service: homeassistant.turn_on
     entity_id:
-      - group.living_room_window_lights
-      - group.dining_room_window_lights
-      #- group.kitchen_window_lights
+      - group.downstairs_window_lights
       - group.upstairs_window_lights
 
 # Turn on Lovelia's window lights when living room becomes dark and Lovelia is not sleeping
@@ -165,6 +161,4 @@
     before: sunset
   action:
     service: homeassistant.turn_off
-    entity_id:
-      - group.indoor_comfort_lights
-      - group.indoor_window_lights
+    entity_id: group.indoor_lights
