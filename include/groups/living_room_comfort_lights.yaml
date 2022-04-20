@@ -2,4 +2,3 @@ entities:
   #- switch.living_room_christmas_tree
   - group.living_room_floor_light
   - light.living_room_sideboard_light
-  - light.dining_room_cabinet_light

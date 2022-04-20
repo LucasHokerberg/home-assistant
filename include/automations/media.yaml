@@ -32,15 +32,24 @@
   action:
     - service: homeassistant.turn_off
       entity_id:
-        - automation.lighting_turn_on_indoor_lights_when_dark_and_somone_is_home
-        - automation.lighting_turn_on_indoor_lights_when_dark
-        - group.downstairs_lights
-    - delay:
-        seconds: 12
+        - automation.lighting_turn_on_comfort_lights_when_dark
+        - automation.lighting_turn_on_window_lights_when_dark
+        - automation.lighting_turn_on_lovelias_comfort_lights_when_dark
+        - automation.lighting_turn_on_lovelias_window_lights_when_dark
+        - automation.lighting_turn_on_bedroom_comfort_lights when dark
+        - automation.lighting_turn_on_bedroom_window_lights_when_dark
+        - group.dining_room_comfort_lights
+        - group.dining_room_window_lights
+        - group.kitchen_comfort_lights
+        - group.kitchen_window_lights
+        - group.upstairs_comfort_lights
+        - group.upstairs_window_lights
     - service: scene.turn_on
       data:
         entity_id: scene.living_room_lights_plex
         transition: 3
+    - delay:
+        seconds: 12
     - service: androidtv.adb_command
       data:
         entity_id: media_player.living_room_shield
@@ -93,9 +102,18 @@
     data:
       entity_id:
         - scene.living_room_lights_normal
-        - group.downstairs_lights
-        - automation.lighting_turn_on_indoor_lights_when_dark_and_somone_is_home
-        - automation.lighting_turn_on_indoor_lights_when_dark
+        - group.dining_room_comfort_lights
+        - group.dining_room_window_lights
+        - group.kitchen_comfort_lights
+        - group.kitchen_window_lights
+        - group.upstairs_comfort_lights
+        - group.upstairs_window_lights
+        - automation.lighting_turn_on_comfort_lights_when_dark
+        - automation.lighting_turn_on_window_lights_when_dark
+        - automation.lighting_turn_on_lovelias_comfort_lights_when_dark
+        - automation.lighting_turn_on_lovelias_window_lights_when_dark
+        - automation.lighting_turn_on_bedroom_comfort_lights when dark
+        - automation.lighting_turn_on_bedroom_window_lights_when_dark
 
 # Turn on lights when the computer is turning on
 - alias: Media - Turn on lights when computer start
