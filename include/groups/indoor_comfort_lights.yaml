@@ -1,7 +1,7 @@
 entities:
   - group.living_room_comfort_lights
   - group.dining_room_comfort_lights
-  - group.kitchen_comfort_lights
-  - group.upstairs_comfort_lights
+  #- group.kitchen_comfort_lights
+  #- group.upstairs_comfort_lights
   - group.lovelias_room_comfort_lights
   - group.bedroom_comfort_lights
