@@ -88,18 +88,17 @@
     from: armed_away
     to: disarmed
   condition:
+    - condition: template
+      value_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state - 0.5 | float) }}'
     - condition: numeric_state
       entity_id: sensor.outdoor_temperature
       below: 17
-    - condition: numeric_state
-      entity_id: sensor.living_room_temperature
-      below: 21.5
     - condition: state
       entity_id: climate.living_room_hvac
       state: 'off'
   action:
     service: automation.trigger
-    entity_id: automation.climate_start_cooling_when_warm
+    entity_id: automation.climate_start_heating_when_cold
 
 # Turn on the AC if warm inside and outside, and someone comes home
 - alias: Presence - Turn on AC when warm and someone comes home
@@ -109,12 +108,11 @@
     from: armed_away
     to: disarmed
   condition:
+    - condition: template
+      value_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state + 0.5 | float) }}'
     - condition: numeric_state
       entity_id: sensor.outdoor_temperature
       above: 17
-    - condition: numeric_state
-      entity_id: sensor.living_room_temperature
-      above: 22.5
     - condition: state
       entity_id: climate.living_room_hvac
       state: 'off'

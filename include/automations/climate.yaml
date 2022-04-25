@@ -1,12 +1,18 @@
 # Start the heat when cold inside and outside
 - alias: Climate - Start heating when cold
   trigger:
-    platform: numeric_state
-    entity_id: sensor.living_room_temperature
-    below: 21.5
-    for:
-      minutes: 5
+    - platform: template
+      data_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state - 0.5 | float) }}'
+      for:
+        minutes: 5
+    - platform: numeric_state
+      entity_id: sensor.outdoor_temperature
+      below: 17
+      for:
+        minutes: 5
   condition:
+    - condition: template
+      value_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state - 0.5 | float) }}'
     - condition: numeric_state
       entity_id: sensor.outdoor_temperature
       below: 17
@@ -30,7 +36,7 @@
       target:
         entity_id: climate.living_room_hvac
       data:
-        temperature: '{{ states("input_number.living_room_hvac_target") }}'
+        temperature: '{{ states("input_number.living_room_hvac_target") - 1 | float }}'
     - delay:
         seconds: 5
     - service: climate.set_fan_mode
@@ -39,26 +45,26 @@
       data:
         fan_mode: low
 
-# Start the AC when warm inside and outside, and only if someone is home
+# Start the AC when warm inside and outside
 - alias: Climate - Start cooling when warm
   trigger:
-    platform: numeric_state
-    entity_id: sensor.living_room_temperature
-    above: 22.5
-    for:
-      minutes: 5
-  condition:
-    - condition: state
-      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-      state: disarmed
-    - condition: numeric_state
+    - platform: template
+      data_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state + 0.5 | float) }}'
+      for:
+        minutes: 5
+    - platform: numeric_state
       entity_id: sensor.outdoor_temperature
       above: 17
+      for:
+        minutes: 5
+  condition:
+    - condition: template
+      value_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state + 0.5 | float) }}'
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      below: 17
     - condition: state
       entity_id: climate.living_room_hvac
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.night_mode
       state: 'off'
   action:
     - service: climate.turn_on
@@ -77,7 +83,7 @@
       target:
         entity_id: climate.living_room_hvac
       data:
-        temperature: '{{ states("input_number.living_room_hvac_target") }}'
+        temperature: '{{ states("input_number.living_room_hvac_target") + 1 | float }}'
     - delay:
         seconds: 5
     - service: climate.set_fan_mode
@@ -86,30 +92,43 @@
       data:
         fan_mode: low
 
-# Change HVAC temperature when target is changed
-- alias: Climate - Change temperature
+# Change HVAC temperature when target is changed and HVAC is set to heat
+- alias: Climate - Change temperature heat
   trigger:
     platform: state
     entity_id: input_number.living_room_hvac_target
   condition:
-    condition: not
-    conditions:
-      condition: state
-      entity_id: climate.living_room_hvac
-      state: 'off'
+    condition: state
+    entity_id: climate.living_room_hvac
+    state: heat
   action:
     service: climate.set_temperature
     target:
       entity_id: climate.living_room_hvac
     data:
-      temperature: '{{ states("input_number.living_room_hvac_target") }}'
+      temperature: '{{ states("input_number.living_room_hvac_target") - 1 | float }}'
+
+# Change HVAC temperature when target is changed and HVAC is set to cool
+- alias: Climate - Change temperature heat
+  trigger:
+    platform: state
+    entity_id: input_number.living_room_hvac_target
+  condition:
+    condition: state
+    entity_id: climate.living_room_hvac
+    state: cool
+  action:
+    service: climate.set_temperature
+    target:
+      entity_id: climate.living_room_hvac
+    data:
+      temperature: '{{ states("input_number.living_room_hvac_target") + 1 | float }}'
 
 # Turn off the heat when warm inside or outside, and the heat is on
 - alias: Climate - Stop heating when warm
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.living_room_temperature
-      above: 22.5
+    - platform: template
+      data_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state + 0.5 | float) }}'
       for:
         minutes: 30
     - platform: numeric_state
@@ -129,9 +148,8 @@
 # Turn off the AC when cold inside or outside, and the AC is on
 - alias: Climate - Stop cooling when cold
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.living_room_temperature
-      below: 21.5
+    - platform: template
+      data_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state - 0.5 | float) }}'
       for:
         minutes: 30
     - platform: numeric_state
