@@ -39,7 +39,7 @@
       target:
         entity_id: climate.living_room_hvac
       data:
-        temperature: '{{ states("input_number.living_room_hvac_target") - 1 | float }}'
+        temperature: '{{ states.input_number.living_room_hvac_target.state | float - 1 | float }}'
     - delay:
         seconds: 5
     - service: climate.set_fan_mode
@@ -89,7 +89,7 @@
       target:
         entity_id: climate.living_room_hvac
       data:
-        temperature: '{{ states("input_number.living_room_hvac_target") + 1 | float }}'
+        temperature: '{{ states.input_number.living_room_hvac_target.state | float + 1 | float }}'
     - delay:
         seconds: 5
     - service: climate.set_fan_mode
@@ -113,7 +113,7 @@
     target:
       entity_id: climate.living_room_hvac
     data:
-      temperature: '{{ states("input_number.living_room_hvac_target") - 1 | float }}'
+      temperature: '{{ states.input_number.living_room_hvac_target.state | float - 1 | float }}'
 
 # Change HVAC temperature when target is changed and HVAC is set to cool
 - id: '0304'
@@ -130,7 +130,7 @@
     target:
       entity_id: climate.living_room_hvac
     data:
-      temperature: '{{ states("input_number.living_room_hvac_target") + 1 | float }}'
+      temperature: '{{ states.input_number.living_room_hvac_target.state | float + 1 | float }}'
 
 # Turn off the heat when warm inside or outside, and the heat is on
 - id: '0305'
