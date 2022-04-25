@@ -2,7 +2,7 @@
 - alias: Climate - Start heating when cold
   trigger:
     - platform: template
-      data_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state - 0.5 | float) }}'
+      value_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state - 0.5 | float) }}'
       for:
         minutes: 5
     - platform: numeric_state
@@ -49,7 +49,7 @@
 - alias: Climate - Start cooling when warm
   trigger:
     - platform: template
-      data_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state + 0.5 | float) }}'
+      value_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state + 0.5 | float) }}'
       for:
         minutes: 5
     - platform: numeric_state
@@ -128,7 +128,7 @@
 - alias: Climate - Stop heating when warm
   trigger:
     - platform: template
-      data_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state + 0.5 | float) }}'
+      value_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state + 0.5 | float) }}'
       for:
         minutes: 30
     - platform: numeric_state
@@ -149,7 +149,7 @@
 - alias: Climate - Stop cooling when cold
   trigger:
     - platform: template
-      data_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state - 0.5 | float) }}'
+      value_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state - 0.5 | float) }}'
       for:
         minutes: 30
     - platform: numeric_state
