@@ -1,14 +1,9 @@
-# Start the heat when cold inside and outside
+# Start the heat when cold inside
 - id: '0301'
   alias: Climate - Start heating when cold
   trigger:
     - platform: template
       value_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
-      for:
-        minutes: 5
-    - platform: numeric_state
-      entity_id: sensor.outdoor_temperature
-      below: 17
       for:
         minutes: 5
     - platform: state
@@ -45,17 +40,12 @@
       data:
         fan_mode: low
 
-# Start the AC when warm inside and outside
+# Start the AC when warm inside
 - id: '0302'
   alias: Climate - Start cooling when warm
   trigger:
     - platform: template
       value_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
-      for:
-        minutes: 5
-    - platform: numeric_state
-      entity_id: sensor.outdoor_temperature
-      above: 17
       for:
         minutes: 5
     - platform: state
@@ -126,17 +116,12 @@
     data:
       temperature: '{{ states.input_number.living_room_hvac_target.state | float + 1 | float }}'
 
-# Turn off the heat when warm inside or outside, and the heat is on
+# Turn off the heat when warm inside, and the heat is on
 - id: '0305'
   alias: Climate - Stop heating when warm
   trigger:
     - platform: template
       value_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
-      for:
-        minutes: 30
-    - platform: numeric_state
-      entity_id: sensor.outdoor_temperature
-      above: 17
       for:
         minutes: 30
     - platform: state
@@ -152,17 +137,12 @@
     target:
       entity_id: climate.living_room_hvac
 
-# Turn off the AC when cold inside or outside, and the AC is on
+# Turn off the AC when cold inside, and the AC is on
 - id: '0306'
   alias: Climate - Stop cooling when cold
   trigger:
     - platform: template
       value_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
-      for:
-        minutes: 30
-    - platform: numeric_state
-      entity_id: sensor.outdoor_temperature
-      below: 17
       for:
         minutes: 30
     - platform: state
