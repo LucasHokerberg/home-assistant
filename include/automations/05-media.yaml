@@ -1,5 +1,6 @@
 # Start Spotify and play a default playlist when Living Room Harmony Hub starts Spotify
-- alias: "Media - Living Room Harmony Spotify"
+- id: 0501
+  alias: "Media - Living Room Harmony Spotify"
   trigger:
     platform: state
     entity_id: sensor.living_room_harmony_hub
@@ -24,7 +25,8 @@
         media_content_type: playlist
 
 # Turn off lights and start Plex when Living Room Harmony Hub starts Movie Mode
-- alias: "Media - Living Room Harmony Movie Mode"
+- id: 0502
+  alias: "Media - Living Room Harmony Movie Mode"
   trigger:
     platform: state
     entity_id: sensor.living_room_harmony_hub
@@ -56,7 +58,8 @@
         command: 'am start -a android.intent.action.MAIN -c android.intent.category.LEANBACK_LAUNCHER -n com.plexapp.android/com.plexapp.plex.activities.SplashActivity'
 
 # Turn off lights when Plex is resuming or playing and Movie Mode is active
-- alias: Media - Turn off lights when Plex plays
+- id: 0503
+  alias: Media - Turn off lights when Plex plays
   initial_state: 'on'
   trigger:
     platform: state
@@ -75,7 +78,8 @@
       transition: 3
 
 # Turn on lights when Plex is pausing or stoping and Movie Mode is active
-- alias: Media - Turn on lights when Plex stops
+- id: 0504
+  alias: Media - Turn on lights when Plex stops
   initial_state: 'on'
   trigger:
     platform: state
@@ -92,7 +96,8 @@
       transition: 3
 
 # Turn on lights when Living Room Harmony Hub stops Movie Mode
-- alias: Media - Turn on lights when Living Room Harmony exit Movie Mode
+- id: 0505
+  alias: Media - Turn on lights when Living Room Harmony exit Movie Mode
   trigger:
     platform: state
     entity_id: sensor.living_room_harmony_hub
@@ -116,7 +121,8 @@
         #- automation.lighting_turn_on_bedroom_window_lights_when_dark
 
 # Turn on lights when the computer is turning on
-- alias: Media - Turn on lights when computer start
+- id: 0506
+  alias: Media - Turn on lights when computer start
   trigger:
     platform: state
     entity_id: device_tracker.lucas_pc
@@ -126,7 +132,8 @@
     entity_id: scene.upstairs_desk_light_computer
 
 # Turn off lights when the computer is turning off
-- alias: Media - Turn off lights when computer stop
+- id: 0507
+  alias: Media - Turn off lights when computer stop
   trigger:
     platform: state
     entity_id: device_tracker.lucas_pc

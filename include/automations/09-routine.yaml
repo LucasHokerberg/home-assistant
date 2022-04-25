@@ -1,5 +1,6 @@
 # Run wake up routine when an alarm is set or in the morning, when night mode is on, and guest mode is off
-- alias: Routine - Wake up
+- id: 0901
+  alias: Routine - Wake up
   trigger:
     - platform: template
       value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) == as_timestamp(states("sensor.date_time").replace(",","")) }}'
@@ -15,7 +16,8 @@
     service: script.wake_up
     
 # Wake up routine when living room is dark
-- alias: Routine - Wake up and dark
+- id: 0902
+  alias: Routine - Wake up and dark
   trigger:
     platform: state
     entity_id: script.wake_up
@@ -34,7 +36,8 @@
       - group.upstairs_window_lights
 
 # Run bedtime routine when the TV is off, it's evening, and all downstairs lights are turned off
-- alias: Routine - Bedtime
+- id: 0903
+  alias: Routine - Bedtime
   trigger:
     platform: state
     entity_id: group.downstairs_lights

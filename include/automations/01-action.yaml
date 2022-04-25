@@ -1,5 +1,6 @@
 # Lock hallway front door
-- alias: Action - Lock hallway front door
+- id: 0101
+  alias: Action - Lock hallway front door
   trigger:
     platform: event
     event_type: mobile_app_notification_action
@@ -10,7 +11,8 @@
     entity_id: lock.hallway_front_door_lock
 
 # Unlock hallway front door only when someone is home
-- alias: Action - Unlock hallway front door
+- id: 0102
+  alias: Action - Unlock hallway front door
   trigger:
     platform: event
     event_type: mobile_app_notification_action
@@ -25,7 +27,8 @@
     entity_id: lock.hallway_front_door_lock
 
 # Acknowledge basement water leakge alert
-- alias: Action - Acknowledge basement water leakage
+- id: 0103
+  alias: Action - Acknowledge basement water leakage
   trigger:
     platform: event
     event_type: mobile_app_notification_action
@@ -37,7 +40,8 @@
       entity_id: alert.basement_water_leakage
 
 # Acknowledge kitchen water leakge alert
-- alias: Action - Acknowledge kitchen water leakage
+- id: 0104
+  alias: Action - Acknowledge kitchen water leakage
   trigger:
     platform: event
     event_type: mobile_app_notification_action

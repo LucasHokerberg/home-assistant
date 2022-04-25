@@ -1,5 +1,6 @@
 # Send a notification when someone enters or leaves a zone
-- alias: Presence - Notify on zone enter or leave
+- id: 0701
+  alias: Presence - Notify on zone enter or leave
   trigger:
     - platform: zone
       entity_id: person.lucas_hokerberg
@@ -50,7 +51,8 @@
         channel: Presence
 
 # Turn on lights when living room is dark and someone comes home
-- alias: Presence - Turn on indoor lights when someone comes home 1
+- id: 0702
+  alias: Presence - Turn on indoor lights when someone comes home 1
   trigger:
     platform: state
     entity_id: alarm_control_panel.snyggatorpsvagen_alarm
@@ -64,7 +66,8 @@
     service: homeassistant.turn_on
     entity_id: group.indoor_comfort_lights
 
-- alias: Presence - Turn on indoor lights when someone comes home 2
+- id: 0703
+  alias: Presence - Turn on indoor lights when someone comes home 2
   trigger:
     platform: state
     entity_id: binary_sensor.hallway_front_door_contact_sensor
@@ -81,7 +84,8 @@
     entity_id: group.indoor_comfort_lights
 
 # Turn on the heat if cold inside and outside, and someone comes home
-- alias: Presence - Turn on heat when cold and someone comes home
+- id: 0704
+  alias: Presence - Turn on heat when cold and someone comes home
   trigger:
     platform: state
     entity_id: alarm_control_panel.snyggatorpsvagen_alarm
@@ -101,7 +105,8 @@
     entity_id: automation.climate_start_heating_when_cold
 
 # Turn on the AC if warm inside and outside, and someone comes home
-- alias: Presence - Turn on AC when warm and someone comes home
+- id: 0705
+  alias: Presence - Turn on AC when warm and someone comes home
   trigger:
     platform: state
     entity_id: alarm_control_panel.snyggatorpsvagen_alarm
@@ -121,7 +126,8 @@
     entity_id: automation.climate_start_cooling_when_warm
 
 # Turn off lights and TV when the alarm is armed away
-- alias: Presence - Turn off lights and TV when alarm is armed away
+- id: 0706
+  alias: Presence - Turn off lights and TV when alarm is armed away
   trigger:
     platform: state
     entity_id: alarm_control_panel.snyggatorpsvagen_alarm
@@ -133,7 +139,8 @@
       - remote.living_room_harmony_hub
 
 # Turn on bedroom wardrobe light when door is open
-- alias: Presence - Turn on wardrobe light on door open
+- id: 0707
+  alias: Presence - Turn on wardrobe light on door open
   trigger:
     platform: state
     entity_id: binary_sensor.bedroom_wardrobe_contact_sensor
@@ -143,7 +150,8 @@
     entity_id: light.bedroom_wardrobe_ceiling_light
 
 # Turn off bedroom wardrobe light when door is closed
-- alias: Presence - Turn off wardrobe light on door close
+- id: 0708
+  alias: Presence - Turn off wardrobe light on door close
   trigger:
     platform: state
     entity_id: binary_sensor.bedroom_wardrobe_contact_sensor

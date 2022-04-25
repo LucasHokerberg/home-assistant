@@ -1,5 +1,6 @@
 # Send a notification when the dishwasher is done
-- alias: Appliance - Notify when dishwasher is done
+- id: 0201
+  alias: Appliance - Notify when dishwasher is done
   trigger:
     platform: state
     entity_id: binary_sensor.kitchen_dishwasher_state
@@ -14,7 +15,8 @@
         channel: Appliance
 
 # Notify when the freezer temperature is too high
-- alias: Appliance - Notify on high freezer temperature
+- id: 0202
+  alias: Appliance - Notify on high freezer temperature
   trigger:
     platform: numeric_state
     entity_id: sensor.kitchen_freezer_temperature
@@ -30,7 +32,8 @@
         channel: Appliance
 
 # Notify when the fridge temperature is too high
-- alias: Appliance - Notify on high fridge temperature
+- id: 0203
+  alias: Appliance - Notify on high fridge temperature
   trigger:
     platform: numeric_state
     entity_id: sensor.kitchen_fridge_temperature

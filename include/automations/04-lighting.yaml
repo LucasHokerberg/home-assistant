@@ -1,5 +1,6 @@
 # Turn on outdoor lights at sunset
-- alias: Lighting - Turn on outdoor lights at sunset
+- id: 0401
+  alias: Lighting - Turn on outdoor lights at sunset
   trigger:
     platform: sun
     event: sunset
@@ -8,7 +9,8 @@
     entity_id: group.outdoor_comfort_lights
 
 # Turn on comfort lights when living room becomes dark and someone is home
-- alias: Lighting - Turn on comfort lights when dark
+- id: 0402
+  alias: Lighting - Turn on comfort lights when dark
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
@@ -32,7 +34,8 @@
       #- group.upstairs_comfort_lights
 
 # Turn on window lights when living room becomes dark
-- alias: Lighting - Turn on window lights when dark
+- id: 0403
+  alias: Lighting - Turn on window lights when dark
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
@@ -53,7 +56,8 @@
       - group.upstairs_window_lights
 
 # Turn on Lovelia's comfort lights when living room becomes dark, someone is home, and Lovelia is not sleeping
-- alias: Lighting - Turn on Lovelias comfort lights when dark
+- id: 0404
+  alias: Lighting - Turn on Lovelias comfort lights when dark
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
@@ -77,7 +81,8 @@
     entity_id: group.lovelias_room_comfort_lights
 
 # Turn on Lovelia's window lights when living room becomes dark and Lovelia is not sleeping
-#- alias: Lighting - Turn on Lovelias window lights when dark
+#- id: 0405
+#  alias: Lighting - Turn on Lovelias window lights when dark
 #  trigger:
 #    platform: numeric_state
 #    entity_id: sensor.living_room_light_level
@@ -98,7 +103,8 @@
 #    entity_id: group.lovelias_room_window_lights
 
 # Turn on bedroom comfort lights when living room becomes dark and someone is home
-- alias: Lighting - Turn on bedroom comfort lights when dark
+- id: 0406
+  alias: Lighting - Turn on bedroom comfort lights when dark
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
@@ -120,7 +126,8 @@
     entity_id: group.bedroom_comfort_lights
 
 # Turn on bedroom window lights when living room becomes dark
-#- alias: Lighting - Turn on bedroom window lights when dark
+#- id: 0407
+#  alias: Lighting - Turn on bedroom window lights when dark
 #  trigger:
 #    platform: numeric_state
 #    entity_id: sensor.living_room_light_level
@@ -139,7 +146,8 @@
 #    entity_id: group.bedroom_window_lights
 
 # Turn off outdoor lights at sunrise
-- alias: Lighting - Turn off outdoor lights at sunrise
+- id: 0408
+  alias: Lighting - Turn off outdoor lights at sunrise
   trigger:
     platform: sun
     event: sunrise
@@ -148,7 +156,8 @@
     entity_id: group.outdoor_comfort_lights
 
 # Turn off indoor lights when living room is bright
-- alias: Lighting - Turn off indoor lights when bright
+- id: 0409
+  alias: Lighting - Turn off indoor lights when bright
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level

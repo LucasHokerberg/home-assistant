@@ -1,5 +1,6 @@
 # Notify when everyone leaves the home and the front door is unlocked or the alarm is disarmed
-- alias: Security - Notify when home is unsecured
+- id: 1001
+  alias: Security - Notify when home is unsecured
   trigger:
     platform: state
     entity_id: group.home_members
@@ -28,7 +29,8 @@
             title: 'Lock Front Door'
 
 # Notify when entrance doorbell is ringed
-- alias: Security - Notify on entrance doorbell
+- id: 1002
+  alias: Security - Notify on entrance doorbell
   trigger:
     platform: state
     entity_id: binary_sensor.outdoor_entrance_doorbell
