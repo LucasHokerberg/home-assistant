@@ -1,5 +1,5 @@
 # Start Spotify and play a default playlist when Living Room Harmony Hub starts Spotify
-- id: 0501
+- id: '0501'
   alias: "Media - Living Room Harmony Spotify"
   trigger:
     platform: state
@@ -25,7 +25,7 @@
         media_content_type: playlist
 
 # Turn off lights and start Plex when Living Room Harmony Hub starts Movie Mode
-- id: 0502
+- id: '0502'
   alias: "Media - Living Room Harmony Movie Mode"
   trigger:
     platform: state
@@ -58,7 +58,7 @@
         command: 'am start -a android.intent.action.MAIN -c android.intent.category.LEANBACK_LAUNCHER -n com.plexapp.android/com.plexapp.plex.activities.SplashActivity'
 
 # Turn off lights when Plex is resuming or playing and Movie Mode is active
-- id: 0503
+- id: '0503'
   alias: Media - Turn off lights when Plex plays
   initial_state: 'on'
   trigger:
@@ -78,7 +78,7 @@
       transition: 3
 
 # Turn on lights when Plex is pausing or stoping and Movie Mode is active
-- id: 0504
+- id: '0504'
   alias: Media - Turn on lights when Plex stops
   initial_state: 'on'
   trigger:
@@ -96,7 +96,7 @@
       transition: 3
 
 # Turn on lights when Living Room Harmony Hub stops Movie Mode
-- id: 0505
+- id: '0505'
   alias: Media - Turn on lights when Living Room Harmony exit Movie Mode
   trigger:
     platform: state
@@ -121,7 +121,7 @@
         #- automation.lighting_turn_on_bedroom_window_lights_when_dark
 
 # Turn on lights when the computer is turning on
-- id: 0506
+- id: '0506'
   alias: Media - Turn on lights when computer start
   trigger:
     platform: state
@@ -132,7 +132,7 @@
     entity_id: scene.upstairs_desk_light_computer
 
 # Turn off lights when the computer is turning off
-- id: 0507
+- id: '0507'
   alias: Media - Turn off lights when computer stop
   trigger:
     platform: state

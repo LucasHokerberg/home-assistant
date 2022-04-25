@@ -1,5 +1,5 @@
 # Start the heat when cold inside and outside
-- id: 0301
+- id: '0301'
   alias: Climate - Start heating when cold
   trigger:
     - platform: template
@@ -49,7 +49,7 @@
         fan_mode: low
 
 # Start the AC when warm inside and outside
-- id: 0302
+- id: '0302'
   alias: Climate - Start cooling when warm
   trigger:
     - platform: template
@@ -99,7 +99,7 @@
         fan_mode: low
 
 # Change HVAC temperature when target is changed and HVAC is set to heat
-- id: 0303
+- id: '0303'
   alias: Climate - Change temperature heat
   trigger:
     platform: state
@@ -116,7 +116,7 @@
       temperature: '{{ states("input_number.living_room_hvac_target") - 1 | float }}'
 
 # Change HVAC temperature when target is changed and HVAC is set to cool
-- id: 0304
+- id: '0304'
   alias: Climate - Change temperature heat
   trigger:
     platform: state
@@ -133,7 +133,7 @@
       temperature: '{{ states("input_number.living_room_hvac_target") + 1 | float }}'
 
 # Turn off the heat when warm inside or outside, and the heat is on
-- id: 0305
+- id: '0305'
   alias: Climate - Stop heating when warm
   trigger:
     - platform: template
@@ -157,7 +157,7 @@
       entity_id: climate.living_room_hvac
 
 # Turn off the AC when cold inside or outside, and the AC is on
-- id: 0306
+- id: '0306'
   alias: Climate - Stop cooling when cold
   trigger:
     - platform: template

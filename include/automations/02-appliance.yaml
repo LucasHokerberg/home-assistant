@@ -1,5 +1,5 @@
 # Send a notification when the dishwasher is done
-- id: 0201
+- id: '0201'
   alias: Appliance - Notify when dishwasher is done
   trigger:
     platform: state
@@ -15,7 +15,7 @@
         channel: Appliance
 
 # Notify when the freezer temperature is too high
-- id: 0202
+- id: '0202'
   alias: Appliance - Notify on high freezer temperature
   trigger:
     platform: numeric_state
@@ -32,7 +32,7 @@
         channel: Appliance
 
 # Notify when the fridge temperature is too high
-- id: 0203
+- id: '0203'
   alias: Appliance - Notify on high fridge temperature
   trigger:
     platform: numeric_state

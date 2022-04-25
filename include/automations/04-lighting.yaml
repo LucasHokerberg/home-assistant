@@ -1,5 +1,5 @@
 # Turn on outdoor lights at sunset
-- id: 0401
+- id: '0401'
   alias: Lighting - Turn on outdoor lights at sunset
   trigger:
     platform: sun
@@ -9,7 +9,7 @@
     entity_id: group.outdoor_comfort_lights
 
 # Turn on comfort lights when living room becomes dark and someone is home
-- id: 0402
+- id: '0402'
   alias: Lighting - Turn on comfort lights when dark
   trigger:
     platform: numeric_state
@@ -34,7 +34,7 @@
       #- group.upstairs_comfort_lights
 
 # Turn on window lights when living room becomes dark
-- id: 0403
+- id: '0403'
   alias: Lighting - Turn on window lights when dark
   trigger:
     platform: numeric_state
@@ -56,7 +56,7 @@
       - group.upstairs_window_lights
 
 # Turn on Lovelia's comfort lights when living room becomes dark, someone is home, and Lovelia is not sleeping
-- id: 0404
+- id: '0404'
   alias: Lighting - Turn on Lovelias comfort lights when dark
   trigger:
     platform: numeric_state
@@ -81,7 +81,7 @@
     entity_id: group.lovelias_room_comfort_lights
 
 # Turn on Lovelia's window lights when living room becomes dark and Lovelia is not sleeping
-#- id: 0405
+#- id: '0405'
 #  alias: Lighting - Turn on Lovelias window lights when dark
 #  trigger:
 #    platform: numeric_state
@@ -103,7 +103,7 @@
 #    entity_id: group.lovelias_room_window_lights
 
 # Turn on bedroom comfort lights when living room becomes dark and someone is home
-- id: 0406
+- id: '0406'
   alias: Lighting - Turn on bedroom comfort lights when dark
   trigger:
     platform: numeric_state
@@ -126,7 +126,7 @@
     entity_id: group.bedroom_comfort_lights
 
 # Turn on bedroom window lights when living room becomes dark
-#- id: 0407
+#- id: '0407'
 #  alias: Lighting - Turn on bedroom window lights when dark
 #  trigger:
 #    platform: numeric_state
@@ -146,7 +146,7 @@
 #    entity_id: group.bedroom_window_lights
 
 # Turn off outdoor lights at sunrise
-- id: 0408
+- id: '0408'
   alias: Lighting - Turn off outdoor lights at sunrise
   trigger:
     platform: sun
@@ -156,7 +156,7 @@
     entity_id: group.outdoor_comfort_lights
 
 # Turn off indoor lights when living room is bright
-- id: 0409
+- id: '0409'
   alias: Lighting - Turn off indoor lights when bright
   trigger:
     platform: numeric_state

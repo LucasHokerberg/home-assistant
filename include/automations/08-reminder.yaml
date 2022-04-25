@@ -1,5 +1,5 @@
 # Send a reminder when garbage can 1 is emptied tomorrow
-- id: 0801
+- id: '0801'
   alias: Reminder - Garbage Can 1
   trigger:
     - platform: state
@@ -21,7 +21,7 @@
         channel: Reminder
 
 # Send a reminder when garbage can 2 is emptied tomorrow
-- id: 0802
+- id: '0802'
   alias: Reminder - Garbage Can 2
   trigger:
     - platform: state
@@ -43,7 +43,7 @@
         channel: Reminder
 
 # Send a reminder when garden waste is emptied tomorrow
-- id: 0803
+- id: '0803'
   alias: Reminder - Garden Waste
   trigger:
     - platform: state

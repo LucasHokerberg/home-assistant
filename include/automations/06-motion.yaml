@@ -1,5 +1,5 @@
 # Turn on lights when motion in living room is detected, it's dark and quiet, night mode is on, and guest mode is off
-- id: 0601
+- id: '0601'
   alias: Motion - Turn on lights on living room motion
   trigger:
     platform: state
@@ -34,7 +34,7 @@
       entity_id: light.living_room_floor_light_1
 
 # Turn on lights when motion upstairs is detected, it's dark, and night mode is on
-- id: 0602
+- id: '0602'
   alias: Motion - Turn on lights on upstairs motion
   trigger:
     platform: state
@@ -66,7 +66,7 @@
       entity_id: light.upstairs_desk_light
 
 # Turn on lights when driveway motion is detected, and outdoor comfort lights are on
-- id: 0603
+- id: '0603'
   alias: Motion - Turn on lights on driveway motion
   trigger:
     platform: state
