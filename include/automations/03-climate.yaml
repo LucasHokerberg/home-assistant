@@ -148,9 +148,14 @@
     - platform: state
       entity_id: input_number.living_room_hvac_target
   condition:
-    condition: state
-    entity_id: climate.living_room_hvac
-    state: heat
+    - condition: template
+      value_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      above: 17
+    - condition: state
+      entity_id: climate.living_room_hvac
+      state: heat
   action:
     service: climate.turn_off
     target:
@@ -172,9 +177,14 @@
     - platform: state
       entity_id: input_number.living_room_hvac_target
   condition:
-    condition: state
-    entity_id: climate.living_room_hvac
-    state: cool
+    - condition: template
+      value_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      below: 17
+    - condition: state
+      entity_id: climate.living_room_hvac
+      state: cool
   action:
     service: climate.turn_off
     target:
