@@ -10,6 +10,8 @@
       below: 17
       for:
         minutes: 5
+    - platform: state
+      entity_id: input_number.living_room_hvac_target
   condition:
     - condition: template
       value_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state - 0.5 | float) }}'
@@ -57,6 +59,8 @@
       above: 17
       for:
         minutes: 5
+    - platform: state
+      entity_id: input_number.living_room_hvac_target
   condition:
     - condition: template
       value_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state + 0.5 | float) }}'
@@ -136,6 +140,8 @@
       above: 17
       for:
         minutes: 30
+    - platform: state
+      entity_id: input_number.living_room_hvac_target
   condition:
     condition: state
     entity_id: climate.living_room_hvac
@@ -157,6 +163,8 @@
       below: 17
       for:
         minutes: 30
+    - platform: state
+      entity_id: input_number.living_room_hvac_target
   condition:
     condition: state
     entity_id: climate.living_room_hvac
