@@ -33,7 +33,7 @@
     - service: light.turn_off
       entity_id: light.living_room_floor_light_1
 
-# Turn on lights when motion upstairs is detected, it's dark, and night mode is on
+# Turn on lights when motion upstairs is detected, the PC is off, and it's dark
 - id: '0602'
   alias: Motion - Turn on lights on upstairs motion
   trigger:
@@ -50,9 +50,6 @@
     - condition: numeric_state
       entity_id: sensor.upstairs_light_level
       below: 6
-    - condition: state
-      entity_id: input_boolean.night_mode
-      state: 'on'
   action:
     - service: scene.turn_on
       entity_id: scene.upstairs_desk_light_night
