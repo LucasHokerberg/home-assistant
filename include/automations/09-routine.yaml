@@ -31,9 +31,7 @@
       state: 'off'
   action:
     service: homeassistant.turn_on
-    entity_id:
-      - group.downstairs_window_lights
-      - group.upstairs_window_lights
+    entity_id: group.downstairs_window_lights
 
 # Run bedtime routine when the TV is off, it's evening, and all downstairs lights are turned off
 - id: '0903'
