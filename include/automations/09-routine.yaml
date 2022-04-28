@@ -1,4 +1,4 @@
-# Run wake up routine when an alarm is set or in the morning, when night mode is on, and guest mode is off
+# Run wake up routine when an alarm is set or in the morning, and when night mode is on
 - id: '0901'
   alias: Routine - Wake up
   trigger:
