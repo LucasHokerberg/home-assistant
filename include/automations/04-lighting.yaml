@@ -116,6 +116,9 @@
       after: sunrise
       before: sunset
     - condition: state
+      entity_id: input_boolean.bedroom_block_light_automation
+      state: 'off'
+    - condition: state
       entity_id: alarm_control_panel.snyggatorpsvagen_alarm
       state: disarmed
     - condition: state
@@ -138,6 +141,9 @@
 #    - condition: sun
 #      after: sunrise
 #      before: sunset
+#    - condition: state
+#      entity_id: input_boolean.bedroom_block_light_automation
+#      state: 'off'
 #    - condition: state
 #      entity_id: input_boolean.night_mode
 #      state: 'off'
