@@ -9,7 +9,7 @@
     - platform: template
       value_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
       for:
-        minutes: 35
+        minutes: 65
     - platform: state
       entity_id: input_number.living_room_hvac_target
   condition:
@@ -55,7 +55,7 @@
     - platform: template
       value_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
       for:
-        minutes: 35
+        minutes: 65
     - platform: state
       entity_id: input_number.living_room_hvac_target
   condition:
