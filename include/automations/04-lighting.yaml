@@ -14,7 +14,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
-    below: 6
+    below: 7
     for:
       seconds: 60
   condition:
@@ -39,7 +39,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
-    below: 6
+    below: 7
     for:
       seconds: 61
   condition:
@@ -61,7 +61,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
-    below: 6
+    below: 7
     for:
       seconds: 62
   condition:
@@ -86,7 +86,7 @@
 #  trigger:
 #    platform: numeric_state
 #    entity_id: sensor.living_room_light_level
-#    below: 6
+#    below: 7
 #    for:
 #      seconds: 63
 #  condition:
@@ -108,7 +108,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
-    below: 6
+    below: 7
     for:
       seconds: 64
   condition:
@@ -134,7 +134,7 @@
 #  trigger:
 #    platform: numeric_state
 #    entity_id: sensor.living_room_light_level
-#    below: 6
+#    below: 7
 #    for:
 #      seconds: 65
 #  condition:
