@@ -60,8 +60,6 @@ script: !include_dir_named include/scripts/
 
 sensor: !include_dir_list include/sensors/
 
-spotify: !include include/spotify.yaml
-
 utility_meter: !include_dir_named include/utility_meters/
 
 zone: !include_dir_list include/zones/
