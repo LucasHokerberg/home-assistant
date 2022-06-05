@@ -44,7 +44,7 @@
       data:
         fan_mode: low
 
-# Start the AC when warm inside
+# Start the AC when warm inside, and vacation mode is off
 - id: '0302'
   alias: Climate - Start cooling when warm
   trigger:
@@ -63,6 +63,9 @@
       value_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
     - condition: state
       entity_id: climate.living_room_hvac
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.vacation_mode
       state: 'off'
   action:
     - service: climate.turn_on

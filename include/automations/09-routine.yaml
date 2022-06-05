@@ -1,4 +1,4 @@
-# Run wake up routine when an alarm is set or in the morning, and when night mode is on
+# Run wake up routine when an alarm is set or in the morning, and when night mode is on, and vacation mode is off
 - id: '0901'
   alias: Routine - Wake up
   trigger:
@@ -9,11 +9,29 @@
     - platform: time
       at: '08:00:00'
   condition:
-    condition: state
-    entity_id: input_boolean.night_mode
-    state: 'on'
+    - condition: state
+      entity_id: input_boolean.night_mode
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
   action:
     service: script.wake_up
+
+# Run wake up routine when vacation mode is on
+- id: '0904'
+  alias: Routine - Wake up vacation
+  trigger:
+    platform: time
+    at: '08:00:00'
+  condition:
+    condition: state
+    entity_id: input_boolean.vacation_mode
+    state: 'on'
+  action:
+    - delay:
+        minutes: '{{ range(2,32) | random | int }}'
+    - service: script.wake_up
     
 # Wake up routine when living room is dark
 - id: '0902'
@@ -55,3 +73,18 @@
       state: 'off'
   action:
     service: script.bedtime
+
+# Run bedtime routine when vacation mode is on
+- id: '0905'
+  alias: Routine - Bedtime vacation
+  trigger:
+    platform: time
+    at: '21:30:00'
+  condition:
+    condition: state
+    entity_id: input_boolean.vacation_mode
+    state: 'on'
+  action:
+    - delay:
+        minutes: '{{ range(16,59) | random | int }}'
+    - service: script.bedtime

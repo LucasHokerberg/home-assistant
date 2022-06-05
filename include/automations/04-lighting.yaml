@@ -21,9 +21,13 @@
     - condition: sun
       after: sunrise
       before: sunset
-    - condition: state
-      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-      state: disarmed
+    - condition: or
+      - condition: state
+        entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+        state: disarmed
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'on'
     - condition: state
       entity_id: input_boolean.night_mode
       state: 'off'
@@ -70,9 +74,13 @@
       before: sunset
     - condition: time
       before: '19:00:00'
-    - condition: state
-      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-      state: disarmed
+    - condition: or
+      - condition: state
+        entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+        state: disarmed
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'on'
     - condition: state
       entity_id: input_boolean.night_mode
       state: 'off'
@@ -102,7 +110,7 @@
 #    service: homeassistant.turn_on
 #    entity_id: group.lovelias_room_window_lights
 
-# Turn on bedroom comfort lights when living room becomes dark and someone is home
+# Turn on bedroom comfort lights when living room becomes dark and someone is home or vacation mode is on
 - id: '0406'
   alias: Lighting - Turn on bedroom comfort lights when dark
   trigger:
@@ -118,9 +126,13 @@
     - condition: state
       entity_id: input_boolean.bedroom_block_light_automation
       state: 'off'
-    - condition: state
-      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-      state: disarmed
+    - condition: or
+      - condition: state
+        entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+        state: disarmed
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'on'
     - condition: state
       entity_id: input_boolean.night_mode
       state: 'off'
