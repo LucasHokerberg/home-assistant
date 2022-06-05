@@ -18,19 +18,22 @@
     for:
       seconds: 60
   condition:
-    - condition: sun
-      after: sunrise
-      before: sunset
-    - condition: or
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunrise
+        before: sunset
       - condition: state
-        entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-        state: disarmed
-      - condition: state
-        entity_id: input_boolean.vacation_mode
-        state: 'on'
-    - condition: state
-      entity_id: input_boolean.night_mode
-      state: 'off'
+        entity_id: input_boolean.night_mode
+        state: 'off'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+            state: disarmed
+          - condition: state
+            entity_id: input_boolean.vacation_mode
+            state: 'on'
   action:
     service: homeassistant.turn_on
     entity_id:
@@ -69,21 +72,24 @@
     for:
       seconds: 62
   condition:
-    - condition: sun
-      after: sunrise
-      before: sunset
-    - condition: time
-      before: '19:00:00'
-    - condition: or
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunrise
+        before: sunset
+      - condition: time
+        before: '19:00:00'
       - condition: state
-        entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-        state: disarmed
-      - condition: state
-        entity_id: input_boolean.vacation_mode
-        state: 'on'
-    - condition: state
-      entity_id: input_boolean.night_mode
-      state: 'off'
+        entity_id: input_boolean.night_mode
+        state: 'off'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+            state: disarmed
+          - condition: state
+            entity_id: input_boolean.vacation_mode
+            state: 'on'
   action:
     service: homeassistant.turn_on
     entity_id: group.lovelias_room_comfort_lights
@@ -120,22 +126,25 @@
     for:
       seconds: 64
   condition:
-    - condition: sun
-      after: sunrise
-      before: sunset
-    - condition: state
-      entity_id: input_boolean.bedroom_block_light_automation
-      state: 'off'
-    - condition: or
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunrise
+        before: sunset
       - condition: state
-        entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-        state: disarmed
+        entity_id: input_boolean.bedroom_block_light_automation
+        state: 'off'
       - condition: state
-        entity_id: input_boolean.vacation_mode
-        state: 'on'
-    - condition: state
-      entity_id: input_boolean.night_mode
-      state: 'off'
+        entity_id: input_boolean.night_mode
+        state: 'off'
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+          state: disarmed
+        - condition: state
+          entity_id: input_boolean.vacation_mode
+          state: 'on'
   action:
     service: homeassistant.turn_on
     entity_id: group.bedroom_comfort_lights
