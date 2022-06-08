@@ -88,3 +88,4 @@
     - delay:
         minutes: '{{ range(16,59) | random | int }}'
     - service: script.bedtime
+    - service: script.sleep_time
