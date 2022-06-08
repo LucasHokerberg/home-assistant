@@ -74,7 +74,7 @@
   action:
     service: script.bedtime
 
-# Run bedtime routine when vacation mode is on
+# Bedtime routine when vacation mode is on
 - id: '0905'
   alias: Routine - Bedtime vacation
   trigger:
@@ -87,5 +87,8 @@
   action:
     - delay:
         minutes: '{{ range(16,59) | random | int }}'
-    - service: script.bedtime
-    - service: script.sleep_time
+    - service: homeassistant.turn_off
+      entity_id: group.indoor_lights
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.night_mode 
