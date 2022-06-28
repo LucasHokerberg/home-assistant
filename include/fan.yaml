@@ -1,0 +1,5 @@
+- platform: xiaomi_miio_fan
+  name: Bedroom Fan
+  host: !secret fan_bedroom_host
+  token: !secret fan_bedroom_secret
+  model: dmaker.fan.p18
