@@ -48,6 +48,8 @@ binary_sensor: !include_dir_list include/binary_sensors/
 
 device_tracker: !include_dir_list include/device_trackers/
 
+fan: !include include/fans.yaml
+
 group: !include_dir_named include/groups/
 
 notify: !include include/notify.yaml
