@@ -198,10 +198,9 @@
     for:
       minutes: 5
   condition:
-    - condition: time
-      after: '12:00'
-    - condition: sun
-      before: sunset
+    condition: sun
+    after: sunrise
+    before: sunset
   action:
     service: homeassistant.turn_off
     entity_id: group.indoor_lights
