@@ -1,3 +1,4 @@
 entities:
   - group.downstairs_comfort_lights
   - group.downstairs_window_lights
+  - group.downstairs_work_lights

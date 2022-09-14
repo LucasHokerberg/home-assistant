@@ -1,0 +1,5 @@
+entities:
+  - group.downstairs_work_lights
+  #- group.upstairs_work_lights
+  #- group.lovelias_room_work_lights
+  #- group.bedroom_work_lights
