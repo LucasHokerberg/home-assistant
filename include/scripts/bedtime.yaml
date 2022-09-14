@@ -1,13 +1,7 @@
 sequence:
   - service: homeassistant.turn_off
     entity_id:
-      - group.living_room_comfort_lights
-      - group.living_room_window_lights
-      - group.dining_room_comfort_lights
-      - group.dining_room_window_lights
-      - group.kitchen_comfort_lights
-      - group.kitchen_window_lights
-      - remote.living_room_harmony_hub
+      group.downstairs_lights
   - service: lock.lock
     entity_id: lock.hallway_front_door_lock
   - service: input_boolean.turn_on
