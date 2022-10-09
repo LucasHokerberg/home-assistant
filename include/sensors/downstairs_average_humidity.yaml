@@ -4,4 +4,4 @@ sensors:
     unit_of_measurement: '%'
     friendly_name: Downstairs (average)
     value_template: >-
-      {{ (float(states.sensor.living_room_humidity.state) + float(states.sensor.dining_room_humidity.state) + float(states.sensor.kitchen_humidity.state)) / 3 | round(1) }}
+      {{ ((float(states.sensor.living_room_humidity.state) + float(states.sensor.dining_room_humidity.state) + float(states.sensor.kitchen_humidity.state)) / 3) | round(1) }}
