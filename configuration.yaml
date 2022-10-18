@@ -24,15 +24,6 @@ mobile_app:
 
 energy:
 
-# Helpers
-input_boolean:
-input_text:
-input_number:
-input_datetime:
-input_select:
-counter:
-timer:
-
 # Replace built-in SQLite database with mariadb
 recorder: !include include/recorder.yaml
 
@@ -61,7 +52,5 @@ scene: !include scenes.yaml
 script: !include_dir_named include/scripts/
 
 sensor: !include_dir_list include/sensors/
-
-utility_meter: !include_dir_named include/utility_meters/
 
 zone: !include_dir_list include/zones/
