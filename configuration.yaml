@@ -30,10 +30,10 @@ input_text:
 input_number:
 input_datetime:
 input_select:
+input_button:
 counter:
 timer:
 schedule:
-button:
 
 # Replace built-in SQLite database with mariadb
 recorder: !include include/recorder.yaml
