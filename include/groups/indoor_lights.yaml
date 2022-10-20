@@ -1,3 +1,4 @@
 entities:
   - group.indoor_comfort_lights
   - group.indoor_window_lights
+  - group.indoor_work_lights

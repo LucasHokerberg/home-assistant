@@ -20,8 +20,9 @@
   condition:
     condition: and
     conditions:
+      - condition: time
+        after: '12:00'
       - condition: sun
-        after: sunrise
         before: sunset
       - condition: state
         entity_id: input_boolean.night_mode
@@ -50,8 +51,9 @@
     for:
       seconds: 61
   condition:
+    - condition: time
+      after: '12:00'
     - condition: sun
-      after: sunrise
       before: sunset
     - condition: state
       entity_id: input_boolean.night_mode
@@ -74,8 +76,9 @@
   condition:
     condition: and
     conditions:
+      - condition: time
+        after: '12:00'
       - condition: sun
-        after: sunrise
         before: sunset
       - condition: time
         before: '19:00:00'
@@ -104,8 +107,9 @@
 #    for:
 #      seconds: 63
 #  condition:
+#    - condition: time
+#      after: '12:00'
 #    - condition: sun
-#      after: sunrise
 #      before: sunset
 #    - condition: time
 #      before: '19:00:00'
@@ -128,8 +132,9 @@
   condition:
     condition: and
     conditions:
+      - condition: time
+        after: '12:00'
       - condition: sun
-        after: sunrise
         before: sunset
       - condition: state
         entity_id: input_boolean.bedroom_block_light_automation
@@ -159,8 +164,9 @@
 #    for:
 #      seconds: 65
 #  condition:
+#    - condition: time
+#      after: '12:00'
 #    - condition: sun
-#      after: sunrise
 #      before: sunset
 #    - condition: state
 #      entity_id: input_boolean.bedroom_block_light_automation

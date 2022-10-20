@@ -83,7 +83,7 @@
     service: homeassistant.turn_on
     entity_id: group.indoor_comfort_lights
 
-# Turn on the heat if cold inside and outside, and someone comes home
+# Turn on the heat if cold inside, and someone comes home
 - id: '0704'
   alias: Presence - Turn on heat when cold and someone comes home
   trigger:
@@ -93,7 +93,7 @@
     to: disarmed
   condition:
     - condition: template
-      value_template: '{{ states.sensor.living_room_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
+      value_template: '{{ states.sensor.downstairs_average_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
     - condition: numeric_state
       entity_id: sensor.outdoor_temperature
       below: 17
@@ -104,7 +104,7 @@
     service: automation.trigger
     entity_id: automation.climate_start_heating_when_cold
 
-# Turn on the AC if warm inside and outside, and someone comes home
+# Turn on the AC if warm inside, and someone comes home
 - id: '0705'
   alias: Presence - Turn on AC when warm and someone comes home
   trigger:
@@ -114,7 +114,7 @@
     to: disarmed
   condition:
     - condition: template
-      value_template: '{{ states.sensor.living_room_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
+      value_template: '{{ states.sensor.downstairs_average_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
     - condition: numeric_state
       entity_id: sensor.outdoor_temperature
       above: 17
@@ -136,6 +136,7 @@
     service: homeassistant.turn_off
     entity_id:
       - group.indoor_comfort_lights
+      - group.indoor_work_lights
       - remote.living_room_harmony_hub
 
 # Turn on bedroom wardrobe light when door is open

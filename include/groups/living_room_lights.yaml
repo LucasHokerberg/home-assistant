@@ -1,3 +1,4 @@
 entities:
   - group.living_room_comfort_lights
   - group.living_room_window_lights
+  #- group.living_room_work_lights
