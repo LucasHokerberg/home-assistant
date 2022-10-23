@@ -1,7 +1,8 @@
 sequence:
   - service: homeassistant.turn_off
     entity_id:
-      group.downstairs_lights
+      - group.downstairs_lights
+      - remote.living_room_harmony_hub
   - service: lock.lock
     entity_id: lock.hallway_front_door_lock
   - service: input_boolean.turn_on
