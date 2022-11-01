@@ -1,4 +1,4 @@
 entities:
   - group.living_room_window_lights
   - group.dining_room_window_lights
-  #- group.kitchen_window_lights
+  - group.kitchen_window_lights

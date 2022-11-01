@@ -1,2 +1,3 @@
 entities:
-  # None
+  - group.lovelias_room_comfort_lights
+  - group.bedroom_comfort_lights

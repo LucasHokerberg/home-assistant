@@ -1,2 +1,4 @@
 entities:
   - light.upstairs_window_light
+  - group.lovelias_room_window_lights
+  - group.bedroom_window_lights

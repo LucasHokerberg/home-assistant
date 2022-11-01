@@ -1,5 +1,3 @@
 entities:
   - group.downstairs_window_lights
   - group.upstairs_window_lights
-  #- group.lovelias_room_window_lights
-  #- group.bedroom_window_lights
