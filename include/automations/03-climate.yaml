@@ -35,7 +35,7 @@
       target:
         entity_id: climate.living_room_hvac
       data:
-        temperature: '{{ states.input_number.living_room_hvac_target.state | float - 1 | float }}'
+        temperature: '{{ states.input_number.living_room_hvac_target.state | float - 2 | float }}'
     - delay:
         seconds: 5
     - service: climate.set_fan_mode
@@ -84,7 +84,7 @@
       target:
         entity_id: climate.living_room_hvac
       data:
-        temperature: '{{ states.input_number.living_room_hvac_target.state | float + 1 | float }}'
+        temperature: '{{ states.input_number.living_room_hvac_target.state | float + 2 | float }}'
     - delay:
         seconds: 5
     - service: climate.set_fan_mode
@@ -134,7 +134,7 @@
     - platform: template
       value_template: '{{ states.sensor.downstairs_average_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
       for:
-        minutes: 30
+        minutes: 60
     - platform: state
       entity_id: input_number.living_room_hvac_target
   condition:
@@ -155,7 +155,7 @@
     - platform: template
       value_template: '{{ states.sensor.downstairs_average_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
       for:
-        minutes: 30
+        minutes: 60
     - platform: state
       entity_id: input_number.living_room_hvac_target
   condition:
