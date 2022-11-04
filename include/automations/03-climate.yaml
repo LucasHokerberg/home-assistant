@@ -112,7 +112,7 @@
 
 # Change HVAC temperature when target is changed and HVAC is set to cool
 - id: '0304'
-  alias: Climate - Change temperature heat
+  alias: Climate - Change temperature cool
   trigger:
     platform: state
     entity_id: input_number.living_room_hvac_target
