@@ -1,7 +1,6 @@
 sequence:
   service: homeassistant.turn_off
   entity_id:
-    - group.bedroom_comfort_lights
-    - group.bedroom_window_lights
+    - group.bedroom_lights
     - media_player.bedroom_chromecast
-    - media_player.bedroom_tv
+    - remote.bedroom_tv
