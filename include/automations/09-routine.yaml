@@ -1,33 +1,41 @@
-# Run wake up routine when an alarm is set or in the morning, and when night mode is on, and vacation mode is off
+# Run wake up routine when Lucas' alarm is ringing and he's home, and night mode is on
 - id: '0901'
-  alias: Routine - Wake up
+  alias: Routine - Wake up Lucas
   trigger:
-    - platform: template
-      value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) == as_timestamp(states("sensor.date_time").replace(",","")) }}'
-    - platform: template
-      value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) == as_timestamp(states("sensor.date_time").replace(",","")) }}'
-    - platform: time
-      at: '08:00:00'
+    platform: time
+    at: sensor.lucas_hokerberg_next_alarm
   condition:
+    - condition: state
+      entity_id: person.lucas_hokerberg
+      state: 'home'
     - condition: state
       entity_id: input_boolean.night_mode
       state: 'on'
-    - condition: state
-      entity_id: input_boolean.vacation_mode
-      state: 'off'
   action:
     service: script.wake_up
 
-# Run wake up routine when vacation mode is on
+# Run wake up routine when Victoria's alarm is ringing and she's home, and night mode is on
+- id: '0906'
+  alias: Routine - Wake up Victoria
+  trigger:
+    platform: time
+    at: sensor.victoria_hjerter_next_alarm
+  condition:
+    - condition: state
+      entity_id: person.victoria_hjerter
+      state: 'home'
+    - condition: state
+      entity_id: input_boolean.night_mode
+      state: 'on'
+  action:
+    service: script.wake_up
+
+# Run wake up routine in the morning, and night mode is still on
 - id: '0904'
-  alias: Routine - Wake up vacation
+  alias: Routine - Wake up
   trigger:
     platform: time
     at: '08:00:00'
-  condition:
-    condition: state
-    entity_id: input_boolean.vacation_mode
-    state: 'on'
   action:
     - delay:
         minutes: '{{ range(2,32) | random | int }}'
@@ -43,7 +51,7 @@
   condition:
     - condition: numeric_state
       entity_id: sensor.living_room_light_level
-      below: 6
+      below: 7
     - condition: state
       entity_id: input_boolean.guest_mode
       state: 'off'
