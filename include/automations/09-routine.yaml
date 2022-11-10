@@ -1,9 +1,9 @@
-# Run wake up routine when Lucas' alarm is ringing and he's home, and night mode is on
+# Run wake up routine 5 minutes prior to Lucas' alarm and he's home, and night mode is on
 - id: '0901'
   alias: Routine - Wake up Lucas
   trigger:
-    platform: time
-    at: sensor.lucas_hokerberg_next_alarm
+    platform: template
+    value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - 300 < as_timestamp(now()) }}'
   condition:
     - condition: state
       entity_id: person.lucas_hokerberg
@@ -14,12 +14,12 @@
   action:
     service: script.wake_up
 
-# Run wake up routine when Victoria's alarm is ringing and she's home, and night mode is on
+# Run wake up routine 5 minutes prior to Victoria's alarm and she's home, and night mode is on
 - id: '0906'
   alias: Routine - Wake up Victoria
   trigger:
-    platform: time
-    at: sensor.victoria_hjerter_next_alarm
+    platform: template
+    value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - 300 < as_timestamp(now()) }}'
   condition:
     - condition: state
       entity_id: person.victoria_hjerter
