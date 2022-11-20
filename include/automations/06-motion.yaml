@@ -42,7 +42,7 @@
     to: 'on'
   condition:
     - condition: state
-      entity_id: group.upstairs_lights
+      entity_id: light.upstairs_window_light
       state: 'off'
     - condition: state
       entity_id: device_tracker.lucas_pc
