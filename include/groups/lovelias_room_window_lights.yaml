@@ -1,2 +1,2 @@
 entities:
-  #- switch.lovelias_room_candlestick
+  - light.lovelias_room_candlestick

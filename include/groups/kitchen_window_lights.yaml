@@ -1,3 +1,4 @@
 entities:
   - light.kitchen_window_light
-  #- light.kitchen_star_light
+  - light.kitchen_candlelight
+  - light.kitchen_star_light
