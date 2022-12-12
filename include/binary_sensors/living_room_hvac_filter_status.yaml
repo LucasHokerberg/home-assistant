@@ -1,0 +1,5 @@
+platform: template
+sensors:
+  living_room_hvac_filter_status:
+    value_template: >-
+      {{ state_attr("button.living_room_hvac_reset_dust_filter", "DustFilterStatus") }}
