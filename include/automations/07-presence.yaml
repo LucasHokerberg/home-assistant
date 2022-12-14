@@ -6,58 +6,42 @@
       entity_id: person.lucas_hokerberg
       zone: zone.lucas_hokerberg_work
       event: enter
-      for:
-        minutes: 1
     - platform: zone
       entity_id: person.victoria_hjerter
       zone: zone.victoria_hjerter_work
       event: enter
-      for:
-        minutes: 1
     - platform: zone
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
       zone: zone.hokerbergs
       event: enter
-      for:
-        minutes: 1
     - platform: zone
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
       zone: zone.johanssons
       event: enter
-      for:
-        minutes: 1
     - platform: zone
       entity_id: person.lucas_hokerberg
       zone: zone.lucas_hokerberg_work
       event: leave
-      for:
-        minutes: 1
     - platform: zone
       entity_id: person.victoria_hjerter
       zone: zone.victoria_hjerter_work
       event: leave
-      for:
-        minutes: 1
     - platform: zone
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
       zone: zone.hokerbergs
       event: leave
-      for:
-        minutes: 1
     - platform: zone
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
       zone: zone.johanssons
       event: leave
-      for:
-        minutes: 1
   action:
     service: notify.home_mobile_apps
     data_template:
