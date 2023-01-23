@@ -130,27 +130,27 @@
       - light.upstairs_window_light
 
 # Turn on Lovelia's window lights when living room becomes dark, and Lovelia is not sleeping
-#- id: '0406'
-#  alias: Lighting - Turn on Lovelias window lights when dark
-#  trigger:
-#    platform: numeric_state
-#    entity_id: sensor.living_room_light_level
-#    below: 7
-#    for:
-#      seconds: 64
-#  condition:
-#    - condition: time
-#      after: '12:00'
-#    - condition: sun
-#      before: sunset
-#    - condition: time
-#      before: '19:00:00'
-#    - condition: state
-#      entity_id: input_boolean.night_mode
-#      state: 'off'
-#  action:
-#    service: homeassistant.turn_on
-#    entity_id: group.lovelias_room_window_lights
+- id: '0406'
+  alias: Lighting - Turn on Lovelias window lights when dark
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_light_level
+    below: 7
+    for:
+      seconds: 64
+  condition:
+    - condition: time
+      after: '12:00'
+    - condition: sun
+      before: sunset
+    - condition: time
+      before: '19:00:00'
+    - condition: state
+      entity_id: input_boolean.night_mode
+      state: 'off'
+  action:
+    service: homeassistant.turn_on
+    entity_id: group.lovelias_room_window_lights
 
 # Turn on bedroom window lights when living room becomes dark, and automation is not blocked
 - id: '0407'
