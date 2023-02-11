@@ -8,7 +8,7 @@
     service: homeassistant.turn_on
     entity_id: group.outdoor_comfort_lights
 
-# Turn on downstairs comfort lights when living room becomes dark and someone is home
+# Turn on downstairs comfort lights when living room becomes dark and someone is home (or vacation mode is on)
 - id: '0402'
   alias: Lighting - Turn on comfort lights when dark
   trigger:
@@ -47,7 +47,7 @@
     entity_id: sensor.living_room_light_level
     below: 7
     for:
-      seconds: 61
+      seconds: 60
   condition:
     condition: and
     conditions:
@@ -56,7 +56,7 @@
       - condition: sun
         before: sunset
       - condition: time
-        before: '19:30:00'
+        before: '19:00:00'
       - condition: state
         entity_id: input_boolean.night_mode
         state: 'off'
@@ -80,7 +80,7 @@
     entity_id: sensor.living_room_light_level
     below: 7
     for:
-      seconds: 62
+      seconds: 60
   condition:
     condition: and
     conditions:
@@ -114,7 +114,7 @@
     entity_id: sensor.living_room_light_level
     below: 7
     for:
-      seconds: 63
+      seconds: 60
   condition:
     - condition: time
       after: '12:00'
@@ -137,7 +137,7 @@
     entity_id: sensor.living_room_light_level
     below: 7
     for:
-      seconds: 64
+      seconds: 60
   condition:
     - condition: time
       after: '12:00'
@@ -160,7 +160,7 @@
     entity_id: sensor.living_room_light_level
     below: 7
     for:
-      seconds: 65
+      seconds: 60
   condition:
     - condition: time
       after: '12:00'
