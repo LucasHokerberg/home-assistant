@@ -2,22 +2,14 @@
 - id: '0301'
   alias: Climate - Start heating when cold
   trigger:
-    - platform: template
-      value_template: '{{ states.sensor.downstairs_average_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
-      for:
-        minutes: 5
-    - platform: template
-      value_template: '{{ states.sensor.downstairs_average_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
-      for:
-        minutes: 65
-    - platform: state
-      entity_id: input_number.living_room_hvac_target
+    platform: template
+    value_template: '{{ states.sensor.downstairs_average_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
+    for:
+      minutes: 30
   condition:
-    - condition: template
-      value_template: '{{ states.sensor.downstairs_average_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
-    - condition: state
-      entity_id: climate.living_room_hvac
-      state: 'off'
+    condition: state
+    entity_id: climate.living_room_hvac
+    state: 'off'
   action:
     - service: climate.turn_on
       target:
@@ -48,19 +40,11 @@
 - id: '0302'
   alias: Climate - Start cooling when warm
   trigger:
-    - platform: template
-      value_template: '{{ states.sensor.downstairs_average_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
-      for:
-        minutes: 5
-    - platform: template
-      value_template: '{{ states.sensor.downstairs_average_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
-      for:
-        minutes: 65
-    - platform: state
-      entity_id: input_number.living_room_hvac_target
+    platform: template
+    value_template: '{{ states.sensor.downstairs_average_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
+    for:
+      minutes: 30
   condition:
-    - condition: template
-      value_template: '{{ states.sensor.downstairs_average_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
     - condition: state
       entity_id: climate.living_room_hvac
       state: 'off'
@@ -131,18 +115,14 @@
 - id: '0305'
   alias: Climate - Stop heating when warm
   trigger:
-    - platform: template
-      value_template: '{{ states.sensor.downstairs_average_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
-      for:
-        minutes: 60
-    - platform: state
-      entity_id: input_number.living_room_hvac_target
+    platform: template
+    value_template: '{{ states.sensor.downstairs_average_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
+    for:
+      minutes: 15
   condition:
-    - condition: template
-      value_template: '{{ states.sensor.downstairs_average_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
-    - condition: state
-      entity_id: climate.living_room_hvac
-      state: heat
+    condition: state
+    entity_id: climate.living_room_hvac
+    state: heat
   action:
     service: climate.turn_off
     target:
@@ -152,18 +132,14 @@
 - id: '0306'
   alias: Climate - Stop cooling when cold
   trigger:
-    - platform: template
-      value_template: '{{ states.sensor.downstairs_average_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
-      for:
-        minutes: 60
-    - platform: state
-      entity_id: input_number.living_room_hvac_target
+    platform: template
+    value_template: '{{ states.sensor.downstairs_average_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
+    for:
+      minutes: 15
   condition:
-    - condition: template
-      value_template: '{{ states.sensor.downstairs_average_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
-    - condition: state
-      entity_id: climate.living_room_hvac
-      state: cool
+    condition: state
+    entity_id: climate.living_room_hvac
+    state: cool
   action:
     service: climate.turn_off
     target:
