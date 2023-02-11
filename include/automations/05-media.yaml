@@ -34,12 +34,6 @@
   action:
     - service: homeassistant.turn_off
       entity_id:
-        - automation.lighting_turn_on_comfort_lights_when_dark
-        - automation.lighting_turn_on_lovelias_comfort_lights_when_dark
-        - automation.lighting_turn_on_bedroom_comfort_lights_when_dark
-        - automation.lighting_turn_on_window_lights_when_dark
-        #- automation.lighting_turn_on_lovelias_window_lights_when_dark
-        - automation.lighting_turn_on_bedroom_window_lights_when_dark
         - group.downstairs_lights
         - light.upstairs_window_light
     - service: scene.turn_on
@@ -53,7 +47,7 @@
         entity_id: media_player.living_room_shield
         command: 'am start -a android.intent.action.MAIN -c android.intent.category.LEANBACK_LAUNCHER -n com.plexapp.android/com.plexapp.plex.activities.SplashActivity'
 
-# Turn off lights when Plex is resuming or playing and Movie Mode is active
+# Turn off lights when Plex is resuming and Movie Mode is active
 - id: '0503'
   alias: Media - Turn off lights when Plex plays
   initial_state: 'on'
@@ -73,7 +67,7 @@
         - group.living_room_floor_light
       transition: 2
 
-# Turn on lights when Plex is pausing or stoping and Movie Mode is active
+# Turn on lights when Plex goes idle and Movie Mode is active
 - id: '0504'
   alias: Media - Turn on lights when Plex stops
   initial_state: 'on'
@@ -105,13 +99,7 @@
         - scene.living_room_lights_normal
         - scene.dining_room_lights_normal
         - scene.kitchen_lights_normal
-        - light.upstairs_window_light
-        - automation.lighting_turn_on_comfort_lights_when_dark
-        - automation.lighting_turn_on_lovelias_comfort_lights_when_dark
-        - automation.lighting_turn_on_bedroom_comfort_lights_when_dark
-        - automation.lighting_turn_on_window_lights_when_dark
-        #- automation.lighting_turn_on_lovelias_window_lights_when_dark
-        - automation.lighting_turn_on_bedroom_window_lights_when_dark
+        - scene.upstairs_lights_normal
 
 # Turn on lights when the computer is turning on
 - id: '0506'
