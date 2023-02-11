@@ -1,4 +1,4 @@
-# Notify when everyone leaves the home and the front door is unlocked or the alarm is disarmed
+# Notify when everyone leaves the home, and the front door is unlocked or the alarm is disarmed
 - id: '1001'
   alias: Security - Notify when home is unsecured
   trigger:
