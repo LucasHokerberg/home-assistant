@@ -94,9 +94,6 @@
   condition:
     - condition: template
       value_template: '{{ states.sensor.downstairs_average_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
-    - condition: numeric_state
-      entity_id: sensor.outdoor_temperature
-      below: 17
     - condition: state
       entity_id: climate.living_room_hvac
       state: 'off'
@@ -115,9 +112,6 @@
   condition:
     - condition: template
       value_template: '{{ states.sensor.downstairs_average_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
-    - condition: numeric_state
-      entity_id: sensor.outdoor_temperature
-      above: 17
     - condition: state
       entity_id: climate.living_room_hvac
       state: 'off'
