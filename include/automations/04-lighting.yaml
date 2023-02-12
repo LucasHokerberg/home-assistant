@@ -8,7 +8,7 @@
     service: homeassistant.turn_on
     entity_id: group.outdoor_comfort_lights
 
-# Turn on downstairs lights when living room becomes dark and someone is home (or vacation mode is on)
+# Turn on lights when living room becomes dark and someone is home (or vacation mode is on)
 - id: '0402'
   alias: Lighting - Turn on comfort lights when dark
   trigger:
@@ -41,6 +41,7 @@
       - scene.living_room_lights_normal
       - scene.dining_room_lights_normal
       - scene.kitchen_lights_normal
+      - scene.upstairs_lights_normal
 
 # Turn on Lovelia's lights when living room becomes dark, someone is home (or vacation mode is on), and Lovelia is not asleep
 - id: '0403'
@@ -133,57 +134,7 @@
         state: armed_away
   action:
     service: homeassistant.turn_on
-    entity_id:
-      - group.downstairs_window_lights
-      - light.upstairs_window_light
-
-# Turn on Lovelia's window lights when living room becomes dark and no one's home
-- id: '0406'
-  alias: Lighting - Turn on Lovelias window lights when dark
-  trigger:
-    platform: numeric_state
-    entity_id: sensor.living_room_light_level
-    below: 7
-    for:
-      seconds: 60
-  condition:
-    - condition: time
-      after: '12:00'
-    - condition: sun
-      before: sunset
-    - condition: state
-      entity_id: input_boolean.night_mode
-      state: 'off'
-    - condition: state
-      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-      state: armed_away
-  action:
-    service: homeassistant.turn_on
-    entity_id: group.lovelias_room_window_lights
-
-# Turn on bedroom window lights when living room becomes dark and no one's home
-- id: '0407'
-  alias: Lighting - Turn on bedroom window lights when dark
-  trigger:
-    platform: numeric_state
-    entity_id: sensor.living_room_light_level
-    below: 7
-    for:
-      seconds: 60
-  condition:
-    - condition: time
-      after: '12:00'
-    - condition: sun
-      before: sunset
-    - condition: state
-      entity_id: input_boolean.night_mode
-      state: 'off'
-    - condition: state
-      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
-      state: armed_away
-  action:
-    service: homeassistant.turn_on
-    entity_id: group.bedroom_window_lights
+    entity_id: indoor_window_lights
 
 # Turn off outdoor lights at sunrise
 - id: '0408'
