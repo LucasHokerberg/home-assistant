@@ -8,9 +8,9 @@
     service: homeassistant.turn_on
     entity_id: group.outdoor_comfort_lights
 
-# Turn on lights when living room becomes dark and someone is home (or vacation mode is on)
+# Turn on indoor lights when living room becomes dark and someone is home (or vacation mode is on)
 - id: '0402'
-  alias: Lighting - Turn on comfort lights when dark
+  alias: Lighting - Turn on indoor lights when dark
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
@@ -45,7 +45,7 @@
 
 # Turn on Lovelia's lights when living room becomes dark, someone is home (or vacation mode is on), and Lovelia is not asleep
 - id: '0403'
-  alias: Lighting - Turn on Lovelias comfort lights when dark
+  alias: Lighting - Turn on Lovelias lights when dark
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
@@ -78,7 +78,7 @@
 
 # Turn on bedroom lights when living room becomes dark, someone is home (or vacation mode is on), and automation is not blocked
 - id: '0404'
-  alias: Lighting - Turn on bedroom comfort lights when dark
+  alias: Lighting - Turn on bedroom lights when dark
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_light_level
