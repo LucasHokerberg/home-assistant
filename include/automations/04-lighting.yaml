@@ -134,7 +134,7 @@
         state: armed_away
   action:
     service: homeassistant.turn_on
-    entity_id: indoor_window_lights
+    entity_id: group.indoor_window_lights
 
 # Turn off outdoor lights at sunrise
 - id: '0408'
