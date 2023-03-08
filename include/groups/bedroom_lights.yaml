@@ -1,4 +1,4 @@
 entities:
   - group.bedroom_comfort_lights
   - group.bedroom_window_lights
-  #- group.bedroom_work_lights
+  - group.bedroom_work_lights

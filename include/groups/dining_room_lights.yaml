@@ -3,4 +3,4 @@ icon: mdi:table-chair
 entities:
   - group.dining_room_comfort_lights
   - group.dining_room_window_lights
-  #- group.dining_room_work_lights
+  - group.dining_room_work_lights
