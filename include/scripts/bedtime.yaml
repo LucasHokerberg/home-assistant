@@ -13,5 +13,4 @@ sequence:
     target:
       entity_id: climate.living_room_hvac
   - service: lock.lock
-    target:
-      entity_id: lock.hallway_front_door_lock
+    entity_id: lock.hallway_front_door_lock
