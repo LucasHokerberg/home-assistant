@@ -13,13 +13,5 @@ sequence:
     target:
       entity_id: climate.living_room_hvac
   - service: lock.lock
-    data:
-      code: !secret verisure_pin
     target:
       entity_id: lock.hallway_front_door_lock
-
-# Verisure integration not working with default code
-# Hence adding PIN in script
-#
-# https://github.com/home-assistant/core/issues/82997
-# https://github.com/home-assistant/core/issues/86963
