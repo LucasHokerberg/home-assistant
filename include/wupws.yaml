@@ -1,0 +1,2 @@
+api_key: !secret wupws_api
+pws_id: !secret wuwps_id
