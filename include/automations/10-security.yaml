@@ -12,7 +12,7 @@
           entity_id: lock.hallway_front_door_lock
           state: 'unlocked'
         - condition: state
-          entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+          entity_id: alarm_control_panel.verisure_alarm
           state: 'disarmed'
     - condition: state
       entity_id: input_boolean.guest_mode
@@ -21,7 +21,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: 'Home is left unsecured! The front door is {{ states("lock.hallway_front_door_lock") }} and the alarm is {{ states("alarm_control_panel.snyggatorpsvagen_alarm") }}!'
+      message: 'Home is left unsecured! The front door is {{ states("lock.hallway_front_door_lock") }} and the alarm is {{ states("alarm_control_panel.verisure_alarm") }}!'
       data:
         channel: Security
         actions:

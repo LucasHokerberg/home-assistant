@@ -20,7 +20,7 @@
       action: unlock_hallway_front_door_lock
   condition:
     condition: state
-    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    entity_id: alarm_control_panel.verisure_alarm
     state: 'disarmed'
   action:
     service: lock.unlock

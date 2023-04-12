@@ -30,7 +30,7 @@
       - condition: or
         conditions:
           - condition: state
-            entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+            entity_id: alarm_control_panel.verisure_alarm
             state: disarmed
           - condition: state
             entity_id: input_boolean.vacation_mode
@@ -67,7 +67,7 @@
       - condition: or
         conditions:
           - condition: state
-            entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+            entity_id: alarm_control_panel.verisure_alarm
             state: disarmed
           - condition: state
             entity_id: input_boolean.vacation_mode
@@ -101,7 +101,7 @@
       - condition: or
         conditions:
         - condition: state
-          entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+          entity_id: alarm_control_panel.verisure_alarm
           state: disarmed
         - condition: state
           entity_id: input_boolean.vacation_mode
@@ -130,7 +130,7 @@
         entity_id: input_boolean.night_mode
         state: 'off'
       - condition: state
-        entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+        entity_id: alarm_control_panel.verisure_alarm
         state: armed_away
   action:
     service: homeassistant.turn_on

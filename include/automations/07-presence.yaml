@@ -55,7 +55,7 @@
   alias: Presence - Turn on indoor lights when someone comes home 1
   trigger:
     platform: state
-    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    entity_id: alarm_control_panel.verisure_alarm
     from: armed_away
     to: disarmed
   condition:
@@ -74,7 +74,7 @@
     to: 'on'
   condition:
     - condition: state
-      entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+      entity_id: alarm_control_panel.verisure_alarm
       state: armed_away
     - condition: state
       entity_id: group.indoor_window_lights
@@ -88,7 +88,7 @@
   alias: Presence - Turn on heat when cold and someone comes home
   trigger:
     platform: state
-    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    entity_id: alarm_control_panel.verisure_alarm
     from: armed_away
     to: disarmed
   condition:
@@ -106,7 +106,7 @@
   alias: Presence - Turn on AC when warm and someone comes home
   trigger:
     platform: state
-    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    entity_id: alarm_control_panel.verisure_alarm
     from: armed_away
     to: disarmed
   condition:
@@ -124,7 +124,7 @@
   alias: Presence - Turn off lights and TV when alarm is armed away
   trigger:
     platform: state
-    entity_id: alarm_control_panel.snyggatorpsvagen_alarm
+    entity_id: alarm_control_panel.verisure_alarm
     to: armed_away
   action:
     service: homeassistant.turn_off
