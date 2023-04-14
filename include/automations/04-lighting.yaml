@@ -161,4 +161,6 @@
     before: sunset
   action:
     service: homeassistant.turn_off
-    entity_id: group.indoor_lights
+    entity_id:
+      - group.indoor_window_lights
+      - group.indoor_comfort_lights
