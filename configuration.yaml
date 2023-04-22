@@ -64,8 +64,4 @@ script: !include_dir_named include/scripts/
 
 sensor: !include_dir_list include/sensors/
 
-wundergroundpws: !include include/wupws.yaml
-weather:
-  - platform: wundergroundpws
-
 zone: !include_dir_list include/zones/
