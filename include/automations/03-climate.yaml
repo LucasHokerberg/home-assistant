@@ -11,11 +11,6 @@
     entity_id: climate.living_room_hvac
     state: 'off'
   action:
-    - service: climate.turn_on
-      target:
-        entity_id: climate.living_room_hvac
-    - delay:
-        seconds: 5
     - service: climate.set_hvac_mode
       target:
         entity_id: climate.living_room_hvac
@@ -27,14 +22,14 @@
       target:
         entity_id: climate.living_room_hvac
       data:
-        temperature: '{{ states.input_number.living_room_hvac_target.state | float - 2 | float }}'
+        temperature: '{{ states.input_number.living_room_hvac_target.state | float - states.input_number.living_room_hvac_offset.state | float }}'
     - delay:
         seconds: 5
     - service: climate.set_fan_mode
       target:
         entity_id: climate.living_room_hvac
       data:
-        fan_mode: low
+        fan_mode: auto
 
 # Start the AC when warm inside, and vacation mode is off
 - id: '0302'
@@ -52,11 +47,6 @@
       entity_id: input_boolean.vacation_mode
       state: 'off'
   action:
-    - service: climate.turn_on
-      target:
-        entity_id: climate.living_room_hvac
-    - delay:
-        seconds: 5
     - service: climate.set_hvac_mode
       target:
         entity_id: climate.living_room_hvac
@@ -68,21 +58,23 @@
       target:
         entity_id: climate.living_room_hvac
       data:
-        temperature: '{{ states.input_number.living_room_hvac_target.state | float + 2 | float }}'
+        temperature: '{{ states.input_number.living_room_hvac_target.state | float + states.input_number.living_room_hvac_offset.state | float }}'
     - delay:
         seconds: 5
     - service: climate.set_fan_mode
       target:
         entity_id: climate.living_room_hvac
       data:
-        fan_mode: low
+        fan_mode: auto
 
-# Change HVAC temperature when target is changed and HVAC is set to heat
+# Change HVAC temperature when target or offset is changed and HVAC is set to heat
 - id: '0303'
   alias: Climate - Change temperature heat
   trigger:
-    platform: state
-    entity_id: input_number.living_room_hvac_target
+    - platform: state
+      entity_id: input_number.living_room_hvac_target
+    - platform: state
+      entity_id: input_number.living_room_hvac_offset
   condition:
     condition: state
     entity_id: climate.living_room_hvac
@@ -92,14 +84,16 @@
     target:
       entity_id: climate.living_room_hvac
     data:
-      temperature: '{{ states.input_number.living_room_hvac_target.state | float - 2 | float }}'
+      temperature: '{{ states.input_number.living_room_hvac_target.state | float - states.input_number.living_room_hvac_offset.state | float }}'
 
-# Change HVAC temperature when target is changed and HVAC is set to cool
+# Change HVAC temperature when target or offset is changed and HVAC is set to cool
 - id: '0304'
   alias: Climate - Change temperature cool
   trigger:
-    platform: state
-    entity_id: input_number.living_room_hvac_target
+    - platform: state
+      entity_id: input_number.living_room_hvac_target
+    - platform: state
+      entity_id: input_number.living_room_hvac_offset
   condition:
     condition: state
     entity_id: climate.living_room_hvac
@@ -109,7 +103,7 @@
     target:
       entity_id: climate.living_room_hvac
     data:
-      temperature: '{{ states.input_number.living_room_hvac_target.state | float + 2 | float }}'
+      temperature: '{{ states.input_number.living_room_hvac_target.state | float + states.input_number.living_room_hvac_offset.state | float }}'
 
 # Turn off the heat when warm inside, and the heat is on
 - id: '0305'
