@@ -3,8 +3,8 @@ sequence:
     entity_id:
       - group.downstairs_lights
       - remote.living_room_harmony_hub
-  - service: lock.lock
-    entity_id: lock.hallway_front_door_lock
+#  - service: lock.lock
+#    entity_id: lock.hallway_front_door_lock
   - service: input_boolean.turn_on
     target:
       entity_id: input_boolean.night_mode
