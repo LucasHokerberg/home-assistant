@@ -3,9 +3,9 @@
   alias: Appliance - Notify when dishwasher is done
   trigger:
     platform: state
-    entity_id: binary_sensor.kitchen_dishwasher_state
-    from: 'on'
-    to: 'off'
+    entity_id: sensor.kitchen_dishwasher_operation_state
+    from: 'Run'
+    to: 'Finished'
   action:
     service: notify.home_mobile_apps
     data_template:
