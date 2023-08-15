@@ -15,7 +15,7 @@
           channel: Appliance
     - service: switch.turn_off
       target:
-        entity: switch.kitchen_dishwasher_shutoff_valve
+        entity_id: switch.kitchen_dishwasher_shutoff_valve
 
 # Notify when the freezer temperature is too high
 - id: '0202'
