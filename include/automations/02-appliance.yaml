@@ -1,18 +1,21 @@
-# Send a notification when the dishwasher is done
+# Send a notification and turn off the shut-off valve when the dishwasher is done
 - id: '0201'
-  alias: Appliance - Notify when dishwasher is done
+  alias: Appliance - Notify and turn off shut-off valve when dishwasher is done
   trigger:
     platform: state
     entity_id: sensor.kitchen_dishwasher_operation_state
     from: 'Run'
     to: 'Finished'
   action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: 'The dishwasher is done.'
-      data:
-        channel: Appliance
+    - service: notify.home_mobile_apps
+      data_template:
+        title: 'HalloNET Home'
+        message: 'The dishwasher is done.'
+        data:
+          channel: Appliance
+    - service: switch.turn_off
+      target:
+        entity: switch.kitchen_dishwasher_shutoff_valve
 
 # Notify when the freezer temperature is too high
 - id: '0202'
