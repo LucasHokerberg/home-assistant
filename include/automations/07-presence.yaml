@@ -63,8 +63,8 @@
     entity_id: group.indoor_window_lights
     state: 'on'
   action:
-    service: homeassistant.turn_on
-    entity_id: group.indoor_comfort_lights
+    service: automation.trigger
+    entity_id: automation.lighting_turn_on_indoor_lights_when_dark
 
 - id: '0703'
   alias: Presence - Turn on indoor lights when someone comes home 2
@@ -80,8 +80,8 @@
       entity_id: group.indoor_window_lights
       state: 'on'
   action:
-    service: homeassistant.turn_on
-    entity_id: group.indoor_comfort_lights
+    service: automation.trigger
+    entity_id: automation.lighting_turn_on_indoor_lights_when_dark
 
 # Turn on the heat if cold inside, and someone comes home
 - id: '0704'
