@@ -63,8 +63,14 @@
     entity_id: group.indoor_window_lights
     state: 'on'
   action:
-    service: automation.trigger
-    entity_id: automation.lighting_turn_on_indoor_lights_when_dark
+    service: homeassistant.turn_on
+    entity_id:
+      - scene.living_room_lights_normal
+      - scene.dining_room_lights_normal
+      - scene.kitchen_lights_normal
+      - scene.upstairs_lights_normal
+      - scene.lovelias_room_lights_normal
+      - scene.bedroom_lights_normal
 
 - id: '0703'
   alias: Presence - Turn on indoor lights when someone comes home 2
