@@ -9,7 +9,7 @@
     service: notify.mobile_app_lucas_hokerberg
     data:
       title: 'HalloNET Home'
-      message: 'FGH47K battery level reached 80%. Charging has been stoped!'
+      message: 'FGH47K battery level reached 80%. Charging has been stopped!'
       data:
         channel: Car
         actions:
