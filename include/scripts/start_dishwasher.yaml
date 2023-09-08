@@ -2,4 +2,4 @@ sequence:
   - service: switch.turn_on
     entity_id:
       - switch.kitchen_dishwasher_shutoff_valve
-      - kitchen_dishwasher_program_intensiv70
+      - switch.kitchen_dishwasher_program_intensiv70
