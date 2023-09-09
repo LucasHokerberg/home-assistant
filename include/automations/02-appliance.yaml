@@ -50,3 +50,18 @@
       message: 'Fridge temperature is too high!'
       data:
         channel: Appliance
+
+# Start dishwasher when shut-off valve is opened
+- id: '0204'
+  alias: Appliance - Start dishwasher
+  trigger:
+    platform: state
+    entity_id: switch.kitchen_dishwasher_shutoff_valve
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: sensor.kitchen_dishwasher_operation_state
+    state: 'Ready'
+  action:
+    service: switch.turn_on
+    entity_id: switch.kitchen_dishwasher_program_intensiv70
