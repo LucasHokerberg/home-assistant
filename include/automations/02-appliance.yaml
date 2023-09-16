@@ -63,5 +63,11 @@
     entity_id: sensor.kitchen_dishwasher_operation_state
     state: 'Ready'
   action:
-    service: switch.turn_on
-    entity_id: switch.kitchen_dishwasher_program_intensiv70
+    - service: input_select.select_option
+      target:
+        entity_id: kitchen_dishwasher_program
+      data:
+        option: 'Intensive 70°C'
+    - service: button.press
+      target:
+        entity_id: button.kitchen_dishwasher_start
