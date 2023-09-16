@@ -80,6 +80,8 @@
       - platform: state
         entity_id: binary_sensor.outdoor_driveway_motion
         to: 'off'
+        for:
+          seconds: 15
       timeout:
         minutes: 5
     - service: switch.turn_off
