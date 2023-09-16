@@ -87,7 +87,7 @@
       state: 'on'
   action:
     service: automation.trigger
-    entity_id: automation.lighting_turn_on_indoor_lights_when_dark
+    entity_id: automation.presence_turn_on_indoor_lights_when_someone_comes_home_1 
 
 # Turn on the heat if cold inside, and someone comes home
 - id: '0704'
