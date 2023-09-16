@@ -1,0 +1,21 @@
+# FGH47K: Notify and stop charging when battery level reached 80%
+- id: '1101'
+  alias: Car - FGH47K Stop charging at 80 percent
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.fgh47k_battery_level
+    above: 80
+  condition:
+    condition: state
+    entity_id: switch.fgh47k_charging
+    state: 'on'
+  action:
+    service: notify.mobile_app_lucas_hokerberg
+    data:
+      title: 'HalloNET Home'
+      message: 'FGH47K battery level reached 80%. Charging has been stopped!'
+      data:
+        channel: Car
+        actions:
+          - action: fgh47k_restart_charging
+            title: 'Restart charging'
