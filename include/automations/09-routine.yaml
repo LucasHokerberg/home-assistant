@@ -90,7 +90,7 @@
   alias: Routine - Bedtime vacation
   trigger:
     platform: time
-    at: '21:30:00'
+    at: '21:58:00'
   condition:
     condition: state
     entity_id: input_boolean.vacation_mode
