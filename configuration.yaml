@@ -52,6 +52,8 @@ fan: !include include/fans.yaml
 
 group: !include_dir_named include/groups/
 
+home_connect_alt: !include include/home_connect_alt.yaml
+
 notify: !include include/notify.yaml
 
 remote: !include_dir_list include/remotes/
