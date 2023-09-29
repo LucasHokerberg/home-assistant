@@ -12,7 +12,7 @@
   action:
     - service: switch.turn_off
       data:
-        entity_id: fgh47k_charging
+        entity_id: switch.fgh47k_charging
     - service: notify.mobile_app_lucas_hokerberg
       data:
         title: 'HalloNET Home'
