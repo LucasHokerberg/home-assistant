@@ -65,7 +65,7 @@
   action:
     - service: input_select.select_option
       target:
-        entity_id: kitchen_dishwasher_program
+        entity_id: select.kitchen_dishwasher_program
       data:
         option: 'Intensive 70°C'
     - service: button.press
