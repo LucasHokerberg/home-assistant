@@ -25,3 +25,20 @@
           actions:
             - action: fgh47k_restart_charging
               title: 'Restart charging'
+
+# FGH47K: Disable full charge when charging complete
+- id: '1102'
+  alias: Car - FGH47K Disable full charge
+  trigger:
+    platform: state
+    entity_id: switch.fgh47k_charging
+    from: 'on'
+    to: 'off'
+  condition:
+    condition: state
+    entity_id: switch.fgh47k_full_charge
+    state: 'on'
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.fgh47k_full_charge
