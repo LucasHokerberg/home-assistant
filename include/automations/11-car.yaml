@@ -36,9 +36,9 @@
     to: 'off'
   condition:
     condition: state
-    entity_id: switch.fgh47k_full_charge
+    entity_id: input_boolean.fgh47k_full_charge
     state: 'on'
   action:
-    service: switch.turn_off
-    data:
-      entity_id: switch.fgh47k_full_charge
+    service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.fgh47k_full_charge
