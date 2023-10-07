@@ -3,9 +3,9 @@ sequence:
     entity_id: switch.kitchen_dishwasher_shutoff_valve
   - service: input_select.select_option
     target:
-      entity_id: kitchen_dishwasher_program
+      entity_id: select.kitchen_dishwasher_program
     data:
-      option: 'Intensive 70°C'
+      option: 'Dishcare.Dishwasher.Program.Intensiv70'
   - service: button.press
     target:
       entity_id: button.kitchen_dishwasher_start
