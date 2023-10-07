@@ -4,8 +4,8 @@
   trigger:
     platform: state
     entity_id: sensor.kitchen_dishwasher_operation_state
-    from: 'Run'
-    to: 'Finished'
+    from: 'BSH.Common.EnumType.OperationState.Run'
+    to: 'BSH.Common.EnumType.OperationState.Ready'
   action:
     - service: notify.home_mobile_apps
       data_template:
@@ -57,17 +57,18 @@
   trigger:
     platform: state
     entity_id: switch.kitchen_dishwasher_shutoff_valve
+    from: 'off'
     to: 'on'
   condition:
     condition: state
     entity_id: sensor.kitchen_dishwasher_operation_state
-    state: 'Ready'
+    state: 'BSH.Common.EnumType.OperationState.Ready'
   action:
     - service: input_select.select_option
       target:
         entity_id: select.kitchen_dishwasher_program
       data:
-        option: 'Intensive 70°C'
+        option: 'Dishcare.Dishwasher.Program.Intensiv70'
     - service: button.press
       target:
         entity_id: button.kitchen_dishwasher_start
