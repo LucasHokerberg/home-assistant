@@ -5,7 +5,7 @@
     platform: state
     entity_id: sensor.kitchen_dishwasher_operation_state
     from: 'BSH.Common.EnumType.OperationState.Run'
-    to: 'BSH.Common.EnumType.OperationState.Ready'
+    to: 'BSH.Common.EnumType.OperationState.Finished'
   action:
     - service: notify.home_mobile_apps
       data_template:
