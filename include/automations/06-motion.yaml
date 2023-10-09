@@ -52,7 +52,7 @@
       below: 6
   action:
     - service: scene.turn_on
-      entity_id: scene.upstairs_desk_light_night
+      entity_id: scene.upstairs_desk_light_night_motion
     - wait_for_trigger:
       - platform: state
         entity_id: binary_sensor.upstairs_motion
