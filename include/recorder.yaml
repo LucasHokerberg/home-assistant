@@ -1,1 +1,5 @@
 db_url: !secret mariadb_url
+purge_keep_days: 7
+exclude:
+  entities:
+    - sensor.date_time
