@@ -3,4 +3,3 @@ sequence:
   entity_id:
     - group.bedroom_lights
     - media_player.bedroom_chromecast
-    - remote.bedroom_tv
