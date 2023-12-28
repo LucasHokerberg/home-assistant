@@ -4,4 +4,4 @@ sensors:
     unit_of_measurement: 'SEK/kWh'
     friendly_name: Electricity Price
     value_template: >-
-      {{ (float(state_attr('sensor.nordpool_kwh_se4_sek', 'average')) + float(states.input_number.kraftringen_transfer_price.state) + float(states.input_number.kraftringen_energy_tax.state) + float(states.input_number.fortum_surcharge.state) | round(2) }}
+      {{ (float(state_attr('sensor.nordpool_kwh_se4_sek', 'average')) + float(states.input_number.kraftringen_transfer_price.state) + float(states.input_number.kraftringen_energy_tax.state) + float(states.input_number.fortum_surcharge.state)) | round(2) }}
