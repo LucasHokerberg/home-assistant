@@ -1,5 +1,11 @@
 sequence:
-  service: homeassistant.turn_off
-  entity_id:
-    - group.bedroom_lights
-    - media_player.bedroom_chromecast
+  - service: homeassistant.turn_off
+    entity_id:
+      - group.upstairs_lights
+      - media_player.bedroom_chromecast
+  - if:
+      condition: state
+      entity_id: input_boolean.night_mode
+      state: 'off'
+    then:
+      service: script.bedtime
