@@ -21,7 +21,7 @@
     - service: media_player.play_media
       entity_id: media_player.spotify_lucas_hokerberg
       data:
-        media_content_id: 'spotify:user:spotify:playlist:37i9dQZF1E39tlfU8S1CM8'
+        media_content_id: 'spotify:user:spotify:playlist:37i9dQZEVXcH5UOFYpBVWG'
         media_content_type: playlist
 
 # Turn off lights and start Plex when Living Room Harmony Hub starts Movie Mode
