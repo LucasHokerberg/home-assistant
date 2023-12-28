@@ -7,7 +7,7 @@
     to: 'on'
   condition:
     - condition: state
-      entity_id: group.downstairs_lights
+      entity_id: group.living_room_lights
       state: 'off'
     - condition: state
       entity_id: remote.living_room_harmony_hub
@@ -39,7 +39,7 @@
     to: 'on'
   condition:
     - condition: state
-      entity_id: group.downstairs_lights
+      entity_id: group.kitchen_lights
       state: 'off'
     - condition: numeric_state
       entity_id: sensor.living_room_light_level
