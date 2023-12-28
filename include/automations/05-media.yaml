@@ -15,11 +15,13 @@
     - delay:
         seconds: 10
     - service: media_player.select_source
-      entity_id: media_player.spotify_lucas_hokerberg
+      target:
+        entity_id: media_player.spotify_lucas_hokerberg
       data:
         source: 'Living Room Shield'
     - service: media_player.play_media
-      entity_id: media_player.spotify_lucas_hokerberg
+      target:
+        entity_id: media_player.spotify_lucas_hokerberg
       data:
         media_content_id: 'spotify:user:spotify:playlist:37i9dQZEVXcH5UOFYpBVWG'
         media_content_type: playlist
