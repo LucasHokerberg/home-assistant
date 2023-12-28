@@ -8,4 +8,4 @@ sequence:
       - scene.lovelias_room_lights_normal
       - scene.bedroom_lights_normal
   - service: homeassistant.turn_off
-    entity_id: indoor_work_lights
+    entity_id: group.indoor_work_lights
