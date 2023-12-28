@@ -1,0 +1,3 @@
+sequence:
+  service: homeassistant.turn_off
+  entity_id: group.indoor_lights

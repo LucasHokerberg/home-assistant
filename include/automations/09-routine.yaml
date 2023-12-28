@@ -98,8 +98,7 @@
   action:
     - delay:
         minutes: '{{ range(16,59) | random | int }}'
-    - service: homeassistant.turn_off
-      entity_id: group.indoor_lights
+    - service: script.indoor_lights_off
     - service: input_boolean.turn_on
       target:
         entity_id: input_boolean.night_mode 
