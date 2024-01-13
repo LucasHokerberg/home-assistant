@@ -19,9 +19,9 @@
         entity_id: media_player.spotify_lucas_hokerberg
       data:
         source: 'Living Room Shield'
-    - service: media_player.play_media
     - delay:
         seconds: 2
+    - service: media_player.play_media
       target:
         entity_id: media_player.spotify_lucas_hokerberg
       data:
