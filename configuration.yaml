@@ -46,13 +46,9 @@ automation ui: !include automations.yaml
 
 binary_sensor: !include_dir_list include/binary_sensors/
 
-device_tracker: !include_dir_list include/device_trackers/
-
 fan: !include include/fans.yaml
 
 group: !include_dir_named include/groups/
-
-home_connect_alt: !include include/home_connect_alt.yaml
 
 notify: !include include/notify.yaml
 
