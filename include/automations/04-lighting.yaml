@@ -60,7 +60,7 @@
       - condition: sun
         before: sunset
       - condition: state
-        entity_ud: light.kitchen_counter_light
+        entity_id: light.kitchen_counter_light
         state: 'off'
       - condition: state
         entity_id: input_boolean.night_mode
