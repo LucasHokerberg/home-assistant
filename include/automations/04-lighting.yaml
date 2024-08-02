@@ -43,6 +43,42 @@
       - scene.kitchen_lights_normal
       - scene.upstairs_lights_normal
 
+# Turn on kitchen counter light when living room becomes dark, someone is home (or vacation mode is on), and the light is not already turned on
+- id: '0406'
+  alias: Lighting - Turn on kitchen counter light when dark
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_light_level
+    below: 7
+    for:
+      seconds: 60
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        after: '12:00'
+      - condition: sun
+        before: sunset
+      - condition: state
+        entity_ud: light.kitchen_counter_light
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.night_mode
+        state: 'off'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: alarm_control_panel.verisure_alarm
+            state: disarmed
+          - condition: state
+            entity_id: input_boolean.vacation_mode
+            state: 'on'
+  action:
+    service: light.turn_on
+    entity_id: light.kitchen_counter_light
+    data:
+      brightness_pct: 20
+
 # Turn on Lovelia's lights when living room becomes dark, someone is home (or vacation mode is on), and Lovelia is not asleep
 - id: '0403'
   alias: Lighting - Turn on Lovelias lights when dark
