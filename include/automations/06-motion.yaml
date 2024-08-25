@@ -46,17 +46,17 @@
       below: 6
   action:
     - service: light.turn_on
-      entity_id: light.kitchen_window_light
+      entity_id: light.kitchen_counter_light
+      data:
+        brightness_pct: 1
     - wait_for_trigger:
         platform: state
         entity_id: binary_sensor.kitchen_motion
         to: 'off'
       timeout:
         minutes: 5
-    - service: light.turn_on
+    - service: light.turn_off
       entity_id: light.kitchen_counter_light
-      data:
-        brightness_pct: 1
 
 # Turn on lights when motion upstairs is detected, the PC is off, and it's dark
 - id: '0602'
