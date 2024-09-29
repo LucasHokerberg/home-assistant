@@ -8,10 +8,10 @@
       at: '20:00:00'
   condition:
     condition: template
-    value_template: "{{ state_attr('sensor.garbage_can_1', 'Garbage Can 1') == 1 }}"
+    value_template: "{{ states('sensor.garbage_can_1') == '1' }}"
   action:
     service: notify.home_mobile_apps
-    data_template:
+    data:
       title: 'HalloNET Home'
       message: 'Garbage can 1 is emptied tomorrow.'
       data:
@@ -27,10 +27,10 @@
       at: '20:00:00'
   condition:
     condition: template
-    value_template: "{{ state_attr('sensor.garbage_can_2', 'Garbage Can 2') == 1 }}"
+    value_template: "{{ states('sensor.garbage_can_2') == '1' }}"
   action:
     service: notify.home_mobile_apps
-    data_template:
+    data:
       title: 'HalloNET Home'
       message: 'Garbage can 2 is emptied tomorrow.'
       data:
@@ -38,7 +38,7 @@
 
 # Send a reminder when garden waste is emptied tomorrow
 - id: '0803'
-  alias: Reminder - Garbage Waste
+  alias: Reminder - Garden Waste
   trigger:
     - platform: time
       at: '08:00:00'
@@ -46,10 +46,10 @@
       at: '20:00:00'
   condition:
     condition: template
-    value_template: "{{ state_attr('sensor.garden_waste', 'Garden Waste') == 1 }}"
+    value_template: "{{ states('sensor.garden_waste') == '1' }}"
   action:
     service: notify.home_mobile_apps
-    data_template:
+    data:
       title: 'HalloNET Home'
       message: 'Garden waste is emptied tomorrow.'
       data:
