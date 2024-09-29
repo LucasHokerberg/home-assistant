@@ -181,7 +181,7 @@
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.vacation_mode
-    - service: notify.home.mobile_apps
+    - service: notify.home_mobile_apps
       data:
         title: 'HalloNET Home'
         message: 'Welcome home! Vacation mode has been turned off.'
