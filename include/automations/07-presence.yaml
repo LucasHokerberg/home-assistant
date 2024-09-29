@@ -2,53 +2,45 @@
 - id: '0701'
   alias: Presence - Notify on zone enter or leave
   trigger:
-    - platform: zone
+    - platform: state
       entity_id: person.lucas_hokerberg
-      zone: zone.lucas_hokerberg_work
-      event: enter
+      to: zone.lucas_hokerberg_work
       for: '00:00:30'
-    - platform: zone
+    - platform: state
       entity_id: person.victoria_hjerter
-      zone: zone.victoria_hjerter_work
-      event: enter
+      to: zone.victoria_hjerter_work
       for: '00:00:30'
-    - platform: zone
+    - platform: state
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
-      zone: zone.hokerbergs
-      event: enter
+      to: zone.hokerbergs
       for: '00:00:30'
-    - platform: zone
+    - platform: state
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
-      zone: zone.johanssons
-      event: enter
+      to: zone.johanssons
       for: '00:00:30'
-    - platform: zone
+    - platform: state
       entity_id: person.lucas_hokerberg
-      zone: zone.lucas_hokerberg_work
-      event: leave
+      from: zone.lucas_hokerberg_work
       for: '00:00:30'
-    - platform: zone
+    - platform: state
       entity_id: person.victoria_hjerter
-      zone: zone.victoria_hjerter_work
-      event: leave
+      from: zone.victoria_hjerter_work
       for: '00:00:30'
-    - platform: zone
+    - platform: state
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
-      zone: zone.hokerbergs
-      event: leave
+      from: zone.hokerbergs
       for: '00:00:30'
-    - platform: zone
+    - platform: state
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
-      zone: zone.johanssons
-      event: leave
+      from: zone.johanssons
       for: '00:00:30'
   action:
     service: notify.home_mobile_apps
