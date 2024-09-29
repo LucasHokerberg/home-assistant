@@ -167,7 +167,7 @@
 
 # Turn off vacation mode and notify when someone comes home
 - id: '0709'
-  alias: Precense - Turn off vataction mode when someone comes home
+  alias: Precense - Turn off vacation mode when someone comes home
   trigger:
     platform: state
     entity_id: alarm_control_panel.verisure_alarm
