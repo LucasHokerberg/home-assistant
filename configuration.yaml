@@ -60,6 +60,8 @@ script: !include_dir_named include/scripts/
 
 sensor: !include_dir_list include/sensors/
 
+# New way of implementing templates
+# @todo: Move older templates in the sensors folder to new structure
 template: !include_dir_merge_list include/templates/
 
 zone: !include_dir_list include/zones/
