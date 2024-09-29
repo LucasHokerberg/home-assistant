@@ -2,14 +2,11 @@ template:
   - sensor:
     - name: Garden Waste
       state: >
-        {% set t = now() %}
-        {% set midnight = today_at() %}
-        {% set event = state_attr('calendar.garden_waste', 'start_time') | as_datetime | as_local %}
-        {% set delta = event - midnight %}
-        {% if delta.days == 0 %}
+        {% set days_left = ((state_attr('calendar.garden_waste', 'start_time') | as_timestamp - today_at('00:00') | as_timestamp) / 86400) | int %}
+        {% if days_left == 0 %}
           Today
-        {% elif delta.days == 1 %}
+        {% elif days_left == 1 %}
           Tomorrow
         {% else %}
-          In {{ delta.days }} days
+          {{ days_left }} days
         {% endif %}
