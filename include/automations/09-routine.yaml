@@ -101,4 +101,4 @@
     - service: script.indoor_lights_off
     - service: input_boolean.turn_on
       target:
-        entity_id: input_boolean.night_mode 
+        entity_id: input_boolean.night_mode
