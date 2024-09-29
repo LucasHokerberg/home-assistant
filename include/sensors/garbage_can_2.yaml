@@ -1,0 +1,16 @@
+platform: template
+sensors:
+  garbage_can_2:
+    friendly_name: "Garbage Can 2"
+    value_template: >
+      {% set today = now().date() %}
+      {% set events = state_attr('calendar.garbage_can_2', 'all_day') %}
+      {% set days_left = 999 %}
+      {% for event in events %}
+        {% set event_date = event.start.date() %}
+        {% set delta = (event_date - today).days %}
+        {% if delta >= 0 and delta < days_left %}
+          {% set days_left = delta %}
+        {% endif %}
+      {% endfor %}
+      {{ days_left if days_left != 999 else 'No upcoming collection' }}

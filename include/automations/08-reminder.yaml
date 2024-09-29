@@ -1,17 +1,14 @@
-# Send a reminder when garbage can 1 is emptied tomorrow
+# Send a reminder when garbage can is emptied tomorrow
 - id: '0801'
   alias: Reminder - Garbage Can 1
   trigger:
-    - platform: state
-      entity_id: sensor.garbage_can_1
-      to: 'tomorrow'
-      for:
-        hours: 8
-    - platform: state
-      entity_id: sensor.garbage_can_1
-      to: 'tomorrow'
-      for:
-        hours: 20
+    - platform: time
+      at: '08:00:00'
+    - platform: time
+      at: '20:00:00'
+  condition:
+    condition: template
+    value_template: "{{ state_attr('sensor.garbage_can_1', 'Garbage Can 1') == 1 }}"
   action:
     service: notify.home_mobile_apps
     data_template:
@@ -24,16 +21,13 @@
 - id: '0802'
   alias: Reminder - Garbage Can 2
   trigger:
-    - platform: state
-      entity_id: sensor.garbage_can_2
-      to: 'tomorrow'
-      for:
-        hours: 8
-    - platform: state
-      entity_id: sensor.garbage_can_2
-      to: 'tomorrow'
-      for:
-        hours: 20
+    - platform: time
+      at: '08:00:00'
+    - platform: time
+      at: '20:00:00'
+  condition:
+    condition: template
+    value_template: "{{ state_attr('sensor.garbage_can_2', 'Garbage Can 2') == 1 }}"
   action:
     service: notify.home_mobile_apps
     data_template:
@@ -44,18 +38,15 @@
 
 # Send a reminder when garden waste is emptied tomorrow
 - id: '0803'
-  alias: Reminder - Garden Waste
+  alias: Reminder - Garbage Waste
   trigger:
-    - platform: state
-      entity_id: sensor.garden_waste
-      to: 'tomorrow'
-      for:
-        hours: 8
-    - platform: state
-      entity_id: sensor.garden_waste
-      to: 'tomorrow'
-      for:
-        hours: 20
+    - platform: time
+      at: '08:00:00'
+    - platform: time
+      at: '20:00:00'
+  condition:
+    condition: template
+    value_template: "{{ state_attr('sensor.garden_waste', 'Garden Waste') == 1 }}"
   action:
     service: notify.home_mobile_apps
     data_template:
