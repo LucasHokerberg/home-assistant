@@ -30,20 +30,23 @@ template:
     sensor:
       - name: "Garbage Can 1 Pickup"
         state: >
-          {% set event = agenda_garbage_can_1["calendar.garbage_can_1"].events | selectattr('summary', 'search', 'Garbage Can 1') | map(attribute='start') | map('as_datetime') | first %}
-          {{ (event | as_local - today_at()).days }}
+          {% set events = agenda_garbage_can_1["calendar.garbage_can_1"].events if agenda_garbage_can_1 is defined else [] %}
+          {% set event = events | selectattr('summary', 'search', 'Garbage Can 1') | map(attribute='start') | map('as_datetime') | first %}
+          {{ (event | as_local - today_at()).days if event else 'No upcoming collection' }}
         unit_of_measurement: "Days"
         icon: mdi:calendar-arrow-right
       - name: "Garbage Can 2 Pickup"
         state: >
-          {% set event = agenda_garbage_can_2["calendar.garbage_can_2"].events | selectattr('summary', 'search', 'Garbage Can 2') | map(attribute='start') | map('as_datetime') | first %}
-          {{ (event | as_local - today_at()).days }}
+          {% set events = agenda_garbage_can_2["calendar.garbage_can_2"].events if agenda_garbage_can_2 is defined else [] %}
+          {% set event = events | selectattr('summary', 'search', 'Garbage Can 2') | map(attribute='start') | map('as_datetime') | first %}
+          {{ (event | as_local - today_at()).days if event else 'No upcoming collection' }}
         unit_of_measurement: "Days"
         icon: mdi:calendar-arrow-right
       - name: "Garden Waste Pickup"
         state: >
-          {% set event = agenda_garden_waste["calendar.garden_waste"].events | selectattr('summary', 'search', 'Garden Waste') | map(attribute='start') | map('as_datetime') | first %}
-          {{ (event | as_local - today_at()).days }}
+          {% set events = agenda_garden_waste["calendar.garden_waste"].events if agenda_garden_waste is defined else [] %}
+          {% set event = events | selectattr('summary', 'search', 'Garden Waste') | map(attribute='start') | map('as_datetime') | first %}
+          {{ (event | as_local - today_at()).days if event else 'No upcoming collection' }}
         unit_of_measurement: "Days"
         icon: mdi:calendar-arrow-right
   - sensor:
@@ -52,7 +55,7 @@ template:
           {% set delta = states('sensor.garbage_can_1_pickup') | int %}
           {% if delta == 0 %} Today
           {% elif delta == 1 %} Tomorrow
-          {% else %} In {{ delta }} Days
+          {% else %} In {{ delta }} days
           {% endif %}
         icon: mdi:trash-can
       - name: "Garbage Can 2"
@@ -60,7 +63,7 @@ template:
           {% set delta = states('sensor.garbage_can_2_pickup') | int %}
           {% if delta == 0 %} Today
           {% elif delta == 1 %} Tomorrow
-          {% else %} In {{ delta }} Days
+          {% else %} In {{ delta }} days
           {% endif %}
         icon: mdi:trash-can
       - name: "Garden Waste"
@@ -68,6 +71,6 @@ template:
           {% set delta = states('sensor.garden_waste_pickup') | int %}
           {% if delta == 0 %} Today
           {% elif delta == 1 %} Tomorrow
-          {% else %} In {{ delta }} Days
+          {% else %} In {{ delta }} days
           {% endif %}
         icon: mdi:recycle
