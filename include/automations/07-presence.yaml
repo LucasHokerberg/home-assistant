@@ -189,4 +189,4 @@
           channel: Presence
           actions:
             - action: turn_on_vacation_mode
-              title: 'Turn vacation mode back on'
+              title: 'Turn on vacation mode'
