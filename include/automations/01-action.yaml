@@ -63,3 +63,15 @@
   action:
     service: switch.turn_on
     entity_id: switch.fgh47k_charging
+
+# Turn on vacation mode
+- id: '0106'
+  alias: Action - Turn on vacation mode
+  trigger:
+    platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: turn_on_vacation_mode
+  action:
+    service: input_boolean.turn_on
+    entity_id: input_boolean.vacation_mode
