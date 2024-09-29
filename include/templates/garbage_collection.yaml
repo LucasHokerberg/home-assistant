@@ -1,0 +1,73 @@
+template:
+  - trigger:
+      - platform: time
+        at: "00:00:00"
+    action:
+      - service: calendar.get_events
+        data:
+          start_date_time: "{{ today_at() }}"
+          duration:
+            days: 31
+        target:
+          entity_id: calendar.garbage_can_1
+        response_variable: agenda_garbage_can_1
+      - service: calendar.get_events
+        data:
+          start_date_time: "{{ today_at() }}"
+          duration:
+            days: 31
+        target:
+          entity_id: calendar.garbage_can_2
+        response_variable: agenda_garbage_can_2
+      - service: calendar.get_events
+        data:
+          start_date_time: "{{ today_at() }}"
+          duration:
+            days: 31
+        target:
+          entity_id: calendar.garden_waste
+        response_variable: agenda_garden_waste
+    sensor:
+      - name: "Garbage Can 1 Pickup"
+        state: >
+          {% set event = agenda_garbage_can_1["calendar.garbage_can_1"].events | selectattr('summary', 'search', 'Garbage Can 1') | map(attribute='start') | map('as_datetime') | first %}
+          {{ (event | as_local - today_at()).days }}
+        unit_of_measurement: "Days"
+        icon: mdi:calendar-arrow-right
+      - name: "Garbage Can 2 Pickup"
+        state: >
+          {% set event = agenda_garbage_can_2["calendar.garbage_can_2"].events | selectattr('summary', 'search', 'Garbage Can 2') | map(attribute='start') | map('as_datetime') | first %}
+          {{ (event | as_local - today_at()).days }}
+        unit_of_measurement: "Days"
+        icon: mdi:calendar-arrow-right
+      - name: "Garden Waste Pickup"
+        state: >
+          {% set event = agenda_garden_waste["calendar.garden_waste"].events | selectattr('summary', 'search', 'Garden Waste') | map(attribute='start') | map('as_datetime') | first %}
+          {{ (event | as_local - today_at()).days }}
+        unit_of_measurement: "Days"
+        icon: mdi:calendar-arrow-right
+  - sensor:
+      - name: "Garbage Can 1"
+        state: >
+          {% set delta = states('sensor.garbage_can_1_pickup') | int %}
+          {% if delta == 0 %} Today
+          {% elif delta == 1 %} Tomorrow
+          {% else %} In {{ delta }} Days
+          {% endif %}
+        icon: mdi:trash-can
+      - name: "Garbage Can 2"
+        state: >
+          {% set delta = states('sensor.garbage_can_2_pickup') | int %}
+          {% if delta == 0 %} Today
+          {% elif delta == 1 %} Tomorrow
+          {% else %} In {{ delta }} Days
+          {% endif %}
+        icon: mdi:trash-can
+      - name: "Garden Waste"
+        state: >
+          {% set delta = states('sensor.garden_waste_pickup') | int %}
+          {% if delta == 0 %} Today
+          {% elif delta == 1 %} Tomorrow
+          {% else %} In {{ delta }} Days
+          {% endif %}
+        icon: mdi:recycle
