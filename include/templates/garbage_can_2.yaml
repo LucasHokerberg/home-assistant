@@ -1,0 +1,15 @@
+template:
+  - sensor:
+    - name: Garbage Can 2
+      state: >
+        {% set t = now() %}
+        {% set midnight = today_at() %}
+        {% set event = state_attr('calendar.garbage_can_2', 'start_time') | as_datetime | as_local %}
+        {% set delta = event - midnight %}
+        {% if delta.days == 0 %}
+          Today
+        {% elif delta.days == 1 %}
+          Tomorrow
+        {% else %}
+          In {{ delta.days }} days
+        {% endif %}
