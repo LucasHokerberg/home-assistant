@@ -4,43 +4,43 @@
   trigger:
     - platform: state
       entity_id: person.lucas_hokerberg
-      to: zone.lucas_hokerberg_work
+      to: 'Gelita'
       for: '00:00:30'
     - platform: state
       entity_id: person.victoria_hjerter
-      to: zone.victoria_hjerter_work
+      to: 'Resurs'
       for: '00:00:30'
     - platform: state
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
-      to: zone.hokerbergs
+      to: 'Hökerbergs'
       for: '00:00:30'
     - platform: state
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
-      to: zone.johanssons
+      to: 'Johanssons'
       for: '00:00:30'
     - platform: state
       entity_id: person.lucas_hokerberg
-      from: zone.lucas_hokerberg_work
+      from: 'Gelita'
       for: '00:00:30'
     - platform: state
       entity_id: person.victoria_hjerter
-      from: zone.victoria_hjerter_work
+      from: 'Resurs'
       for: '00:00:30'
     - platform: state
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
-      from: zone.hokerbergs
+      from: 'Hökerbergs'
       for: '00:00:30'
     - platform: state
       entity_id:
         - person.lucas_hokerberg
         - person.victoria_hjerter
-      from: zone.johanssons
+      from: 'Johanssons'
       for: '00:00:30'
   action:
     service: notify.home_mobile_apps
