@@ -2,53 +2,28 @@
 - id: '0701'
   alias: Presence - Notify on zone enter or leave
   trigger:
-    - platform: state
-      entity_id: person.lucas_hokerberg
-      to: 'Gelita'
-      for: '00:00:30'
-    - platform: state
-      entity_id: person.victoria_hjerter
-      to: 'Resurs'
-      for: '00:00:30'
-    - platform: state
-      entity_id:
-        - person.lucas_hokerberg
-        - person.victoria_hjerter
-      to: 'Hökerbergs'
-      for: '00:00:30'
-    - platform: state
-      entity_id:
-        - person.lucas_hokerberg
-        - person.victoria_hjerter
-      to: 'Johanssons'
-      for: '00:00:30'
-    - platform: state
-      entity_id: person.lucas_hokerberg
-      from: 'Gelita'
-      for: '00:00:30'
-    - platform: state
-      entity_id: person.victoria_hjerter
-      from: 'Resurs'
-      for: '00:00:30'
-    - platform: state
-      entity_id:
-        - person.lucas_hokerberg
-        - person.victoria_hjerter
-      from: 'Hökerbergs'
-      for: '00:00:30'
-    - platform: state
-      entity_id:
-        - person.lucas_hokerberg
-        - person.victoria_hjerter
-      from: 'Johanssons'
-      for: '00:00:30'
+  - platform: state
+    entity_id:
+      - person.lucas_hokerberg
+      - person.victoria_hjerter
+    for: '00:00:30'
+  condition:
+    - condition: template
+      value_template: >
+        '{{ trigger.to_state.state in ["Gelita", "Resurs"] or trigger.from_state.state in ["Gelita", "Resurs"] }}'
   action:
-    service: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: '{{ trigger.to_state.attributes.friendly_name }} {{ "left" if trigger.event == "leave" else "arrived at" }} {{ trigger.zone.attributes.friendly_name }}.'
-      data:
-        channel: Presence
+    - service: notify.home_mobile_apps
+      data_template:
+        title: 'HalloNET Home'
+        message: >
+          '{{ trigger.to_state.attributes.friendly_name }}
+          {% if trigger.to_state.state == "not_home" %}
+           left
+          {% else %}
+           arrived at
+          {% endif %} {{ trigger.to_state.state }}.'
+        data:
+          channel: Presence
 
 # Turn on lights when living room is dark and someone comes home
 - id: '0702'
