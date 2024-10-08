@@ -1,26 +1,32 @@
 # Send a notification when someone enters or leaves a zone
-- id: '0701'
+- id: '0710'
   alias: Presence - Notify on zone enter or leave
   trigger:
-    platform: state
-    entity_id:
-      - person.lucas_hokerberg
-      - person.victoria_hjerter
-    for: '00:00:30'
-  condition:
-    condition: template
-    value_template: '{{ trigger.to_state.state in ["Gelita", "Resurs"] or trigger.from_state.state in ["Gelita", "Resurs"] }}'
+    - platform: state
+      entity_id: person.lucas_hokerberg
+      from: 'not_home'
+      to: 'Gelita'
+      for: '00:00:30'
+    - platform: state
+      entity_id: person.lucas_hokerberg
+      from: 'Gelita'
+      to: 'not_home'
+      for: '00:00:30'
+    - platform: state
+      entity_id: person.victoria_hjerter
+      from: 'not_home'
+      to: 'Resurs'
+      for: '00:00:30'
+    - platform: state
+      entity_id: person.victoria_hjerter
+      from: 'Resurs'
+      to: 'not_home'
+      for: '00:00:30'
   action:
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: >
-        '{{ trigger.to_state.attributes.friendly_name }}
-        {% if trigger.to_state.state == "not_home" %}
-         left
-        {% else %}
-         arrived at
-        {% endif %} {{ trigger.to_state.state }}.'
+      message: '{{ trigger.to_state.attributes.friendly_name }} {% if trigger.to_state.state == "not_home" %} left {% else %} arrived at {% endif %} {{ trigger.to_state.state }}.'
       data:
         channel: Presence
 
