@@ -1,5 +1,5 @@
 # Send a notification when someone enters or leaves a zone
-- id: '0710'
+- id: '0701'
   alias: Presence - Notify on zone enter or leave
   trigger:
     - platform: state
