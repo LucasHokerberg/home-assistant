@@ -1,6 +1,6 @@
 # FGH47K: Notify and stop charging when battery level reached configured level
 - id: '1101'
-  alias: Car - FGH47K Stop charging at 
+  alias: Car - FGH47K Stop charging at level
   trigger:
     platform: template
     value_template: '{{ states.sensor.fgh47k_battery_level.state | int > (states.input_number.fgh47k_charge_level.state | int - 1 | int) }}'
@@ -34,4 +34,5 @@
     service: input_number.set_value
     target:
       entity_id: input_number.fgh47k_charge_level
+    data:
       value: 80
