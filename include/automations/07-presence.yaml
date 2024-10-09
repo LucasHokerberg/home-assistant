@@ -26,7 +26,7 @@
     service: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
-      message: '{{ trigger.to_state.attributes.friendly_name }} {% if trigger.to_state.state == "not_home" %} left {% else %} arrived at {% endif %} {{ trigger.to_state.state }}.'
+      message: '{{ trigger.to_state.attributes.friendly_name }} {% if trigger.to_state.state == "not_home" %} left {{ trigger.from_state.state }} {% else %} arrived at {{ trigger.to_state.state }}. {% endif %}'
       data:
         channel: Presence
 
