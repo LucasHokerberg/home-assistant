@@ -3,13 +3,17 @@ sensors:
   garden_waste:
     friendly_name: Garden Waste
     value_template: >-
-      {% set days_left = ((state_attr('calendar.garden_waste', 'start_time') | as_timestamp - today_at('00:00') | as_timestamp) / 86400) | int %}
-      {% if days_left == 0 %}
-        Today
-      {% elif days_left == 1 %}
-        Tomorrow
+      {% if state_attr('calendar.garden_waste', 'start_time') == None %}
+        Not Planned
       {% else %}
-        In {{ days_left }} days
+        {% set days_left = ((state_attr('calendar.garden_waste', 'start_time') | as_timestamp - today_at('00:00') | as_timestamp) / 86400) | int %}
+        {% if days_left == 0 %}
+          Today
+        {% elif days_left == 1 %}
+          Tomorrow
+        {% else %}
+          In {{ days_left }} days
+        {% endif %}
       {% endif %}
     icon_template: >-
       {% if is_state('sensor.garden_waste', 'Today') %}
