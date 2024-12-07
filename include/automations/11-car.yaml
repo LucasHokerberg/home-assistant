@@ -22,7 +22,7 @@
             - action: fgh47k_restart_charging
               title: 'Restart charging'
 
-# FGH47K: Set charge level based on temperature when charging starts (with override)
+# FGH47K: Set charge level based on temperature when charging starts
 - id: '1103'
   alias: Car - FGH47K Set charge level on start
   trigger:
