@@ -22,17 +22,29 @@
             - action: fgh47k_restart_charging
               title: 'Restart charging'
 
-# FGH47K: Restore charge level when charging complete
-- id: '1102'
-  alias: Car - FGH47K Restore charge level
+# FGH47K: Set charge level based on temperature when charging starts (with override)
+- id: '1103'
+  alias: Car - FGH47K Set charge level on start
   trigger:
     platform: state
     entity_id: switch.fgh47k_charging
-    from: 'on'
-    to: 'off'
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.fgh47k_auto_charge_level
+    state: 'on'
   action:
     service: input_number.set_value
     target:
       entity_id: input_number.fgh47k_charge_level
     data:
-      value: 80
+      value: >
+        {% set temp = state_attr('weather.smhi_home', 'temperature') | float %}
+        {% if temp < 5 %}
+          100
+        {% elif temp < 10 %}
+          90
+        {% else %}
+          80
+        {% endif %}
