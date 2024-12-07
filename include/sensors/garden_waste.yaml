@@ -4,7 +4,7 @@ sensors:
     friendly_name: Garden Waste
     value_template: >-
       {% if state_attr('calendar.garden_waste', 'start_time') == None %}
-        Not Planned
+        None planned
       {% else %}
         {% set days_left = ((state_attr('calendar.garden_waste', 'start_time') | as_timestamp - today_at('00:00') | as_timestamp) / 86400) | int %}
         {% if days_left == 0 %}
