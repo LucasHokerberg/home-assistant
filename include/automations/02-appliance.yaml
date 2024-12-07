@@ -1,33 +1,33 @@
 # Send a notification and turn off the shut-off valve when the dishwasher is done
 - id: '0201'
   alias: Appliance - Notify and turn off shut-off valve when dishwasher is done
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: sensor.kitchen_dishwasher_operation_state
     from: 'BSH.Common.EnumType.OperationState.Run'
     to: 'BSH.Common.EnumType.OperationState.Finished'
-  action:
-    - service: notify.home_mobile_apps
+  actions:
+    - action: notify.home_mobile_apps
       data_template:
         title: 'HalloNET Home'
         message: 'The dishwasher is done.'
         data:
           channel: Appliance
-    - service: switch.turn_off
+    - action: switch.turn_off
       target:
         entity_id: switch.kitchen_dishwasher_shutoff_valve
 
 # Notify when the freezer temperature is too high
 - id: '0202'
   alias: Appliance - Notify on high freezer temperature
-  trigger:
-    platform: numeric_state
+  triggers:
+    trigger: numeric_state
     entity_id: sensor.kitchen_freezer_temperature
     above: -10
     for:
       minutes: 20
-  action:
-    service: notify.home_mobile_apps
+  actions:
+    action: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
       message: 'Freezer temperature is too high!'
@@ -37,14 +37,14 @@
 # Notify when the fridge temperature is too high
 - id: '0203'
   alias: Appliance - Notify on high fridge temperature
-  trigger:
-    platform: numeric_state
+  triggers:
+    trigger: numeric_state
     entity_id: sensor.kitchen_fridge_temperature
     above: 15
     for:
       minutes: 10
-  action:
-    service: notify.home_mobile_apps
+  actions:
+    action: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
       message: 'Fridge temperature is too high!'
@@ -54,21 +54,21 @@
 # Start dishwasher when shut-off valve is opened
 - id: '0204'
   alias: Appliance - Start dishwasher
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: switch.kitchen_dishwasher_shutoff_valve
     from: 'off'
     to: 'on'
-  condition:
+  conditions:
     condition: state
     entity_id: sensor.kitchen_dishwasher_operation_state
     state: 'BSH.Common.EnumType.OperationState.Ready'
-  action:
-    - service: input_select.select_option
+  actions:
+    - action: input_select.select_option
       target:
         entity_id: select.kitchen_dishwasher_program
       data:
         option: 'Dishcare.Dishwasher.Program.Intensiv70'
-    - service: button.press
+    - action: button.press
       target:
         entity_id: button.kitchen_dishwasher_start

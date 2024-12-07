@@ -1,27 +1,28 @@
 # Start Spotify and play a default playlist when Living Room Harmony Hub starts Spotify
 - id: '0501'
   alias: "Media - Living Room Harmony Spotify"
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: sensor.living_room_harmony_hub
     to: 'Spotify'
-  action:
+  actions:
     - delay:
         seconds: 12
-    - service: androidtv.adb_command
-      data:
+    - action: androidtv.adb_command
+      target:
         entity_id: media_player.living_room_shield
+      data:
         command: 'am start -a android.intent.action.VIEW -d -n com.spotify.tv.android/.SpotifyTVActivity'
     - delay:
         seconds: 12
-    - service: media_player.select_source
+    - action: media_player.select_source
       target:
         entity_id: media_player.spotify_lucas_hokerberg
       data:
         source: 'Living Room Shield'
     - delay:
         seconds: 2
-    - service: media_player.play_media
+    - action: media_player.play_media
       target:
         entity_id: media_player.spotify_lucas_hokerberg
       data:
@@ -31,100 +32,108 @@
 # Turn off lights and start Plex when Living Room Harmony Hub starts Movie Mode
 - id: '0502'
   alias: "Media - Living Room Harmony Movie Mode"
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: sensor.living_room_harmony_hub
     to: 'Movie Mode'
-  action:
-    - service: homeassistant.turn_off
-      entity_id:
-        - group.downstairs_lights
-        - light.upstairs_window_light
-    - service: scene.turn_on
-      data:
+  actions:
+    - action: homeassistant.turn_off
+      target:
+        entity_id:
+          - group.downstairs_lights
+          - light.upstairs_window_light
+    - action: scene.turn_on
+      target:
         entity_id: scene.living_room_lights_plex
+      data:
         transition: 2
     - delay:
         seconds: 12
-    - service: androidtv.adb_command
-      data:
+    - action: androidtv.adb_command
+      target:
         entity_id: media_player.living_room_shield
+      data:
         command: 'am start -a android.intent.action.MAIN -c android.intent.category.LEANBACK_LAUNCHER -n com.plexapp.android/com.plexapp.plex.activities.SplashActivity'
 
 # Turn off lights when Plex is resuming and Movie Mode is active
 - id: '0503'
   alias: Media - Turn off lights when Plex plays
   initial_state: 'on'
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: media_player.living_room_shield
     to: 'playing'
-  condition:
+  conditions:
     condition: state
     entity_id: sensor.living_room_harmony_hub
     state: 'Movie Mode'
-  action:
-    service: light.turn_off
-    data:
+  actions:
+    action: light.turn_off
+    target:
       entity_id: group.downstairs_lights
+    data:
       transition: 2
 
 # Turn on lights when Plex goes idle and Movie Mode is active
 - id: '0504'
   alias: Media - Turn on lights when Plex stops
   initial_state: 'on'
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: media_player.living_room_shield
     to: 'idle'
-  condition:
+  conditions:
     condition: state
     entity_id: sensor.living_room_harmony_hub
     state: 'Movie Mode'
-  action:
-    service: scene.turn_on
-    data:
+  actions:
+    action: scene.turn_on
+    target:
       entity_id: scene.living_room_lights_plex
+    data:
       transition: 2
 
 # Turn on lights when Living Room Harmony Hub stops Movie Mode
 - id: '0505'
   alias: Media - Turn on lights when Living Room Harmony exit Movie Mode
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: sensor.living_room_harmony_hub
     from: 'Movie Mode'
-  action:
-    - service: homeassistant.turn_on
-      data:
+  actions:
+    - action: homeassistant.turn_on
+      target:
         entity_id:
           - scene.living_room_lights_normal
           - scene.dining_room_lights_normal
           - scene.kitchen_lights_normal
           - scene.upstairs_lights_normal
-    - service: light.turn_on
-      entity_id: light.kitchen_counter_light
+    - action: light.turn_on
+      target:
+        entity_id: light.kitchen_counter_light
       data:
         brightness_pct: 20
 
 # Turn on lights when the computer is turning on
 - id: '0506'
   alias: Media - Turn on lights when computer start
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: device_tracker.lucas_pc
     to: 'home'
-  action:
-    service: scene.turn_on
-    entity_id: scene.upstairs_desk_light_computer
+  actions:
+    action: scene.turn_on
+    target:
+      entity_id: scene.upstairs_desk_light_computer
 
 # Turn off lights when the computer is turning off
 - id: '0507'
   alias: Media - Turn off lights when computer stop
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: device_tracker.lucas_pc
     to: 'not_home'
-  action:
-    service: light.turn_off
-    entity_id: light.upstairs_desk_light
+  actions:
+    action: light.turn_off
+    target:
+      entity_id: light.upstairs_desk_light

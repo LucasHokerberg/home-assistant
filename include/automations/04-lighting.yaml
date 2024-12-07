@@ -1,23 +1,24 @@
 # Turn on outdoor lights at sunset
 - id: '0401'
   alias: Lighting - Turn on outdoor lights at sunset
-  trigger:
-    platform: sun
+  triggers:
+    trigger: sun
     event: sunset
-  action:
-    service: homeassistant.turn_on
-    entity_id: group.outdoor_comfort_lights
+  actions:
+    action: homeassistant.turn_on
+    target:
+      entity_id: group.outdoor_comfort_lights
 
 # Turn on indoor lights when living room becomes dark and someone is home (or vacation mode is on)
 - id: '0402'
   alias: Lighting - Turn on indoor lights when dark
-  trigger:
-    platform: numeric_state
+  triggers:
+    trigger: numeric_state
     entity_id: sensor.living_room_light_level
     below: 7
     for:
       seconds: 60
-  condition:
+  conditions:
     condition: and
     conditions:
       - condition: time
@@ -35,24 +36,25 @@
           - condition: state
             entity_id: input_boolean.vacation_mode
             state: 'on'
-  action:
-    service: homeassistant.turn_on
-    entity_id:
-      - scene.living_room_lights_normal
-      - scene.dining_room_lights_normal
-      - scene.kitchen_lights_normal
-      - scene.upstairs_lights_normal
+  actions:
+    action: homeassistant.turn_on
+    target:
+      entity_id:
+        - scene.living_room_lights_normal
+        - scene.dining_room_lights_normal
+        - scene.kitchen_lights_normal
+        - scene.upstairs_lights_normal
 
 # Turn on kitchen counter light when living room becomes dark, someone is home (or vacation mode is on), and the light is not already turned on
 - id: '0406'
   alias: Lighting - Turn on kitchen counter light when dark
-  trigger:
-    platform: numeric_state
+  triggers:
+    trigger: numeric_state
     entity_id: sensor.living_room_light_level
     below: 7
     for:
       seconds: 60
-  condition:
+  conditions:
     condition: and
     conditions:
       - condition: time
@@ -73,22 +75,23 @@
           - condition: state
             entity_id: input_boolean.vacation_mode
             state: 'on'
-  action:
-    service: light.turn_on
-    entity_id: light.kitchen_counter_light
+  actions:
+    action: light.turn_on
+    target:
+      entity_id: light.kitchen_counter_light
     data:
       brightness_pct: 20
 
 # Turn on Lovelia's lights when living room becomes dark, someone is home (or vacation mode is on), and Lovelia is not asleep
 - id: '0403'
   alias: Lighting - Turn on Lovelias lights when dark
-  trigger:
-    platform: numeric_state
+  triggers:
+    trigger: numeric_state
     entity_id: sensor.living_room_light_level
     below: 7
     for:
       seconds: 60
-  condition:
+  conditions:
     condition: and
     conditions:
       - condition: time
@@ -108,20 +111,21 @@
           - condition: state
             entity_id: input_boolean.vacation_mode
             state: 'on'
-  action:
-    service: homeassistant.turn_on
-    entity_id: scene.lovelias_room_lights_normal
+  actions:
+    action: homeassistant.turn_on
+    target:
+      entity_id: scene.lovelias_room_lights_normal
 
 # Turn on bedroom lights when living room becomes dark, someone is home (or vacation mode is on), and automation is not blocked
 - id: '0404'
   alias: Lighting - Turn on bedroom lights when dark
-  trigger:
-    platform: numeric_state
+  triggers:
+    trigger: numeric_state
     entity_id: sensor.living_room_light_level
     below: 7
     for:
       seconds: 60
-  condition:
+  conditions:
     condition: and
     conditions:
       - condition: time
@@ -142,20 +146,21 @@
         - condition: state
           entity_id: input_boolean.vacation_mode
           state: 'on'
-  action:
-    service: homeassistant.turn_on
-    entity_id: scene.bedroom_lights_normal
+  actions:
+    action: homeassistant.turn_on
+    target:
+      entity_id: scene.bedroom_lights_normal
 
 # Turn on window lights when living room becomes dark and no one's home
 - id: '0405'
   alias: Lighting - Turn on window lights when dark
-  trigger:
-    platform: numeric_state
+  triggers:
+    trigger: numeric_state
     entity_id: sensor.living_room_light_level
     below: 7
     for:
       seconds: 60
-  condition:
+  conditions:
     condition: and
     conditions:
       - condition: time
@@ -168,35 +173,38 @@
       - condition: state
         entity_id: alarm_control_panel.verisure_alarm
         state: armed_away
-  action:
-    service: homeassistant.turn_on
-    entity_id: group.indoor_window_lights
+  actions:
+    action: homeassistant.turn_on
+    target:
+      entity_id: group.indoor_window_lights
 
 # Turn off outdoor lights at sunrise
 - id: '0408'
   alias: Lighting - Turn off outdoor lights at sunrise
-  trigger:
-    platform: sun
+  triggers:
+    trigger: sun
     event: sunrise
-  action:
-    service: homeassistant.turn_off
-    entity_id: group.outdoor_comfort_lights
+  actions:
+    action: homeassistant.turn_off
+    target:
+      entity_id: group.outdoor_comfort_lights
 
 # Turn off indoor lights when living room is bright
 - id: '0409'
   alias: Lighting - Turn off indoor lights when bright
-  trigger:
-    platform: numeric_state
+  triggers:
+    trigger: numeric_state
     entity_id: sensor.living_room_light_level
     above: 9
     for:
       minutes: 5
-  condition:
+  conditions:
     condition: sun
     after: sunrise
     before: sunset
-  action:
-    service: homeassistant.turn_off
-    entity_id:
-      - group.indoor_window_lights
-      - group.indoor_comfort_lights
+  actions:
+    action: homeassistant.turn_off
+    target:
+      entity_id:
+        - group.indoor_window_lights
+        - group.indoor_comfort_lights

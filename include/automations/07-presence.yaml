@@ -1,29 +1,29 @@
 # Send a notification when someone enters or leaves a zone
 - id: '0701'
   alias: Presence - Notify on zone enter or leave
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: person.lucas_hokerberg
       from: 'not_home'
       to: 'Gelita'
       for: '00:00:30'
-    - platform: state
+    - trigger: state
       entity_id: person.lucas_hokerberg
       from: 'Gelita'
       to: 'not_home'
       for: '00:00:30'
-    - platform: state
+    - trigger: state
       entity_id: person.victoria_hjerter
       from: 'not_home'
       to: 'Resurs'
       for: '00:00:30'
-    - platform: state
+    - trigger: state
       entity_id: person.victoria_hjerter
       from: 'Resurs'
       to: 'not_home'
       for: '00:00:30'
-  action:
-    service: notify.home_mobile_apps
+  actions:
+    action: notify.home_mobile_apps
     data_template:
       title: 'HalloNET Home'
       message: '{{ trigger.to_state.attributes.friendly_name }} {% if trigger.to_state.state == "not_home" %} left {{ trigger.from_state.state }} {% else %} arrived at {{ trigger.to_state.state }}. {% endif %}'
@@ -33,17 +33,17 @@
 # Turn on lights when living room is dark and someone comes home
 - id: '0702'
   alias: Presence - Turn on indoor lights when someone comes home 1
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: alarm_control_panel.verisure_alarm
     from: armed_away
     to: disarmed
-  condition:
+  conditions:
     condition: state
     entity_id: group.indoor_window_lights
     state: 'on'
-  action:
-    - service: homeassistant.turn_on
+  actions:
+    - action: homeassistant.turn_on
       entity_id:
         - scene.living_room_lights_normal
         - scene.dining_room_lights_normal
@@ -51,117 +51,124 @@
         - scene.upstairs_lights_normal
         - scene.lovelias_room_lights_normal
         - scene.bedroom_lights_normal
-    - service: light.turn_on
-      entity_id: light.kitchen_counter_light
+    - action: light.turn_on
+      target:
+        entity_id: light.kitchen_counter_light
       data:
         brightness_pct: 20
 
 - id: '0703'
   alias: Presence - Turn on indoor lights when someone comes home 2
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.hallway_front_door_contact_sensor
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: alarm_control_panel.verisure_alarm
       state: armed_away
     - condition: state
       entity_id: group.indoor_window_lights
       state: 'on'
-  action:
-    service: automation.trigger
-    entity_id: automation.presence_turn_on_indoor_lights_when_someone_comes_home_1 
+  actions:
+    action: automation.trigger
+    target:
+      entity_id: automation.presence_turn_on_indoor_lights_when_someone_comes_home_1 
 
 # Turn on the heat if cold inside, and someone comes home
 - id: '0704'
   alias: Presence - Turn on heat when cold and someone comes home
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: alarm_control_panel.verisure_alarm
     from: armed_away
     to: disarmed
-  condition:
+  conditions:
     - condition: template
       value_template: '{{ states.sensor.downstairs_average_temperature.state | float < (states.input_number.living_room_hvac_target.state | float - 0.5 | float) }}'
     - condition: state
       entity_id: climate.living_room_hvac
       state: 'off'
-  action:
-    service: automation.trigger
-    entity_id: automation.climate_start_heating_when_cold
+  actions:
+    action: automation.trigger
+    target:
+      entity_id: automation.climate_start_heating_when_cold
 
 # Turn on the AC if warm inside, and someone comes home
 - id: '0705'
   alias: Presence - Turn on AC when warm and someone comes home
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: alarm_control_panel.verisure_alarm
     from: armed_away
     to: disarmed
-  condition:
+  conditions:
     - condition: template
       value_template: '{{ states.sensor.downstairs_average_temperature.state | float > (states.input_number.living_room_hvac_target.state | float + 0.5 | float) }}'
     - condition: state
       entity_id: climate.living_room_hvac
       state: 'off'
-  action:
-    service: automation.trigger
-    entity_id: automation.climate_start_cooling_when_warm
+  actions:
+    action: automation.trigger
+    target:
+      entity_id: automation.climate_start_cooling_when_warm
 
 # Turn off lights and TV when the alarm is armed away
 - id: '0706'
   alias: Presence - Turn off lights and TV when alarm is armed away
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: alarm_control_panel.verisure_alarm
     to: armed_away
-  action:
-    service: homeassistant.turn_off
-    entity_id:
-      - group.indoor_comfort_lights
-      - group.indoor_work_lights
-      - remote.living_room_harmony_hub
+  actions:
+    action: homeassistant.turn_off
+    target:
+      entity_id:
+        - group.indoor_comfort_lights
+        - group.indoor_work_lights
+        - remote.living_room_harmony_hub
 
 # Turn on bedroom wardrobe light when door is open
 - id: '0707'
   alias: Presence - Turn on wardrobe light on door open
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.bedroom_wardrobe_contact_sensor
     to: 'on'
-  action:
-    service: light.turn_on
-    entity_id: light.bedroom_wardrobe_ceiling_light
+  actions:
+    action: light.turn_on
+    target:
+      entity_id: light.bedroom_wardrobe_ceiling_light
 
 # Turn off bedroom wardrobe light when door is closed
 - id: '0708'
   alias: Presence - Turn off wardrobe light on door close
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.bedroom_wardrobe_contact_sensor
     to: 'off'
-  action:
-    service: light.turn_off
-    entity_id: light.bedroom_wardrobe_ceiling_light
+  actions:
+    action: light.turn_off
+    target:
+      entity_id: light.bedroom_wardrobe_ceiling_light
 
 # Turn off vacation mode and notify when someone comes home
 - id: '0709'
   alias: Presence - Turn off vacation mode when someone comes home
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: alarm_control_panel.verisure_alarm
     from: armed_away
     to: disarmed
-  condition:
+  conditions:
     condition: state
     entity_id: input_boolean.vacation_mode
     state: 'on'
-  action:
-    - service: input_boolean.turn_off
+  actions:
+    - action: input_boolean.turn_off
       target:
         entity_id: input_boolean.vacation_mode
-    - service: notify.home_mobile_apps
+    - action: notify.home_mobile_apps
       data:
         title: 'HalloNET Home'
         message: 'Welcome home! Vacation mode has been turned off.'

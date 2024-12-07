@@ -1,77 +1,81 @@
 # Lock hallway front door
 - id: '0101'
   alias: Action - Lock hallway front door
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: mobile_app_notification_action
     event_data:
       action: lock_hallway_front_door_lock
-  action:
-    service: lock.lock
-    entity_id: lock.hallway_front_door_lock
+  actions:
+    action: lock.lock
+    target:
+      entity_id: lock.hallway_front_door_lock
 
 # Unlock hallway front door only when someone is home
 - id: '0102'
   alias: Action - Unlock hallway front door
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: mobile_app_notification_action
     event_data:
       action: unlock_hallway_front_door_lock
-  condition:
+  conditions:
     condition: state
     entity_id: alarm_control_panel.verisure_alarm
     state: 'disarmed'
-  action:
-    service: lock.unlock
-    entity_id: lock.hallway_front_door_lock
+  actions:
+    action: lock.unlock
+    target:
+      entity_id: lock.hallway_front_door_lock
 
 # Acknowledge basement water leakge alert
 - id: '0103'
   alias: Action - Acknowledge basement water leakage
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: mobile_app_notification_action
     event_data:
       action: acknowledge_basement_water_leakage
-  action:
-    service: alert.turn_off
+  actions:
+    action: alert.turn_off
     target:
       entity_id: alert.basement_water_leakage
 
 # Acknowledge kitchen water leakge alert
 - id: '0104'
   alias: Action - Acknowledge kitchen water leakage
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: mobile_app_notification_action
     event_data:
       action: acknowledge_kitchen_water_leakage
-  action:
-    service: alert.turn_off
+  actions:
+    action: alert.turn_off
     target:
       entity_id: alert.kitchen_water_leakage
 
 # FGH47K: Turn on charging
 - id: '0105'
   alias: Action - FGH47K Restart charging
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: mobile_app_notification_action
     event_data:
       action: fgh47k_restart_charging
-  action:
-    service: switch.turn_on
-    entity_id: switch.fgh47k_charging
+  actions:
+    action: switch.turn_on
+    target:
+      entity_id: switch.fgh47k_charging
 
 # Turn on vacation mode
 - id: '0106'
   alias: Action - Turn on vacation mode
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: mobile_app_notification_action
     event_data:
       action: turn_on_vacation_mode
-  action:
-    service: input_boolean.turn_on
-    entity_id: input_boolean.vacation_mode
+  actions:
+    action: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.vacation_mode

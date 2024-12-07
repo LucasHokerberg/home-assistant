@@ -1,75 +1,76 @@
 # Run wake up routine 5 minutes prior to Lucas' alarm and he's home, and night mode is on
 - id: '0901'
   alias: Routine - Wake up Lucas
-  trigger:
-    platform: template
+  triggers:
+    trigger: template
     value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - 300 < as_timestamp(now()) }}'
-  condition:
+  conditions:
     - condition: state
       entity_id: person.lucas_hokerberg
       state: 'home'
     - condition: state
       entity_id: input_boolean.night_mode
       state: 'on'
-  action:
-    service: script.wake_up
+  actions:
+    action: script.wake_up
 
 # Run wake up routine 5 minutes prior to Victoria's alarm and she's home, and night mode is on
 - id: '0906'
   alias: Routine - Wake up Victoria
-  trigger:
-    platform: template
+  triggers:
+    trigger: template
     value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - 300 < as_timestamp(now()) }}'
-  condition:
+  conditions:
     - condition: state
       entity_id: person.victoria_hjerter
       state: 'home'
     - condition: state
       entity_id: input_boolean.night_mode
       state: 'on'
-  action:
-    service: script.wake_up
+  actions:
+    action: script.wake_up
 
 # Run wake up routine in the morning and night mode is still on
 - id: '0904'
   alias: Routine - Wake up
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '08:00:00'
-  action:
+  actions:
     - delay:
         minutes: '{{ range(2,32) | random | int }}'
-    - service: script.wake_up
+    - action: script.wake_up
     
 # Wake up routine when living room is dark
 - id: '0902'
   alias: Routine - Wake up and dark
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: script.wake_up
     to: 'on'
-  condition:
+  conditions:
     - condition: numeric_state
       entity_id: sensor.living_room_light_level
       below: 7
     - condition: state
       entity_id: input_boolean.guest_mode
       state: 'off'
-  action:
-    service: homeassistant.turn_on
-    entity_id:
-      - scene.living_room_lights_normal
-      - scene.dining_room_lights_normal
-      - scene.kitchen_lights_normal
+  actions:
+    action: homeassistant.turn_on
+    target:
+      entity_id:
+        - scene.living_room_lights_normal
+        - scene.dining_room_lights_normal
+        - scene.kitchen_lights_normal
 
 # Run bedtime routine when the TV is off, it's evening, and all downstairs lights are turned off
 - id: '0903'
   alias: Routine - Bedtime
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: group.downstairs_lights
     to: 'off'
-  condition:
+  conditions:
     - condition: time
       after: '21:00'
       before: '03:00'
@@ -82,23 +83,23 @@
     - condition: state
       entity_id: input_boolean.guest_mode
       state: 'off'
-  action:
-    service: script.bedtime
+  actions:
+    action: script.bedtime
 
 # Bedtime routine when vacation mode is on
 - id: '0905'
   alias: Routine - Bedtime vacation
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '21:58:00'
-  condition:
+  conditions:
     condition: state
     entity_id: input_boolean.vacation_mode
     state: 'on'
-  action:
+  actions:
     - delay:
         minutes: '{{ range(16,59) | random | int }}'
-    - service: script.indoor_lights_off
-    - service: input_boolean.turn_on
+    - action: script.indoor_lights_off
+    - action: input_boolean.turn_on
       target:
         entity_id: input_boolean.night_mode

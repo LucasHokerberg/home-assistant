@@ -1,11 +1,11 @@
 # Turn on lights when motion in living room is detected, night mode is on, and guest mode is off
 - id: '0601'
   alias: Motion - Turn on lights on living room motion
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.living_room_motion
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: group.living_room_floor_light
       state: 'off'
@@ -15,54 +15,58 @@
     - condition: state
       entity_id: input_boolean.guest_mode
       state: 'off'
-  action:
-    - service: light.turn_on
-      entity_id: light.living_room_floor_light_1
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.living_room_floor_light_1
     - wait_for_trigger:
-        platform: state
+        trigger: state
         entity_id: binary_sensor.living_room_motion
         to: 'off'
       timeout:
         minutes: 5
-    - service: light.turn_off
-      entity_id: light.living_room_floor_light_1
+    - action: light.turn_off
+      target:
+        entity_id: light.living_room_floor_light_1
 
 # Turn on lights when motion in kitchen is detected and night mode is on
 - id: '0604'
   alias: Motion - Turn on lights on kitchen motion
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.kitchen_motion
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: light.kitchen_counter_light
       state: 'off'
     - condition: state
       entity_id: input_boolean.night_mode
       state: 'on'
-  action:
-    - service: light.turn_on
-      entity_id: light.kitchen_counter_light
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.kitchen_counter_light
       data:
         brightness_pct: 1
     - wait_for_trigger:
-        platform: state
+        trigger: state
         entity_id: binary_sensor.kitchen_motion
         to: 'off'
       timeout:
         minutes: 5
-    - service: light.turn_off
-      entity_id: light.kitchen_counter_light
+    - action: light.turn_off
+      target:
+        entity_id: light.kitchen_counter_light
 
 # Turn on lights when motion upstairs is detected and it's dark
 - id: '0602'
   alias: Motion - Turn on lights on upstairs motion
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.upstairs_motion
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: light.upstairs_window_light
       state: 'off'
@@ -72,40 +76,44 @@
     - condition: numeric_state
       entity_id: sensor.upstairs_light_level
       below: 6
-  action:
-    - service: scene.turn_on
-      entity_id: scene.upstairs_desk_light_night_motion
+  actions:
+    - action: scene.turn_on
+      target:
+        entity_id: scene.upstairs_desk_light_night_motion
     - wait_for_trigger:
-        platform: state
+        trigger: state
         entity_id: binary_sensor.upstairs_motion
         to: 'off'
       timeout:
         minutes: 5
-    - service: light.turn_off
-      entity_id: light.upstairs_desk_light
+    - action: light.turn_off
+      target:
+        entity_id: light.upstairs_desk_light
 
 # Turn on lights when driveway motion is detected and outdoor comfort lights are on
 - id: '0603'
   alias: Motion - Turn on lights on driveway motion
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.outdoor_driveway_motion
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: group.outdoor_comfort_lights
       state: 'on'
     - condition: state
       entity_id: switch.outdoor_driveway_floodlight
       state: 'off'
-  action:
-    - service: switch.turn_on
-      entity_id: switch.outdoor_driveway_floodlight
+  actions:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.outdoor_driveway_floodlight
     - wait_for_trigger:
-        platform: state
+        trigger: state
         entity_id: binary_sensor.outdoor_driveway_motion
         to: 'off'
       timeout:
         minutes: 5
-    - service: switch.turn_off
-      entity_id: switch.outdoor_driveway_floodlight
+    - action: switch.turn_off
+      target:
+        entity_id: switch.outdoor_driveway_floodlight
