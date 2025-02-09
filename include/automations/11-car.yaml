@@ -1,17 +1,23 @@
-# FGH47K: Notify and stop charging when battery level reached configured level
+# FGH47K: Notify, stop, and reset charging when battery level reached configured level
 - id: '1101'
-  alias: Car - FGH47K Stop charging at level
+  alias: Car - FGH47K Stop and reset charging at level
   triggers:
     trigger: template
     value_template: '{{ states.sensor.fgh47k_battery_level.state | int > (states.input_number.fgh47k_charge_level.state | int - 1 | int) }}'
   conditions:
-    condition: state
-    entity_id: switch.fgh47k_charging
-    state: 'on'
+    - condition: state
+      entity_id: switch.fgh47k_charging
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.fgh47k_auto_charge
+      state: 'on'
   actions:
     - action: switch.turn_off
       target:
         entity_id: switch.fgh47k_charging
+    - action: switch.turn_off
+      target:
+        entity_id: switch.fgh47k_max_charge_current
     - action: notify.mobile_app_lucas_hokerberg
       data:
         title: 'HalloNET Home'
@@ -32,7 +38,7 @@
     to: 'on'
   conditions:
     condition: state
-    entity_id: input_boolean.fgh47k_auto_charge_level
+    entity_id: input_boolean.fgh47k_auto_charge
     state: 'on'
   actions:
     action: input_number.set_value
