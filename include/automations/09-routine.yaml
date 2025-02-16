@@ -62,6 +62,7 @@
         - scene.living_room_lights_normal
         - scene.dining_room_lights_normal
         - scene.kitchen_lights_normal
+        - light.kitchen_counter_light
 
 # Run bedtime routine when the TV is off, it's evening, and all downstairs lights are turned off
 - id: '0903'
