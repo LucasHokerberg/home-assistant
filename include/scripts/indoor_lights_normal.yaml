@@ -7,9 +7,5 @@ sequence:
       - scene.upstairs_lights_normal
       - scene.lovelias_room_lights_normal
       - scene.bedroom_lights_normal
-  - service: light.turn_on
-    entity_id: light.kitchen_counter_light
-    data:
-      brightness_pct: 20
   - service: homeassistant.turn_off
     entity_id: group.indoor_work_lights
