@@ -41,16 +41,22 @@
     entity_id: input_boolean.fgh47k_auto_charge
     state: 'on'
   actions:
-    action: input_number.set_value
-    target:
-      entity_id: input_number.fgh47k_charge_level
-    data:
-      value: >
-        {% set temp = states('sensor.fgh47k_outside_temperature') | float %}
-        {% if temp < 5 %}
-          100
-        {% elif temp < 10 %}
-          90
-        {% else %}
-          80
-        {% endif %}
+    - delay: 
+        minutes: 5
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.fgh47k_charge_level
+      data:
+        value: >
+          {% if is_state('device_tracker.fgh47k', 'home') %}
+            {% set temp = states('sensor.outdoor_temperature') | float %}
+          {% else %}
+            {% set temp = states('sensor.fgh47k_outside_temperature') | float %}
+          {% endif %}
+          {% if temp < 5 %}
+            100
+          {% elif temp < 10 %}
+            90
+          {% else %}
+            80
+          {% endif %}
