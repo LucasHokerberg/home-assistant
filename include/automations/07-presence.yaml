@@ -172,29 +172,3 @@
           actions:
             - action: turn_on_vacation_mode
               title: 'Turn on vacation mode'
-
-# Lock cable in the charger when car is not home
-- id: '0710'
-  alias: Presence - Lock charger cable when car is not home
-  trigger:
-    trigger: state
-    entity_id: device_tracker.fgh47k
-    from: 'home'
-    to: 'not_home'
-  actions:
-    action: lock.lock
-    target:
-      entity_id: lock.outdoor_ev_charger
-
-# Unlock cable in the charger when car is home
-- id: '0711'
-  alias: Presence - Unlock charger cable when car is home
-  trigger:
-    trigger: state
-    entity_id: device_tracker.fgh47k
-    from: 'not_home'
-    to: 'home'
-  actions:
-    action: lock.unlock
-    target:
-      entity_id: lock.outdoor_ev_charger

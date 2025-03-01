@@ -60,3 +60,29 @@
           {% else %}
             80
           {% endif %}
+
+# Lock cable in the charger when cable is disconnected
+- id: '1104'
+  alias: Car - Lock charger when cable disconnected
+  trigger:
+    trigger: state
+    entity_id: sensor.outdoor_ev_charger_mode
+    to: 'Disconnected'
+    for:
+      minutes: 5
+  actions:
+    action: lock.lock
+    target:
+      entity_id: lock.outdoor_ev_charger
+
+# Unlock cable in the charger when cable is connected
+- id: '1105'
+  alias: Car - Unlock charger when cable connected
+  trigger:
+    trigger: state
+    entity_id: sensor.outdoor_ev_charger_mode
+    to: 'Charging'
+  actions:
+    action: lock.unlock
+    target:
+      entity_id: lock.outdoor_ev_charger
