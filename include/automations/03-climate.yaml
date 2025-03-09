@@ -138,3 +138,33 @@
     action: climate.turn_off
     target:
       entity_id: climate.living_room_hvac
+
+# Report external temperature to bedroom radiator
+- id: '0307'
+  alias: Climate - Report bedroom external temp
+  triggers:
+    - trigger:
+      platform: state
+      entity_id: sensor.bedroom_temperature
+    - trigger: time_pattern
+      minutes: '/5'
+  actions:
+    action: number.set_value
+    data:
+      entity_id: number.bedroom_radiator_external_temperature
+      value: "{{ states('sensor.bedroom_temperature') | float }}"
+
+# Report external temperature to Lovelia's room radiator
+- id: '0307'
+  alias: Climate - Report Lovelia's room external temp
+  triggers:
+    - trigger:
+      platform: state
+      entity_id: sensor.lovelias_room_temperature
+    - trigger: time_pattern
+      minutes: '/5'
+  actions:
+    action: number.set_value
+    data:
+      entity_id: number.lovelias_room_radiator_external_temperature
+      value: "{{ states('sensor.lovelias_room_temperature') | float }}"
