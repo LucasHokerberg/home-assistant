@@ -15,7 +15,7 @@
     - action: switch.turn_off
       target:
         entity_id: switch.fgh47k_charging
-    - action: switch.turn_no
+    - action: switch.turn_on
       target:
         entity_id: switch.fgh47k_reduced_current
     - action: notify.mobile_app_lucas_hokerberg
