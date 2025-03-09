@@ -143,8 +143,7 @@
 - id: '0307'
   alias: Climate - Report bedroom external temp
   triggers:
-    - trigger:
-      platform: state
+    - trigger: state
       entity_id: sensor.bedroom_temperature
     - trigger: time_pattern
       minutes: '/5'
@@ -158,8 +157,7 @@
 - id: '0307'
   alias: Climate - Report Lovelia's room external temp
   triggers:
-    - trigger:
-      platform: state
+    - trigger: state
       entity_id: sensor.lovelias_room_temperature
     - trigger: time_pattern
       minutes: '/5'
