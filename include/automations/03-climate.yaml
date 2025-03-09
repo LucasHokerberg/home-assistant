@@ -154,7 +154,7 @@
       value: "{{ states('sensor.bedroom_temperature') | float }}"
 
 # Report external temperature to Lovelia's room radiator
-- id: '0307'
+- id: '0308'
   alias: Climate - Report Lovelia's room external temp
   triggers:
     - trigger: state
