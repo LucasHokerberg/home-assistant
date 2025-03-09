@@ -1,6 +1,6 @@
-# FGH47K: Notify, stop, and reset charging when battery level reached configured level
+# FGH47K: Notify and stopcharging when battery level reached configured level
 - id: '1101'
-  alias: Car - FGH47K Stop and reset charging at level
+  alias: Car - FGH47K Stop charging at level
   triggers:
     trigger: template
     value_template: '{{ states.sensor.fgh47k_battery_level.state | int > (states.input_number.fgh47k_charge_level.state | int - 1 | int) }}'
@@ -15,9 +15,6 @@
     - action: switch.turn_off
       target:
         entity_id: switch.fgh47k_charging
-    - action: switch.turn_on
-      target:
-        entity_id: switch.fgh47k_reduced_current
     - action: notify.mobile_app_lucas_hokerberg
       data:
         title: 'HalloNET Home'
@@ -27,6 +24,23 @@
           actions:
             - action: fgh47k_restart_charging
               title: 'Restart charging'
+
+# FGH47K: Reset charge settings when charging stop
+- id: '1102'
+  alias: Car - FGH47K Reset charge on stop
+  triggers:
+    trigger: state
+    entity_id: switch.fgh47k_charging
+    from: 'on'
+    to: 'off'
+  conditions:
+    condition: state
+    entity_id: input_boolean.fgh47k_auto_charge
+    state: 'on'
+  actions:
+    action: switch.turn_on
+    target:
+      entity_id: switch.fgh47k_reduced_current
 
 # FGH47K: Set charge level based on outside temperature when charging starts
 - id: '1103'
