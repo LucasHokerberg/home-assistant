@@ -151,7 +151,7 @@
     action: number.set_value
     data:
       entity_id: number.bedroom_radiator_external_temperature
-      value: "{{ states('sensor.bedroom_temperature') | float }}"
+      value: "{{ states('sensor.bedroom_temperature') | float * 100 }}"
 
 # Report external temperature to Lovelia's room radiator
 - id: '0308'
@@ -165,4 +165,4 @@
     action: number.set_value
     data:
       entity_id: number.lovelias_room_radiator_external_temperature
-      value: "{{ states('sensor.lovelias_room_temperature') | float }}"
+      value: "{{ states('sensor.lovelias_room_temperature') | float * 100 }}"
