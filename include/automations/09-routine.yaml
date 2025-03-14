@@ -14,22 +14,6 @@
   actions:
     action: script.wake_up
 
-# Run wake up routine 5 minutes prior to Victoria's alarm and she's home, and night mode is on
-- id: '0906'
-  alias: Routine - Wake up Victoria
-  triggers:
-    trigger: template
-    value_template: '{{ as_timestamp(states("sensor.victoria_hjerter_next_alarm")) - 300 < as_timestamp(now()) }}'
-  conditions:
-    - condition: state
-      entity_id: person.victoria_hjerter
-      state: 'home'
-    - condition: state
-      entity_id: input_boolean.night_mode
-      state: 'on'
-  actions:
-    action: script.wake_up
-
 # Run wake up routine in the morning and night mode is still on
 - id: '0904'
   alias: Routine - Wake up

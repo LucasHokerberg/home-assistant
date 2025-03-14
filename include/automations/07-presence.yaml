@@ -12,16 +12,6 @@
       from: 'Gelita'
       to: 'not_home'
       for: '00:00:30'
-    - trigger: state
-      entity_id: person.victoria_hjerter
-      from: 'not_home'
-      to: 'Resurs'
-      for: '00:00:30'
-    - trigger: state
-      entity_id: person.victoria_hjerter
-      from: 'Resurs'
-      to: 'not_home'
-      for: '00:00:30'
   actions:
     action: notify.home_mobile_apps
     data_template:
