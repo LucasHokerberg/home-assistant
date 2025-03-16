@@ -37,13 +37,19 @@
             entity_id: input_boolean.vacation_mode
             state: 'on'
   actions:
-    action: homeassistant.turn_on
-    target:
-      entity_id:
-        - scene.living_room_lights_normal
-        - scene.dining_room_lights_normal
-        - scene.kitchen_lights_normal
-        - scene.upstairs_lights_normal
+    - action: homeassistant.turn_on
+      target:
+        entity_id:
+          - scene.living_room_lights_normal
+          - scene.dining_room_lights_normal
+          - scene.kitchen_lights_normal
+          - light.kitchen_counter_light
+          - scene.upstairs_lights_normal
+    - action: light.turn_on
+      target:
+        entity_id: light.kitchen_counter_light
+      data:
+        brightness_pct: 20
 
 # Turn on Lovelia's lights when living room becomes dark, someone is home (or vacation mode is on), and Lovelia is not asleep
 - id: '0403'

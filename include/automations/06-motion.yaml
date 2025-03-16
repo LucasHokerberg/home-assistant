@@ -29,71 +29,6 @@
       target:
         entity_id: light.living_room_floor_light_1
 
-# Turn on lights when motion in kitchen is detected
-- id: '0604'
-  alias: Motion - Turn on lights on kitchen motion
-  triggers:
-    trigger: state
-    entity_id: binary_sensor.kitchen_motion
-    to: 'on'
-  conditions:
-    - condition: state
-      entity_id: light.kitchen_counter_light
-      state: 'off'
-    - condition: numeric_state
-      entity_id: sensor.kitchen_light_level
-      below: 7
-    - condition: state
-      entity_id: input_boolean.night_mode
-      state: 'off'
-  actions:
-    - action: light.turn_on
-      target:
-        entity_id: light.kitchen_counter_light
-      data:
-        brightness_pct: 20
-    - wait_for_trigger:
-        trigger: state
-        entity_id: binary_sensor.kitchen_motion
-        to: 'off'
-        for:
-          minutes: 10
-      timeout:
-        minutes: 60
-    - action: light.turn_off
-      target:
-        entity_id: light.kitchen_counter_light
-
-# Turn on lights when motion in kitchen is detected and night mode is on
-- id: '0605'
-  alias: Motion - Turn on lights on kitchen motion in night
-  triggers:
-    trigger: state
-    entity_id: binary_sensor.kitchen_motion
-    to: 'on'
-  conditions:
-    - condition: state
-      entity_id: light.kitchen_counter_light
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.night_mode
-      state: 'on'
-  actions:
-    - action: light.turn_on
-      target:
-        entity_id: light.kitchen_counter_light
-      data:
-        brightness_pct: 1
-    - wait_for_trigger:
-        trigger: state
-        entity_id: binary_sensor.kitchen_motion
-        to: 'off'
-      timeout:
-        minutes: 5
-    - action: light.turn_off
-      target:
-        entity_id: light.kitchen_counter_light
-
 # Turn on lights when motion upstairs is detected and it's dark
 - id: '0602'
   alias: Motion - Turn on lights on upstairs motion
@@ -152,3 +87,54 @@
     - action: switch.turn_off
       target:
         entity_id: switch.outdoor_driveway_floodlight
+
+# Turn on lights when motion in kitchen is detected and night mode is on
+- id: '0605'
+  alias: Motion - Turn on lights on kitchen motion in night
+  triggers:
+    trigger: state
+    entity_id: binary_sensor.kitchen_motion
+    to: 'on'
+  conditions:
+    - condition: state
+      entity_id: light.kitchen_counter_light
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.night_mode
+      state: 'on'
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.kitchen_counter_light
+      data:
+        brightness_pct: 1
+    - wait_for_trigger:
+        trigger: state
+        entity_id: binary_sensor.kitchen_motion
+        to: 'off'
+      timeout:
+        minutes: 5
+    - action: light.turn_off
+      target:
+        entity_id: light.kitchen_counter_light
+
+# Turn off lights when no motion in kitchen is detected and downstair lights are off
+- id: '0606'
+  alias: Motion - Turn off lights on no kitchen motion
+  triggers:
+    trigger: state
+    entity_id: binary_sensor.kitchen_motion
+    to: 'off'
+    for:
+      minutes: 10
+  conditions:
+    - condition: state
+      entity_id: group.downstairs_lights
+      state: 'off'
+    - condition: state
+      entity_id: light.kitchen_counter_light
+      state: 'on'
+  actions:
+    action: light.turn_off
+    target:
+      entity_id: light.kitchen_counter_light
