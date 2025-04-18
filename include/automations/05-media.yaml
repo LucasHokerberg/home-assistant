@@ -8,9 +8,9 @@
   actions:
     # Wait for Shield to start
     - wait_for_trigger:
-      platform: state
-      entity_id: media_player.living_room_shield
-      to: "idle"
+        platform: state
+        entity_id: media_player.living_room_shield
+        to: "idle"
       timeout: "00:00:30"
       continue_on_timeout: false
     # (Re)Start Spotify app
@@ -57,9 +57,9 @@
         command: ENTER
     # Wait for Spotify to start playing
     - wait_for_trigger:
-      platform: state
-      entity_id: media_player.spotify_lucas_hokerberg
-      to: "playing"
+        platform: state
+        entity_id: media_player.spotify_lucas_hokerberg
+        to: "playing"
       timeout: "00:00:30"
       continue_on_timeout: false
     # Play selected playlist
