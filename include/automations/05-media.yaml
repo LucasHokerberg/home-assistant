@@ -10,15 +10,15 @@
     - wait_for_trigger:
         platform: state
         entity_id: media_player.living_room_shield
-        to: "idle"
-      timeout: "00:00:30"
+        to: 'idle'
+      timeout: '00:00:30'
       continue_on_timeout: false
     # (Re)Start Spotify app
     - service: androidtv.adb_command
       target:
         entity_id: media_player.living_room_shield
       data:
-        command: "am force-stop com.spotify.tv.android"
+        command: 'am force-stop com.spotify.tv.android'
     - delay:
         seconds: 2
     - action: androidtv.adb_command
@@ -29,7 +29,7 @@
     # Wait for Spotify to start
     - wait_template: >
         {{ state_attr('media_player.living_room_shield', 'source') == 'Spotify' }}
-      timeout: "00:00:30"
+      timeout: '00:00:30'
       continue_on_timeout: false
     # Select Living Room Shield as Spotify device
     - action: media_player.select_source
@@ -39,8 +39,8 @@
         source: 'Living Room Shield'
     # Wait for Living Room Shield to be selected
     - wait_template: >
-        {{ 'Living Room Shield' in state_attr('media_player.spotify_lucas_hokerberg', 'source_list') }}
-      timeout: "00:00:30"
+        {{ state_attr('media_player.spotify_lucas_hokerberg', 'source') == 'Living Room Shield' }}
+      timeout: '00:00:30'
       continue_on_timeout: false
     # Press enter to play currently selected playlist (required for media_player.play_media)
     - action: androidtv.adb_command
@@ -59,8 +59,8 @@
     - wait_for_trigger:
         platform: state
         entity_id: media_player.spotify_lucas_hokerberg
-        to: "playing"
-      timeout: "00:00:30"
+        to: 'playing'
+      timeout: '00:00:30'
       continue_on_timeout: false
     # Play selected playlist
     - action: media_player.play_media
