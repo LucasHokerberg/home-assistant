@@ -118,7 +118,7 @@
       target:
         entity_id: light.kitchen_counter_light
 
-# Turn off lights when no motion in kitchen is detected and downstair lights are off
+# Turn off lights when no motion in kitchen is detected and downstairs lights are off
 - id: '0606'
   alias: Motion - Turn off lights on no kitchen motion
   triggers:
