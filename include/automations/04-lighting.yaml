@@ -43,13 +43,7 @@
           - scene.living_room_lights_normal
           - scene.dining_room_lights_normal
           - scene.kitchen_lights_normal
-          - light.kitchen_counter_light
           - scene.upstairs_lights_normal
-    - action: light.turn_on
-      target:
-        entity_id: light.kitchen_counter_light
-      data:
-        brightness_pct: 20
 
 # Turn on Lovelia's lights when living room becomes dark, someone is home (or vacation mode is on), and Lovelia is not asleep
 - id: '0403'
@@ -147,6 +141,24 @@
     target:
       entity_id: group.indoor_window_lights
 
+# Turn on kitchen counter light when downstairs comfort lights turn on and counter light is off
+- id: '0406'
+  alias: Lighting - Turn on kitchen counter light when comfort lights turns on
+  triggers:
+    trigger: state
+    entity_id: group.downstairs_comfort_lights
+    to: 'on'
+  conditions:
+    condition: state
+    entity_id: light.kitchen_counter_light
+    state: 'off'
+  actions:
+    action: light.turn_on
+    target:
+      entity_id: light.kitchen_counter_light
+    data:
+      brightness_pct: 20
+
 # Turn off outdoor lights at sunrise
 - id: '0408'
   alias: Lighting - Turn off outdoor lights at sunrise
@@ -177,3 +189,21 @@
       entity_id:
         - group.indoor_window_lights
         - group.indoor_comfort_lights
+
+# Turn off kitchen counter light when downstairs comfort lights turn off and no motion is detected
+- id: '0410'
+  alias: Lighting - Turn off kitchen counter light when comfort lights turns off
+  triggers:
+    trigger: state
+    entity_id: group.downstairs_comfort_lights
+    to: 'off'
+  conditions:
+    condition: state
+    entity_id: binary_sensor.kitchen_motion
+    state: 'off'
+    for:
+      minutes: 10
+  actions:
+    action: homeassistant.turn_off
+    target:
+      entity_id: light.kitchen_counter_light
