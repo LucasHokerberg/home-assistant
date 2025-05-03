@@ -34,6 +34,8 @@
         {{ 'Living Room Shield' in state_attr('media_player.spotify_lucas_hokerberg', 'source_list') }}
       timeout: '00:00:30'
       continue_on_timeout: false
+    - delay:
+        seconds: 5
     # Select Living Room Shield as Spotify device
     - action: media_player.select_source
       target:
