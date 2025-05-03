@@ -31,6 +31,11 @@
         {{ state_attr('media_player.living_room_shield', 'source') == 'Spotify' }}
       timeout: '00:00:30'
       continue_on_timeout: false
+    # Wait for Living Room shield to be available as a Spotify source
+    - wait_template: >
+        {{ 'Living Room Shield' in state_attr('media_player.spotify_lucas_hokerberg', 'source_list') }}
+      timeout: '00:00:30'
+      continue_on_timeout: false
     # Select Living Room Shield as Spotify device
     - action: media_player.select_source
       target:
