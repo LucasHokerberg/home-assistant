@@ -29,7 +29,7 @@
         {{ state_attr('media_player.living_room_shield', 'source') == 'Spotify' }}
       timeout: '00:00:30'
       continue_on_timeout: false
-    # Wait for Living Room shield to be available as a Spotify source
+    # Wait for Living Room Shield to be available as a Spotify source
     - wait_template: >
         {{ 'Living Room Shield' in state_attr('media_player.spotify_lucas_hokerberg', 'source_list') }}
       timeout: '00:00:30'
@@ -49,6 +49,12 @@
           - condition: template
             value_template: >
               {{ state_attr('media_player.spotify_lucas_hokerberg', 'source') == 'Living Room Shield' or now() >= end_time }}
+    # Mute until correct playlist is selected
+    - action: media_player.volume_mute
+      target:
+        entity_id: media_player.living_room_shield
+      data:
+        is_volume_muted: true
     # Press enter to play currently selected playlist (required for media_player.play_media)
     - action: androidtv.adb_command
       target:
@@ -76,6 +82,12 @@
       data:
         media_content_id: 'https://open.spotify.com/playlist/37i9dQZEVXcH5UOFYpBVWG?si=b012073025ac4849'
         media_content_type: playlist
+    # Unmute again
+    - action: media_player.volume_mute
+      target:
+        entity_id: media_player.living_room_shield
+      data:
+        is_volume_muted: false
     # Enable shuffle
     - action: media_player.shuffle_set
       target:
