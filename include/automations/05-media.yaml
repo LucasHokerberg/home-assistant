@@ -34,19 +34,21 @@
         {{ 'Living Room Shield' in state_attr('media_player.spotify_lucas_hokerberg', 'source_list') }}
       timeout: '00:00:30'
       continue_on_timeout: false
-    - delay:
-        seconds: 5
-    # Select Living Room Shield as Spotify device
-    - action: media_player.select_source
-      target:
-        entity_id: media_player.spotify_lucas_hokerberg
-      data:
-        source: 'Living Room Shield'
-    # Wait for Living Room Shield to be selected
-    - wait_template: >
-        {{ state_attr('media_player.spotify_lucas_hokerberg', 'source') == 'Living Room Shield' }}
-      timeout: '00:00:30'
-      continue_on_timeout: false
+    # Select Living Room Shield as Spotify device (repeat until Living Room Shield is selected)
+    - variables:
+        end_time: "{{ now() + timedelta(seconds=30) }}"
+    - repeat:
+        sequence:
+          - service: media_player.select_source
+            target:
+              entity_id: media_player.spotify_lucas_hokerberg
+            data:
+              source: 'Living Room Shield'
+          - delay: '00:00:02'
+        until:
+          - condition: template
+            value_template: >
+              {{ state_attr('media_player.spotify_lucas_hokerberg', 'source') == 'Living Room Shield' or now() >= end_time }}
     # Press enter to play currently selected playlist (required for media_player.play_media)
     - action: androidtv.adb_command
       target:
