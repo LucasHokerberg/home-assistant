@@ -54,11 +54,12 @@
             value_template: >
               {{ state_attr('media_player.spotify_lucas_hokerberg', 'source') == 'Living Room Shield' or now() >= end_time }}
     # Mute until correct playlist is selected
-    - action: media_player.volume_mute
+    - action: remote.send_command
       target:
-        entity_id: media_player.living_room_shield
+        entity_id: remote.living_room_harmony_hub
       data:
-        is_volume_muted: true
+        command: Mute
+        device: Receiver
     # Press enter to play currently selected playlist (required for media_player.play_media)
     - action: androidtv.adb_command
       target:
@@ -87,11 +88,12 @@
         media_content_id: 'https://open.spotify.com/playlist/37i9dQZEVXcH5UOFYpBVWG?si=b012073025ac4849'
         media_content_type: playlist
     # Unmute again
-    - action: media_player.volume_mute
+    - action: remote.send_command
       target:
-        entity_id: media_player.living_room_shield
+        entity_id: remote.living_room_harmony_hub
       data:
-        is_volume_muted: false
+        command: Mute
+        device: Receiver
     # Enable shuffle
     - action: media_player.shuffle_set
       target:
