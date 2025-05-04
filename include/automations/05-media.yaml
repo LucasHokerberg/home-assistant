@@ -12,7 +12,7 @@
       timeout: '00:00:30'
       continue_on_timeout: false
     # Restart Spotify app (repeat until Spotify is started)
-    - service: androidtv.adb_command
+    - action: androidtv.adb_command
       target:
         entity_id: media_player.living_room_shield
       data:
@@ -23,7 +23,7 @@
         end_time: "{{ now() + timedelta(seconds=30) }}"
     - repeat:
         sequence:
-          - service: androidtv.adb_command
+          - action: androidtv.adb_command
             target:
               entity_id: media_player.living_room_shield
             data:
@@ -43,7 +43,7 @@
         end_time: "{{ now() + timedelta(seconds=30) }}"
     - repeat:
         sequence:
-          - service: media_player.select_source
+          - action: media_player.select_source
             target:
               entity_id: media_player.spotify_lucas_hokerberg
             data:
