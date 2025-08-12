@@ -2,10 +2,15 @@
 - id: '1101'
   alias: Car - FGH47K Stop charging at level
   triggers:
-    trigger: numeric_state
+    trigger: state
     entity_id: sensor.fgh47k_battery_level
-    above: "{{ states('input_number.fgh47k_charge_level') | int - 1 }}"
   conditions:
+    - condition: template
+      value_template: >-
+        {% set old = trigger.from_state.state | int(0) %}
+        {% set new = trigger.to_state.state | int(0) %}
+        {% set limit = states('input_number.fgh47k_charge_level') | int(0) %}
+        {{ old < limit and new >= limit }}
     - condition: state
       entity_id: switch.fgh47k_charging
       state: 'on'
