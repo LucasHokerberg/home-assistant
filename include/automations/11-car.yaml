@@ -9,9 +9,6 @@
     - condition: state
       entity_id: switch.fgh47k_charging
       state: 'on'
-    - condition: state
-      entity_id: input_boolean.fgh47k_auto_charge
-      state: 'on'
   actions:
     - action: switch.turn_off
       target:
