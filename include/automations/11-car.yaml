@@ -1,4 +1,4 @@
-# FGH47K: Notify and stopcharging when battery level reached configured level
+# FGH47K: Notify and stop charging when battery level reached configured level
 - id: '1101'
   alias: Car - FGH47K Stop charging at level
   triggers:
@@ -81,13 +81,13 @@
   trigger:
     trigger: state
     entity_id: sensor.outdoor_ev_charger_mode
-    to: 'Disconnected'
+    to: 'disconnected'
     for:
       minutes: 5
   actions:
-    action: lock.lock
+    action: switch.turn_on
     target:
-      entity_id: lock.outdoor_ev_charger
+      entity_id: switch.outdoor_ev_charger_cable_lock
 
 # Unlock cable in the charger when cable is connected
 - id: '1105'
@@ -95,8 +95,8 @@
   trigger:
     trigger: state
     entity_id: sensor.outdoor_ev_charger_mode
-    to: 'Charging'
+    to: 'connected_charging'
   actions:
-    action: lock.unlock
+    action: switch.turn_off
     target:
-      entity_id: lock.outdoor_ev_charger
+      entity_id: switch.outdoor_ev_charger_cable_lock
