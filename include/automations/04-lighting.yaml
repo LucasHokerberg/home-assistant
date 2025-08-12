@@ -141,7 +141,7 @@
     target:
       entity_id: group.indoor_window_lights
 
-# Turn on kitchen counter light when downstairs comfort lights turn on and counter light is off
+# Turn on kitchen counter light when ALL downstairs comfort lights turn on and counter light is off
 - id: '0406'
   alias: Lighting - Turn on kitchen counter light when comfort lights turns on
   triggers:
@@ -149,9 +149,17 @@
     entity_id: group.downstairs_comfort_lights
     to: 'on'
   conditions:
-    condition: state
-    entity_id: light.kitchen_counter_light
-    state: 'off'
+    - condition: state
+      entity_id: light.kitchen_counter_light
+      state: 'off'
+    - condition: template
+      value_template: >
+        {% set lights = expand('group.downstairs_comfort_lights')
+          | selectattr('domain', 'equalto', 'light')
+          | rejectattr('state', 'in', ['unavailable', 'unknown'])
+          | map(attribute='entity_id')
+          | list %}
+        {{ lights | select('is_state', 'on') | list | count == lights | count }}
   actions:
     action: light.turn_on
     target:
