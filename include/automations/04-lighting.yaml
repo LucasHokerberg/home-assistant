@@ -206,11 +206,19 @@
     entity_id: group.downstairs_comfort_lights
     to: 'off'
   conditions:
-    condition: state
-    entity_id: binary_sensor.kitchen_motion
-    state: 'off'
-    for:
-      minutes: 10
+    - condition: template
+      value_template: >
+        {% set lights = expand('group.downstairs_comfort_lights')
+          | selectattr('domain', 'equalto', 'light')
+          | rejectattr('state', 'in', ['unavailable', 'unknown'])
+          | map(attribute='entity_id')
+          | list %}
+        {{ lights | select('is_state', 'off') | list | count == lights | count }}
+    - condition: state
+      entity_id: binary_sensor.kitchen_motion
+      state: 'off'
+      for:
+        minutes: 10
   actions:
     action: homeassistant.turn_off
     target:
