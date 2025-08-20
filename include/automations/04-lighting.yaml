@@ -141,19 +141,19 @@
     target:
       entity_id: group.indoor_window_lights
 
-# Turn on kitchen counter light when ALL downstairs comfort lights turn on and counter light is off
+# Turn on kitchen work lights when ALL downstairs comfort lights turn on and counter light is off
 - id: '0406'
-  alias: Lighting - Turn on kitchen counter light when comfort lights turns on
+  alias: Lighting - Turn on kitchen work lights when comfort lights turns on
   triggers:
     trigger: state
     entity_id: group.downstairs_comfort_lights
     to: 'on'
   conditions:
     condition: state
-    entity_id: light.kitchen_counter_light
+    entity_id: group.kitchen_work_lights
     state: 'off'
   actions:
-    - delay: "00:00:02"
+    - delay: '00:00:05'
     - condition: template
       value_template: >
         {% set lights = expand('group.downstairs_comfort_lights')
@@ -162,11 +162,27 @@
           | map(attribute='entity_id')
           | list %}
         {{ lights | select('is_state', 'on') | list | count == lights | count }}
-    - action: light.turn_on
-      target:
-        entity_id: light.kitchen_counter_light
-      data:
-        brightness_pct: 20
+    - choose:
+      - conditions:
+          condition: state
+          entity_id: light.kitchen_counter_light
+          state: 'off'
+        sequence:
+          action: light.turn_on
+          target:
+            entity_id: light.kitchen_counter_light
+          data:
+            brightness_pct: 20
+      - conditions:
+          condition: state
+          entity_id: light.kitchen_island_light
+          state: 'off'
+        sequence:
+          action: light.turn_on
+          target:
+            entity_id: light.kitchen_island_light
+          data:
+            brightness_pct: 5
 
 # Turn off outdoor lights at sunrise
 - id: '0408'
@@ -199,28 +215,20 @@
         - group.indoor_window_lights
         - group.indoor_comfort_lights
 
-# Turn off kitchen counter light when downstairs comfort lights turn off and no motion is detected
+# Turn off kitchen work lights when downstairs comfort lights turn off and no motion is detected
 - id: '0410'
-  alias: Lighting - Turn off kitchen counter light when comfort lights turns off
+  alias: Lighting - Turn off kitchen work lights when comfort lights turns off
   triggers:
     trigger: state
     entity_id: group.downstairs_comfort_lights
     to: 'off'
   conditions:
-    - condition: template
-      value_template: >
-        {% set lights = expand('group.downstairs_comfort_lights')
-          | selectattr('domain', 'equalto', 'light')
-          | rejectattr('state', 'in', ['unavailable', 'unknown'])
-          | map(attribute='entity_id')
-          | list %}
-        {{ lights | select('is_state', 'off') | list | count == lights | count }}
-    - condition: state
-      entity_id: binary_sensor.kitchen_motion
-      state: 'off'
-      for:
+    condition: state
+    entity_id: binary_sensor.kitchen_motion
+    state: 'off'
+    for:
         minutes: 10
   actions:
     action: homeassistant.turn_off
     target:
-      entity_id: light.kitchen_counter_light
+      entity_id: group.kitchen_work_lights

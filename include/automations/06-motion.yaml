@@ -97,7 +97,7 @@
     to: 'on'
   conditions:
     - condition: state
-      entity_id: light.kitchen_counter_light
+      entity_id: light.kitchen_island_light
       state: 'off'
     - condition: state
       entity_id: input_boolean.night_mode
@@ -105,7 +105,7 @@
   actions:
     - action: light.turn_on
       target:
-        entity_id: light.kitchen_counter_light
+        entity_id: light.kitchen_island_light
       data:
         brightness_pct: 1
     - wait_for_trigger:
@@ -116,7 +116,7 @@
         minutes: 5
     - action: light.turn_off
       target:
-        entity_id: light.kitchen_counter_light
+        entity_id: light.kitchen_island_light
 
 # Turn off lights when no motion in kitchen is detected and downstairs lights are off
 - id: '0606'
@@ -132,9 +132,9 @@
       entity_id: group.downstairs_lights
       state: 'off'
     - condition: state
-      entity_id: light.kitchen_counter_light
+      entity_id: group.kitchen_work_lights
       state: 'on'
   actions:
-    action: light.turn_off
+    action: homeassistant.turn_off
     target:
-      entity_id: light.kitchen_counter_light
+      entity_id: group.kitchen_work_lights
