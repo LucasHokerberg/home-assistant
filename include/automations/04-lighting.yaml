@@ -177,7 +177,7 @@
           target:
             entity_id: light.kitchen_island_light
           data:
-            brightness_pct: 5
+            brightness_pct: 2
 
 # Turn off outdoor lights at sunrise
 - id: '0408'
