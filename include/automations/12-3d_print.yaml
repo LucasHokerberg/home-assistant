@@ -1,0 +1,35 @@
+# Notify when 3D printing is finished and bed has cooled down
+- id: '1201'
+  alias: 3D Print - Notify when print finished
+  triggers:
+    trigger: state
+    entity_id: sensor.3d_printer_print_status
+    from: 'Running'
+    to: 'Finish'
+  actions:
+    - wait_for_trigger:
+        trigger: numeric_state
+        entity_id: sensor.3d_printer_bed_temperature
+        below: 35
+      timeout:
+        hours: 1
+      continue_on_timeout: true
+    - choose:
+        - conditions:
+            condition: numeric_state
+            entity_id: sensor.3d_printer_bed_temperature
+            below: 35
+          sequence:
+            action: notify.mobile_app_lucas_hokerberg
+            data:
+              title: 'HalloNET Home'
+              message: '3D print is finished and the bed has cooled down.'
+              data:
+                channel: 3D Print
+      default:
+        action: notify.mobile_app_lucas_hokerberg
+        data:
+          title: 'HalloNET Home'
+          message: '3D print is finished, but the bed hase not cooled down yet.'
+          data:
+            channel: 3D Print
