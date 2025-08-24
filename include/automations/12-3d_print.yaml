@@ -4,8 +4,7 @@
   triggers:
     trigger: state
     entity_id: sensor.3d_printer_print_status
-    from: 'Running'
-    to: 'Finish'
+    to: 'finish'
   actions:
     - wait_for_trigger:
         trigger: numeric_state
