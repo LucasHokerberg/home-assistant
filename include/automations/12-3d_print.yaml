@@ -25,6 +25,7 @@
               message: '3D print is finished and the bed has cooled down.'
               data:
                 channel: 3D Print
+                image: '/api/camera_proxy/camera.3d_printer_camera'
       default:
         action: notify.mobile_app_lucas_hokerberg
         data:
@@ -32,3 +33,4 @@
           message: '3D print is finished, but the bed hase not cooled down yet.'
           data:
             channel: 3D Print
+            image: '/api/camera_proxy/camera.3d_printer_camera'
