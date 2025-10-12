@@ -22,6 +22,8 @@ mobile_app:
 
 energy:
 
+stream:
+
 # Helpers
 input_boolean:
 input_text:
