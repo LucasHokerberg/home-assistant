@@ -24,6 +24,8 @@ energy:
 
 stream:
 
+media_source:
+
 # Helpers
 input_boolean:
 input_text:
