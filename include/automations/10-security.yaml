@@ -5,7 +5,7 @@
     trigger: state
     entity_id: group.home_members
     from: 'home'
-    for: '00:00:30'
+    for: '00:02:00'
   conditions:
     - condition: or
       conditions:
