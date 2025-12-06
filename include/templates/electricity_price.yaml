@@ -1,8 +1,8 @@
-platform: template
-sensors:
-  - default_entity_id: sensor.electricity_price
+sensor:
+  - name: Electricity Price
+    default_entity_id: sensor.electricity_price
     unit_of_measurement: SEK/kWh
-    name: Electricity Price
+    icon: mdi:cash-sync
     state: >-
       {{ (float(state_attr('sensor.nordpool_kwh_se4_sek', 'average')) +
       float(states.input_number.kraftringen_transfer_price.state) + float(states.input_number.kraftringen_energy_tax.state)

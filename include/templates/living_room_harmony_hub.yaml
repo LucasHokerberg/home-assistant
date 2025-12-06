@@ -1,6 +1,5 @@
-platform: template
-sensors:
-  - default_entity_id: sensor.living_room_harmony_hub
+sensor:
+  - name: Harmony Hub
+    default_entity_id: sensor.living_room_harmony_hub
     icon: mdi:remote
-    name: Harmony Hub
     state: '{{ state_attr("remote.living_room_harmony_hub", "current_activity") }}'
