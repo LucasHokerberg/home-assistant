@@ -17,40 +17,6 @@
       target:
         entity_id: switch.kitchen_dishwasher_shutoff_valve
 
-# Notify when the freezer temperature is too high
-- id: '0202'
-  alias: Appliance - Notify on high freezer temperature
-  triggers:
-    trigger: numeric_state
-    entity_id: sensor.kitchen_freezer_temperature
-    above: -10
-    for:
-      minutes: 20
-  actions:
-    action: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: 'Freezer temperature is too high!'
-      data:
-        channel: Appliance
-
-# Notify when the fridge temperature is too high
-- id: '0203'
-  alias: Appliance - Notify on high fridge temperature
-  triggers:
-    trigger: numeric_state
-    entity_id: sensor.kitchen_fridge_temperature
-    above: 15
-    for:
-      minutes: 10
-  actions:
-    action: notify.home_mobile_apps
-    data_template:
-      title: 'HalloNET Home'
-      message: 'Fridge temperature is too high!'
-      data:
-        channel: Appliance
-
 # Start dishwasher when shut-off valve is opened
 - id: '0204'
   alias: Appliance - Start dishwasher
