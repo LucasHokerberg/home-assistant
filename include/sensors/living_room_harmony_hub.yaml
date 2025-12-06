@@ -1,5 +1,5 @@
-template:
-- sensor:
+platform: template
+sensors:
   - default_entity_id: sensor.living_room_harmony_hub
     icon: mdi:remote
     name: Harmony Hub

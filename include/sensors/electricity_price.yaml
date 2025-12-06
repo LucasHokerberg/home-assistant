@@ -1,5 +1,5 @@
-template:
-- sensor:
+platform: template
+sensors:
   - default_entity_id: sensor.electricity_price
     unit_of_measurement: SEK/kWh
     name: Electricity Price
