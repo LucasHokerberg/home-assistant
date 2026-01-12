@@ -115,7 +115,7 @@
 
 # Turn on bedroom wardrobe light when door is open
 - id: '0707'
-  alias: Presence - Turn on wardrobe light on door open
+  alias: Presence - Turn on bedroom wardrobe light on door open
   triggers:
     trigger: state
     entity_id: binary_sensor.bedroom_wardrobe_contact_sensor
@@ -127,7 +127,7 @@
 
 # Turn off bedroom wardrobe light when door is closed
 - id: '0708'
-  alias: Presence - Turn off wardrobe light on door close
+  alias: Presence - Turn off bedroom wardrobe light on door close
   triggers:
     trigger: state
     entity_id: binary_sensor.bedroom_wardrobe_contact_sensor
@@ -162,3 +162,27 @@
           actions:
             - action: turn_on_vacation_mode
               title: 'Turn on vacation mode'
+
+# Turn on Lovelia's room wardrobe light when door is open
+- id: '0710'
+  alias: Presence - Turn on Lovelia's room wardrobe light on door open
+  triggers:
+    trigger: state
+    entity_id: binary_sensor.lovelias_room_wardrobe_contact_sensor
+    to: 'on'
+  actions:
+    action: light.turn_on
+    target:
+      entity_id: light.lovelias_room_wardrobe_ceiling_light
+
+# Turn off Lovelias's room wardrobe light when door is closed
+- id: '0711'
+  alias: Presence - Turn off Lovelia's room wardrobe light on door close
+  triggers:
+    trigger: state
+    entity_id: binary_sensor.lovelias_room_wardrobe_contact_sensor
+    to: 'off'
+  actions:
+    action: light.turn_off
+    target:
+      entity_id: light.lovelias_room_wardrobe_ceiling_light
