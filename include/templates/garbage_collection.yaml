@@ -19,10 +19,20 @@ binary_sensor:
         {% endif %}
       {% endfor %}
       
+      {# Check if we're past noon #}
+      {% set now_time = now() %}
+      {% set is_past_noon = now_time.hour >= 12 %}
+      {% set today_str = now_time.date().isoformat() %}
+      
+      {# Filter out today's collections if past noon #}
+      {% if is_past_noon %}
+        {% set ns.dates = ns.dates | rejectattr(0, 'eq', today_str) | list %}
+      {% endif %}
+      
       {# Check if earliest date is today or tomorrow #}
       {% if ns.dates | length > 0 %}
         {% set next_date = ns.dates | map(attribute=0) | min %}
-        {% set today = now().date() %}
+        {% set today = now_time.date() %}
         {% set collection_date = strptime(next_date, '%Y-%m-%d').date() %}
         {% set days = (collection_date - today).days %}
         {{ days == 0 or days == 1 }}
@@ -47,6 +57,16 @@ binary_sensor:
           {% endif %}
         {% endfor %}
         
+        {# Check if we're past noon #}
+        {% set now_time = now() %}
+        {% set is_past_noon = now_time.hour >= 12 %}
+        {% set today_str = now_time.date().isoformat() %}
+        
+        {# Filter out today's collections if past noon #}
+        {% if is_past_noon %}
+          {% set ns.dates = ns.dates | rejectattr(0, 'eq', today_str) | list %}
+        {% endif %}
+        
         {# Return the earliest date #}
         {% if ns.dates | length > 0 %}
           {{ ns.dates | map(attribute=0) | min }}
@@ -69,6 +89,16 @@ binary_sensor:
             {% set ns.dates = ns.dates + [(date, bin.name)] %}
           {% endif %}
         {% endfor %}
+        
+        {# Check if we're past noon #}
+        {% set now_time = now() %}
+        {% set is_past_noon = now_time.hour >= 12 %}
+        {% set today_str = now_time.date().isoformat() %}
+        
+        {# Filter out today's collections if past noon #}
+        {% if is_past_noon %}
+          {% set ns.dates = ns.dates | rejectattr(0, 'eq', today_str) | list %}
+        {% endif %}
         
         {# Find the earliest date #}
         {% if ns.dates | length > 0 %}
@@ -96,12 +126,22 @@ binary_sensor:
           {% endif %}
         {% endfor %}
         
+        {# Check if we're past noon #}
+        {% set now_time = now() %}
+        {% set is_past_noon = now_time.hour >= 12 %}
+        {% set today_str = now_time.date().isoformat() %}
+        
+        {# Filter out today's collections if past noon #}
+        {% if is_past_noon %}
+          {% set ns.dates = ns.dates | rejectattr(0, 'eq', today_str) | list %}
+        {% endif %}
+        
         {% if ns.dates | length > 0 %}
           {% set next_date = ns.dates | map(attribute=0) | min %}
           {% set next_bins = ns.dates | selectattr(0, 'eq', next_date) | map(attribute=1) | list %}
           
           {# Calculate days until collection #}
-          {% set today = now().date() %}
+          {% set today = now_time.date() %}
           {% set collection_date = strptime(next_date, '%Y-%m-%d').date() %}
           {% set days = (collection_date - today).days %}
           
