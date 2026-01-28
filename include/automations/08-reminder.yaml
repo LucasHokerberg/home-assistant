@@ -22,6 +22,6 @@
     action: notify.home_mobile_apps
     data:
       title: 'HalloNET Home'
-      message: "{{ state_attr('binary_sensor.garbage_collection', 'friendly_message') }}"
+      message: "{{ state_attr('binary_sensor.garbage_collection', 'friendly_message') }}."
       data:
         channel: Reminder
