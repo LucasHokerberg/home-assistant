@@ -1,5 +1,5 @@
 # Send a reminder when garbage collection is tomorrow
-- id: '0801'
+- id: '0803'
   alias: Reminder - Garbage Collection
   triggers:
     - trigger: time
