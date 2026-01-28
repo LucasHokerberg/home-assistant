@@ -1,0 +1,127 @@
+binary_sensor:
+  - name: Garbage Collection
+    default_entity_id: binary_sensor.garbage_collection
+    icon: mdi:delete
+    state: >
+      {% set bins = [
+        {'name': 'Garbage Bin 1', 'entity': 'calendar.garbage_bin_1'},
+        {'name': 'Garbage Bin 2', 'entity': 'calendar.garbage_bin_2'},
+        {'name': 'Garden Bin', 'entity': 'calendar.garden_bin'}
+      ] %}
+      
+      {# Get all upcoming dates #}
+      {% set ns = namespace(dates=[]) %}
+      {% for bin in bins %}
+        {% set start = state_attr(bin.entity, 'start_time') %}
+        {% if start %}
+          {% set date = start.split(' ')[0] %}
+          {% set ns.dates = ns.dates + [(date, bin.name)] %}
+        {% endif %}
+      {% endfor %}
+      
+      {# Check if earliest date is today or tomorrow #}
+      {% if ns.dates | length > 0 %}
+        {% set next_date = ns.dates | map(attribute=0) | min %}
+        {% set today = now().date() %}
+        {% set collection_date = strptime(next_date, '%Y-%m-%d').date() %}
+        {% set days = (collection_date - today).days %}
+        {{ days == 0 or days == 1 }}
+      {% else %}
+        false
+      {% endif %}
+    attributes:
+      next_date: >
+        {% set bins = [
+          {'name': 'Garbage Bin 1', 'entity': 'calendar.garbage_bin_1'},
+          {'name': 'Garbage Bin 2', 'entity': 'calendar.garbage_bin_2'},
+          {'name': 'Garden Bin', 'entity': 'calendar.garden_bin'}
+        ] %}
+        
+        {# Get all upcoming dates #}
+        {% set ns = namespace(dates=[]) %}
+        {% for bin in bins %}
+          {% set start = state_attr(bin.entity, 'start_time') %}
+          {% if start %}
+            {% set date = start.split(' ')[0] %}
+            {% set ns.dates = ns.dates + [(date, bin.name)] %}
+          {% endif %}
+        {% endfor %}
+        
+        {# Return the earliest date #}
+        {% if ns.dates | length > 0 %}
+          {{ ns.dates | map(attribute=0) | min }}
+        {% else %}
+          None
+        {% endif %}
+      bins: >
+        {% set bins = [
+          {'name': 'Garbage Bin 1', 'entity': 'calendar.garbage_bin_1'},
+          {'name': 'Garbage Bin 2', 'entity': 'calendar.garbage_bin_2'},
+          {'name': 'Garden Bin', 'entity': 'calendar.garden_bin'}
+        ] %}
+        
+        {# Get all upcoming dates #}
+        {% set ns = namespace(dates=[]) %}
+        {% for bin in bins %}
+          {% set start = state_attr(bin.entity, 'start_time') %}
+          {% if start %}
+            {% set date = start.split(' ')[0] %}
+            {% set ns.dates = ns.dates + [(date, bin.name)] %}
+          {% endif %}
+        {% endfor %}
+        
+        {# Find the earliest date #}
+        {% if ns.dates | length > 0 %}
+          {% set next_date = ns.dates | map(attribute=0) | min %}
+          {# Get all bins with that date #}
+          {% set next_bins = ns.dates | selectattr(0, 'eq', next_date) | map(attribute=1) | list %}
+          {{ next_bins }}
+        {% else %}
+          []
+        {% endif %}
+      friendly_message: >
+        {% set bins = [
+          {'name': 'Garbage Bin 1', 'entity': 'calendar.garbage_bin_1'},
+          {'name': 'Garbage Bin 2', 'entity': 'calendar.garbage_bin_2'},
+          {'name': 'Garden Bin', 'entity': 'calendar.garden_bin'}
+        ] %}
+        
+        {# Get all upcoming dates #}
+        {% set ns = namespace(dates=[]) %}
+        {% for bin in bins %}
+          {% set start = state_attr(bin.entity, 'start_time') %}
+          {% if start %}
+            {% set date = start.split(' ')[0] %}
+            {% set ns.dates = ns.dates + [(date, bin.name)] %}
+          {% endif %}
+        {% endfor %}
+        
+        {% if ns.dates | length > 0 %}
+          {% set next_date = ns.dates | map(attribute=0) | min %}
+          {% set next_bins = ns.dates | selectattr(0, 'eq', next_date) | map(attribute=1) | list %}
+          
+          {# Calculate days until collection #}
+          {% set today = now().date() %}
+          {% set collection_date = strptime(next_date, '%Y-%m-%d').date() %}
+          {% set days = (collection_date - today).days %}
+          
+          {# Format bin names #}
+          {% if next_bins | length == 1 %}
+            {% set bin_text = next_bins[0] %}
+          {% elif next_bins | length == 2 %}
+            {% set bin_text = next_bins[0] ~ ' and ' ~ next_bins[1] %}
+          {% else %}
+            {% set bin_text = next_bins[:-1] | join(', ') ~ ', and ' ~ next_bins[-1] %}
+          {% endif %}
+          
+          {# Format time text #}
+          {% if days == 0 %}
+            {{ bin_text }} is being emptied today.
+          {% elif days == 1 %}
+            {{ bin_text }} is being emptied tomorrow.
+          {% else %}
+            {{ bin_text }} in {{ days }} days
+          {% endif %}
+        {% else %}
+          No upcoming collections
+        {% endif %}

@@ -8,11 +8,20 @@
       at: '20:00:00'
   conditions:
     condition: template
-    value_template: "{{ states('sensor.garbage_collection') == 'Tomorrow' }}"
+    value_template: >
+      {% set next_date = state_attr('binary_sensor.garbage_collection', 'next_date') %}
+      {% if next_date and next_date != 'None' %}
+        {% set today = now().date() %}
+        {% set collection_date = strptime(next_date, '%Y-%m-%d').date() %}
+        {% set days = (collection_date - today).days %}
+        {{ days == 1 }}
+      {% else %}
+        false
+      {% endif %}
   actions:
     action: notify.home_mobile_apps
     data:
       title: 'HalloNET Home'
-      message: '{{ state_attr("calendar.garbage_collection", "message") }} is emptied tomorrow.'
+      message: "{{ state_attr('binary_sensor.garbage_collection', 'friendly_message') }}"
       data:
         channel: Reminder
