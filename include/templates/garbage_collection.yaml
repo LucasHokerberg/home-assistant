@@ -116,9 +116,9 @@ binary_sensor:
           
           {# Format time text #}
           {% if days == 0 %}
-            {{ bin_text }} is being emptied today
+            {{ bin_text }} today
           {% elif days == 1 %}
-            {{ bin_text }} is being emptied tomorrow
+            {{ bin_text }} tomorrow
           {% else %}
             {{ bin_text }} in {{ days }} days
           {% endif %}
