@@ -49,7 +49,7 @@
   actions:
     - action: scene.turn_on
       target:
-        entity_id: scene.upstairs_desk_light_night_motion
+        entity_id: scene.upstairs_window_light_night_motion
     - wait_for_trigger:
         trigger: state
         entity_id: binary_sensor.upstairs_motion
@@ -58,7 +58,7 @@
         minutes: 5
     - action: light.turn_off
       target:
-        entity_id: light.upstairs_desk_light
+        entity_id: light.upstairs_window_light
 
 # Turn on lights when driveway motion is detected and outdoor comfort lights are on
 - id: '0603'
@@ -97,7 +97,7 @@
     to: 'on'
   conditions:
     - condition: state
-      entity_id: light.kitchen_island_light
+      entity_id: light.kitchen_counter_light
       state: 'off'
     - condition: state
       entity_id: input_boolean.night_mode
@@ -105,7 +105,7 @@
   actions:
     - action: light.turn_on
       target:
-        entity_id: light.kitchen_island_light
+        entity_id: light.kitchen_counter_light
       data:
         brightness_pct: 1
     - wait_for_trigger:
@@ -116,7 +116,7 @@
         minutes: 5
     - action: light.turn_off
       target:
-        entity_id: light.kitchen_island_light
+        entity_id: light.kitchen_counter_light
 
 # Turn off lights when no motion in kitchen is detected and downstairs lights are off
 - id: '0606'
