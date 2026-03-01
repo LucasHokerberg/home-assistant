@@ -1,5 +1,4 @@
 sensor:
   - name: Spotify
-    unique_id: spotify_lucas_hokerberg
     icon: mdi:spotify
     state: '{{ state_attr("media_player.spotify_lucas_hokerberg", "source") | default("Unknown", true) }}'
