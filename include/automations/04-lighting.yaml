@@ -227,3 +227,29 @@
     action: homeassistant.turn_off
     target:
       entity_id: group.kitchen_work_lights
+
+# Turn off both Lovelia's balloon lights 30 minutes after one turns off
+- id: '0411'
+  alias: Lighting - Turn off Lovelia's balloon lights after night scene
+  mode: single
+  triggers:
+    trigger: state
+    entity_id:
+      - light.lovelias_room_balloon_light_1
+      - light.lovelias_room_balloon_light_2
+    to: 'off'
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: light.lovelias_room_balloon_light_1
+          state: 'on'
+        - condition: state
+          entity_id: light.lovelias_room_balloon_light_2
+          state: 'on'
+  action:
+    - delay:
+        minutes: 30
+    - action: homeassistant.turn_off
+      target:
+        entity_id: group.lovelias_room_balloon_lights
