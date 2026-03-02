@@ -66,7 +66,7 @@
       data:
         value: >
           {% if is_state('device_tracker.fgh47k', 'home') %}
-            {% set temp = states('sensor.klippan_temperature') | float %}
+            {% set temp = states('sensor.outdoor_temperature') | float %}
           {% else %}
             {% set temp = states('sensor.fgh47k_outside_temperature') | float %}
           {% endif %}
