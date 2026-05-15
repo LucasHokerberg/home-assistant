@@ -25,11 +25,11 @@
     entity_id: switch.kitchen_dishwasher_shutoff_valve
     from: 'off'
     to: 'on'
-  conditions:
-    condition: state
-    entity_id: sensor.kitchen_dishwasher_operation_state
-    state: 'BSH.Common.EnumType.OperationState.Ready'
   actions:
+    - wait_template: >
+        {{ is_state('sensor.kitchen_dishwasher_operation_state', 'BSH.Common.EnumType.OperationState.Ready') }}
+      timeout: '00:00:30'
+      continue_on_timeout: true
     - action: input_select.select_option
       target:
         entity_id: select.kitchen_dishwasher_program
