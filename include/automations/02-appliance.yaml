@@ -38,3 +38,19 @@
     - action: button.press
       target:
         entity_id: button.kitchen_dishwasher_start
+
+# Open shut-off valve if closed when dishwasher starts running
+- id: '0205'
+  alias: Appliance - Open shut-off valve
+  triggers:
+    trigger: state
+    entity_id: sensor.kitchen_dishwasher_operation_state
+    to: 'BSH.Common.EnumType.OperationState.Run'
+  conditions:
+    condition: state
+    entity_id: switch.kitchen_dishwasher_shutoff_valve
+    state: 'off'
+  actions:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.kitchen_dishwasher_shutoff_valve
