@@ -9,19 +9,11 @@
   conditions:
     condition: template
     value_template: >
-      {% set next_date = state_attr('binary_sensor.garbage_collection', 'next_date') %}
-      {% if next_date and next_date != 'None' %}
-        {% set today = now().date() %}
-        {% set collection_date = strptime(next_date, '%Y-%m-%d').date() %}
-        {% set days = (collection_date - today).days %}
-        {{ days == 1 }}
-      {% else %}
-        false
-      {% endif %}
+      {{ state_attr('binary_sensor.garbage_collection', 'has_tomorrow') | bool }}
   actions:
     action: notify.home_mobile_apps
     data:
       title: 'HalloNET Home'
-      message: "Collection of {{ state_attr('binary_sensor.garbage_collection', 'friendly_message') }}."
+      message: "Collection of {{ state_attr('binary_sensor.garbage_collection', 'tomorrow_message') }}."
       data:
         channel: Reminder

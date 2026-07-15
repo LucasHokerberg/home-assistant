@@ -43,7 +43,9 @@ binary_sensor:
           {% set start = state_attr(bin.entity, 'start_time') %}
           {% if start %}
             {% set date = start.split(' ')[0] %}
-            {% set ns.dates = ns.dates + [(date, bin.name)] %}
+            {% if not (now().hour >= 12 and date == now().date().strftime('%Y-%m-%d')) %}
+              {% set ns.dates = ns.dates + [(date, bin.name)] %}
+            {% endif %}
           {% endif %}
         {% endfor %}
         
@@ -66,7 +68,9 @@ binary_sensor:
           {% set start = state_attr(bin.entity, 'start_time') %}
           {% if start %}
             {% set date = start.split(' ')[0] %}
-            {% set ns.dates = ns.dates + [(date, bin.name)] %}
+            {% if not (now().hour >= 12 and date == now().date().strftime('%Y-%m-%d')) %}
+              {% set ns.dates = ns.dates + [(date, bin.name)] %}
+            {% endif %}
           {% endif %}
         {% endfor %}
         
@@ -92,7 +96,9 @@ binary_sensor:
           {% set start = state_attr(bin.entity, 'start_time') %}
           {% if start %}
             {% set date = start.split(' ')[0] %}
-            {% set ns.dates = ns.dates + [(date, bin.name)] %}
+            {% if not (now().hour >= 12 and date == now().date().strftime('%Y-%m-%d')) %}
+              {% set ns.dates = ns.dates + [(date, bin.name)] %}
+            {% endif %}
           {% endif %}
         {% endfor %}
         
@@ -124,4 +130,40 @@ binary_sensor:
           {% endif %}
         {% else %}
           No upcoming collections
+        {% endif %}
+      has_tomorrow: >
+        {% set bins = [
+          {'name': 'Garbage Bin 1', 'entity': 'calendar.garbage_bin_1'},
+          {'name': 'Garbage Bin 2', 'entity': 'calendar.garbage_bin_2'},
+          {'name': 'Garden Bin', 'entity': 'calendar.garden_bin'}
+        ] %}
+        {% set tomorrow = (now().date() + timedelta(days=1)).strftime('%Y-%m-%d') %}
+        {% set ns = namespace(found=false) %}
+        {% for bin in bins %}
+          {% set start = state_attr(bin.entity, 'start_time') %}
+          {% if start and start.split(' ')[0] == tomorrow %}
+            {% set ns.found = true %}
+          {% endif %}
+        {% endfor %}
+        {{ ns.found }}
+      tomorrow_message: >
+        {% set bins = [
+          {'name': 'Garbage Bin 1', 'entity': 'calendar.garbage_bin_1'},
+          {'name': 'Garbage Bin 2', 'entity': 'calendar.garbage_bin_2'},
+          {'name': 'Garden Bin', 'entity': 'calendar.garden_bin'}
+        ] %}
+        {% set tomorrow = (now().date() + timedelta(days=1)).strftime('%Y-%m-%d') %}
+        {% set ns = namespace(names=[]) %}
+        {% for bin in bins %}
+          {% set start = state_attr(bin.entity, 'start_time') %}
+          {% if start and start.split(' ')[0] == tomorrow %}
+            {% set ns.names = ns.names + [bin.name] %}
+          {% endif %}
+        {% endfor %}
+        {% if ns.names | length == 1 %}
+          {{ ns.names[0] }} tomorrow
+        {% elif ns.names | length == 2 %}
+          {{ ns.names[0] }} and {{ ns.names[1] }} tomorrow
+        {% else %}
+          {{ ns.names[:-1] | join(', ') }}, and {{ ns.names[-1] }} tomorrow
         {% endif %}
