@@ -32,7 +32,7 @@
         until:
           - condition: template
             value_template: >
-              {{ state_attr('media_player.living_room_shield', 'source') == 'Spotify' }}
+              {{ state_attr('media_player.living_room_shield', 'source') == 'Spotify' or now() >= end_time }}
     # Wait for Living Room Shield to be available as a Spotify source
     - wait_template: >
         {{ 'Living Room Shield' in state_attr('media_player.spotify_lucas_hokerberg', 'source_list') }}
@@ -61,6 +61,7 @@
         command: Mute
         device: Receiver
     # Press enter to play currently selected playlist (required for media_player.play_media) (repeat until Spotify is playing)
+    # continue_on_error so a failure here still falls through to the unmute below, keeping the Mute toggle paired every run
     - variables:
         end_time: "{{ now() + timedelta(seconds=30) }}"
     - repeat:
@@ -75,14 +76,16 @@
           - condition: template
             value_template: >
               {{ states('media_player.spotify_lucas_hokerberg') == 'playing' or now() >= end_time }}
-    # Play selected playlist
+      continue_on_error: true
+    # Play selected playlist (continue_on_error: see note above)
     - action: media_player.play_media
       target:
         entity_id: media_player.spotify_lucas_hokerberg
       data:
         media_content_id: "https://open.spotify.com/playlist/37i9dQZEVXcH5UOFYpBVWG?si=b012073025ac4849"
         media_content_type: playlist
-    # Unmute again
+      continue_on_error: true
+    # Unmute again (always runs, even if the steps above failed, so Mute toggle stays paired with the one above)
     - action: remote.send_command
       target:
         entity_id: remote.living_room_harmony_hub
