@@ -16,8 +16,11 @@
         entity_id: climate.living_room_hvac
       data:
         hvac_mode: heat
-    - delay:
-        seconds: 5
+    # Wait for the mode switch to actually land before pushing temperature/fan, otherwise the HVAC can apply them against the old mode
+    - wait_template: "{{ states('climate.living_room_hvac') == 'heat' }}"
+      timeout:
+        seconds: 20
+      continue_on_timeout: true
     - action: climate.set_temperature
       target:
         entity_id: climate.living_room_hvac
@@ -52,8 +55,11 @@
         entity_id: climate.living_room_hvac
       data:
         hvac_mode: cool
-    - delay:
-        seconds: 5
+    # Wait for the mode switch to actually land before pushing temperature/fan, otherwise the HVAC can apply them against the old mode
+    - wait_template: "{{ states('climate.living_room_hvac') == 'cool' }}"
+      timeout:
+        seconds: 20
+      continue_on_timeout: true
     - action: climate.set_temperature
       target:
         entity_id: climate.living_room_hvac
