@@ -39,7 +39,8 @@ Rules:
 
 ## HA MCP server
 
-- An `ha-custom` MCP server connects to the live instance, read-only by design — use it to verify entity ids, states, areas, and existing automations/helpers before editing YAML; never rely on it to apply changes.
+- An `ha-custom` MCP server connects to the live instance with full write access (services, helpers, apps/add-ons, restarts, etc.) — use it freely for live control and diagnostics (traces, logs, states).
+- Never use it to write/edit anything that lives in this repo (`include/automations/`, `include/scripts/`, any other repo-tracked YAML) — those are YAML-mode and change only via git + the "Git pull" app reload, never the live config-write API.
 
 ## Commit style
 
