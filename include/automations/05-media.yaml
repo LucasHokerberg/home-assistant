@@ -19,8 +19,6 @@
         command: "am force-stop com.spotify.tv.android"
     - delay:
         seconds: 2
-    - variables:
-        end_time: "{{ now() + timedelta(seconds=30) }}"
     - repeat:
         sequence:
           - action: androidtv.adb_command
@@ -32,15 +30,13 @@
         until:
           - condition: template
             value_template: >
-              {{ state_attr('media_player.living_room_shield', 'source') == 'Spotify' or now() >= end_time }}
+              {{ state_attr('media_player.living_room_shield', 'source') == 'Spotify' or repeat.index >= 15 }}
     # Wait for Living Room Shield to be available as a Spotify source
     - wait_template: >
         {{ 'Living Room Shield' in state_attr('media_player.spotify_lucas_hokerberg', 'source_list') }}
       timeout: "00:00:30"
       continue_on_timeout: false
     # Select Living Room Shield as Spotify device (repeat until Living Room Shield is selected)
-    - variables:
-        end_time: "{{ now() + timedelta(seconds=30) }}"
     - repeat:
         sequence:
           - action: media_player.select_source
@@ -52,7 +48,7 @@
         until:
           - condition: template
             value_template: >
-              {{ state_attr('media_player.spotify_lucas_hokerberg', 'source') == 'Living Room Shield' or now() >= end_time }}
+              {{ state_attr('media_player.spotify_lucas_hokerberg', 'source') == 'Living Room Shield' or repeat.index >= 6 }}
     # Mute until correct playlist is selected
     - action: remote.send_command
       target:
@@ -62,8 +58,6 @@
         device: Receiver
     # Press enter to play currently selected playlist (required for media_player.play_media) (repeat until Spotify is playing)
     # continue_on_error so a failure here still falls through to the unmute below, keeping the Mute toggle paired every run
-    - variables:
-        end_time: "{{ now() + timedelta(seconds=30) }}"
     - repeat:
         sequence:
           - action: androidtv.adb_command
@@ -75,7 +69,7 @@
         until:
           - condition: template
             value_template: >
-              {{ states('media_player.spotify_lucas_hokerberg') == 'playing' or now() >= end_time }}
+              {{ states('media_player.spotify_lucas_hokerberg') == 'playing' or repeat.index >= 6 }}
       continue_on_error: true
     # Play selected playlist (continue_on_error: see note above)
     - action: media_player.play_media
