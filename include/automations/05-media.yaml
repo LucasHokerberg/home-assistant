@@ -31,11 +31,28 @@
           - condition: template
             value_template: >
               {{ state_attr('media_player.living_room_shield', 'source') == 'Spotify' or repeat.index >= 15 }}
-    # Wait for Living Room Shield to be available as a Spotify source
-    - wait_template: >
-        {{ 'Living Room Shield' in (state_attr('media_player.spotify_lucas_hokerberg', 'source_list') or []) }}
-      timeout: "00:00:30"
-      continue_on_timeout: false
+    # Mute until correct playlist is selected
+    - action: remote.send_command
+      target:
+        entity_id: remote.living_room_harmony_hub
+      data:
+        command: Mute
+        device: Receiver
+    # Press play (required before Spotify Connect reports Living Room Shield as a source — repeat until it does)
+    # continue_on_error so a failure here still falls through to the unmute below, keeping the Mute toggle paired every run
+    - repeat:
+        sequence:
+          - action: androidtv.adb_command
+            target:
+              entity_id: media_player.living_room_shield
+            data:
+              command: ENTER
+          - delay: "00:00:05"
+        until:
+          - condition: template
+            value_template: >
+              {{ 'Living Room Shield' in (state_attr('media_player.spotify_lucas_hokerberg', 'source_list') or []) or repeat.index >= 6 }}
+      continue_on_error: true
     # Select Living Room Shield as Spotify device (repeat until Living Room Shield is selected)
     - repeat:
         sequence:
@@ -49,27 +66,6 @@
           - condition: template
             value_template: >
               {{ state_attr('media_player.spotify_lucas_hokerberg', 'source') == 'Living Room Shield' or repeat.index >= 6 }}
-    # Mute until correct playlist is selected
-    - action: remote.send_command
-      target:
-        entity_id: remote.living_room_harmony_hub
-      data:
-        command: Mute
-        device: Receiver
-    # Press enter to play currently selected playlist (required for media_player.play_media) (repeat until Spotify is playing)
-    # continue_on_error so a failure here still falls through to the unmute below, keeping the Mute toggle paired every run
-    - repeat:
-        sequence:
-          - action: androidtv.adb_command
-            target:
-              entity_id: media_player.living_room_shield
-            data:
-              command: ENTER
-          - delay: "00:00:05"
-        until:
-          - condition: template
-            value_template: >
-              {{ states('media_player.spotify_lucas_hokerberg') == 'playing' or repeat.index >= 6 }}
       continue_on_error: true
     # Play selected playlist (continue_on_error: see note above)
     - action: media_player.play_media
