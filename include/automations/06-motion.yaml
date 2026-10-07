@@ -1,20 +1,20 @@
 # Turn on lights when motion in living room is detected, night mode is on, and guest mode is off
-- id: '0601'
+- id: "0601"
   alias: Motion - Turn on lights on living room motion
   triggers:
     trigger: state
     entity_id: binary_sensor.living_room_motion
-    to: 'on'
+    to: "on"
   conditions:
     - condition: state
       entity_id: group.living_room_floor_light
-      state: 'off'
+      state: "off"
     - condition: state
       entity_id: input_boolean.night_mode
-      state: 'on'
+      state: "on"
     - condition: state
       entity_id: input_boolean.guest_mode
-      state: 'off'
+      state: "off"
   actions:
     - action: light.turn_on
       target:
@@ -22,7 +22,7 @@
     - wait_for_trigger:
         trigger: state
         entity_id: binary_sensor.living_room_motion
-        to: 'off'
+        to: "off"
       timeout:
         minutes: 5
     - action: light.turn_off
@@ -30,19 +30,19 @@
         entity_id: light.living_room_floor_light_1
 
 # Turn on lights when motion upstairs is detected and night mode is on
-- id: '0602'
+- id: "0602"
   alias: Motion - Turn on lights on upstairs motion
   triggers:
     trigger: state
     entity_id: binary_sensor.upstairs_motion
-    to: 'on'
+    to: "on"
   conditions:
     - condition: state
       entity_id: light.upstairs_window_light
-      state: 'off'
+      state: "off"
     - condition: state
       entity_id: input_boolean.night_mode
-      state: 'on'
+      state: "on"
   actions:
     - action: scene.turn_on
       target:
@@ -50,7 +50,7 @@
     - wait_for_trigger:
         trigger: state
         entity_id: binary_sensor.upstairs_motion
-        to: 'off'
+        to: "off"
       timeout:
         minutes: 5
     - action: light.turn_off
@@ -58,19 +58,19 @@
         entity_id: light.upstairs_window_light
 
 # Turn on lights when driveway motion is detected and outdoor comfort lights are on
-- id: '0603'
+- id: "0603"
   alias: Motion - Turn on lights on driveway motion
   triggers:
     trigger: state
     entity_id: binary_sensor.outdoor_driveway_motion
-    to: 'on'
+    to: "on"
   conditions:
     - condition: state
       entity_id: group.outdoor_comfort_lights
-      state: 'on'
+      state: "on"
     - condition: state
       entity_id: switch.outdoor_driveway_floodlight
-      state: 'off'
+      state: "off"
   actions:
     - action: switch.turn_on
       target:
@@ -78,7 +78,7 @@
     - wait_for_trigger:
         trigger: state
         entity_id: binary_sensor.outdoor_driveway_motion
-        to: 'off'
+        to: "off"
       timeout:
         minutes: 5
     - action: switch.turn_off
@@ -86,19 +86,19 @@
         entity_id: switch.outdoor_driveway_floodlight
 
 # Turn on lights when motion in kitchen is detected and night mode is on
-- id: '0605'
+- id: "0605"
   alias: Motion - Turn on lights on kitchen motion in night
   triggers:
     trigger: state
     entity_id: binary_sensor.kitchen_motion
-    to: 'on'
+    to: "on"
   conditions:
     - condition: state
       entity_id: light.kitchen_counter_light
-      state: 'off'
+      state: "off"
     - condition: state
       entity_id: input_boolean.night_mode
-      state: 'on'
+      state: "on"
   actions:
     - action: light.turn_on
       target:
@@ -108,7 +108,7 @@
     - wait_for_trigger:
         trigger: state
         entity_id: binary_sensor.kitchen_motion
-        to: 'off'
+        to: "off"
       timeout:
         minutes: 5
     - action: light.turn_off
@@ -116,21 +116,21 @@
         entity_id: light.kitchen_counter_light
 
 # Turn off lights when no motion in kitchen is detected and downstairs lights are off
-- id: '0606'
+- id: "0606"
   alias: Motion - Turn off lights on no kitchen motion
   triggers:
     trigger: state
     entity_id: binary_sensor.kitchen_motion
-    to: 'off'
+    to: "off"
     for:
       minutes: 10
   conditions:
     - condition: state
       entity_id: group.downstairs_lights
-      state: 'off'
+      state: "off"
     - condition: state
       entity_id: group.kitchen_work_lights
-      state: 'on'
+      state: "on"
   actions:
     action: homeassistant.turn_off
     target:

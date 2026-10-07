@@ -1,16 +1,16 @@
 # Send a notification and turn off the shut-off valve when the dishwasher is done
-- id: '0201'
+- id: "0201"
   alias: Appliance - Notify and turn off shut-off valve when dishwasher is done
   triggers:
     trigger: state
     entity_id: sensor.kitchen_dishwasher_operation_state
-    from: 'BSH.Common.EnumType.OperationState.Run'
-    to: 'BSH.Common.EnumType.OperationState.Finished'
+    from: "BSH.Common.EnumType.OperationState.Run"
+    to: "BSH.Common.EnumType.OperationState.Finished"
   actions:
     - action: notify.home_mobile_apps
       data_template:
-        title: 'HalloNET Home'
-        message: 'The dishwasher is done.'
+        title: "HalloNET Home"
+        message: "The dishwasher is done."
         data:
           channel: Appliance
     - action: switch.turn_off
@@ -18,38 +18,41 @@
         entity_id: switch.kitchen_dishwasher_shutoff_valve
 
 # Start dishwasher when shut-off valve is opened
-- id: '0204'
+- id: "0204"
   alias: Appliance - Start dishwasher
   triggers:
     trigger: state
     entity_id: switch.kitchen_dishwasher_shutoff_valve
-    from: 'off'
-    to: 'on'
+    from: "off"
+    to: "on"
   actions:
+    # Wait for the dishwasher to report it's ready to accept a program
     - wait_template: >
         {{ is_state('sensor.kitchen_dishwasher_operation_state', 'BSH.Common.EnumType.OperationState.Ready') }}
-      timeout: '00:00:30'
+      timeout: "00:00:30"
       continue_on_timeout: true
+    # Select the default wash program
     - action: input_select.select_option
       target:
         entity_id: select.kitchen_dishwasher_program
       data:
-        option: 'Dishcare.Dishwasher.Program.Intensiv70'
+        option: "Dishcare.Dishwasher.Program.Intensiv70"
+    # Start the wash
     - action: button.press
       target:
         entity_id: button.kitchen_dishwasher_start
 
 # Open shut-off valve if closed when dishwasher starts running
-- id: '0205'
+- id: "0205"
   alias: Appliance - Open shut-off valve
   triggers:
     trigger: state
     entity_id: sensor.kitchen_dishwasher_operation_state
-    to: 'BSH.Common.EnumType.OperationState.Run'
+    to: "BSH.Common.EnumType.OperationState.Run"
   conditions:
     condition: state
     entity_id: switch.kitchen_dishwasher_shutoff_valve
-    state: 'off'
+    state: "off"
   actions:
     - action: switch.turn_on
       target:

@@ -1,11 +1,12 @@
 sequence:
-  - service: switch.turn_on
-    entity_id: switch.kitchen_dishwasher_shutoff_valve
-  - service: input_select.select_option
+  - action: switch.turn_on
+    target:
+      entity_id: switch.kitchen_dishwasher_shutoff_valve
+  - action: input_select.select_option
     target:
       entity_id: select.kitchen_dishwasher_program
     data:
-      option: 'Dishcare.Dishwasher.Program.Intensiv70'
-  - service: button.press
+      option: "Dishcare.Dishwasher.Program.Intensiv70"
+  - action: button.press
     target:
       entity_id: button.kitchen_dishwasher_start

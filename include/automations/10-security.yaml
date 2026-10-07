@@ -1,48 +1,48 @@
 # Notify when everyone leaves the home, and the front door is unlocked or the alarm is disarmed
-- id: '1001'
+- id: "1001"
   alias: Security - Notify when home is unsecured
   triggers:
     trigger: state
     entity_id: group.home_members
-    from: 'home'
-    for: '00:02:00'
+    from: "home"
+    for: "00:02:00"
   conditions:
     - condition: or
       conditions:
         - condition: state
           entity_id: lock.hallway_front_door_lock
-          state: 'unlocked'
+          state: "unlocked"
         - condition: state
           entity_id: alarm_control_panel.verisure_alarm
-          state: 'disarmed'
+          state: "disarmed"
     - condition: state
       entity_id: input_boolean.guest_mode
-      state: 'off'
+      state: "off"
   actions:
     action: notify.home_mobile_apps
     data_template:
-      title: 'HalloNET Home'
-      message: 'Home is left unsecured! The front door is {{ states("lock.hallway_front_door_lock") }} and the alarm is {{ states("alarm_control_panel.verisure_alarm") }}!'
+      title: "HalloNET Home"
+      message: "Home is left unsecured! The front door is {{ states('lock.hallway_front_door_lock') }} and the alarm is {{ states('alarm_control_panel.verisure_alarm') }}!"
       data:
         channel: Security
         actions:
           - action: lock_hallway_front_door_lock
-            title: 'Lock Front Door'
+            title: "Lock Front Door"
 
 # Notify when entrance doorbell is ringed
-- id: '1002'
+- id: "1002"
   alias: Security - Notify on entrance doorbell
   triggers:
     trigger: state
     entity_id: binary_sensor.outdoor_entrance_doorbell
-    to: 'on'
+    to: "on"
   actions:
     action: notify.home_mobile_apps
     data:
-      title: 'HalloNET Home'
-      message: 'Someone is at the front door!'
+      title: "HalloNET Home"
+      message: "Someone is at the front door!"
       data:
         channel: Security
         actions:
           - action: unlock_hallway_front_door_lock
-            title: 'Unlock Front Door'
+            title: "Unlock Front Door"

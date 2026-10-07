@@ -1,11 +1,11 @@
 # Send a reminder when garbage collection is tomorrow
-- id: '0803'
+- id: "0803"
   alias: Reminder - Garbage Collection
   triggers:
     - trigger: time
-      at: '08:00:00'
+      at: "08:00:00"
     - trigger: time
-      at: '20:00:00'
+      at: "20:00:00"
   conditions:
     condition: template
     value_template: >
@@ -13,7 +13,7 @@
   actions:
     action: notify.home_mobile_apps
     data:
-      title: 'HalloNET Home'
+      title: "HalloNET Home"
       message: "Collection of {{ state_attr('binary_sensor.garbage_collection', 'tomorrow_message') }}."
       data:
         channel: Reminder

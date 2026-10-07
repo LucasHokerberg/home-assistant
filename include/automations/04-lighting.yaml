@@ -1,5 +1,5 @@
 # Turn on outdoor lights at sunset
-- id: '0401'
+- id: "0401"
   alias: Lighting - Turn on outdoor lights at sunset
   triggers:
     trigger: sun
@@ -10,7 +10,7 @@
       entity_id: group.outdoor_comfort_lights
 
 # Turn on indoor lights when living room becomes dark and someone is home (or vacation mode is on)
-- id: '0402'
+- id: "0402"
   alias: Lighting - Turn on indoor lights when dark
   triggers:
     trigger: numeric_state
@@ -22,12 +22,12 @@
     condition: and
     conditions:
       - condition: time
-        after: '12:00'
+        after: "12:00"
       - condition: sun
         before: sunset
       - condition: state
         entity_id: input_boolean.night_mode
-        state: 'off'
+        state: "off"
       - condition: or
         conditions:
           - condition: state
@@ -35,7 +35,7 @@
             state: disarmed
           - condition: state
             entity_id: input_boolean.vacation_mode
-            state: 'on'
+            state: "on"
   actions:
     - action: homeassistant.turn_on
       target:
@@ -46,7 +46,7 @@
           - scene.upstairs_lights_normal
 
 # Turn on Lovelia's lights when living room becomes dark, someone is home (or vacation mode is on), and Lovelia is not asleep
-- id: '0403'
+- id: "0403"
   alias: Lighting - Turn on Lovelias lights when dark
   triggers:
     trigger: numeric_state
@@ -58,14 +58,14 @@
     condition: and
     conditions:
       - condition: time
-        after: '12:00'
+        after: "12:00"
       - condition: sun
         before: sunset
       - condition: time
-        before: '19:00:00'
+        before: "19:00:00"
       - condition: state
         entity_id: input_boolean.night_mode
-        state: 'off'
+        state: "off"
       - condition: or
         conditions:
           - condition: state
@@ -73,14 +73,14 @@
             state: disarmed
           - condition: state
             entity_id: input_boolean.vacation_mode
-            state: 'on'
+            state: "on"
   actions:
     action: homeassistant.turn_on
     target:
       entity_id: scene.lovelias_room_lights_normal
 
 # Turn on bedroom lights when living room becomes dark, someone is home (or vacation mode is on), and automation is not blocked
-- id: '0404'
+- id: "0404"
   alias: Lighting - Turn on bedroom lights when dark
   triggers:
     trigger: numeric_state
@@ -92,30 +92,30 @@
     condition: and
     conditions:
       - condition: time
-        after: '12:00'
+        after: "12:00"
       - condition: sun
         before: sunset
       - condition: state
         entity_id: input_boolean.bedroom_block_light_automation
-        state: 'off'
+        state: "off"
       - condition: state
         entity_id: input_boolean.night_mode
-        state: 'off'
+        state: "off"
       - condition: or
         conditions:
-        - condition: state
-          entity_id: alarm_control_panel.verisure_alarm
-          state: disarmed
-        - condition: state
-          entity_id: input_boolean.vacation_mode
-          state: 'on'
+          - condition: state
+            entity_id: alarm_control_panel.verisure_alarm
+            state: disarmed
+          - condition: state
+            entity_id: input_boolean.vacation_mode
+            state: "on"
   actions:
     action: homeassistant.turn_on
     target:
       entity_id: scene.bedroom_lights_normal
 
 # Turn on window lights when living room becomes dark and no one's home
-- id: '0405'
+- id: "0405"
   alias: Lighting - Turn on window lights when dark
   triggers:
     trigger: numeric_state
@@ -127,12 +127,12 @@
     condition: and
     conditions:
       - condition: time
-        after: '12:00'
+        after: "12:00"
       - condition: sun
         before: sunset
       - condition: state
         entity_id: input_boolean.night_mode
-        state: 'off'
+        state: "off"
       - condition: state
         entity_id: alarm_control_panel.verisure_alarm
         state: armed_away
@@ -142,14 +142,14 @@
       entity_id: group.indoor_window_lights
 
 # Turn on kitchen work lights when ALL downstairs comfort lights turn on and counter light is off
-- id: '0406'
+- id: "0406"
   alias: Lighting - Turn on kitchen work lights when comfort lights turns on
   triggers:
     trigger: state
     entity_id: group.downstairs_comfort_lights
-    to: 'on'
+    to: "on"
   actions:
-    - delay: '00:00:02'
+    - delay: "00:00:02"
     - condition: template
       value_template: >
         {% set lights = expand('group.downstairs_comfort_lights')
@@ -161,7 +161,7 @@
     - if:
         condition: state
         entity_id: light.kitchen_counter_light
-        state: 'off'
+        state: "off"
       then:
         action: light.turn_on
         target:
@@ -171,7 +171,7 @@
     - if:
         condition: state
         entity_id: light.kitchen_island_light
-        state: 'off'
+        state: "off"
       then:
         action: light.turn_on
         target:
@@ -180,7 +180,7 @@
           brightness_pct: 1
 
 # Turn off outdoor lights at sunrise
-- id: '0408'
+- id: "0408"
   alias: Lighting - Turn off outdoor lights at sunrise
   triggers:
     trigger: sun
@@ -191,7 +191,7 @@
       entity_id: group.outdoor_comfort_lights
 
 # Turn off indoor lights when living room is bright
-- id: '0409'
+- id: "0409"
   alias: Lighting - Turn off indoor lights when bright
   triggers:
     trigger: numeric_state
@@ -211,25 +211,25 @@
         - group.indoor_comfort_lights
 
 # Turn off kitchen work lights when downstairs comfort lights turn off and no motion is detected
-- id: '0410'
+- id: "0410"
   alias: Lighting - Turn off kitchen work lights when comfort lights turns off
   triggers:
     trigger: state
     entity_id: group.downstairs_comfort_lights
-    to: 'off'
+    to: "off"
   conditions:
     condition: state
     entity_id: binary_sensor.kitchen_motion
-    state: 'off'
+    state: "off"
     for:
-        minutes: 10
+      minutes: 10
   actions:
     action: homeassistant.turn_off
     target:
       entity_id: group.kitchen_work_lights
 
 # Turn off both Lovelia's balloon lights 30 minutes after one turns off
-- id: '0411'
+- id: "0411"
   alias: Lighting - Turn off Lovelia's balloon lights after night scene
   mode: single
   triggers:
@@ -237,17 +237,17 @@
     entity_id:
       - light.lovelias_room_balloon_light_1
       - light.lovelias_room_balloon_light_2
-    to: 'off'
-  condition:
+    to: "off"
+  conditions:
     - condition: or
       conditions:
         - condition: state
           entity_id: light.lovelias_room_balloon_light_1
-          state: 'on'
+          state: "on"
         - condition: state
           entity_id: light.lovelias_room_balloon_light_2
-          state: 'on'
-  action:
+          state: "on"
+  actions:
     - delay:
         minutes: 30
     - action: homeassistant.turn_off

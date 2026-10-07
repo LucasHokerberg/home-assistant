@@ -1,5 +1,5 @@
 sequence:
-  service: input_boolean.turn_off
+  action: input_boolean.turn_off
   target:
     entity_id:
       - input_boolean.night_mode

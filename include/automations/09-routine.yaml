@@ -1,44 +1,44 @@
 # Run wake up routine 5 minutes prior to Lucas' alarm and he's home, and night mode is on
-- id: '0901'
+- id: "0901"
   alias: Routine - Wake up Lucas
   triggers:
     trigger: template
-    value_template: '{{ as_timestamp(states("sensor.lucas_hokerberg_next_alarm")) - 300 < as_timestamp(now()) }}'
+    value_template: "{{ as_timestamp(states('sensor.lucas_hokerberg_next_alarm')) - 300 < as_timestamp(now()) }}"
   conditions:
     - condition: state
       entity_id: person.lucas_hokerberg
-      state: 'home'
+      state: "home"
     - condition: state
       entity_id: input_boolean.night_mode
-      state: 'on'
+      state: "on"
   actions:
     action: script.wake_up
 
 # Run wake up routine in the morning and night mode is still on
-- id: '0904'
+- id: "0904"
   alias: Routine - Wake up
   triggers:
     trigger: time
-    at: '08:00:00'
+    at: "08:00:00"
   actions:
     - delay:
-        minutes: '{{ range(2,32) | random | int }}'
+        minutes: "{{ range(2,32) | random | int }}"
     - action: script.wake_up
-    
+
 # Wake up routine when living room is dark
-- id: '0902'
+- id: "0902"
   alias: Routine - Wake up and dark
   triggers:
     trigger: state
     entity_id: script.wake_up
-    to: 'on'
+    to: "on"
   conditions:
     - condition: numeric_state
       entity_id: sensor.living_room_light_level
       below: 7
     - condition: state
       entity_id: input_boolean.guest_mode
-      state: 'off'
+      state: "off"
   actions:
     action: homeassistant.turn_on
     target:
@@ -48,41 +48,41 @@
         - scene.kitchen_lights_normal
 
 # Run bedtime routine when the TV is off, it's evening, and all downstairs lights are turned off
-- id: '0903'
+- id: "0903"
   alias: Routine - Bedtime
   triggers:
     trigger: state
     entity_id: group.downstairs_lights
-    to: 'off'
+    to: "off"
   conditions:
     - condition: time
-      after: '21:00'
-      before: '03:00'
+      after: "21:00"
+      before: "03:00"
     - condition: state
       entity_id: remote.living_room_harmony_hub
-      state: 'off'
+      state: "off"
     - condition: state
       entity_id: input_boolean.night_mode
-      state: 'off'
+      state: "off"
     - condition: state
       entity_id: input_boolean.guest_mode
-      state: 'off'
+      state: "off"
   actions:
     action: script.bedtime
 
 # Bedtime routine when vacation mode is on
-- id: '0905'
+- id: "0905"
   alias: Routine - Bedtime vacation
   triggers:
     trigger: time
-    at: '21:58:00'
+    at: "21:58:00"
   conditions:
     condition: state
     entity_id: input_boolean.vacation_mode
-    state: 'on'
+    state: "on"
   actions:
     - delay:
-        minutes: '{{ range(16,59) | random | int }}'
+        minutes: "{{ range(16,59) | random | int }}"
     - action: script.indoor_lights_off
     - action: input_boolean.turn_on
       target:

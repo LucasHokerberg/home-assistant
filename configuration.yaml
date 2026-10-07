@@ -46,15 +46,11 @@ alert: !include_dir_merge_named include/alerts/
 automation manual: !include_dir_merge_list include/automations/
 automation ui: !include automations.yaml
 
-binary_sensor: !include_dir_list include/binary_sensors/
-
 fan: !include include/fans.yaml
 
 group: !include_dir_named include/groups/
 
 notify: !include include/notify.yaml
-
-remote: !include_dir_list include/remotes/
 
 scene: !include scenes.yaml
 

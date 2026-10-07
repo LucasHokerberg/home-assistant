@@ -1,22 +1,22 @@
 # Start Spotify and play a default playlist when Living Room Harmony Hub starts Spotify
-- id: '0501'
-  alias: "Media - Living Room Harmony Spotify"
+- id: "0501"
+  alias: Media - Living Room Harmony Spotify
   triggers:
     trigger: state
     entity_id: sensor.living_room_harmony_hub
-    to: 'Spotify'
+    to: "Spotify"
   actions:
     # Wait for Shield to start
     - wait_template: >
         {{ state_attr('media_player.living_room_shield', 'state') != 'Off' }}
-      timeout: '00:00:30'
+      timeout: "00:00:30"
       continue_on_timeout: false
     # Restart Spotify app (repeat until Spotify is started)
     - action: androidtv.adb_command
       target:
         entity_id: media_player.living_room_shield
       data:
-        command: 'am force-stop com.spotify.tv.android'
+        command: "am force-stop com.spotify.tv.android"
     - delay:
         seconds: 2
     - variables:
@@ -27,8 +27,8 @@
             target:
               entity_id: media_player.living_room_shield
             data:
-              command: 'am start -a android.intent.action.VIEW -d -n com.spotify.tv.android/.SpotifyTVActivity'
-          - delay: '00:00:02'
+              command: "am start -a android.intent.action.VIEW -d -n com.spotify.tv.android/.SpotifyTVActivity"
+          - delay: "00:00:02"
         until:
           - condition: template
             value_template: >
@@ -36,7 +36,7 @@
     # Wait for Living Room Shield to be available as a Spotify source
     - wait_template: >
         {{ 'Living Room Shield' in state_attr('media_player.spotify_lucas_hokerberg', 'source_list') }}
-      timeout: '00:00:30'
+      timeout: "00:00:30"
       continue_on_timeout: false
     # Select Living Room Shield as Spotify device (repeat until Living Room Shield is selected)
     - variables:
@@ -47,8 +47,8 @@
             target:
               entity_id: media_player.spotify_lucas_hokerberg
             data:
-              source: 'Living Room Shield'
-          - delay: '00:00:05'
+              source: "Living Room Shield"
+          - delay: "00:00:05"
         until:
           - condition: template
             value_template: >
@@ -70,7 +70,7 @@
               entity_id: media_player.living_room_shield
             data:
               command: ENTER
-          - delay: '00:00:05'
+          - delay: "00:00:05"
         until:
           - condition: template
             value_template: >
@@ -80,7 +80,7 @@
       target:
         entity_id: media_player.spotify_lucas_hokerberg
       data:
-        media_content_id: 'https://open.spotify.com/playlist/37i9dQZEVXcH5UOFYpBVWG?si=b012073025ac4849'
+        media_content_id: "https://open.spotify.com/playlist/37i9dQZEVXcH5UOFYpBVWG?si=b012073025ac4849"
         media_content_type: playlist
     # Unmute again
     - action: remote.send_command
@@ -97,12 +97,12 @@
         shuffle: true
 
 # Turn off lights and start Plex when Living Room Harmony Hub starts Movie Mode
-- id: '0502'
-  alias: "Media - Living Room Harmony Movie Mode"
+- id: "0502"
+  alias: Media - Living Room Harmony Movie Mode
   triggers:
     trigger: state
     entity_id: sensor.living_room_harmony_hub
-    to: 'Movie Mode'
+    to: "Movie Mode"
   actions:
     - action: homeassistant.turn_off
       target:
@@ -120,20 +120,20 @@
       target:
         entity_id: media_player.living_room_shield
       data:
-        command: 'am start -a android.intent.action.MAIN -c android.intent.category.LEANBACK_LAUNCHER -n com.plexapp.android/com.plexapp.plex.activities.SplashActivity'
+        command: "am start -a android.intent.action.MAIN -c android.intent.category.LEANBACK_LAUNCHER -n com.plexapp.android/com.plexapp.plex.activities.SplashActivity"
 
 # Turn off lights when Plex is resuming and Movie Mode is active
-- id: '0503'
+- id: "0503"
   alias: Media - Turn off lights when Plex plays
-  initial_state: 'on'
+  initial_state: "on"
   triggers:
     trigger: state
     entity_id: media_player.living_room_shield
-    to: 'playing'
+    to: "playing"
   conditions:
     condition: state
     entity_id: sensor.living_room_harmony_hub
-    state: 'Movie Mode'
+    state: "Movie Mode"
   actions:
     action: light.turn_off
     target:
@@ -142,17 +142,17 @@
       transition: 2
 
 # Turn on lights when Plex goes idle and Movie Mode is active
-- id: '0504'
+- id: "0504"
   alias: Media - Turn on lights when Plex stops
-  initial_state: 'on'
+  initial_state: "on"
   triggers:
     trigger: state
     entity_id: media_player.living_room_shield
-    to: 'idle'
+    to: "idle"
   conditions:
     condition: state
     entity_id: sensor.living_room_harmony_hub
-    state: 'Movie Mode'
+    state: "Movie Mode"
   actions:
     action: scene.turn_on
     target:
@@ -161,12 +161,12 @@
       transition: 2
 
 # Turn on lights when Living Room Harmony Hub stops Movie Mode
-- id: '0505'
+- id: "0505"
   alias: Media - Turn on lights when Living Room Harmony exit Movie Mode
   triggers:
     trigger: state
     entity_id: sensor.living_room_harmony_hub
-    from: 'Movie Mode'
+    from: "Movie Mode"
   actions:
     action: homeassistant.turn_on
     target:
@@ -177,24 +177,24 @@
         - scene.upstairs_lights_normal
 
 # Turn on lights when the computer is turning on
-- id: '0506'
+- id: "0506"
   alias: Media - Turn on lights when computer start
   triggers:
     trigger: state
     entity_id: device_tracker.fs_master
-    to: 'home'
+    to: "home"
   actions:
     action: scene.turn_on
     target:
       entity_id: scene.upstairs_desk_light_computer
 
 # Turn off lights when the computer is turning off
-- id: '0507'
+- id: "0507"
   alias: Media - Turn off lights when computer stop
   triggers:
     trigger: state
     entity_id: device_tracker.fs_master
-    to: 'not_home'
+    to: "not_home"
   actions:
     action: light.turn_off
     target:

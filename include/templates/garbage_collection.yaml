@@ -8,7 +8,7 @@ binary_sensor:
         {'name': 'Garbage Bin 2', 'entity': 'calendar.garbage_bin_2'},
         {'name': 'Garden Bin', 'entity': 'calendar.garden_bin'}
       ] %}
-      
+
       {# Get all upcoming dates #}
       {% set ns = namespace(dates=[]) %}
       {% for bin in bins %}
@@ -18,7 +18,7 @@ binary_sensor:
           {% set ns.dates = ns.dates + [(date, bin.name)] %}
         {% endif %}
       {% endfor %}
-      
+
       {# Check if earliest date is today or tomorrow #}
       {% if ns.dates | length > 0 %}
         {% set next_date = ns.dates | map(attribute=0) | min %}
@@ -36,7 +36,7 @@ binary_sensor:
           {'name': 'Garbage Bin 2', 'entity': 'calendar.garbage_bin_2'},
           {'name': 'Garden Bin', 'entity': 'calendar.garden_bin'}
         ] %}
-        
+
         {# Get all upcoming dates #}
         {% set ns = namespace(dates=[]) %}
         {% for bin in bins %}
@@ -48,7 +48,7 @@ binary_sensor:
             {% endif %}
           {% endif %}
         {% endfor %}
-        
+
         {# Return the earliest date #}
         {% if ns.dates | length > 0 %}
           {{ ns.dates | map(attribute=0) | min }}
@@ -61,7 +61,7 @@ binary_sensor:
           {'name': 'Garbage Bin 2', 'entity': 'calendar.garbage_bin_2'},
           {'name': 'Garden Bin', 'entity': 'calendar.garden_bin'}
         ] %}
-        
+
         {# Get all upcoming dates #}
         {% set ns = namespace(dates=[]) %}
         {% for bin in bins %}
@@ -73,7 +73,7 @@ binary_sensor:
             {% endif %}
           {% endif %}
         {% endfor %}
-        
+
         {# Find the earliest date #}
         {% if ns.dates | length > 0 %}
           {% set next_date = ns.dates | map(attribute=0) | min %}
@@ -89,7 +89,7 @@ binary_sensor:
           {'name': 'Garbage Bin 2', 'entity': 'calendar.garbage_bin_2'},
           {'name': 'Garden Bin', 'entity': 'calendar.garden_bin'}
         ] %}
-        
+
         {# Get all upcoming dates #}
         {% set ns = namespace(dates=[]) %}
         {% for bin in bins %}
@@ -101,7 +101,7 @@ binary_sensor:
             {% endif %}
           {% endif %}
         {% endfor %}
-        
+
         {% if ns.dates | length > 0 %}
           {% set next_date = ns.dates | map(attribute=0) | min %}
           {% set next_bins = ns.dates | selectattr(0, 'eq', next_date) | map(attribute=1) | list %}
