@@ -37,6 +37,10 @@ Rules:
 - Entity ids: `<location>_<thing>` snake_case; cryptic hardware ids (e.g. car `fgh47k`) are kept as-is.
 - `input_boolean.vacation_mode` / `night_mode` / `guest_mode` are recurring gating conditions — check whether new automations should respect them.
 
+## HA MCP server
+
+- An `ha-custom` MCP server connects to the live instance, read-only by design — use it to verify entity ids, states, areas, and existing automations/helpers before editing YAML; never rely on it to apply changes.
+
 ## Commit style
 
 - Short, imperative, present-tense summary; no body; no conventional-commit prefixes.
