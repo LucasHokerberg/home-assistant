@@ -25,7 +25,7 @@
             target:
               entity_id: media_player.living_room_shield
             data:
-              command: "am start -a android.intent.action.VIEW -d -n com.spotify.tv.android/.SpotifyTVActivity"
+              command: "am start -a android.intent.action.MAIN -c android.intent.category.LEANBACK_LAUNCHER -n com.spotify.tv.android/.SpotifyTVActivity"
           - delay: "00:00:02"
         until:
           - condition: template
