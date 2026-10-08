@@ -1,5 +1,6 @@
 binary_sensor:
   - name: Error
+    unique_id: outdoor_lawn_mower_error
     default_entity_id: binary_sensor.outdoor_lawn_mower_error
     device_class: problem
     state: >
