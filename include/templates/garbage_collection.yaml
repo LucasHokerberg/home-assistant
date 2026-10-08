@@ -161,7 +161,9 @@ binary_sensor:
             {% set ns.names = ns.names + [bin.name] %}
           {% endif %}
         {% endfor %}
-        {% if ns.names | length == 1 %}
+        {% if ns.names | length == 0 %}
+
+        {% elif ns.names | length == 1 %}
           {{ ns.names[0] }} tomorrow
         {% elif ns.names | length == 2 %}
           {{ ns.names[0] }} and {{ ns.names[1] }} tomorrow
