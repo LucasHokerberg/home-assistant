@@ -1,0 +1,20 @@
+binary_sensor:
+  - name: Outdoor Lawn Mower Error
+    default_entity_id: binary_sensor.outdoor_lawn_mower_error
+    device_class: problem
+    state: >
+      {% set code = states('sensor.outdoor_lawn_mower_self_check') %}
+      {% set expected = ['normal', 'rain', 'low_battery', 'non_working_hours', 'night_protection', 'rain_protection'] %}
+      {{ code not in expected and code not in ['unknown', 'unavailable'] }}
+    attributes:
+      error_message: >
+        {% set code = states('sensor.outdoor_lawn_mower_self_check') %}
+        {% set expected = ['normal', 'rain', 'low_battery', 'non_working_hours', 'night_protection', 'rain_protection'] %}
+        {% if code in expected or code in ['unknown', 'unavailable'] %}
+          None
+        {% elif code == 'other' %}
+          {% set last_error = states('sensor.outdoor_lawn_mower_last_error') %}
+          {{ last_error.split(': ', 1)[-1] if ': ' in last_error else last_error }}
+        {% else %}
+          {{ state_translated('sensor.outdoor_lawn_mower_self_check') }}
+        {% endif %}

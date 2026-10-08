@@ -1,0 +1,14 @@
+# Notify home members when the lawn mower reports an error
+- id: "1301"
+  alias: Gardening - Notify on lawn mower error
+  triggers:
+    trigger: state
+    entity_id: binary_sensor.outdoor_lawn_mower_error
+    to: "on"
+  actions:
+    action: notify.home_mobile_apps
+    data:
+      title: "HalloNET Home"
+      message: "Lawn mower error: {{ state_attr('binary_sensor.outdoor_lawn_mower_error', 'error_message') }}"
+      data:
+        channel: Gardening
