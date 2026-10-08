@@ -1,5 +1,6 @@
 sensor:
   - name: Electricity Price
+    unique_id: electricity_price
     default_entity_id: sensor.electricity_price
     unit_of_measurement: SEK/kWh
     icon: mdi:cash-sync

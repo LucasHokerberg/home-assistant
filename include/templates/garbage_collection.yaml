@@ -1,5 +1,6 @@
 binary_sensor:
   - name: Garbage Collection
+    unique_id: garbage_collection
     default_entity_id: binary_sensor.garbage_collection
     icon: mdi:delete
     state: >
