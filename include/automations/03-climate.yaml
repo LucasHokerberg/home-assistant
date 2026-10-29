@@ -178,3 +178,32 @@
     data:
       entity_id: number.lovelias_room_radiator_external_temperature
       value: "{{ states('sensor.lovelias_room_temperature') | float * 100 }}"
+
+# Notify when the HVAC dust filter has reached its wear threshold, with a one-tap reset
+- id: "0309"
+  alias: Climate - Notify on HVAC dust filter wear warning
+  triggers:
+    trigger: state
+    entity_id: binary_sensor.hvac_dust_filter_wear
+    to: "on"
+  actions:
+    action: notify.home_mobile_apps
+    data:
+      title: "HalloNET Home"
+      message: "HVAC dust filter needs cleaning: {{ states('sensor.hvac_dust_filter_runtime_since_reset') }} h used, threshold at {{ states('select.hvac_dust_filter_alarm_threshold') }} h"
+      data:
+        channel: Climate
+        actions:
+          - action: reset_hvac_dust_filter
+            title: "Reset filter"
+
+# Reset the HVAC dust filter runtime when the reset button is pressed
+- id: "0310"
+  alias: Climate - Reset HVAC dust filter runtime
+  triggers:
+    trigger: state
+    entity_id: input_button.hvac_dust_filter_reset
+  actions:
+    action: utility_meter.reset
+    target:
+      entity_id: sensor.hvac_dust_filter_runtime_since_reset

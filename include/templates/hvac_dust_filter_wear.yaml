@@ -1,0 +1,8 @@
+binary_sensor:
+  - name: Dust Filter Wear
+    unique_id: hvac_dust_filter_wear
+    default_entity_id: binary_sensor.hvac_dust_filter_wear
+    device_class: problem
+    state: >
+      {{ states('sensor.hvac_dust_filter_runtime_since_reset') | float(0) >=
+         states('select.hvac_dust_filter_alarm_threshold') | float(999999) }}

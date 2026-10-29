@@ -79,3 +79,16 @@
     action: input_boolean.turn_on
     target:
       entity_id: input_boolean.vacation_mode
+
+# Reset HVAC dust filter runtime
+- id: "0107"
+  alias: Action - Reset HVAC dust filter
+  triggers:
+    trigger: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: reset_hvac_dust_filter
+  actions:
+    action: input_button.press
+    target:
+      entity_id: input_button.hvac_dust_filter_reset

@@ -1,0 +1,6 @@
+sensor:
+  - name: Fan Active
+    unique_id: hvac_fan_active
+    default_entity_id: sensor.hvac_fan_active
+    state: >
+      {{ 0 if is_state('climate.living_room_hvac', 'off') else 1 }}
