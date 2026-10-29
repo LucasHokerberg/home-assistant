@@ -73,7 +73,7 @@
       data:
         fan_mode: auto
 
-# Change HVAC temperature when target or offset is changed and HVAC is set to heat
+# Change HVAC temperature when target/offset changes, or whenever HVAC switches to heat (covers mode changes not made via 0301, e.g. manual)
 - id: "0303"
   alias: Climate - Change temperature heat
   triggers:
@@ -81,6 +81,9 @@
       entity_id: input_number.living_room_hvac_target
     - trigger: state
       entity_id: input_number.living_room_hvac_offset
+    - trigger: state
+      entity_id: climate.living_room_hvac
+      to: heat
   conditions:
     condition: state
     entity_id: climate.living_room_hvac
@@ -92,7 +95,7 @@
     data:
       temperature: "{{ states.input_number.living_room_hvac_target.state | float - states.input_number.living_room_hvac_offset.state | float }}"
 
-# Change HVAC temperature when target or offset is changed and HVAC is set to cool
+# Change HVAC temperature when target/offset changes, or whenever HVAC switches to cool (covers mode changes not made via 0302, e.g. manual)
 - id: "0304"
   alias: Climate - Change temperature cool
   triggers:
@@ -100,6 +103,9 @@
       entity_id: input_number.living_room_hvac_target
     - trigger: state
       entity_id: input_number.living_room_hvac_offset
+    - trigger: state
+      entity_id: climate.living_room_hvac
+      to: cool
   conditions:
     condition: state
     entity_id: climate.living_room_hvac
