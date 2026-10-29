@@ -29,10 +29,9 @@
 - id: "1303"
   alias: Gardening - Notify on lawn mower blade wear warning
   triggers:
-    trigger: template
-    value_template: >
-      {{ states('sensor.outdoor_lawn_mower_blade_use_time') | float(0) >=
-         states('sensor.outdoor_lawn_mower_blade_wear_warning_time') | float(999999) }}
+    trigger: state
+    entity_id: binary_sensor.outdoor_lawn_mower_blade_wear
+    to: "on"
   actions:
     action: notify.home_mobile_apps
     data:

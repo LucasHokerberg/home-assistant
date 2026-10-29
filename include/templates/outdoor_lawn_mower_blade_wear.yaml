@@ -1,0 +1,8 @@
+binary_sensor:
+  - name: Blade Wear
+    unique_id: outdoor_lawn_mower_blade_wear
+    default_entity_id: binary_sensor.outdoor_lawn_mower_blade_wear
+    device_class: problem
+    state: >
+      {{ states('sensor.outdoor_lawn_mower_blade_use_time') | float(0) >=
+         states('sensor.outdoor_lawn_mower_blade_wear_warning_time') | float(999999) }}
