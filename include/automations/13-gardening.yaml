@@ -13,17 +13,34 @@
       data:
         channel: Gardening
 
-# Turn off the side LED once the mower finishes for the day and returns to the dock
+# Turn the lawn mower side LED off when docked and back on when mowing starts
 - id: "1302"
-  alias: Gardening - Turn off lawn mower side LED when docked
+  alias: Gardening - Toggle lawn mower side LED with mowing state
   triggers:
-    trigger: state
-    entity_id: lawn_mower.outdoor_lawn_mower
-    to: "docked"
+    - trigger: state
+      entity_id: lawn_mower.outdoor_lawn_mower
+      to: "docked"
+      id: "docked"
+    - trigger: state
+      entity_id: lawn_mower.outdoor_lawn_mower
+      to: "mowing"
+      id: "mowing"
   actions:
-    action: switch.turn_off
-    target:
-      entity_id: switch.outdoor_lawn_mower_side_led
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: "docked"
+          sequence:
+            - action: switch.turn_off
+              target:
+                entity_id: switch.outdoor_lawn_mower_side_led
+        - conditions:
+            - condition: trigger
+              id: "mowing"
+          sequence:
+            - action: switch.turn_on
+              target:
+                entity_id: switch.outdoor_lawn_mower_side_led
 
 # Notify when the lawn mower blade use time reaches the wear-warning threshold
 - id: "1303"
