@@ -24,3 +24,19 @@
     action: switch.turn_off
     target:
       entity_id: switch.outdoor_lawn_mower_side_led
+
+# Notify when the lawn mower blade use time reaches the wear-warning threshold
+- id: "1303"
+  alias: Gardening - Notify on lawn mower blade wear warning
+  triggers:
+    trigger: template
+    value_template: >
+      {{ states('sensor.outdoor_lawn_mower_blade_use_time') | float(0) >=
+         states('sensor.outdoor_lawn_mower_blade_wear_warning_time') | float(999999) }}
+  actions:
+    action: notify.home_mobile_apps
+    data:
+      title: "HalloNET Home"
+      message: "Lawn mower blade needs replacing: {{ states('sensor.outdoor_lawn_mower_blade_use_time') }} h used, warning at {{ states('sensor.outdoor_lawn_mower_blade_wear_warning_time') }} h"
+      data:
+        channel: Gardening
