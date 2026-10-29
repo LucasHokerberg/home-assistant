@@ -12,3 +12,15 @@
       message: "Lawn mower error: {{ state_attr('binary_sensor.outdoor_lawn_mower_error', 'error_message') }}"
       data:
         channel: Gardening
+
+# Turn off the side LED once the mower finishes for the day and returns to the dock
+- id: "1302"
+  alias: Gardening - Turn off lawn mower side LED when docked
+  triggers:
+    trigger: state
+    entity_id: lawn_mower.outdoor_lawn_mower
+    to: "docked"
+  actions:
+    action: switch.turn_off
+    target:
+      entity_id: switch.outdoor_lawn_mower_side_led
